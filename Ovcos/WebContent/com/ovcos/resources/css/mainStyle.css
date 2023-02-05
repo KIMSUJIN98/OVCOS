@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*---- wrap 시작-------*/
+*{margin: 0; padding: 0;}
+
+div, form, input{
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+.wrap{width: 1400px; height: 1600px; margin: auto;}
+.wrap>div{width: 100%;}
+#header{width: 1400px; height: 70px; position: fixed;}
+#content{height: 90%; padding-top: 70px;}
+#footer{height: 10%;}
+/*---- wrap 끝-------*/
+
+
+
+
+/*---- header 시작-------*/
+#header{ border-bottom: 1px solid lightgray; }
+#header>div{height: 100%; float: left; background-color: white; }
+#hd1{width: 20%; position: relative;}
+#hd1 img{
+    width: 100%; 
+    height: 100%;
+    /* margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+}
+
+#hd2{width: 60%; position: relative;}
+#hd2>ul{
+    /* background-color: mediumaquamarine; */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#hd2 li{
+    /* background-color: rgb(40, 241, 0); */
+    float: left;
+    width: 15%;
+    height: 100%;
+    margin: 0px 16px ;
+    line-height: 100%;
+    text-align: center;
+    list-style: none;
+    
+}
+#hd2 a{
+    /* background-color: beige; */
+    color:rgb(67, 115, 176)  ;
+    text-decoration: none;
+    font-family: 'SUIT-Regular';
+    font-weight: 700;
+    font-size: 20px;
+    /* v 영역근처만가도 마우스클릭뜨게 */
+    width: 100%;
+    height: 100%;
+    display: block;
+    line-height: 60px;
+    
+}
+
+#hd3{width: 20%;}
+#hd3 ul{ padding: 0; margin: 0; width: 100%; height: 100%; display: flex; justify-content: flex-end;}
+#hd3 li{ list-style: none;  height: 100%;  margin: 0 0 0 1px; }
+#hd3_li1{width: 30%; }
+#hd3_li2{width: 40%; }
+#hd3_li3{width: 35%; }
+#alarm{
+    width: 100%;
+    height: 100%;
+    padding: 10px; 
+    
+}
+#alarm img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   
+}
+#myPage{
+    width: 100%;
+    height: 100%;
+}
+#myPage img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   
+} 
+#feed{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    align-items: end;
+    text-align: center;
+}
+#plus{
+    text-decoration: none;
+    line-height: 50%;
+    font-size: 50px;
+    color: black;
+} 
+/*---- header 끝-------*/
+
+
+
+/*---- content 시작-----*/
+#content>div{
+    height: 100%;
+    float: left;
+}
+#content img{width: 100%; height: 100%;}
+#ct1{width: 20%; padding-top: 100px;}
+#record{ 
+    width: 95%; 
+    height: 600px; 
+    margin: auto; 
+    border: 1px solid lightgray;
+}
+#notice{
+    width: 100%; 
+    height: 40px; 
+    padding: 10px;
+}
+#ct2{width: 60%; background-color: antiquewhite;}
+#content_header{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    background-color: white;
+}
+#btn_list{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    padding: 20px 0px 0px 0px;
+}
+#btn_list>div{
+    width: 30%; 
+    height: 120%; 
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+#all_feed{
+    background-color: antiquewhite;
+}
+#fw_feed{
+    background-color: white;
+}
+#my_feed{
+    background-color: white;
+}
+
+#feed_select{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    
+    
+}
+#fs{
+    width: 70%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+}
+
+/* 가운데 content ct2  */
+#content_feed{
+    width: 100%;
+    height: 95%;
+    /* content_haader에서 5퍼 가져감 */
+}
+#content_feed>iframe{
+    width: 100%;
+    height: 100%; 
+}
+
+/* 오른쪽 content */
+#ct3{width: 20%; padding-top: 100px;}
+#dust{ width: 90%; height: 10%; background-color: aquamarine; margin: auto; margin-bottom: 20px;}
+#weather{ width: 90%; height: 60%; background-color: skyblue; margin: auto;}
+
+
+
+/* ------footer-------- */
+#footer{
+    width: 100%;
+    background-color: lightgrey;
+}
+#ft1{width: 100%;}
