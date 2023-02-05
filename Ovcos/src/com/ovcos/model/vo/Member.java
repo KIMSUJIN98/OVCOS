@@ -1,4 +1,4 @@
-package com.covcos.model.vo;
+package com.ovcos.model.vo;
 
 public class Member {
 	
