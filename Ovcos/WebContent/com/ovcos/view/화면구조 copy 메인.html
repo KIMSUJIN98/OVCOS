@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화면구조_1</title>
+    <link rel="stylesheet" href="../resources/css/mainStyle.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="header">
+            <div id="hd1">
+                <img src="../resources/img/logo.png" alt="">
+            </div>
+
+            <div id="hd2">
+                <ul>
+                    <li><a href="">피드</a></li>
+                    <li><a href="">탐색</a></li>
+                    <li><a href="">챌린지</a></li>
+                </ul>
+            </div>
+
+            <div id="hd3">
+                <ul >
+                    <li id="hd3_li1">
+                        <div id="alarm" >
+                            <img src="../resources/img/bell.png" alt="알람">
+                        </div>
+                    </li>
+                    <li id="hd3_li2">
+                        <div id="myPage" >
+                            <img src="../resources/img/mypage.png" alt="마이페이지" onclick="location.href='login.html'">
+                        </div>
+                    </li>
+                    <li id="hd3_li3">
+                        <div id="feed" >
+                            <a href=""id="plus">+</a>
+                        </div>
+                    </li>
+                </ul>
+            
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="ct1">
+                <div id="record">운동기록구역입니다</div>
+                <div id="notice">공지사항구역입니다</div>
+            </div>
+            <div id="ct2">
+                <div id="content_header">
+                    <div id="btn_list">
+                        <div id="all_feed">전체피드</div>
+                        <div id="fw_feed">친구피드</div>
+                        <div id="my_feed">내피드</div>
+                    </div>
+                    <div id="feed_select">
+                        <select name="" id="fs">
+                            <option value="">최신순</option>
+                            <option value="">오래된순</option>
+                            <option value="">별점순</option>
+                            <option value="">찜순</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="content_feed">
+                    <iframe src="login.html"></iframe>
+                </div>
+            </div>
+
+            
+            <div id="ct3">
+                <div id="dust">미세먼지api 구역</div>
+                <div id="weather">날씨 api 구역</div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="f1"> 푸터 구역입니다ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+        </div>
+    </div>
+</body>
+
+</html>
