@@ -1,4 +1,4 @@
-package com.covcos.common;
+package com.ovcos.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class JDBCTemplate {
 	
 	/**
-	 *1. 커넥션 객체 생성 (DB와 접속) 한 후 해당 connection 객체 반환해주는 메서드
+	 *1. 而ㅻ꽖�뀡 媛앹껜 �깮�꽦 (DB�� �젒�냽) �븳 �썑 �빐�떦 connection 媛앹껜 諛섑솚�빐二쇰뒗 硫붿꽌�뱶
 	 * @return
 	 */
 	public static Connection getConnection() {
@@ -31,7 +31,7 @@ public class JDBCTemplate {
 	}
 	
 	/**
-	 * 2. commit을 처리해주는 메서드 (커넥션 객체를 전달받아서)
+	 * 2. commit�쓣 泥섎━�빐二쇰뒗 硫붿꽌�뱶 (而ㅻ꽖�뀡 媛앹껜瑜� �쟾�떖諛쏆븘�꽌)
 	 * @param conn
 	 */
 	public static void commit(Connection conn) {
@@ -45,7 +45,7 @@ public class JDBCTemplate {
 	}
 	
 	/**
-	 * 3. Rollback을 처리해주는 메서드 (커넥션 객체를 전달받아서)
+	 * 3. Rollback�쓣 泥섎━�빐二쇰뒗 硫붿꽌�뱶 (而ㅻ꽖�뀡 媛앹껜瑜� �쟾�떖諛쏆븘�꽌)
 	 * @param conn
 	 */
 	public static void rollback(Connection conn) {
@@ -59,10 +59,10 @@ public class JDBCTemplate {
 	}
 	
 	/**
-	 * 4. Statement 관련 객체 전달받아서 반납시켜주는 메서드
+	 * 4. Statement 愿��젴 媛앹껜 �쟾�떖諛쏆븘�꽌 諛섎궔�떆耳쒖＜�뒗 硫붿꽌�뱶
 	 * @param stmt
 	 */
-	public static void close(Statement stmt) {// 얘가 부모라서 PreparedStatement 받을수 있음.
+	public static void close(Statement stmt) {// �뼐媛� 遺�紐⑤씪�꽌 PreparedStatement 諛쏆쓣�닔 �엳�쓬.
 		try {
 			if(stmt != null && !stmt.isClosed()) {
 				stmt.close();
@@ -73,7 +73,7 @@ public class JDBCTemplate {
 	}
 	
 	/**
-	 * 5. Connection 객체 전달 받아서 반납시켜주는 메서드
+	 * 5. Connection 媛앹껜 �쟾�떖 諛쏆븘�꽌 諛섎궔�떆耳쒖＜�뒗 硫붿꽌�뱶
 	 * @param conn
 	 */
 	public static void close(Connection conn) {
@@ -87,7 +87,7 @@ public class JDBCTemplate {
 	}
 	
 	/**
-	 * 6. ResultSet 객체 전달 받아서 반납시켜주는 메서드
+	 * 6. ResultSet 媛앹껜 �쟾�떖 諛쏆븘�꽌 諛섎궔�떆耳쒖＜�뒗 硫붿꽌�뱶
 	 * @param rset
 	 */
 	public static void close(ResultSet rset) {

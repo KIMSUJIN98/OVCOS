@@ -1,4 +1,4 @@
-package com.covcos.model.dao;
+package com.ovcos.model.dao;
 
 public class MemberDao {
 

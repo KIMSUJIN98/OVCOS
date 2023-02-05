@@ -1,4 +1,4 @@
-package com.covcos.model.service;
+package com.ovcos.model.service;
 
 public class MemberService {
 
