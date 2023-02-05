@@ -1,7 +1,10 @@
 DROP TABLE MEMBER;
+DROP TABLE INQUIRY;
+
+DROP SEQUENCE SEQ_INQ_NO;
 
 CREATE TABLE MEMBER (
-	MEM_ID	VARCHAR(255) CONSTRAINT MEM_ID_PK PRIMARY KEY,
+	MEM_ID	VARCHAR(100) CONSTRAINT MEM_ID_PK PRIMARY KEY,
 	MEM_PWD	VARCHAR2(20)  NOT NULL,
 	MEM_NAME VARCHAR2(15) NOT NULL,
 	MEM_NICK VARCHAR2(24) NOT NULL,
@@ -45,16 +48,16 @@ INSERT INTO MEMBER VALUES('admin','admin','관리자','관리자','관리를 빡세게 하자'
 
 
 
-DROP TABLE INQUIRY;
 
 
 CREATE TABLE INQUIRY(
     INQ_NO NUMBER NOT NULL CONSTRAINT INQ_NO_PK PRIMARY KEY,
     INQ_CTG VARCHAR2(30) NOT NULL CONSTRAINT INQ_CTG_CK CHECK(INQ_CTG IN ('피드', '챌린지', '업로드', '기타')),
-    INQ_TITLE VARCHAR2(60) NOT NULL,
+    INQ_TITLE VARCHAR2(100) NOT NULL,
     INQ_DATE DATE DEFAULT SYSDATE NOT NULL,
-    INQ_CNT VARCHAR2(300) NOT NULL,
-    ANS_CNT VARCHAR(300) REFERENCES MEMBER(MEM_ID)
+    INQ_CNT VARCHAR2(2000) NOT NULL,
+    ANS_CNT VARCHAR(3000),
+    MEM_ID VARCHAR2(100) NOT NULL REFERENCES MEMBER
     
 );
 
@@ -65,12 +68,6 @@ COMMENT ON COLUMN INQUIRY.INQ_DATE IS '문의작성일';
 COMMENT ON COLUMN INQUIRY.INQ_CNT IS '문의내용';
 COMMENT ON COLUMN INQUIRY.ANS_CNT IS '답변내용';
 
-INSERT INTO MEMBER VALUES(1,'피드','이 글 너무 불편합니다',SYSDATE,'음란물 관련내용이 있는거 같습니다. 삭제 부탁드립니다', '회원님 불편을 드려 죄송합니다.해당 글 삭제 처리 되었습니다.');
-INSERT INTO MEMBER VALUES(2,'챌린지','이 대회관련 문의',SYSDATE,'이 대회에 관해 알고 싶은데 정보가 부족한거 같아요.', '회원님 안녕하십니까 말씀하신 대회는 해당 대회 클릭 시 홈페이지로 이동합니다 즐거운 운동되십시오.');
-INSERT INTO MEMBER VALUES(3,'업로드','업로드 관련 문의드립니다.',SYSDATE,'파일을 올리려는데 추가가 되지 않습니다.수정부탁드립니다.', '회원님 불편을 드려 죄송합니다. 업로드 오류발생으로 인하여 수정중입니다.');
-INSERT INTO MEMBER VALUES(4,'기타','광고 관련문의',SYSDATE,'광고가 너무 많이 나오는거 같아요', '회원님 불편을 드려 죄송합니다. 제휴회사와 논의하도록 하겠습니다');
-INSERT INTO MEMBER VALUES(5,'피드','광고 문의',SYSDATE,'이 광고를 올리고 싶습니다 관리자와 통화 할 수 있을까요?', '광고를 하지 않습니다.죄송합니다.');
-
 
 
 CREATE SEQUENCE SEQ_INQ_NO
@@ -78,3 +75,11 @@ START WITH 1
 INCREMENT BY 1
 NOCYCLE
 NOCACHE;
+
+
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'피드','이 글 너무 불편합니다',SYSDATE,'음란물 관련내용이 있는거 같습니다. 삭제 부탁드립니다', '회원님 불편을 드려 죄송합니다.해당 글 삭제 처리 되었습니다.','Qdfca12' );
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'챌린지','이 대회관련 문의',SYSDATE,'이 대회에 관해 알고 싶은데 정보가 부족한거 같아요.', '회원님 안녕하십니까 말씀하신 대회는 해당 대회 클릭 시 홈페이지로 이동합니다 즐거운 운동되십시오.','wSDF23');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'업로드','업로드 관련 문의드립니다.',SYSDATE,'파일을 올리려는데 추가가 되지 않습니다.수정부탁드립니다.', '회원님 불편을 드려 죄송합니다. 업로드 오류발생으로 인하여 수정중입니다.','cvxzv34');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'기타','광고 관련문의',SYSDATE,'광고가 너무 많이 나오는거 같아요', '회원님 불편을 드려 죄송합니다. 제휴회사와 논의하도록 하겠습니다','vdfety1111');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'피드','광고 문의',SYSDATE,'이 광고를 올리고 싶습니다 관리자와 통화 할 수 있을까요?', '광고를 하지 않습니다.죄송합니다.','vdfety1111');
+
