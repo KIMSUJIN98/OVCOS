@@ -45,7 +45,26 @@ INSERT INTO MEMBER VALUES('cvxzv34','pouih1!','김준식','flag123','안녕하세요','1
 INSERT INTO MEMBER VALUES('vdfety1111','jryff3#','존박','jhon','하이요','19970203',DEFAULT,'일시정지','인천 계양구','N',60,'PYJYJYU',3,'네이버', 'AFCETEDF','vdfety1111@gamil.com');
 INSERT INTO MEMBER VALUES('admin','admin','관리자','관리자','관리를 빡세게 하자',NULL,'관리자','관리자',NULL,DEFAULT,DEFAULT,NULL,0,'일반', NULL,'ADMIN@gamil.com');
 
+CREATE TABLE UPLOAD(
+    UPL_ID VARCHAR2(20) NOT NULL,
+    UPL_STT VARCHAR2(30) NOT NULL CHECK(UPL_STT IN('challenge','profile','background','gpx','contest')),
+    UPL_NO NUMBER NOT NULL,
+    UPL_TITLE VARCHAR2(60) NOT NULL,
+    UPL_VER CHAR(1) DEFAULT 'F' CHECK(UPL_VER IN('F','T'))
+);
 
+INSERT INTO UPLOAD VALUES('admin','contest',1,'contest1.img','T');
+INSERT INTO UPLOAD VALUES('Qdfca12','profile',3,'odfcprofile.img','F');
+INSERT INTO UPLOAD VALUES('wSDF23','gpx',2,'dmz.gpx','T');
+INSERT INTO UPLOAD VALUES('cvxzv34','challenge',4,'chal4.img','F');
+INSERT INTO UPLOAD VALUES('vdfety1111','background',2,'back2.img','F');
+
+-- UPLOAD COMMENTS
+COMMENT ON COLUMN UPLOAD.UPL_ID IS '업로드한 유저 아이디';
+COMMENT ON COLUMN UPLOAD.UPL_STT IS '파일 업로드한 게시글 카테고리';
+COMMENT ON COLUMN UPLOAD.UPL_NO IS '게시글 번호';
+COMMENT ON COLUMN UPLOAD.UPL_TITLE IS '파일 이름';
+COMMENT ON COLUMN UPLOAD.UPL_VER IS '검증여부';
 
 
 
