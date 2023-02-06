@@ -1,23 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>화면기본구조</title>
+	<title>Insert title here</title>
+    <link rel="stylesheet" href="../resources/css/shared.css">
     <link rel="stylesheet" href="../resources/css/wrap.css">
 </head>
-
 <body>
-    <div class="wrap">
-        <div id="header">
-            <div id="hd1">
-                <img src="../resources/image/logo.png" alt="">
-            </div>
-            <div id="hd2"></div>
-            <div id="hd3"></div>
-        </div>
+	 <%@ include file="common/mainHeader.jsp" %>
+
+	 <div class="wrap">
 
         <div id="content">
             <div id="ct1"></div>
@@ -44,6 +40,6 @@
             <div id="ft1"></div>
         </div>
     </div>
-</body>
 
+</body>
 </html>
