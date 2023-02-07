@@ -13,13 +13,13 @@
             <div id="wrapnav">
                 <div id="fistgroup">
                     <div id="logo">
-                        <img src="../../resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
+                        <img src="resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
                     </div>
                     <div id="menu">
                         <ul>
-                            <li><a href="aFeed">피드</a></li>
-                            <li id="explore"><a href="">탐색</a></li>
-                            <li id="chall"><a href="">챌린지</a></li>
+                            <li><a href="#">피드</a></li>
+                            <li id="explore"><a href="#">탐색</a></li>
+                            <li id="chall"><a href="#">챌린지</a></li>
                         </ul>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <ul>
                         <li>
                             <div id="alarm">
-                                <img src="../../resources/image/bell.png" alt="알림종">
+                                <img src="resources/image/bell.png" alt="알림종">
                             </div>
                         </li>
                         <li id="mp">

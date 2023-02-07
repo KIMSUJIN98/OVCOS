@@ -5,15 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/header.css">
+<link rel="stylesheet" href="resources/css/start.css">
+<script src="resources/js/jquery-3.6.3.min.js"></script>
 </head>
 <body>
 
-    <%@ include file="views/common/header.jsp" %>
+    <%@ include file="views/common/headerForIndex.jsp" %>
 
-      <div id="body">
-          <div id="c1">
-          </div>
-          <img src="../WebContent/resources/image/logo.png" alt="logo" id="logotop">
+    <script>
+      $(function(){
+        $("#lastgroup").remove();
+      })
+    </script>
+
+      <div id="startWrap">
+          <img src="resources/image/logo.png" alt="logo" id="logotop">
 
           <div id="content">
             <p id="imtext1">
