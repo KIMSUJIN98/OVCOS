@@ -1,4 +1,4 @@
-@import url(header.css);
+/* @import url(header.css); */
 @import url(content.css);
 @import url(footer.css);
 
@@ -6,7 +6,7 @@
 
 div, form, input{
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 .wrap{width: 1400px; height: 1600px; margin: auto;}
 .wrap>div{width: 100%;}
