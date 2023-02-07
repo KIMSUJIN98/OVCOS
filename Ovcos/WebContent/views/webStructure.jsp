@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Insert title here</title>
-    <link rel="stylesheet" href="../resources/css/indexTest.css">
+    <link rel="stylesheet" href="../resources/css/header.css">
     <link rel="stylesheet" href="../resources/css/wrap.css">
 </head>
 <body>
-	 <%@ include file="common/indexTest.jsp" %>
+	 <%@ include file="common/header.jsp" %>
 
 	 <div class="wrap">
 		
