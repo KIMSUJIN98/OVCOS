@@ -17,10 +17,6 @@
     font-style: normal;
 }
 
-@import url(wrap.css);
-@import url(content.css);
-@import url(footer.css);
-
 header{
     width: 100%;
     position: fixed;
@@ -31,13 +27,6 @@ header{
 body{
     margin: 0;
 }
-
-/* #wrap{
-    width: 1400px;
-    height: 1200px;
-    border: 1px solid red;
-    z-index: 0;
-} */
 
 #wrapnav{
     width: 80%;
@@ -92,13 +81,10 @@ nav{
 #menu ul li a:hover{
     color: rgb(67, 115, 176);
 }
-
-
 /* 메뉴끝 */
 
 /* 네비마지막세개버튼 */
 /* 종 */
-
 #alarm img{
     width: 35px;
 }
@@ -145,9 +131,3 @@ nav{
     color: rgb(67, 115, 176);
 
 }
-
-.wrap{width: 1400px; height: 1600px; margin: auto;}
-.wrap>div{width: 100%;}
-#header{width: 1400px; height: 70px; position: fixed;}
-#content{height: 90%; padding-top: 70px;}
-#footer{height: 10%;}
