@@ -1,0 +1,37 @@
+/* @import url(content.css);
+@import url(footer.css); */
+
+*{margin: 0; padding: 0;}
+
+div, form, input{
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+.wrap{width: 1400px; height: 1600px; margin: auto;}
+.wrap>div{width: 100%;}
+#header{width: 1400px; height: 70px; position: fixed;}
+#content{height: 90%; padding-top: 70px;}
+#footer{height: 10%;}
+
+#content>div{
+    height: 100%;
+    float: left;
+}
+
+/* #ct1{width: 20%;}
+#ct2{width: 60%;}
+#ct3{width: 20%;} */
+
+#footer>div{width: 100%;}
+#ft1{height: 100%;}
+
+body{
+    position: relative;
+    background-image: url("../image/start.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 90vh;
+    width: 100%;
+    margin: auto;
+    
+}
