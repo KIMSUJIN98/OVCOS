@@ -39,7 +39,6 @@ DROP SEQUENCE SEQ_FEED_INDEX;
 DROP SEQUENCE SEQ_FEED_CMN_NO;
 DROP SEQUENCE SEQ_CMN_HIST_NO;
 DROP SEQUENCE SEQ_GEN_HIST_NO;
-DROP SEQUENCE SEQ_GPX_UPLOAD;
 
 
 
@@ -126,7 +125,7 @@ COMMENT ON COLUMN CONTEST.CNTS_DEL_NY IS '삭제여부';
 --------------------------------------------------
 CREATE TABLE UPLOAD(
     UPL_ID VARCHAR2(20) NOT NULL,
-    UPL_STT VARCHAR2(30) NOT NULL CHECK(UPL_STT IN('challenge','profile','background','gpx','contest')),
+    UPL_STT VARCHAR2(30) NOT NULL CHECK(UPL_STT IN('challenge','profile','background','contest')),
     UPL_NO NUMBER NOT NULL,
     UPL_TITLE VARCHAR2(60) NOT NULL,
     UPL_VER CHAR(1) DEFAULT 'F' CHECK(UPL_VER IN('F','T')),
@@ -135,13 +134,13 @@ CREATE TABLE UPLOAD(
 
 INSERT INTO UPLOAD VALUES('admin','contest',1,'contest1.img','T','N');
 INSERT INTO UPLOAD VALUES('Qdfca12','profile',3,'odfcprofile.img','F','N');
-INSERT INTO UPLOAD VALUES('wSDF23','gpx',2,'dmz.gpx','T','N');
+INSERT INTO UPLOAD VALUES('wSDF23','profile',2,'dmz.gpx','T','N');
 INSERT INTO UPLOAD VALUES('cvxzv34','challenge',4,'chal4.img','F','N');
 INSERT INTO UPLOAD VALUES('vdfety1111','background',2,'back2.img','F','N');
 
 -- UPLOAD COMMENTS
 COMMENT ON COLUMN UPLOAD.UPL_ID IS '업로드한 유저 아이디';
-COMMENT ON COLUMN UPLOAD.UPL_STT IS '파일 업로드한 게시글 카테고리';
+COMMENT ON COLUMN UPLOAD.UPL_STT IS '이미지 업로드한 게시글 카테고리';
 COMMENT ON COLUMN UPLOAD.UPL_NO IS '게시글 번호';
 COMMENT ON COLUMN UPLOAD.UPL_TITLE IS '파일 이름';
 COMMENT ON COLUMN UPLOAD.UPL_VER IS '검증여부';
@@ -229,8 +228,7 @@ CREATE TABLE FEED (
     FEED_PAHT_NY CHAR(1)  DEFAULT 'N' NOT NULL CONSTRAINT FEED_PAHT_NY_CK CHECK(FEED_PAHT_NY IN('Y','N')), --경로등록여부
     FEED_RPR_NY CHAR(1) DEFAULT 'N' NOT NULL CONSTRAINT FEED_RPR_NY_CK CHECK(FEED_RPR_NY IN('Y','N')), --신고여부
     FEED_RPR_DATE DATE , --신고시간
-    FEED_GPX VARCHAR2(300) NOT NULL, --경로파일  (ERD 는 NULL인데 NOT NULL로...)
-    FEED_DST NUMBER  NOT NULL ,-- 경로길이(ERD 는 NULL인데 NOT NULL로...) 
+    GPX_TITLE VARCHAR2(20) NOT NULL, 
     FEED_DEL_NY CHAR(1)  DEFAULT 'N' NOT NULL CONSTRAINT FEED_DEL_NY_CK CHECK(FEED_DEL_NY IN('Y','N')),--피드삭제여부
     MEM_ID VARCHAR(255) NOT NULL REFERENCES MEMBER  --포린키 작성자아이디
 );
@@ -245,8 +243,7 @@ COMMENT ON COLUMN FEED.FEED_PUBLIC_TYPE IS '피드 공개여부';
 COMMENT ON COLUMN FEED.FEED_PAHT_NY IS '경로등록여부';
 COMMENT ON COLUMN FEED.FEED_RPR_NY IS '피드신고여부';
 COMMENT ON COLUMN FEED.FEED_RPR_DATE IS '피드신고시간';
-COMMENT ON COLUMN FEED.FEED_GPX IS '경로파일';
-COMMENT ON COLUMN FEED.FEED_DST IS '경로길이';
+COMMENT ON COLUMN FEED.GPX_TITLE IS 'GPX파일명';
 COMMENT ON COLUMN FEED.FEED_DEL_NY IS '피드삭제여부';
 COMMENT ON COLUMN FEED.MEM_ID IS '회원 아이디';
 
@@ -257,11 +254,11 @@ NOCYCLE
 NOCACHE;
 
 
-INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '오늘 뛴 호수공원 코스 추천합니다','뷰도 좋고 사람도 많지 않아서 좋네요',5,6000,'전체','Y','N',null,'경로파일',213,'N','Qdfca12');
-INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '오늘의 기록','안양천,30분',4,4000,'친구','Y','N',null,'경로파일',1234,'N','wSDF23');
-INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '2023/02/05 달리기 ','1시간 달렸는데 개빡셌다. 페이스조절해야지 ',3.5 ,6000,'친구','N','N',null,'경로파일',2345,'N','cvxzv34');
-INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, DEFAULT, '2021 안양공원 달리기 코스 ','날씨가 춥긴 춥다',3,5400,'비공개','N','N',null,'경로파일',5678,'N','vdfety1111');
-INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '한강달리기는 옳다','갓생사는기분',5,6500,DEFAULT,'Y','N',null,'경로파일',1111,DEFAULT,'wSDF23');
+INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '오늘 뛴 호수공원 코스 추천합니다','뷰도 좋고 사람도 많지 않아서 좋네요',5,6000,'전체','Y','N',null,'경리단길','N','Qdfca12');
+INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '오늘의 기록','안양천,30분',4,4000,'친구','Y','N',null,'DMZ산책길','N','wSDF23');
+INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '2023/02/05 달리기 ','1시간 달렸는데 개빡셌다. 페이스조절해야지 ',3.5 ,6000,'친구','N','N',null,'계양산길','N','cvxzv34');
+INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, DEFAULT, '2021 안양공원 달리기 코스 ','날씨가 춥긴 춥다',3,5400,'비공개','N','N',null,'옷걸이코스','N','vdfety1111');
+INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '한강달리기는 옳다','갓생사는기분',5,6500,DEFAULT,'Y','N',null,'파주코스',DEFAULT,'wSDF23');
 
 --------------------------------------------------
 --------------     FEED_COMMENTS 관련--------------
@@ -302,8 +299,7 @@ INSERT INTO FEED_COMMENTS VALUES(SEQ_FEED_CMN_NO.NEXTVAL,'rogen0',SYSDATE,'저도 
 ------------     GPX_UPLOAD 관련	------------------
 --------------------------------------------------
 CREATE TABLE GPX_UPLOAD(
-    GPX_INDEX NUMBER CONSTRAINT GPX_UPLOAD_PK PRIMARY KEY,
-    GPX_TITLE VARCHAR2(20) NOT NULL,
+    GPX_TITLE VARCHAR2(20) PRIMARY KEY,
     GPX_LENGTH NUMBER,
     GPX_URL VARCHAR2(100) NOT NULL,
     GPX_DEL_NY CHAR(1) NOT NULL,
@@ -311,7 +307,6 @@ CREATE TABLE GPX_UPLOAD(
     FEED_INDEX NUMBER CONSTRAINT GPX_UPLOAD_FK REFERENCES FEED
 );
 
-COMMENT ON COLUMN GPX_UPLOAD.GPX_INDEX IS 'GPX 번호';
 COMMENT ON COLUMN GPX_UPLOAD.GPX_TITLE IS 'GPX 파일 이름';
 COMMENT ON COLUMN GPX_UPLOAD.GPX_LENGTH IS '경로 길이';
 COMMENT ON COLUMN GPX_UPLOAD.GPX_URL IS '저장 경로';
@@ -319,17 +314,12 @@ COMMENT ON COLUMN GPX_UPLOAD.GPX_DEL_NY IS '삭제 여부';
 COMMENT ON COLUMN GPX_UPLOAD.GPX_DATE IS '파일 등록일자';
 COMMENT ON COLUMN GPX_UPLOAD.FEED_INDEX IS '피드번호';
 
-CREATE SEQUENCE SEQ_GPX_UPLOAD
-START WITH 1
-INCREMENT BY 1
-NOCYCLE
-NOCACHE;
 
-INSERT INTO GPX_UPLOAD VALUES(SEQ_GPX_UPLOAD.NEXTVAL,'feedNo1',12,'Ovcos/resources/gpxupload/feedNo1.gpx','N',SYSDATE,1);
-INSERT INTO GPX_UPLOAD VALUES(SEQ_GPX_UPLOAD.NEXTVAL,'feedNo2',15,'Ovcos/resources/gpxupload/feedNo2.gpx','N',SYSDATE,2);
-INSERT INTO GPX_UPLOAD VALUES(SEQ_GPX_UPLOAD.NEXTVAL,'feedNo3',21,'Ovcos/resources/gpxupload/feedNo3.gpx','N',SYSDATE,3);
-INSERT INTO GPX_UPLOAD VALUES(SEQ_GPX_UPLOAD.NEXTVAL,'feedNo4',10,'Ovcos/resources/gpxupload/feedNo4.gpx','N',SYSDATE,4);
-INSERT INTO GPX_UPLOAD VALUES(SEQ_GPX_UPLOAD.NEXTVAL,'feedNo5',9,'Ovcos/resources/gpxupload/feedNo5.gpx','N',SYSDATE,5);
+INSERT INTO GPX_UPLOAD VALUES('feedNo1',12,'Ovcos/resources/gpxupload/feedNo1.gpx','N',SYSDATE,1);
+INSERT INTO GPX_UPLOAD VALUES('feedNo2',15,'Ovcos/resources/gpxupload/feedNo2.gpx','N',SYSDATE,2);
+INSERT INTO GPX_UPLOAD VALUES('feedNo3',21,'Ovcos/resources/gpxupload/feedNo3.gpx','N',SYSDATE,3);
+INSERT INTO GPX_UPLOAD VALUES('feedNo4',10,'Ovcos/resources/gpxupload/feedNo4.gpx','N',SYSDATE,4);
+INSERT INTO GPX_UPLOAD VALUES('feedNo5',9,'Ovcos/resources/gpxupload/feedNo5.gpx','N',SYSDATE,5);
 --------------------------------------------------
 ------------     GENERAL_HISTORY 관련	----------
 --------------------------------------------------
