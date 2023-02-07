@@ -1,0 +1,9 @@
+body{
+    position: relative;
+}
+#map{
+    position: absolute;
+    top: 250px;
+    left: 350px;
+}
+
