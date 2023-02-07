@@ -24,9 +24,6 @@ header{
     background-color: white;
 }
 
-body{
-    margin: 0;
-}
 
 #wrapnav{
     width: 80%;
@@ -58,7 +55,7 @@ nav{
 }
 #menu ul li{
     list-style: none;
-    border-bottom: 3px solid white ;
+    /* border-bottom: 3px solid white ; */
     margin: 0px 30px;
 }
 #menu ul li:hover{
@@ -95,13 +92,11 @@ nav{
 }
 
 #myPage{
-    background-image: url(../../resources/images/bell.png);
     width: 65px;
     
 }
 #mp{
   background-color: aqua;
-  background-image: url(resources/images/mypage.png);
   border-radius: 50%;
   width: 32px;
   height: 32px;

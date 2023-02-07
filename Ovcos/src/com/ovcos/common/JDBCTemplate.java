@@ -1,24 +1,31 @@
 package com.ovcos.common;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class JDBCTemplate {
 	
-	/**
-	 *1. 而ㅻ꽖�뀡 媛앹껜 �깮�꽦 (DB�� �젒�냽) �븳 �썑 �빐�떦 connection 媛앹껜 諛섑솚�빐二쇰뒗 硫붿꽌�뱶
-	 * @return
-	 */
+	
 	public static Connection getConnection() {
 		Connection conn = null;
+		Properties prop = new Properties();
+		String filePath = JDBCTemplate.class.getResource("db/driver/driver.properties").getPath();
+		try {
+			prop.loadFromXML(new FileInputStream(filePath));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName(prop.getProperty("driver"));
 			
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -30,10 +37,7 @@ public class JDBCTemplate {
 		return conn;
 	}
 	
-	/**
-	 * 2. commit�쓣 泥섎━�빐二쇰뒗 硫붿꽌�뱶 (而ㅻ꽖�뀡 媛앹껜瑜� �쟾�떖諛쏆븘�꽌)
-	 * @param conn
-	 */
+	
 	public static void commit(Connection conn) {
 		try {
 			if(conn != null && !conn.isClosed()) {
@@ -44,10 +48,7 @@ public class JDBCTemplate {
 		}
 	}
 	
-	/**
-	 * 3. Rollback�쓣 泥섎━�빐二쇰뒗 硫붿꽌�뱶 (而ㅻ꽖�뀡 媛앹껜瑜� �쟾�떖諛쏆븘�꽌)
-	 * @param conn
-	 */
+	
 	public static void rollback(Connection conn) {
 		try {
 			if(conn != null && !conn.isClosed()) {
@@ -58,11 +59,8 @@ public class JDBCTemplate {
 		}
 	}
 	
-	/**
-	 * 4. Statement 愿��젴 媛앹껜 �쟾�떖諛쏆븘�꽌 諛섎궔�떆耳쒖＜�뒗 硫붿꽌�뱶
-	 * @param stmt
-	 */
-	public static void close(Statement stmt) {// �뼐媛� 遺�紐⑤씪�꽌 PreparedStatement 諛쏆쓣�닔 �엳�쓬.
+	
+	public static void close(Statement stmt) {
 		try {
 			if(stmt != null && !stmt.isClosed()) {
 				stmt.close();
@@ -72,10 +70,7 @@ public class JDBCTemplate {
 		}
 	}
 	
-	/**
-	 * 5. Connection 媛앹껜 �쟾�떖 諛쏆븘�꽌 諛섎궔�떆耳쒖＜�뒗 硫붿꽌�뱶
-	 * @param conn
-	 */
+	
 	public static void close(Connection conn) {
 		try {
 			if(conn != null && !conn.isClosed()) {
@@ -86,10 +81,7 @@ public class JDBCTemplate {
 		}
 	}
 	
-	/**
-	 * 6. ResultSet 媛앹껜 �쟾�떖 諛쏆븘�꽌 諛섎궔�떆耳쒖＜�뒗 硫붿꽌�뱶
-	 * @param rset
-	 */
+
 	public static void close(ResultSet rset) {
 		try {
 			if(rset != null && !rset.isClosed()) {

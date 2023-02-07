@@ -36,9 +36,7 @@
             </div>
             <div id="ct3"></div>
         </div>
-        <div id="footer">
-            <div id="ft1"></div>
-        </div>
+        
     </div>
 
 </body>
