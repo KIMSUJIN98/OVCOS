@@ -5,50 +5,46 @@
     color: black;
 }
 
+
 #exMainWrap{
     /* border: 1px solid; */
-    width: 100%;
-    height: 1000px;
-    margin: auto;
-    padding-top: 100px;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    /* background-color: black; */
+    margin-top: 55px;
+   
 }
 
-#exMainWrap>div{
-    width: 100%;
-}
-#search{height: 10%;}
-#content{height: 90%;}
-#content>div{float: left;}
+#course{width: 100%; height: 100%;}
 
-#search div{
-    float: left;
+#course>div{float: left;}
+#course-nav{
+    width: 5%;
+    height: 100%;
+    border-right: 1px solid lightgray;
 }
-
-#segSearch{
-    width: 20%;
-    
+.inner{
+    width: 100%; 
+    height: 75px;
+    /* background-color: rgb(158, 153, 153); */
 }
 
-#text{border: 1px solid rgb(56, 55, 55);}
+.inner>img{
+    width: 30%; 
+    height: 30px; 
+    display: flex; 
+    margin: auto;}
 
-#button-addon2{border: 1px solid rgb(56, 55, 55);}
 
-.dropdown{
-    margin-left: 20px;
-    border: 1px solid rgb(56, 55, 55);
-    border-radius: 10px;
-}
-#summary{
-    width: 20%;
-    border: 1px solid black;
-    height: 70%;
+#course-left{
+    width: 15%;
+    height: 100%;
 }
 #map{
-    width: 77%;
+    width: 80%;
     /* border: 1px solid black; */
-    height: 70%;
-    margin-left: 20px;
-    border-radius: 10px;
+    height: 100%;
 }
 #summary div{
     width: 100%;

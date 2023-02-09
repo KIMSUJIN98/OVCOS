@@ -5,17 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/header.css">
+<link rel="stylesheet" href="resources/css/navStyle.css">
 <link rel="stylesheet" href="resources/css/start.css">
 <script src="resources/js/jquery-3.6.3.min.js"></script>
 </head>
 <body>
-
-    <%@ include file="views/common/headerForIndex.jsp" %>
+  
+    <%@ include file="views/common/navForIndex.jsp" %>
 
     <script>
       $(function(){
-        $("#lastgroup").remove();
+        $("#lastgroup ul").hide();
       })
     </script>
 
