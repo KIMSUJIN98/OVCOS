@@ -17,7 +17,7 @@
                     </div>
                     <div id="menu">
                         <ul>
-                            <li><a href="aFeed">피드</a></li>
+                            <li><a href="#">피드</a></li>
                             <li id="explore"><a href="">탐색</a></li>
                             <li id="chall"><a href="">챌린지</a></li>
                         </ul>
