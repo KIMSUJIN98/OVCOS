@@ -1,0 +1,175 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#body{
+    position: relative;
+    background-image: url(../img/img1.jfif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 90vh;
+    width: 100%;
+    margin: auto;
+    
+}
+#c1{
+    width: 100%;
+    height: 90vh;
+    background-color: black;
+    border: 1px solid black;
+    position: absolute;
+    z-index: 2;
+    opacity: 0.5;
+}
+
+#content{
+    width: 30%;
+    height: 40%;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%);
+    z-index: 3;
+    color: black;
+}
+
+.btn{
+    
+        width: 200px;
+        height: 50px;
+        color: white;
+        font-size: 15px;
+        font-weight: bolder;
+        background-color:rgb(67, 115, 176) ;
+        border-style: hidden;
+        /* border-radius: 4%; */
+        top: 120px;
+    
+}
+
+
+/* 로그인 */
+#login{
+    position: absolute;
+    left: 50%;
+    top: -30%;
+    transform: translate(-50%);
+    width: 700px;
+    height: 600px;
+    text-align: center;
+    background-color: #fff;
+    border-radius:5%;
+}
+#logotop{
+    position: absolute;
+    z-index: 3;
+    bottom:100px;
+    width: 250px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#provision{
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+    margin-top: 150px;
+    margin-left: 15%;
+    
+}
+#agreeCheck{
+    position: absolute;
+    top:40px;
+    transform: translate(50%);
+    margin-left: 60px;
+}
+
+#joinStep>ul, #joinStep li, #agreeBox, #box {
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#joinStep{
+    position: relative;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    top: -10px;
+    left: 15%;
+    
+    
+}
+#joinStep li{
+    /* background-color: blue; */
+    list-style-type: none;
+    float: left;
+    width: 15%;
+    height: 10%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 27px;
+
+    display: block;
+    transform: translate(130%);
+
+}
+
+#step{
+    position: relative;
+    background-color: green;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    top: 120px;
+}
+
+
+#agreeBox{
+    position : absolute;
+    width: 500px;
+    height: 300px;
+    border: 1px;
+    color: black;
+} 
+
+ #box{
+    position : absolute;
+    width: 400px;
+    height: 300px;
+    border: 1px;
+    color: black;
+}
+
+.btn{
+    position: absolute;
+    z-index: 3;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    background-color:rgb(67, 115, 176) ;
+    top: 500px;
+    bottom: 20%;
+    left: 50%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transform: translate(-50%);
+    
+}
+
+#btn1{
+    transform: translate(-100%);
+}
+
+#btn2{
+    transform: translate(10%);
+}
+
+#insertInfo{
+    /* top: 150px; */
+    margin-left: auto;
+    margin-right: auto;
+}
