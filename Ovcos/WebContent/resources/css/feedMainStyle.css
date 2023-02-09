@@ -1,0 +1,130 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: black;
+}
+
+#feedWrap{
+    width: 1400px;
+    height: 1000px;
+    margin: auto;
+    /* border: 1px solid red; */
+}
+
+#feedWrap div{
+    /* border: 1px solid green; */
+}
+#feedWrap{
+    display: flex;
+}
+#ct1{
+    width: 20%;
+    height: 100%;
+}
+#ct2{
+    width: 60%;
+    height: 100%;
+}
+#ct3{
+    width: 20%;
+    height: 100%;
+}
+
+
+/* ct1 */
+#ct1>div{
+    border-radius: 2%;
+}
+/* 운동기록 */
+#record{ 
+    width: 90%; 
+    height: 600px; 
+    margin: auto; 
+    border: 1px solid lightgray;
+    margin-top: 100px;
+}
+/* 공지사항 */
+#notice{
+    width: 90%; 
+    height: 40px; 
+    margin: auto; 
+    border: 1px solid lightgray;
+    margin-top: 10px;
+}
+
+
+/*ct2*/
+#content_header{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+#btn_list{
+    display: flex;
+    font-family: 'SUIT-Regular';
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+#btn_list>div{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    width: 10%;
+    height: 100%;
+    text-align: center;
+}
+#all_feed{
+    background-color: rgb(240, 240, 240);
+}
+#btn_list>div>a{
+    font-size: 12px;
+}
+#feed_select{line-height: 30px;}
+#content_feed{
+    width: 100%;
+    height: 90%;
+    background-color: rgb(240, 240, 240);
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#content_feed>iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ct3 */
+#ct3 *{
+    border: 1px solid lightgray;
+}
+#dust{
+    width: 90%;
+    height: 200px;
+    margin: auto;
+    margin-top: 100px;
+}
+#weather{
+    width: 90%;
+    height: 400px;
+    margin: auto;
+    margin-top: 40px;
+}
+#footer{
+    width: 90%;
+    height: 200px;
+    margin: auto;
+    margin-top: 40px;
+}
