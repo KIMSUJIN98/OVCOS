@@ -22,6 +22,8 @@ header{
     position: fixed;
     z-index: 99;
     background-color: white;
+    /* background: linear-gradient(75.89deg,rgba(0,0,0,.09) 17.45%,rgba(0,0,0,.03) 70.49%); */
+    border-bottom: 0px;
 }
 
 
@@ -55,7 +57,7 @@ nav{
 }
 #menu ul li{
     list-style: none;
-    /* border-bottom: 3px solid white ; */
+    border-bottom: 3px solid white ;
     margin: 0px 30px;
 }
 #menu ul li:hover{
