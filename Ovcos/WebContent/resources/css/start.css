@@ -35,7 +35,7 @@
     width: 300px;
     left: 50%;
     transform: translate(-50%);
-    top: 30px;
+    top: 100px;
 }
 
 #content{
@@ -81,6 +81,7 @@
     transform: translate(-50%);
     border: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 
