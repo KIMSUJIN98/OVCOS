@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<link rel="stylesheet" href="../../resources/css/feedMainStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css">
 <title>Insert title here</title>
 
 </head>
