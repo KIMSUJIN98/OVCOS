@@ -1,35 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+    <meta charset="UTF-8">
 <link rel="stylesheet" href="../../resources/css/feedMainStyle.css">
 <title>Insert title here</title>
 
 </head>
 <body>
-<!-- feed°ü·Ã ÆäÀÌÁö ÀÛ¼º -->
-
+<%@ include file="../common/nav.jsp"%>
+<!-- feedê´€ë ¨ íŽ˜ì´ì§€ ìž‘ì„± -->
+<div id="nav"></div>
 <div id="feedWrap">
         
             <div id="ct1">
-                <div id="record">¿îµ¿±â·Ï±¸¿ªÀÔ´Ï´Ù</div>
-                <div id="notice">°øÁö»çÇ×±¸¿ªÀÔ´Ï´Ù</div>
+                <div id="record">ìš´ë™ê¸°ë¡êµ¬ì—­ìž…ë‹ˆë‹¤</div>
+                <div id="notice">ê³µì§€ì‚¬í•­êµ¬ì—­ìž…ë‹ˆë‹¤</div>
             </div>
             <div id="ct2">
                 <div id="content_header">
                     <div id="btn_list">
-                        <div id="all_feed"><a href="">ÀüÃ¼ÇÇµå</a></div>
-                        <div id="fw_feed"><a href="">Ä£±¸ÇÇµå</a></div>
-                        <div id="my_feed"><a href="">³»ÇÇµå</a></div>
+                        <div id="all_feed"><a href="">ì „ì²´í”¼ë“œ</a></div>
+                        <div id="fw_feed"><a href="">ì¹œêµ¬í”¼ë“œ</a></div>
+                        <div id="my_feed"><a href="">ë‚´í”¼ë“œ</a></div>
                     </div>
                     <div id="feed_select">
                         <select name="" id="fs">
-                            <option value="">ÃÖ½Å¼ø</option>
-                            <option value="">¿À·¡µÈ¼ø</option>
-                            <option value="">º°Á¡¼ø</option>
-                            <option value="">Âò¼ø</option>
+                            <option value="">ìµœì‹ ìˆœ</option>
+                            <option value="">ì˜¤ëž˜ëœìˆœ</option>
+                            <option value="">ë³„ì ìˆœ</option>
+                            <option value="">ì°œìˆœ</option>
                         </select>
                     </div>
                 </div>
@@ -41,9 +42,9 @@
 
             
             <div id="ct3">
-                <div id="dust">¹Ì¼¼¸ÕÁöapi ±¸¿ª</div>
-                <div id="weather">³¯¾¾ api ±¸¿ª</div>
-                <div id="footer"> ÇªÅÍ±¸¿ª
+                <div id="dust">ë¯¸ì„¸ë¨¼ì§€api êµ¬ì—­</div>
+                <div id="weather">ë‚ ì”¨ api êµ¬ì—­</div>
+                <div id="footer"> í‘¸í„°êµ¬ì—­
                 </div>
             
             </div>
