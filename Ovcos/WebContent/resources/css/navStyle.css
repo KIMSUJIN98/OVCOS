@@ -27,7 +27,7 @@ body{
 } */
 
 #wrapnav{
-    width: 100%;
+    width: 1400px;
     height: 55PX;
     display: flex;   
     align-items: center;
