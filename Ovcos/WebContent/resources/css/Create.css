@@ -21,8 +21,8 @@ body{
        top: 50%;
        z-index: 5;
        transform: translate(-50%, -50%);
-       width: 500px;
-       height: 500px;
+       width: 700px;
+       height: 700px;
        box-shadow: 0 0 10px rgba(0,0,0,0.5);
        background: #fff;
        border-radius: 5px;
@@ -53,10 +53,24 @@ body{
        background: rgba(0,0,0,0.5);
        opacity: 0;
    }
-   #feed{padding-right: 200px;}
-   td,th{padding-left: 30px;}
+   #feed{padding-right: 500px;
+     margin: 0; 
+   }
+   td,th{padding-left: 50px;}
 
-   
+  #text1{
+    margin-left: -20px;
+    margin-top: 20px;
+  }
+  #avater1{
+    margin-left: -25px;
+  }
+
+  #text{
+    margin-left: -20px;
+    margin-top: 0;
+  }
+
 
 
 

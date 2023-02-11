@@ -15,9 +15,9 @@ public class JDBCTemplate {
 	public static Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		String filePath = JDBCTemplate.class.getResource("db/driver/driver.properties").getPath();
+		String filePath = JDBCTemplate.class.getResource("/db/driver/driver.properties").getPath();
 		try {
-			prop.loadFromXML(new FileInputStream(filePath));
+			prop.load(new FileInputStream(filePath));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

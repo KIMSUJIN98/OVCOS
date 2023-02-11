@@ -3,15 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-<link rel="stylesheet" href="../../resources/css/feedMainStyle.css">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css">
 <title>Insert title here</title>
 
 </head>
 <body>
-<%@ include file="../common/nav.jsp"%>
 <!-- feed관련 페이지 작성 -->
-<div id="nav"></div>
+
 <div id="feedWrap">
         
             <div id="ct1">
@@ -42,11 +41,9 @@
 
             
             <div id="ct3">
-                <div id="dust">미세먼지api 구역</div>
+                 <div id="dust">미세먼지api 구역</div>
                 <div id="weather">날씨 api 구역</div>
-                <div id="footer"> 푸터구역
-                </div>
-            
+                <div id="footer"> 푸터구역</div>
             </div>
 
     </div>
