@@ -10,7 +10,8 @@
 </head>
 <body>
 <!-- feed관련 페이지 작성 -->
-
+<%@ include file="../common/nav.jsp" %>
+<div id="nav"></div>
 <div id="feedWrap">
         
             <div id="ct1">

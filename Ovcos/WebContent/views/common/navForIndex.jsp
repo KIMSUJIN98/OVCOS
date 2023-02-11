@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../resources/css/navStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navStyle.css">
 </head> 
 <body>
     <header>
@@ -16,7 +16,7 @@
             <div id="wrapnav">
                 <div id="fistgroup">
                     <div id="logo">
-                        <img src="resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
+                        <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
                     </div>
                     <div id="menu">
                         <ul>
@@ -30,7 +30,7 @@
                     <ul>
                         <li>
                             <div id="alarm">
-                                <img src="resources/image/bell.png" alt="알림종">
+                                <img src="${pageContext.request.contextPath}/resources/image/bell.png" alt="알림종">
                             </div>
                         </li>
                         <li id="mp">
