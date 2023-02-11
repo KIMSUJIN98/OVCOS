@@ -2,7 +2,7 @@
 
 div, form, input{
     box-sizing: border-box;
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 body{background-color: rgb(247, 247, 250);}
 .wrap{width: 1500px; height: 1600px; margin: auto; padding-top: 55px;}
@@ -11,6 +11,14 @@ body{background-color: rgb(247, 247, 250);}
 
 /* content */
 #content>div{
-    height: 100%;
+    width: 100%;
     float: left;
+}
+
+#chlgMain1{
+    height: 20%;
+}
+
+#chlgMain2{
+    height: 80%;
 }
