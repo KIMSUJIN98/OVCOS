@@ -45,8 +45,8 @@
                     </div>
                     <div id="menu">
                         <ul>
-                            <li><a href="aFeed" >피드</a></li>
-                            <li id="explore" ><a href="">탐색</a></li>
+                            <li id="aFeed"><a href="../feed/feedMain.jsp"  >피드</a></li>
+                            <li id="explore"><a href="../explore/exploreMain.jsp">탐색</a></li>
                             <li id="chall"><a href="">챌린지</a>
                                     <ul>
                                         <li><a href="#">대회</a></li>
