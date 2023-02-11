@@ -22,6 +22,8 @@
     height: 1000px;
     margin: auto;
     margin-top: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
     /* border: 1px solid red; */
 }
 
