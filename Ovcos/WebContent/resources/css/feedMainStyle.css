@@ -13,12 +13,17 @@
     text-decoration: none;
     color: black;
 }
+#nav{
+    width: 1400px;
+    height: 55px;
+}
 
 #feedWrap{
     width: 1400px;
     height: 1000px;
     margin: auto;
     /* border: 1px solid red; */
+        margin-top: 10px;
 }
 
 #feedWrap div{
