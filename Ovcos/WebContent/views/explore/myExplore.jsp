@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMy.css">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 
 </head>
@@ -16,15 +16,15 @@
         <!-- course_nav 시작-->
         <div id="course_nav">
             <ul>
-                <li class="li1">
-                    <a href="course">
-                        <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagWhite.png" alt="깃발"></span>
+                <li>
+                    <a href="<%=contextPath%>/course">
+                        <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagGray.png" alt="깃발"></span>
                         <span class="li1text" align="center">코스검색</span>
                     </a>
                 </li>
-                <li>
+                <li class="li1">
                     <a href="course/my">
-                        <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/exploreuser.png" alt="유저"></span>
+                        <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/userWhite.png" alt="유저"></span>
                         <span class="li2text" align="center">나의코스</span>
                     </a>
                 </li>
@@ -34,7 +34,7 @@
         <!--course_left 시작-->
         <div id="course_left">
             <div id="sectiontop">
-                <div id="title">코스검색</div>
+                <div id="title">나의코스</div>
                 <div id="search">
                     <input type="text" name="searchcourse" placeholder="제목,코스명 검색">
                     <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색">
@@ -43,8 +43,8 @@
             </div>
             <div id="tab_manu">
                 <ul>
-                    <li class="tabon tabon1">최신기록</li>
-                    <li class="tabon1">인기기록</li>
+                    <li class="tabon tabon1">최신순</li>
+                    <li class="tabon1">거리순</li>
                 </ul>
             </div>
             <div id="left_content">
