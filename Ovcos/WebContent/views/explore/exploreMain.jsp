@@ -10,12 +10,12 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
-<link rel="stylesheet" href="../../resources/css/exMain.css?문자열">
+<!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css"> -->
 </head>
 <body>
 	<%@ include file="../common/nav.jsp" %>
 
-    <div id="exMainWrap">
+    <!-- <div id="exMainWrap">
         <div id="course">
             <div id="course-nav">
                 <div class="inner" id="inner1">
@@ -61,7 +61,7 @@
                     })
                    
                 })
-            </script>
+            </script> -->
 
             <!-- <div id="map"> 
                 <script>
