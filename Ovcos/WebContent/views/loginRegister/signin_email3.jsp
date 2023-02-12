@@ -17,7 +17,7 @@
 </head>    
 <body>
 
-    <%@ include file="../../views/common/headerForIndex.jsp" %>
+    <%@ include file="../../views/common/navForIndex.jsp" %>
 
     <script>
       $(function(){
@@ -39,7 +39,7 @@
 </head>    
 <body>
 
-    <%@ include file="../../views/common/headerForIndex.jsp" %>
+    <%@ include file="../../views/common/navForIndex.jsp" %>
 
     <script>
       $(function(){
