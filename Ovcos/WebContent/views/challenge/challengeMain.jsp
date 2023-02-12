@@ -7,20 +7,15 @@
     <meta charset="EUC-KR">
     <title>challengeMain</title>
     <link rel="stylesheet" href="../../resources/css/challengeWrap.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
+    
 </head>
 
 <body>
     <%@ include file="../common/nav.jsp" %>
+    <script>
+        let nav = document.getElementById("wrapnav");
+        nav.style.width = '100%'
+    </script>
         <div class="wrap">
 
             <div id="content">
