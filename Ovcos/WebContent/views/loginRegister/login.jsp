@@ -9,8 +9,7 @@ String contextPath = request.getContextPath();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/loginStyle.css">
-<!-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/niceforms.js"></script> -->
-<link href="${pageContext.request.contextPath}/css/niceforms-default.css" rel="stylesheet" />
+
 </head>
 <body>
 
