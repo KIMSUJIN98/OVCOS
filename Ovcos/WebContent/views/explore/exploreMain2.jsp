@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
+
 </head>
 <body>
 <%@ include file="../common/nav.jsp" %>
@@ -42,11 +43,18 @@
                 </ul>
             </div>
             <div id="left_content">
-
+                <div id="content_list">
+                    <div>
+                        
+                    </div>
+                </div>
+                <div id="list_page">
+                    
+                </div>
             </div>
-        </div>
         <div id="content">
 
+            </div>
         </div>
     </div>
 
