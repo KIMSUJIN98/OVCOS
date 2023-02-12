@@ -12,6 +12,7 @@
     padding: 0px;
     text-decoration: none;
     color: black;
+    font-family: 'SUIT-Regular';
 }
 #nav{
     width: 1400px;
@@ -23,13 +24,9 @@
     height: 1000px;
     margin: auto;
     /* border: 1px solid red; */
-        margin-top: 10px;
-}
-
-#feedWrap div{
-    /* border: 1px solid green; */
-}
-#feedWrap{
+    margin-top: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
     display: flex;
 }
 #ct1{
@@ -53,18 +50,143 @@
 /* 운동기록 */
 #record{ 
     width: 90%; 
-    height: 600px; 
+    height: 500px; 
     margin: auto; 
-    border: 1px solid lightgray;
-    margin-top: 100px;
+    /* border: 1px solid lightgray; */
+    margin-top: 80px;
+    position: relative;
+    margin-right: 50px;
 }
+
+
+#recode>*{    border: 1px solid green;}
+#recode1{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+
+}
+
+#profile{
+    width: 100%;
+    height: 15%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+
+}
+#profile_img{
+    position: absolute;
+    top: -30px;
+    left: 40%;
+}
+#profile_img>img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+#username>h3{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    margin-top: 35px;
+    text-align: center;
+    /* background-color: blue; */
+    line-height: 35px;
+}
+
+/* 운동기록 */
+#ac_recode{
+    width: 100%;
+    height: 80%;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid lightgray;
+    /* background-color: blueviolet; */
+}
+#last_ac1{
+    margin-top: 10px;
+    width: 100%;
+    height: 30%;
+}
+#last_info{
+    width: 80%;
+    height: 50%;
+    margin: auto;
+    border-bottom: 1px solid lightgray;
+}
+#f_title{
+    line-height: 50px;
+}
+.h51>h5{
+    padding: 10px;
+    font-weight: 100;
+    font-size: 10px;
+}
+.km{
+    padding: 10px;
+}
+.km>a{
+    font-size: 20px;
+}
+
+#last_ac2{
+    width: 100%;
+    height: 30%;
+    /* background-color: brown; */
+}
+
+#last_ac3{
+    width: 100%;
+    height: 30%;
+    /* border-bottom: 3px solid white; */
+    /* background-color: chartreuse; */
+}
+#ac3_h5{
+    border-top: 1px solid lightgray;
+    /* background-color: aqua; */
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+
+#f1,#footer{border: 1px solid red;}
+
+#footer *{
+    font-size: 12px;
+    font-family: 'SUIT-Regular';
+    color: gray;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 공지사항 */
 #notice{
     width: 90%; 
     height: 40px; 
+    line-height: 40px;
     margin: auto; 
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
     margin-top: 10px;
+    font-size: 14px;
+}
+#notice>a{
+    color: gray;
+    font-weight: 500;
 }
 
 
