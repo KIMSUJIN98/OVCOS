@@ -1,4 +1,4 @@
-table{border: 1px solid red;}
+/* table{border: 1px solid red;} */
 
 
 
@@ -126,9 +126,14 @@ body {
   padding-left: 100px;
 }
 
-#th1 {
-  padding-left: -50px;
-}
+
 #upload{
-margin-left: 378px;
+margin-left: 370px;
+}
+#td1{
+padding-left: 50px;
+}
+img{
+  width: 15px;
+  height: 15px;
 }
