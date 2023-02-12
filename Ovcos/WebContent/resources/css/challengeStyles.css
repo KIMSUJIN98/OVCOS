@@ -3931,7 +3931,7 @@ textarea.form-control-lg {
   border-top-right-radius: 0;
 }
 
-.nav {
+/* .nav {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
@@ -4505,7 +4505,7 @@ textarea.form-control-lg {
 .navbar-dark .navbar-text a:hover,
 .navbar-dark .navbar-text a:focus {
   color: #fff;
-}
+} */
 
 .card {
   position: relative;

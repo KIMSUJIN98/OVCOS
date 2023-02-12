@@ -29,7 +29,9 @@ public class ChallCon extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher view = request.getRequestDispatcher("views/challenge/challengeList.jsp");
+		RequestDispatcher view2 = request.getRequestDispatcher("views/challenge/contestList.jsp");
 		view.forward(request, response);
+		view2.forward(request, response);
 	}
 
 	/**
