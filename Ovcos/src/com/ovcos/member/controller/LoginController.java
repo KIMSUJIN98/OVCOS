@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/login.me")
+@WebServlet("/login.me1")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
