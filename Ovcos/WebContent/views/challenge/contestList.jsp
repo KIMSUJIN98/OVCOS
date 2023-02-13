@@ -91,7 +91,6 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <input type="text">
                                         </div>
 
                                         <!-- Modal footer -->
@@ -116,14 +115,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -188,14 +179,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -257,14 +240,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -284,14 +259,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
