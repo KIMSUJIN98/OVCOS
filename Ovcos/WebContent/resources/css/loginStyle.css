@@ -55,11 +55,16 @@ input{
     height: 35px;
     margin: 5px;
     border: 1px solid black;
+    padding-left: 15px;
 }
 
 input::placeholder{
     color: rgba(255, 255, 255, 0.486);
-    padding: 15px;
+
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 .login_btn{

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../resources/css/feedMainStyle.css?문자열">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css?문자열">
 <title>Insert title here</title>
 
 </head>
@@ -20,7 +20,7 @@
                     <div id="recode1">
                         <div id="profile">
                             <div id="profile_img">
-                                <img src="../../resources/image/mypage.png" alt="프로필이미지">
+                                <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
                             </div>
                             <a href="#" id="username"><h3>김네임</h3></a>
                         </div>
