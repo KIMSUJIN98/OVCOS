@@ -52,8 +52,8 @@
                     <div id="menu">
                         <ul>
                             <li id="aFeed"><a href="${pageContext.request.contextPath}/views/feed/feedMain.jsp"  >피드</a></li>
-                            <li id="explore"><a href="<%= contextPath%>/course">탐색</a></li>
-                            <li id="chall"><a href="">챌린지</a>
+                            <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
+                            <li id="chall"><a href="<%= contextPath %>/views/challenge/contestList.jsp">챌린지</a>
                                     <ul>
                                         <li><a href="#">대회</a></li>
                                         <li><a href="#">일반</a></li>
