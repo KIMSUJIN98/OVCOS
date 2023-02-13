@@ -98,16 +98,23 @@ body{
     display: none;
 } 
 #chall li{
-    width:50px;
+    width: 100px;
     height: 50px;
     line-height: 50px;
     text-decoration: none;
     background-color: white;
-    margin-top: 2px;
-
 }
+
 #chall:hover>ul{
     display: block;
+}
+
+#chall>ul>li:hover{
+    background-color: darkgray;
+}
+
+#chall>ul>li>a:hover{
+    color: white;
 }
 /* 메뉴끝 */
 
