@@ -49,8 +49,11 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">대회명 챌린지</h1>
-                <p class="lead fw-normal text-white-50 mb-0"></p>
+                <h1 class="display-4 fw-bolder">일반</h1>
+                <p class="lead fw-normal text-white-50 mb-0">
+                	혼자 운동하는게 쉽지 않지? <br>
+                	같이 즐기자GO! 
+                </p>
             </div>
         </div>
     </header>
@@ -91,7 +94,7 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <input type="text">
+                                            Modal body..
                                         </div>
 
                                         <!-- Modal footer -->

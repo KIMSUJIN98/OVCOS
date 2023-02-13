@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>챌린지</title>
+<title>대회목록</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -12,7 +12,6 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
 </head>
-
 <body>
     <%@ include file="../common/nav.jsp" %>
 	<!-- Navigation
@@ -45,12 +44,16 @@
         </div>
     </nav> -->
 
+    
     <!-- Header-->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">서울마라톤 챌린지</h1>
-                <p class="lead fw-normal text-white-50 mb-0"></p>
+                <h1 class="display-4 fw-bolder">대회</h1>
+                <p class="lead fw-normal text-white-50 mb-0">
+                    대회 혼자가기 무섭니? <br>
+                    같이 가보자GO!
+                </p>
             </div>
         </div>
     </header>
@@ -63,45 +66,17 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <!-- <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /> -->
+                        <img class="card-img-top" src="../../resources/image/서울마라톤.PNG" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
-                            <div class="text-center" style="margin-top: 50px;">
-                                <h5 class="fw-bolder">챌린지 생성</h5>
-                                새로운 챌린지를 <br>
-                                생성해보세요!
+                            <div class="text-center">
+                                <h5 class="fw-bolder">서울마라톤</h5>
+                                상세설명
                             </div>
-                            <br><br>
-                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCnts">새로운 모험</button></div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <!-- Button to Open the Modal -->
-                                        
-                            <!-- The Modal -->
-                            <div class="modal" id="newCnts">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">챌린지 생성</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Modal body..
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="contestList.jsp">참가하기</a></div>
                         </div>
                     </div>
                 </div>
@@ -110,12 +85,12 @@
                         <!-- Sale badge-->
                         <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div>
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <img class="card-img-top" src="../../resources/image/JTBC마라톤.PNG" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
+                                <h5 class="fw-bolder">JTBC마라톤</h5>
                                 <!-- Product reviews-->
                                 <!-- <div class="d-flex justify-content-center small text-warning mb-2">
                                     <div class="bi-star-fill"></div>
@@ -130,32 +105,8 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#cntsDetail">참가하기</button></div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
                         </div>
-                            <!-- The Modal -->
-                            <div class="modal" id="cntsDetail">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">챌린지 상세보기</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Modal body..
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                     </div>
                 </div>
                 <div class="col mb-5">
