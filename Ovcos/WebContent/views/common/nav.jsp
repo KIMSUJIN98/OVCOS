@@ -88,7 +88,10 @@
                         </li>
                         <li id="li4">
                             <div id="feed">
-                                <button  id="enro">+</button>
+		                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		                	+
+		            		</button>
+                                
                             </div>
                         </li>
                     </ul>
