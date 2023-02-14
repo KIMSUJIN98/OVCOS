@@ -50,7 +50,13 @@ article {
 .modal-footer{
   position: relative;
 }
-#distance{
+#dist{
   position: absolute;
   left: 10px;
+  width: 300px;
+}
+
+.modal-title{
+  width: 100%;
+  text-align: center;
 }
