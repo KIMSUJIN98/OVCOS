@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css?문자열">
-<link rel="stylesheet" href="../../resources/css/Create.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
 <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>Insert title here</title>
@@ -98,8 +98,8 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">피드 작성</h4>
+                    <button type="button" class="close close1" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
@@ -108,6 +108,7 @@
                         <!--위도와 경도 넣을 hidden-->
                         <input type="hidden" id="startLat" name="startLat" value="">
                         <input type="hidden" id="startLon" name="startLon" value="">
+                        <input type="hidden" id="distance" name="distance" value="">
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
@@ -172,10 +173,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <div id="distance">총 길이 : </div>
+                    <div id="dist">총길이 : </div>
                     <div>
                         <button type="submit" class="btn btn-primary">작성</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger close1" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
@@ -183,102 +184,118 @@
         </div>
     </div>
     <script>
-
-        var polyline=null;
-        var marker = null;
-
-        var array = [];
-        var lats = [];
-        var lons = [];
-
-        var startLat = null;
-        var startLon = null;
+        console.log($("body"));
         
+            $(".close1").click(function(){
+                            location.href="<%=contextPath%>/feed"
+            })
 
-        // 거리구하는데 필요한 변수
-        var sum = 0;
-        var R = null;
-        var dLat = null;
-        var dLon = null;
-        var a = null;
-        var c = null;
-        var d = null;
+            
+            var polyline=null;
+            var marker = null;
+            var map = null;
 
-        function deg2rad(deg) {
-            return deg * (Math.PI/180)
-        }
-
-        var R = 6371; // Radius of the earth in km
-
-        var gpxFileInput = document.getElementById('avatar');
-        gpxFileInput.addEventListener('change', handleFileSelect, false);
-
-        function handleFileSelect(event) {
-            var file = event.target.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function (event) {
-                var gpx = $.parseXML(event.target.result);
-                var trackPoints = $(gpx).find('trkpt');
-
-                trackPoints.each(function (index, value) {
-                    var lat = $(this).attr('lat');
-                    var lon = $(this).attr('lon');
-                    array.push(new naver.maps.LatLng(lat, lon));
-                    lats.push(lat);
-                    lons.push(lon);
-                    if (index == 0) {
-                        startLat = lat;
-                        startLon = lon;
-
-                    }
-
-                    //거리구하는 반복문
-                    for(let i = 1; i<array.length;i++){
-                        var dLat = Math.abs(deg2rad(lats[i]-lats[i-1]));  // deg2rad below
-                        var dLon = Math.abs(deg2rad(lons[i]-lons[i-1]));
-                        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lats[i-1])) * Math.cos(deg2rad(lats[i])) * Math.sin(dLon/2) * Math.sin(dLon/2);
-                        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                        var d = R * c; // Distance in km
-                        sum+= d;
-                    }
-
-                });
-
-                // hidden에 초기 위도와 경도 대입하기
-                $("#startLat").val(startLat);
-                $("#startLon").val(startLon);
-
-                console.log(sum)
-                $("#distance").text($("#distance").text()+sum+' km');
-
-
-                // 지도 표시
-                map = new naver.maps.Map('map', {
-                    center: new naver.maps.LatLng(startLat, startLon),
-                    zoom: 11
-                });
-
-                // 지도에 선 그리기
-                polyline = new naver.maps.Polyline({
-                    path: array,      //선 위치 변수배열
-                    strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                    strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                    strokeWeight: 2,   //선 두께
-                    map: map           //오버레이할 지도
-                });
+            var array = [];
+            var lats = [];
+            var lons = [];
+    
+            var startLat = null;
+            var startLon = null;
+            
+    
+            // 거리구하는데 필요한 변수
+            var sum = 0;
+            
+    
+            function deg2rad(deg) {
+                return (deg*Math.PI/180)
+            }
+    
+            function rad2deg(deg){
+                return (deg*180/Math.PI);
+            }
+    
+            var R = 6371; // Radius of the earth in km
+    
+            var gpxFileInput = document.getElementById('avatar');
+            gpxFileInput.addEventListener('change', handleFileSelect, false);
+    
+            function handleFileSelect(event) {
                 
-                //지도에 마커 표시하기
-                marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(startLat, startLon),
-                    map: map
-                });
-
+                var file = event.target.files[0];
+                var reader = new FileReader();
+    
+                reader.onload = function (event) {
+                    var gpx = $.parseXML(event.target.result);
+                    var trackPoints = $(gpx).find('trkpt');
+    
+                    trackPoints.each(function (index, value) {
+                        var lat = $(this).attr('lat');
+                        var lon = $(this).attr('lon');
+                        array.push(new naver.maps.LatLng(lat, lon));
+                        lats.push(lat);
+                        lons.push(lon);
+                        if (index == 0) {
+                            startLat = lat;
+                            startLon = lon;
+                        
+                        }
+    
+                    });
+                    //거리구하는 반복문
+                    for(let i = 1; i<lats.length;i++){
+                        if(lats[i-1] == lats[i]){
+                            dist = 0
+                        }else{
+                            var theta = lons[i-1]-lons[i];
+                            // console.log(theta)
+                            var dist = Math.sin(deg2rad(lats[i-1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i-1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
+                            
+                            dist = Math.acos(dist);
+                            dist = rad2deg(dist);
+                            dist = dist*60*1.1515;
+                            dist = dist*1.609344;
+                            if(dist === NaN) {
+                                dist = 0;
+                            }
+                            sum+=dist;
+                        }
+                        }
+    
+                    // hidden에 초기 위도와 경도 대입하기
+                    $("#startLat").val(startLat);
+                    $("#startLon").val(startLon);
+                    $("#distance").val(sum.toFixed(1));
+                    
+                    // 화면에 경로 표시하기
+                    $("#dist").text($("#dist").text()+sum.toFixed(1)+' km');
+                    console.log(sum);
+    
+    
+                    // 지도 표시
+                    map = new naver.maps.Map('map', {
+                        center: new naver.maps.LatLng(startLat, startLon),
+                        zoom: 11
+                    });
+    
+                    // 지도에 선 그리기
+                    polyline = new naver.maps.Polyline({
+                        path: array,      //선 위치 변수배열
+                        strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                        strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                        strokeWeight: 2,   //선 두께
+                        map: map           //오버레이할 지도
+                    });
+                    
+                    //지도에 마커 표시하기
+                    marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(startLat, startLon),
+                        map: map
+                    });
+    
+                };
+                reader.readAsText(file);
             };
-            reader.readAsText(file);
-        };
-
-
     </script>
 
 
