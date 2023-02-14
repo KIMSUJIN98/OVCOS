@@ -86,8 +86,8 @@
                         </div>
                     </li>
                     <li id="li4">
-                        <div id="feed">
-		                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">+</button>
+                        <div id="feed" lass="btn" data-toggle="modal" data-target="#myModal">
+                            <img src="${pageContext.request.contextPath}/resources/image/plus1.png" alt="">
                         </div>
                     </li>
                 </ul>
