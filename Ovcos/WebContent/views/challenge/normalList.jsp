@@ -113,8 +113,67 @@
                                         </div>
 
                                         <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Modal body..
+                                        <div class="modal-body" align="center">
+                                            <form action="test.do" method="post" id="updatechallenge-form">
+                                                <table>
+                                                    <tr>
+                                                        <th>챌린지명</th>
+                                                        <td>
+                                                            <input type="text" name="challengeName" required>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>날짜</th>
+                                                        <td>
+                                                            <input type="date" min="2020-01-01" name="challengeDate">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>지역선택</th>
+                                                        <td>
+                                                            <select name="location" id="selectLocation">
+                                                                <option name="selectLocation" value="서울">서울</option>
+                                                                <option name="selectLocation" value="부산">부산</option>
+                                                                <option name="selectLocation" value="인천">인천</option>
+                                                                <option name="selectLocation" value="대구">대구</option>
+                                                                <option name="selectLocation" value="광주">광주</option>
+                                                                <option name="selectLocation" value="대전">대전</option>
+                                                                <option name="selectLocation" value="울산">울산</option>
+                                                                <option name="selectLocation" value="세종">세종</option>
+                                                                <option name="selectLocation" value="경기">경기</option>
+                                                                <option name="selectLocation" value="강원">강원</option>
+                                                                <option name="selectLocation" value="충북">충북</option>
+                                                                <option name="selectLocation" value="충남">충남</option>
+                                                                <option name="selectLocation" value="전북">전북</option>
+                                                                <option name="selectLocation" value="전남">전남</option>
+                                                                <option name="selectLocation" value="경북">경북</option>
+                                                                <option name="selectLocation" value="경남">경남</option>
+                                                                <option name="selectLocation" value="제주">제주</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>최대인원</th>
+                                                        <td>
+                                                            <input type="number" name="challengeMax" min="2">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>이미지</th>
+                                                        <td>
+                                                            <input type="file" name="contestImg">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>상세설명</th>
+                                                        <td>
+                                                            <textarea name="challengeContent"cols="30" rows="10" style="resize: none;"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <button type="submit" class="btn btn-secondary">등록</button>
+                                            </form>
                                         </div>
 
                                         <!-- Modal footer -->

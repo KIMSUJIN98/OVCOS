@@ -12,10 +12,10 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
         <style>
-            #updateContest-form input{
+            #updateContest-form input {
                 width: 100%;
                 box-sizing: border-box;
-            } 
+            }
         </style>
 
     </head>
@@ -68,7 +68,8 @@
 
             <!-- Button to Open the Modal -->
             <div style="float: left; padding-top: 30px; width: 84%;" align="right">
-                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCnts">대회추가</button>
+                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal"
+                    data-target="#newCnts">대회추가</button>
             </div>
 
             <!-- The Modal -->
@@ -115,6 +116,11 @@
                                 <br>
                                 <button type="submit" class="btn btn-secondary">등록</button>
                             </form>
+                        </div>
+                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
 
                     </div>
