@@ -110,15 +110,13 @@ body{
 }
 
 #chall>ul>li:hover{
-    background-color: darkgray;
+    background-color: rgb(67, 115, 176);
 }
 
 #chall>ul>li>a:hover{
     color: white;
 }
 /* 메뉴끝 */
-
-
 
 
 /* 네비마지막세개버튼 */
@@ -184,44 +182,47 @@ body{
     margin: 10px 10px 10px 20px;
     /* margin: auto; */
 }
+
 #alarm img{
     width: 35px;
+    padding-right: 0px;
 }
 
 #alarm:hover{
-    background-color: rgba(0, 0, 0, 0.2);
-
+    filter: invert(50%);
 }
 
 #mp{
     margin: 0;
     padding: 0;
 }
+
 #myPage{
     width: 35px;
     border-radius: 50%;
 
 }
+
 #myPage img{
     width: 35px;
     border-radius: 50%;
-
-
 }
+
 #downbtn{
     width: 35px;
 }
+
 #downbtn img{
     width: 15px;
 }
-
 
 #feed{
     width: 100%;
     height: 50%;
     text-align: center;
 }
-#feed>a{
+
+/* #feed>a{
     font-size: 40px;
     line-height: 60%;
     padding: 0;
@@ -229,7 +230,8 @@ body{
     color: black;
     text-decoration: none;
 }
+
 #feed>a:hover{
     color: rgb(67, 115, 176);
 
-}
+} */
