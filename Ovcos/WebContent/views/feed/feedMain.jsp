@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css?문자열">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
+<script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>Insert title here</title>
 
 </head>
@@ -86,7 +89,215 @@
                     </div>
                 </div>
             </div>
-
     </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">피드 작성</h4>
+                    <button type="button" class="close close1" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="" id="enrollfrm">
+                        <!--위도와 경도 넣을 hidden-->
+                        <input type="hidden" id="startLat" name="startLat" value="">
+                        <input type="hidden" id="startLon" name="startLon" value="">
+                        <input type="hidden" id="distance" name="distance" value="">
+                        <table id="text1">
+                            <tr>
+                                <th>제목</th>
+                                <td><input type="text" name="title" size="62" placeholder="제목입력해주세요"></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table id="text">
+                            <tr>
+                                <th style="padding-bottom: 160px;">내용</th>
+                                <td>
+                                    <textarea type="text" name="content" cols="62" rows="7"
+                                        style="resize: none;"></textarea>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <hr>
+
+                        <div style=" display: flex;">
+                            <div>
+                                <label for="avatar" style="margin-left: 50px;"><b>파일 첨부 :</b></label>
+                                <input type="file" id="avatar" name="avatar" accept="">
+                            </div>
+                            <div style="display: flex; float: right;">
+                                <b style="padding-top: 5px; padding-right: 5px; margin-left: 160px;">별점</b>
+                                <div class="star-rating">
+                                    <input type="radio" id="5-stars" name="rating" value="5" />
+                                    <label for="5-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="4-stars" name="rating" value="4" />
+                                    <label for="4-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="3-stars" name="rating" value="3" />
+                                    <label for="3-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="2-stars" name="rating" value="2" />
+                                    <label for="2-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="1-star" name="rating" value="1" />
+                                    <label for="1-star" class="star">&#9733;</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="map" style="width:750px;height:350px;"></div>
+                    </form>
+                </div>
+
+
+                <!-- Modal footer -->
+                <div style="display: flex;">
+
+                    <div>
+                        <b style="margin-left: 50px;">공개여부</b>
+                        <select>
+                            <option>전채공개</option>
+                            <option>비공개</option>
+                            <option>친구에게만</option>
+                        </select>
+                    </div>
+                    <div style="margin-left: 460px;">
+                        <b style="margin-right: 5px;">경로등록하기</b>
+                        <input type="checkbox">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div id="dist">총길이 : </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">작성</button>
+                        <button type="button" class="btn btn-danger close1" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        console.log($("body"));
+        
+            $(".close1").click(function(){
+                            location.href="<%=contextPath%>/feed"
+            })
+
+            
+            var polyline=null;
+            var marker = null;
+            var map = null;
+
+            var array = [];
+            var lats = [];
+            var lons = [];
+    
+            var startLat = null;
+            var startLon = null;
+            
+    
+            // 거리구하는데 필요한 변수
+            var sum = 0;
+            
+    
+            function deg2rad(deg) {
+                return (deg*Math.PI/180)
+            }
+    
+            function rad2deg(deg){
+                return (deg*180/Math.PI);
+            }
+    
+            var R = 6371; // Radius of the earth in km
+    
+            var gpxFileInput = document.getElementById('avatar');
+            gpxFileInput.addEventListener('change', handleFileSelect, false);
+    
+            function handleFileSelect(event) {
+                
+                var file = event.target.files[0];
+                var reader = new FileReader();
+    
+                reader.onload = function (event) {
+                    var gpx = $.parseXML(event.target.result);
+                    var trackPoints = $(gpx).find('trkpt');
+    
+                    trackPoints.each(function (index, value) {
+                        var lat = $(this).attr('lat');
+                        var lon = $(this).attr('lon');
+                        array.push(new naver.maps.LatLng(lat, lon));
+                        lats.push(lat);
+                        lons.push(lon);
+                        if (index == 0) {
+                            startLat = lat;
+                            startLon = lon;
+                        
+                        }
+    
+                    });
+                    //거리구하는 반복문
+                    for(let i = 1; i<lats.length;i++){
+                        if(lats[i-1] == lats[i]){
+                            dist = 0
+                        }else{
+                            var theta = lons[i-1]-lons[i];
+                            // console.log(theta)
+                            var dist = Math.sin(deg2rad(lats[i-1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i-1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
+                            
+                            dist = Math.acos(dist);
+                            dist = rad2deg(dist);
+                            dist = dist*60*1.1515;
+                            dist = dist*1.609344;
+                            if(dist === NaN) {
+                                dist = 0;
+                            }
+                            sum+=dist;
+                        }
+                        }
+    
+                    // hidden에 초기 위도와 경도 대입하기
+                    $("#startLat").val(startLat);
+                    $("#startLon").val(startLon);
+                    $("#distance").val(sum.toFixed(1));
+                    
+                    // 화면에 경로 표시하기
+                    $("#dist").text($("#dist").text()+sum.toFixed(1)+' km');
+                    console.log(sum);
+    
+    
+                    // 지도 표시
+                    map = new naver.maps.Map('map', {
+                        center: new naver.maps.LatLng(startLat, startLon),
+                        zoom: 11
+                    });
+    
+                    // 지도에 선 그리기
+                    polyline = new naver.maps.Polyline({
+                        path: array,      //선 위치 변수배열
+                        strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                        strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                        strokeWeight: 2,   //선 두께
+                        map: map           //오버레이할 지도
+                    });
+                    
+                    //지도에 마커 표시하기
+                    marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(startLat, startLon),
+                        map: map
+                    });
+    
+                };
+                reader.readAsText(file);
+            };
+    </script>
+
+
 </body>
 </html>

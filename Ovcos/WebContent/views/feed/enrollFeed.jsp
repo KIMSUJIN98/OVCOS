@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="../../resources/css/feedMainStyle.css?문자열">
         <link rel="stylesheet" href="../../resources/css/Create.css">
         <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kv51brmje9"></script>
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
         <title>Insert title here</title>
 
     </head>
@@ -127,10 +127,7 @@
                                         <td><input type="text" name="title" size="62" placeholder="제목입력해주세요"></td>
                                     </tr>
                                 </table>
-
                                 <br>
-
-
                                 <table id="text">
                                     <tr>
                                         <th style="padding-bottom: 160px;">내용</th>
@@ -139,13 +136,12 @@
                                                 style="resize: none;"></textarea>
                                         </td>
                                     </tr>
-                                    
 
                                 </table>
                                 <hr>
 
                                 <div style=" display: flex;">
-                                    <div >
+                                    <div>
                                         <label for="avatar" style="margin-left: 50px;"><b>파일 첨부 :</b></label>
                                         <input type="file" id="avatar" name="avatar" accept="">
                                     </div>
@@ -166,53 +162,95 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div id="map" style="width:100%;height:350px;"></div>
-
-                                </form>
-                                </div>
+                                <div id="map" style="width:750px;height:350px;"></div>
+                            </form>
+                        </div>
 
 
                         <!-- Modal footer -->
+                        <div style="display: flex;">
 
-                        <div>
-                            <b style="margin-left: 50px;">공개여부</b>
-                            <select>
-                                <option>전채공개</option>
-                                <option>비공개</option>
-                                <option>친구에게만</option>
-                            </select>
+                            <div>
+                                <b style="margin-left: 50px;">공개여부</b>
+                                <select>
+                                    <option>전채공개</option>
+                                    <option>비공개</option>
+                                    <option>친구에게만</option>
+                                </select>
+                            </div>
+                            <div style="margin-left: 460px;">
+                                <b style="margin-right: 5px;">경로등록하기</b>
+                                <input type="checkbox">
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" >작성</button>
+                            <button type="submit" class="btn btn-primary">작성</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
 
                     </div>
                 </div>
             </div>
-
-                                <script>
-                                    var mapOptions = {
-                                        center: new naver.maps.LatLng(37.3595704, 127.105399),
-                                        zoom: 10
-                                    };
-                                    
-                                    var map = new naver.maps.Map('map', mapOptions);
-                                    </script>
-
-
-
-
-
             <script>
+                //지도 표시
 
-                var map = new naver.maps.Map('map', {
-                    center: new naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 10
-                });
+                var polyline = null;
+                var marker = null;
+                var map = null;
+
+                var array = [];
+
+                var startLat = null;
+                var startLon = null;
+
+                var gpxFileInput = document.getElementById('avatar');
+                gpxFileInput.addEventListener('change', handleFileSelect, false);
+
+                function handleFileSelect(event) {
+                    var file = event.target.files[0];
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        var gpx = $.parseXML(event.target.result);
+                        var trackPoints = $(gpx).find('trkpt');
+
+                        trackPoints.each(function (index, value) {
+                            var lat = $(this).attr('lat');
+                            var lon = $(this).attr('lon');
+                            array.push(new naver.maps.LatLng(lat, lon));
+                            if (index == 0) {
+                                startLat = lat;
+                                startLon = lon;
+
+                            }
+
+
+                        });
+                        map = new naver.maps.Map('map', {
+                            center: new naver.maps.LatLng(startLat, startLon),
+                            zoom: 11
+                        });
+
+
+                        polyline = new naver.maps.Polyline({
+                            path: array,      //선 위치 변수배열
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 2,   //선 두께
+                            map: map           //오버레이할 지도
+                        });
+
+                        marker = new naver.maps.Marker({
+                            position: new naver.maps.LatLng(startLat, startLon),
+                            map: map
+                        });
+
+                    };
+                    reader.readAsText(file);
+                };
+
 
             </script>
-
     </body>
 
     </html>
