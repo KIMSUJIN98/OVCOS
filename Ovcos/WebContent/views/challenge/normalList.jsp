@@ -49,13 +49,36 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">서울마라톤 챌린지</h1>
-                <p class="lead fw-normal text-white-50 mb-0"></p>
+                <h1 class="display-4 fw-bolder">일반</h1>
+                <p class="lead fw-normal text-white-50 mb-0">
+                	혼자 운동하는게 쉽지 않지? <br>
+                	같이 즐기자GO! 
+                </p>
             </div>
         </div>
     </header>
     
-    
+    <div style="float: left; padding-top: 30px; width: 84%;" align="right">
+    <select name="location" id="selectLocation" onchange="selectBox();">
+        <option name="selectLocation" value="서울">서울</option>
+        <option name="selectLocation" value="부산">부산</option>
+        <option name="selectLocation" value="인천">인천</option>
+        <option name="selectLocation" value="대구">대구</option>
+        <option name="selectLocation" value="광주">광주</option>
+        <option name="selectLocation" value="대전">대전</option>
+        <option name="selectLocation" value="울산">울산</option>
+        <option name="selectLocation" value="세종">세종</option>
+        <option name="selectLocation" value="경기">경기</option>
+        <option name="selectLocation" value="강원">강원</option>
+        <option name="selectLocation" value="충북">충북</option>
+        <option name="selectLocation" value="충남">충남</option>
+        <option name="selectLocation" value="전북">전북</option>
+        <option name="selectLocation" value="전남">전남</option>
+        <option name="selectLocation" value="경북">경북</option>
+        <option name="selectLocation" value="경남">경남</option>
+        <option name="selectLocation" value="제주">제주</option>
+    </select>
+    </div>
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
@@ -90,8 +113,67 @@
                                         </div>
 
                                         <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Modal body..
+                                        <div class="modal-body" align="center">
+                                            <form action="test.do" method="post" id="updatechallenge-form">
+                                                <table>
+                                                    <tr>
+                                                        <th>챌린지명</th>
+                                                        <td>
+                                                            <input type="text" name="challengeName" required>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>날짜</th>
+                                                        <td>
+                                                            <input type="date" min="2020-01-01" name="challengeDate">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>지역선택</th>
+                                                        <td>
+                                                            <select name="location" id="selectLocation">
+                                                                <option name="selectLocation" value="서울">서울</option>
+                                                                <option name="selectLocation" value="부산">부산</option>
+                                                                <option name="selectLocation" value="인천">인천</option>
+                                                                <option name="selectLocation" value="대구">대구</option>
+                                                                <option name="selectLocation" value="광주">광주</option>
+                                                                <option name="selectLocation" value="대전">대전</option>
+                                                                <option name="selectLocation" value="울산">울산</option>
+                                                                <option name="selectLocation" value="세종">세종</option>
+                                                                <option name="selectLocation" value="경기">경기</option>
+                                                                <option name="selectLocation" value="강원">강원</option>
+                                                                <option name="selectLocation" value="충북">충북</option>
+                                                                <option name="selectLocation" value="충남">충남</option>
+                                                                <option name="selectLocation" value="전북">전북</option>
+                                                                <option name="selectLocation" value="전남">전남</option>
+                                                                <option name="selectLocation" value="경북">경북</option>
+                                                                <option name="selectLocation" value="경남">경남</option>
+                                                                <option name="selectLocation" value="제주">제주</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>최대인원</th>
+                                                        <td>
+                                                            <input type="number" name="challengeMax" min="2">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>이미지</th>
+                                                        <td>
+                                                            <input type="file" name="contestImg">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>상세설명</th>
+                                                        <td>
+                                                            <textarea name="challengeContent"cols="30" rows="10" style="resize: none;"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <button type="submit" class="btn btn-secondary">등록</button>
+                                            </form>
                                         </div>
 
                                         <!-- Modal footer -->
@@ -116,14 +198,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -188,14 +262,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -257,14 +323,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -284,14 +342,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product reviews-->
-                                <!-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> -->
                                 <!-- Product price-->
                                 상세설명
                             </div>
@@ -315,6 +365,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="../../resources/js/scripts.js"></script>
+
+    <script>
+        var selectBox = function(){
+            var selectLocation = document.getElementById("selectLocation");
+            var value = (selectLocation.options[selectLocation.selectedIndex].value);
+            // console.log(value);
+        }
+    </script>
 
 </body>
 </html>
