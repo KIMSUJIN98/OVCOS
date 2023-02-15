@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
-
 	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
@@ -11,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navStyle.css">
+<link rel="stylesheet" href="<%= contextPath %>/resources/css/navStyle.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Black+Han+Sans&family=Fira+Sans:wght@400;700&family=Hahmlet:wght@400;500;600;700&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@700;900&family=Oleo+Script&family=Oswald:wght@700&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&family=Rubik+Mono+One&display=swap" rel="stylesheet">
@@ -25,13 +24,70 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 
-    $(document).ready(function(){ //마이페이지 서브메뉴 나오게하기 
-
-        $("#li2,#li3").click(function(){
-            var submenu = $("#submenu");
-
+</head>
+<body>
+    <div id="wrap">
+        <div id="wrapnav">
+            
+            <div id="firstGroup">
+                <div id="logo">
+                    <img src="<%= contextPath %>/resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
+                </div>
+                <div id="menu">
+                    <ul>
+                        <li id="feed"><a href="<%= contextPath %>/views/feed/feedMain.jsp"  >피드</a></li>
+                        <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
+                        <li id="challenge"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
+	                        <ul>
+	                        	<li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>
+	                        	<li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
+	                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="lastGroup">
+                <ul>
+                    <li id="li1">
+                        <!-- <div id="feedEnrollBtn" class="btn" data-toggle="modal" data-target="#myModal">
+                            <img src="<%= contextPath %>/resources/image/plus1.png" alt="">
+                        </div> -->
+                        <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+                    </li>
+                    
+                    <li id="li2" class="menu">
+                        <div id="myPage"><img src="<%= contextPath %>/resources/image/mypage.png" alt="프로필이미지"></div>
+                        <ul id="subMenu" class="hide">
+                        	<li>
+                        		<div id="alert">message<hr>
+                        			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                        			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                        			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                        			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                        			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a>
+                        		</div>
+                        	</li>
+                            <li class="subMenuList"><a href="#">마이페이지</a></li>
+                            <li class="subMenuList"><a href="#">개인정보수정</a></li>
+                            <li class="subMenuList"><a href="#">친구목록</a></li>
+                            <li class="subMenuList"><a href="#">로그아웃</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+    $(document).ready(function(){
+        $(".menu>div").click(function(){
+            var submenu = $(this).next("ul");
+ 
+            // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
             if( submenu.is(":visible") ){
                 submenu.slideUp();
             }else{
@@ -40,59 +96,6 @@
         });
     });
 </script>
-</head>
-<body>
-
-    <div id="wrap">
-        <div id="wrapnav">
-            <div id="fistgroup">
-                <div id="logo">
-                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
-                </div>
-                <div id="menu">
-                    <ul>
-                        <li id="aFeed"><a href="${pageContext.request.contextPath}/views/feed/feedMain.jsp"  >피드</a></li>
-                        <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
-                        <li id="chall"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
-                            <ul>
-                                <li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>
-                                <li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="lastgroup">
-                <ul>
-                    <li id="li1">
-                        <div id="alarm">
-                            <img src="${pageContext.request.contextPath}/resources/image/bell.png" alt="알림종">
-                        </div>
-                    </li>
-                    <li id="li2">
-                        <div id="myPage">
-                            <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
-                        </div>
-                        <ul id="submenu">
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">개인정보수정</a></li>
-                            <li><a href="#">친구목록</a></li>
-                            <li><a href="#">로그아웃</a></li>
-                        </ul>
-                    </li>
-                    <li id="li3">
-                        <div id="downbtn">
-                            <img src="${pageContext.request.contextPath}/resources/image/down.png" alt="아래버튼" onclick="">
-                        </div>
-                    </li>
-                    <li id="li4">
-                        <div id="feed" lass="btn" data-toggle="modal" data-target="#myModal">
-                            <img src="${pageContext.request.contextPath}/resources/image/plus1.png" alt="">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    
 </body>
 </html>
