@@ -101,14 +101,14 @@
                 </div>
 
             </div>
-
+            <!-- 피드 작성 구간 -->
             <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal">
                 Open modal
             </button>
 
 
             <!-- The Modal -->
-            <div class="modal" id="myModal" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal" id="myModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
 
@@ -142,7 +142,7 @@
 
                                 <div style=" display: flex;">
                                     <div>
-                                        <label for="avatar" style="margin-left: 50px;"><b>파일 첨부 :</b></label>
+                                        <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
                                         <input type="file" id="avatar" name="avatar" accept="">
                                     </div>
                                     <div style="display: flex; float: right;">
@@ -162,8 +162,8 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div id="map" style="width:750px;height:350px;"></div>
-                                <button type="reset">초기화</button>
+                                <div id="map" style="width:700px;height:350px; margin: auto;"></div>
+                               
                             
                         </div>
 
@@ -186,7 +186,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">작성</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="reset" class="btn btn-primary">초기화</button>
                         </div>
                     </form>
                     </div>
