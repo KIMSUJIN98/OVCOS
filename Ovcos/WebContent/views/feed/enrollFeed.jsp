@@ -102,13 +102,13 @@
 
             </div>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal">
                 Open modal
             </button>
 
 
             <!-- The Modal -->
-            <div class="modal" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal" id="myModal" tabindex="-1" role="dialog" data-backdrop="static">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
 
@@ -163,7 +163,8 @@
                                 </div>
                                 <hr>
                                 <div id="map" style="width:750px;height:350px;"></div>
-                            </form>
+                                <button type="reset">초기화</button>
+                            
                         </div>
 
 
@@ -187,7 +188,7 @@
                             <button type="submit" class="btn btn-primary">작성</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
-
+                    </form>
                     </div>
                 </div>
             </div>
