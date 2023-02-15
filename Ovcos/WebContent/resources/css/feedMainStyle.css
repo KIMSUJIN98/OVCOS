@@ -14,20 +14,18 @@
     color: black;
     font-family: 'SUIT-Regular';
 }
-#nav{
-    width: 1400px;
-    height: 55px;
-}
 
+body{
+	overflow-X:hidden;
+}
 #feedWrap{
-    width: 1400px;
+    width: 1800px;
     height: 1000px;
     margin: auto;
     /* border: 1px solid red; */
-    margin-top: 10px;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding : 0px 10%;
     display: flex;
+    margin-top : 5px;
 }
 #ct1{
     width: 20%;
@@ -36,6 +34,7 @@
 #ct2{
     width: 60%;
     height: 100%;
+    margin: 0px 20px;
 }
 #ct3{
     width: 20%;
@@ -55,7 +54,6 @@
     /* border: 1px solid lightgray; */
     margin-top: 80px;
     position: relative;
-    margin-right: 50px;
 }
 
 
@@ -69,7 +67,7 @@
 
 #profile{
     width: 100%;
-    height: 15%;
+    height: 20%;
     border: 1px solid lightgray;
     border-radius: 10px;
 
@@ -88,11 +86,15 @@
     width: 100%;
     height: 100%;
     margin: 0;
-    margin-top: 35px;
+    margin-top: 40px;
     text-align: center;
-    /* background-color: blue; */
     line-height: 35px;
+    color: black;
+    font-size: 20px;
+    font-family: 'SUIT-Regular';
+    font-weight: bold;
 }
+
 
 /* 운동기록 */
 #ac_recode{
@@ -103,7 +105,9 @@
     margin-top: 20px;
     text-align: center;
     border: 1px solid lightgray;
-    /* background-color: blueviolet; */
+}
+#ac_recode *{
+	color: black;
 }
 #last_ac1{
     margin-top: 10px;
@@ -134,25 +138,25 @@
 #last_ac2{
     width: 100%;
     height: 30%;
-    /* background-color: brown; */
+
 }
 
 #last_ac3{
     width: 100%;
     height: 30%;
-    /* border-bottom: 3px solid white; */
-    /* background-color: chartreuse; */
+
+
 }
 #ac3_h5{
     border-top: 1px solid lightgray;
-    /* background-color: aqua; */
+
     width: 80%;
     margin: auto;
     padding-top: 20px;
 }
 
 
-#f1,#footer{border: 1px solid red;}
+/* #f1,#footer{border: 1px solid red;} */
 
 #footer *{
     font-size: 12px;
@@ -167,13 +171,6 @@
 
 
 
-
-
-
-
-
-
-
 /* 공지사항 */
 #notice{
     width: 90%; 
@@ -181,7 +178,7 @@
     line-height: 40px;
     margin: auto; 
     /* border: 1px solid lightgray; */
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 14px;
 }
 #notice>a{
@@ -213,25 +210,86 @@
     text-align: center;
 }
 #all_feed{
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(42, 69, 105);
+    background-color: rgb(248, 248, 248);
+
 }
 #btn_list>div>a{
     font-size: 12px;
+    color: gray;
+    text-decoration: none;
 }
 #feed_select{line-height: 30px;}
+#feed_select>*{
+	font-size: 15px;
+	border-radius: 5px;
+}
 #content_feed{
     width: 100%;
     height: 90%;
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(42, 69, 105);
+    background-color: rgb(248, 248, 248);
+
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-#content_feed>iframe{
+/* #content_feed>iframe{
     width: 100%;
     height: 100%;
     border: none;
+} */
+
+/*피드검색*/
+#feed_search{
+    /* border: 1px solid red; */
+    width: 110%;
+    height: 5%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
+#f_select{
+    /* border: 1px solid green; */
+    width: 15%;
+    height: 100%;
+   	font-size: 15px;
+	border-radius: 5px;
+	padding: 0;
+}
+#f_search_select{
+    width: 90%;
+    height: 50%;
+    margin-top: 10px;
+    border-radius: 10%;
+}
+#f_search{
+    width: 30%;
+    height: 100%;
+    /* border: 1px solid blue; */
+}
+#search{
+    width: 95%;
+    margin-top: 10px;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    border-bottom: 2px solid gray;
+}
+/*피드 조회*/
+.feedContent{
+    border: none;
+    width: 100%;
+    height: 90%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+iframe{
+	width:100%;
+	height:100%;
+	border: none;
+}
+
 
 /* ct3 */
 #ct3 *{
