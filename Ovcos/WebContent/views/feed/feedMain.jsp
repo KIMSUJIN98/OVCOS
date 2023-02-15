@@ -6,15 +6,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css?문자열">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
-<script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>Insert title here</title>
-
+<script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <!-- feed관련 페이지 작성 -->
 <%@ include file="../common/nav.jsp" %>
-<div id="nav"></div>
+
 <div id="feedWrap">
         
             <div id="ct1">
@@ -25,7 +24,8 @@
                             <div id="profile_img">
                                 <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
                             </div>
-                            <a href="#" id="username"><h3>김네임</h3></a>
+                            <a href="#" id="username"><h3>김이름</h3></a>
+                            
                         </div>
                         <div id="ac_recode">
                             <div id="last_ac1">
@@ -35,14 +35,15 @@
                             </div>
                             <div id="last_ac2">
                                 <div class="h51"><h5>THIS WEEK</h5></div>
-                                <div id="km1" class="km"><a href="#">0km</a></div>
+                                <div id="km1" class="km">
+                                    <a href="#">0km</a></div>
                             </div>
                             <div id="last_ac3">
                                 <div class="h51" id="ac3_h5"><h5>THIS YEAR</h5></div>
                                 <div id="km2" class="km"><a href="#">0km</a></div>
                             </div>
-                            
                         </div>
+                        
                     </div>
                 </div>
                 <div id="notice"><a href="#">서버 점검 예정 2023-03-03</a></div>
@@ -67,7 +68,31 @@
                 </div>
 
                 <div id="content_feed">
-                    <iframe src="mainHeader.html"></iframe>
+
+                    <div id="feed_search">
+                        <div id="f_select">
+                            <select name="f_search_select" id="f_search_select">
+                            <option value="">작성자</option>
+                            <option value="">제목</option>
+                            <option value="">내용</option>
+                            </select>
+                        </div>
+                        <div id="f_search">
+                            <input type="search" id="search" name="search" placeholder="피드검색">
+                        </div>
+                        <div id="search_btn">
+                            <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색">
+                        </div>
+                    </div>
+                    
+
+                    <div class="feedContent">
+                    
+                    <iframe src="feedContent.jsp"></iframe>
+                    
+                    </div>
+
+                    
                 </div>
             </div>
 
