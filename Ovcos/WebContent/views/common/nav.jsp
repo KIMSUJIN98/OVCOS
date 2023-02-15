@@ -80,11 +80,11 @@
                             <li><a href="#">로그아웃</a></li>
                         </ul>
                     </li>
-                    <li id="li3">
+                    <!-- <li id="li3">
                         <div id="downbtn">
                             <img src="${pageContext.request.contextPath}/resources/image/down.png" alt="아래버튼" onclick="">
                         </div>
-                    </li>
+                    </li> -->
                     <li id="li4">
                         <div id="feed" lass="btn" data-toggle="modal" data-target="#myModal">
                             <img src="${pageContext.request.contextPath}/resources/image/plus1.png" alt="">
