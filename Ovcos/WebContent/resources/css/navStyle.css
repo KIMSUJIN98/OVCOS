@@ -130,20 +130,20 @@ body{
     list-style: none;
 }
 #li1{
-    margin: 10px 30px;
+    margin: 10px;
     width: 35px;
-    height: 39px;
+    height: 35px;
 }
 #li2{
-    margin: 10px 5px;
+    margin: 10px;
+    width: 35px;
+    height: 35px;
+}
+/*#li3{
     width: 35px;
     height: 39px;
-}
-#li3{
-    width: 35px;
-    height: 34px;
     padding: 15px 10px 10px 10px;
-}
+}*/
 
 /* 마이페이지서브메뉴 */
 #submenu{
@@ -170,57 +170,61 @@ body{
     display: block;
 
 }
-#li2,#li3{
+#li2/*,#li3*/{
     cursor: pointer;
 }
 /*서브메뉴 끝*/
 
 
 #li4{
-    width: 28px;
-    height: 39px;
-    margin: 10px 10px 10px 20px;
+    /* width: 28px; */
+    /* height: 39px; */
+    width: 35px;
+    height: 35px;
+    margin: 10px 10px 10px 80px;
+    /* margin: 10px 10px 10px 20px; */
     /* margin: auto; */
 }
 
 #alarm img{
-    width: 35px;
-    padding-right: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 #alarm:hover{
     filter: invert(50%);
 }
 
-#mp{
+/* #mp{
     margin: 0;
     padding: 0;
-}
+} */
 
-#myPage{
+/* #myPage{
     width: 35px;
     border-radius: 50%;
 
-}
+} */
 
 #myPage img{
-    width: 35px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
-#downbtn{
+/* #downbtn{
     width: 35px;
-}
+} */
 
-#downbtn img{
+/*#downbtn img{
     width: 15px;
-}
+}*/
 
-#feed{
-    width: 40px;
-    height: 40px;
+/*#feed{
+    width: 35px;
+    height: 35px;
     padding: 0;
-}
+}*/
 #feed>img{
     width: 100%;
     height: 100%;
