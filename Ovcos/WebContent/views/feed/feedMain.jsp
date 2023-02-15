@@ -203,8 +203,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                <div id="dist1">총길이 : <span id="dist"></span> </div>
+                    <button type="reset" class="btn btn-primary" id="reset">초기화</button>
                     <button type="submit" class="btn btn-primary">작성</button>
-                    <button type="reset" class="btn btn-primary">초기화</button>
                 </div>
             </form>
             </div>
@@ -222,9 +223,16 @@
                         $("#avatar").val("");
                         $(".star-rating label")
                     })
+
+                    
                 
                 
             });
+            $("#reset").click(function(){
+                $("#map").css("visibility","hidden");
+                console.log($("#map"))
+            })
+
 
 
             var polyline=null;
@@ -261,6 +269,7 @@
                 lats = [];
                 lons = [];
                 sum=0;
+                $("#map").css("visibility","visible");
     
                 
                 var file = event.target.files[0];
