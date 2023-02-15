@@ -14,6 +14,10 @@
 <!-- feed관련 페이지 작성 -->
 <%@ include file="../common/nav.jsp" %>
 
+<script>
+    
+</script>
+
 <div id="feedWrap">
         
             <div id="ct1">
@@ -88,7 +92,7 @@
 
                     <div class="feedContent">
                     
-                    <iframe src="feedContent.jsp"></iframe>
+                    <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe>
                     
                     </div>
 
@@ -204,18 +208,23 @@
                         <button type="button" class="btn btn-danger close1" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <script>
-        console.log($("body"));
-        
-            $(".close1").click(function(){
-                            location.href="<%=contextPath%>/feed"
-            })
 
-            
+
+    <script>
+
+            $(function(){
+                    
+                    $(".modal").on("hidden.bs.modal", function(){
+                        $(".modal input").val("");
+                        $("textarea").val("");
+                    });
+                
+                
+            });
+
             var polyline=null;
             var marker = null;
             var map = null;
