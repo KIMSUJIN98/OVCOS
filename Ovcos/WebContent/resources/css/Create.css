@@ -46,3 +46,17 @@ article {
   max-width:30em;
   padding:2em;
 }
+
+.modal-footer{
+  position: relative;
+}
+#dist{
+  position: absolute;
+  left: 10px;
+  width: 300px;
+}
+
+.modal-title{
+  width: 100%;
+  text-align: center;
+}

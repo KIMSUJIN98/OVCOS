@@ -44,62 +44,55 @@
 <body>
 
     <div id="wrap">
-            <div id="wrapnav">
-                <div id="fistgroup">
-                    <div id="logo">
-                        <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
-                    </div>
-                    <div id="menu">
-                        <ul>
-                            <li id="aFeed"><a href="${pageContext.request.contextPath}/views/feed/feedMain.jsp"  >피드</a></li>
-                            <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
-                            <li id="chall"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
-                                    <ul>
-                                        <li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>
-                                        <li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
-                                    </ul>
-                            </li>
-                            </li>
-                        </ul>
-                    </div>
+        <div id="wrapnav">
+            <div id="fistgroup">
+                <div id="logo">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
                 </div>
-                <div id="lastgroup">
+                <div id="menu">
                     <ul>
-                        <li id="li1">
-                            <div id="alarm">
-                                <img src="${pageContext.request.contextPath}/resources/image/bell.png" alt="알림종">
-                            </div>
-                        </li>
-                        <li id="li2">
-                            <div id="myPage">
-                                <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
-                            </div>
-                            <ul id="submenu">
-                                <li><a href="#">마이페이지</a></li>
-                                <li><a href="#">개인정보수정</a></li>
-                                <li><a href="#">친구목록</a></li>
-                                <li><a href="#">로그아웃</a></li>
+                        <li id="aFeed"><a href="${pageContext.request.contextPath}/views/feed/feedMain.jsp"  >피드</a></li>
+                        <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
+                        <li id="chall"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
+                            <ul>
+                                <li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>
+                                <li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
                             </ul>
                         </li>
-                        <li id="li3">
-                            <div id="downbtn">
-                            <img src="${pageContext.request.contextPath}/resources/image/down.png" alt="아래버튼" onclick="">
-                            </div>
-                        </li>
-                        <li id="li4">
-                            <div id="feed">
-		                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-		                	+
-		            		</button>
-                                
-                            </div>
-                        </li>
                     </ul>
-                    
                 </div>
             </div>
+            <div id="lastgroup">
+                <ul>
+                    <li id="li1">
+                        <div id="alarm">
+                            <img src="${pageContext.request.contextPath}/resources/image/bell.png" alt="알림종">
+                        </div>
+                    </li>
+                    <li id="li2">
+                        <div id="myPage">
+                            <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
+                        </div>
+                        <ul id="submenu">
+                            <li><a href="#">마이페이지</a></li>
+                            <li><a href="#">개인정보수정</a></li>
+                            <li><a href="#">친구목록</a></li>
+                            <li><a href="#">로그아웃</a></li>
+                        </ul>
+                    </li>
+                    <li id="li3">
+                        <div id="downbtn">
+                            <img src="${pageContext.request.contextPath}/resources/image/down.png" alt="아래버튼" onclick="">
+                        </div>
+                    </li>
+                    <li id="li4">
+                        <div id="feed" lass="btn" data-toggle="modal" data-target="#myModal">
+                            <img src="${pageContext.request.contextPath}/resources/image/plus1.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-</body>
-</html>
 </body>
 </html>
