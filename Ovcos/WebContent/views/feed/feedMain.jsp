@@ -133,7 +133,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="" id="enrollfrm">
+                        <form action="" id="enrollfrm">
                         <!--위도와 경도 넣을 hidden-->
                         <input type="hidden" id="startLat" name="startLat" value="">
                         <input type="hidden" id="startLon" name="startLon" value="">
@@ -141,7 +141,7 @@
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
-                                <td><input type="text" name="title" size="62" placeholder="제목입력해주세요"></td>
+                                <td><input type="text" id="title" name="title" size="62" placeholder="제목입력해주세요"></td>
                             </tr>
                         </table>
                         <br>
@@ -159,7 +159,7 @@
 
                         <div style=" display: flex;">
                             <div>
-                                <label for="avatar" style="margin-left: 50px;"><b>파일 첨부 :</b></label>
+                                <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
                                 <input type="file" id="avatar" name="avatar" accept="">
                             </div>
                             <div style="display: flex; float: right;">
@@ -179,37 +179,38 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="map" style="width:750px;height:350px;"></div>
-                    </form>
-                </div>
-
-
-                <!-- Modal footer -->
-                <div style="display: flex;">
-
-                    <div>
-                        <b style="margin-left: 50px;">공개여부</b>
-                        <select>
-                            <option>전채공개</option>
-                            <option>비공개</option>
-                            <option>친구에게만</option>
-                        </select>
+				        </form>
+                        <div id="map" style="width:700px;height:350px; margin: auto;"></div>
                     </div>
-                    <div style="margin-left: 460px;">
-                        <b style="margin-right: 5px;">경로등록하기</b>
-                        <input type="checkbox">
+                    
+                    
+                    <!-- Modal footer -->
+                    <div style="display: flex;">
+                        
+                        <div>
+                            <b style="margin-left: 50px;">공개여부</b>
+                            <select>
+                                <option>전채공개</option>
+                                <option>비공개</option>
+                                <option>친구에게만</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 460px;">
+                            <b style="margin-right: 5px;">경로등록하기</b>
+                            <input type="checkbox">
+                        </div>
                     </div>
-                </div>
-
-                <div class="modal-footer">
-                    <div id="dist">총길이 : </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">작성</button>
-                        <button type="button" class="btn btn-danger close1" data-dismiss="modal">Close</button>
+                    
+                    <div class="modal-footer">
+                        <div id="dist1">총길이 : <span id="dist"></span> </div>
+                        <div>
+                            <button type="button" class="btn btn-warning" id="reset">초기화</button>
+                            <button type="submit" class="btn btn-primary">작성</button>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 
@@ -217,13 +218,16 @@
 
             $(function(){
                     
-                    $(".modal").on("hidden.bs.modal", function(){
-                        $(".modal input").val("");
+                    $("#reset").click(function(){
+                        $("#title").val("");
                         $("textarea").val("");
-                    });
+                        $("#avatar").val("");
+                        $(".star-rating label")
+                    })
                 
                 
             });
+
 
             var polyline=null;
             var marker = null;
@@ -255,6 +259,11 @@
             gpxFileInput.addEventListener('change', handleFileSelect, false);
     
             function handleFileSelect(event) {
+                array = [];
+                lats = [];
+                lons = [];
+                sum=0;
+    
                 
                 var file = event.target.files[0];
                 var reader = new FileReader();
@@ -302,8 +311,8 @@
                     $("#distance").val(sum.toFixed(1));
                     
                     // 화면에 경로 표시하기
-                    $("#dist").text($("#dist").text()+sum.toFixed(1)+' km');
-                    console.log(sum);
+                    $("#dist").text(sum.toFixed(1)+' km');
+                    
     
     
                     // 지도 표시

@@ -50,9 +50,16 @@ article {
 .modal-footer{
   position: relative;
 }
+
+#dist1{
+  position: absolute;
+  left: 50px;
+  width: 300px;
+}
+
 #dist{
   position: absolute;
-  left: 10px;
+  left: 50px;
   width: 300px;
 }
 
