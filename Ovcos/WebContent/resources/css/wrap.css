@@ -1,0 +1,20 @@
+*{margin: 0; padding: 0;}
+
+div, form, input{
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+body{background-color: rgb(247, 247, 250);}
+.wrap{width: 1500px; height: 1600px; margin: auto;}
+.wrap>div{width: 100%;}
+#content{height: 90%; padding-top: 55px;}
+
+/* content */
+#content>div{
+    height: 100%;
+    float: left;
+}
+
+#ct1{width: 20%;}
+#ct2{width: 60%;}
+#ct3{width: 20%;}

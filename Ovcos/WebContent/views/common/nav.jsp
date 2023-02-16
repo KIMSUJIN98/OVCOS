@@ -5,6 +5,11 @@
 	String contextPath = request.getContextPath();
 
 	Member loginUser = (Member)session.getAttribute("loginUser");
+<<<<<<< HEAD
+=======
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+>>>>>>> parent of c2a1ae5 (awer)
 %>
 <!DOCTYPE html>
 <html>
@@ -40,8 +45,23 @@
         });
     });
 </script>
+<<<<<<< HEAD
 </head>
 <body>
+=======
+
+
+</head>
+<body>
+	<%if(alertMsg != null){ %>
+	<script>
+	alert("<%= alertMsg%>");
+	</script>
+	<% session.removeAttribute("alertMsg"); %>
+	<%} %>
+	
+
+>>>>>>> parent of c2a1ae5 (awer)
 
     <div id="wrap">
         <div id="wrapnav">
@@ -94,5 +114,9 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of c2a1ae5 (awer)
 </body>
 </html>

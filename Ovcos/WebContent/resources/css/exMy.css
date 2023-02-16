@@ -1,0 +1,219 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: black;
+    list-style: none;
+}
+span, img{
+    display: block;
+}
+
+/* 화면 기본 구조 잡기기 */
+
+#course{
+    /* margin-top: 55px; */
+    width: 100vw;
+    height: calc(100vh - 58px);
+    /* border: 1px solid red; */
+}
+
+#course > div{
+    height: 100%;
+    /*border: 1px solid red;*/
+    float: left;
+}
+#course_nav{
+    width: 70px;
+}
+#course_left{
+    width: 370px;
+    border-left: 1px solid rgb(197, 196, 196);
+    border-right: 1px solid rgb(197, 196, 196);
+}
+#content{
+    width: calc(100% - 447px);
+}
+
+/* course_nav 구조잡기 */
+#course_nav>ul{
+    display: flex;
+    flex-direction: column;
+}
+
+#course_nav li{
+    width: 100%;
+    height: 80px;
+}
+
+.li1{
+    background-color: #404040;;
+}
+a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nav1>img{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.li2text{
+    color: white;
+    font-size: 0.8rem;
+    display: block;
+}
+
+.li1text{
+    color: grey;
+    font-size: 0.8rem;
+    display: block;
+}
+
+#sectiontop{
+    width: 100%;
+    height: 130px;
+}
+
+#title{
+    font-size: 1.3rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 15px;
+}
+input, img{
+    display: block;
+}
+
+#search{
+    background-color: #f2f2f2;
+    width: 88%;
+    height: 40px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding-top: 5px;
+}
+#search>input{
+    float: left;
+    width: 260px;
+    height: 35px;
+    background-color: #f2f2f2;
+    border: none;
+    margin-left: 20px;
+}
+input:focus {outline: none;}
+#search>img{
+    width: 40px;
+    margin: 0;
+    cursor: pointer;
+}
+
+#tab_manu{
+    width: 100%;
+    height: 45px;
+    border-top: 1px solid rgb(197, 196, 196);
+    border-bottom: 1px solid rgb(197, 196, 196);
+    display: flex;
+    align-items: center;
+}
+#tab_manu>ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+    
+}
+
+#tab_manu>ul>li{
+    display: block;
+    align-items: center;
+    text-align: center;
+    width: 170px;
+    height: 35px;
+    line-height: 30px;
+    font-size: 0.9rem;
+    border-radius: 30px;
+    font-weight: 800;
+}
+.tabon{
+    color: rgb(67, 115, 176);
+    background-color: rgba(67, 114, 176, 0.205);
+}
+
+#tab_manu>ul>li:hover{
+    cursor: pointer;
+}
+
+#left_content{
+    width: 100%;
+    height: calc(100% - 210px);
+    overflow: auto;
+}
+
+#content_list>div{
+    border-bottom: 1px solid rgb(211, 209, 209);
+    cursor: pointer;
+}
+#content_list>div:hover{
+    background-color: #f8f8f8;
+}
+
+.list_num{
+    background-image: url("../image/mark.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 27px;
+    height: 33px;
+    float: left;
+    text-align: center;
+    margin: 10px;
+}
+.innertext{
+    padding-top: 20px;
+    padding-left: 10px;
+}
+td{
+    padding-right: 60px;
+}
+#list_page{
+    border-top: 1px solid rgb(197, 196, 196);
+    width: 370px;
+    height: 40px;
+    position: absolute;
+    bottom: 0px;
+    position: fixed;  
+}
+
+#list_page>ul{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+}
+#list_page>ul>li{
+    width: 35px;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.on{
+    color: rgba(67, 114, 176, 0.651);
+    font-size: 1.4rem;
+}
+#map{
+    width: 100%;
+    height: 100%;
+}
