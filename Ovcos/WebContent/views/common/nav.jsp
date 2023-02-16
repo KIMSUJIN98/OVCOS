@@ -43,6 +43,7 @@
     });
 </script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 </head>
 <body>
@@ -53,6 +54,11 @@
 	<% session.removeAttribute("alertMsg"); %>
 	<%} %>
 	
+=======
+</head>
+<body>
+
+>>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
 =======
 </head>
 <body>
@@ -110,7 +116,10 @@
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
 =======
 >>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
 </body>
