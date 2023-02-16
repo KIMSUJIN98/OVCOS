@@ -14,10 +14,6 @@
 <!-- feed관련 페이지 작성 -->
 <%@ include file="../common/nav.jsp" %>
 
-<script>
-    
-</script>
-
 <div id="feedWrap">
         
             <div id="ct1">
@@ -92,6 +88,7 @@
 
                     <div class="feedContent">
                     
+
                     <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe>
                     
                     </div>
@@ -120,11 +117,6 @@
             </div>
     </div>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal">
-        Open modal
-    </button>
-
-
     <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -132,13 +124,17 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">피드 작성</h4>
+                    <button type="button" class="close close1" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <form action="" id="enrollfrm">
+                        <!--위도와 경도 넣을 hidden-->
+                        <input type="hidden" id="startLat" name="startLat" value="">
+                        <input type="hidden" id="startLon" name="startLon" value="">
+                        <input type="hidden" id="distance" name="distance" value="">
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
@@ -160,7 +156,7 @@
 
                         <div style=" display: flex;">
                             <div>
-                                <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
+                                <label for="avatar" style="margin-left: 50px;"><b>파일 첨부 :</b></label>
                                 <input type="file" id="avatar" name="avatar" accept="">
                             </div>
                             <div style="display: flex; float: right;">
@@ -180,9 +176,8 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="map" style="width:700px;height:350px; margin: auto;"></div>
-                       
-                    
+                        <div id="map" style="width:750px;height:350px;"></div>
+                    </form>
                 </div>
 
 
@@ -202,39 +197,26 @@
                         <input type="checkbox">
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                <div id="dist1">총길이 : <span id="dist"></span> </div>
-                    <button type="reset" class="btn btn-primary" id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary">작성</button>
+                    <div id="dist">총길이 : </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">작성</button>
+                        <button type="button" class="btn btn-danger close1" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-            </form>
+
             </div>
         </div>
     </div>
-
-
     <script>
-
-            $(function(){
-                    
-                    $("#reset").click(function(){
-                        $("#title").val("");
-                        $("textarea").val("");
-                        $("#avatar").val("");
-                        $(".star-rating label")
-                    })
-
-                    
-                
-                
-            });
-            $("#reset").click(function(){
-                $("#map").css("visibility","hidden");
-                console.log($("#map"))
+        console.log($("body"));
+        
+            $(".close1").click(function(){
+                            location.href="<%=contextPath%>/feed"
             })
 
-
-
+            
             var polyline=null;
             var marker = null;
             var map = null;
@@ -265,12 +247,6 @@
             gpxFileInput.addEventListener('change', handleFileSelect, false);
     
             function handleFileSelect(event) {
-                array = [];
-                lats = [];
-                lons = [];
-                sum=0;
-                $("#map").css("visibility","visible");
-    
                 
                 var file = event.target.files[0];
                 var reader = new FileReader();
@@ -318,8 +294,8 @@
                     $("#distance").val(sum.toFixed(1));
                     
                     // 화면에 경로 표시하기
-                    $("#dist").text(sum.toFixed(1)+' km');
-                    
+                    $("#dist").text($("#dist").text()+sum.toFixed(1)+' km');
+                    console.log(sum);
     
     
                     // 지도 표시
