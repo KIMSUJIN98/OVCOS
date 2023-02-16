@@ -41,37 +41,38 @@ body{
     border-bottom: 1px solid rgb(197, 196, 196);
 }
 
-#firstGroup {
+
+#fistgroup {
     display: flex;
-    align-items: center;
+    align-items: center ;
 }
 
-#logo>img {
+#logoimg {
     width: 120px;
 }
 
+/* 메뉴시작 (피드,탐색,챌린지) */
 #menu>ul {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 0 !important;
     display: flex;
 }
-
 #menu>ul>li{
     list-style: none;
-    width: 50px;
+    border-bottom: 3px solid white ;
+    width:50px;
     height: 50px;
     margin: 0px 30px;
     text-align: center;
-}
 
+}
 #menu>ul>li:hover{
     border-bottom: 3px solid rgb(67, 115, 176) ;
     margin: 0px 30px;
 }
 
-#menu>ul>li a{
+#menu ul li a{
     text-decoration: none;
     font-family: 'SUIT-Regular';
     font-weight: 700;
@@ -81,14 +82,14 @@ body{
     width: 100%;
     height: 100%;
     display: block;
+    
 }
-
 #menu>ul>li>a:hover{
     color: rgb(67, 115, 176);
 }
 
 /* 챌린지 서브메뉴 */
-#challenge>ul{
+#chall>ul{
     list-style-type: none;
     width:45px;
     height: 50px;
@@ -96,154 +97,103 @@ body{
     margin: 0;
     display: none;
 } 
-
-#challenge:hover>ul{
-    display: block;
-}
-
-#challenge>ul>li{
-    width: 80px;
+#chall li{
+    width: 100px;
     height: 50px;
     line-height: 50px;
+    text-decoration: none;
     background-color: white;
 }
 
-#challenge>ul>li:hover{
+#chall:hover>ul{
+    display: block;
+}
+
+#chall>ul>li:hover{
     background-color: rgb(67, 115, 176);
 }
 
-#challenge>ul>li:hover>a{
+#chall>ul>li>a:hover{
     color: white;
-    text-decoration: none;
 }
 /* 메뉴끝 */
 
 
 /* 네비마지막세개버튼 */
-#lastGroup>ul{
+/* 종 */
+#lastgroup>ul{
     display: flex;
     margin : 0;
 	margin-bottom: 0;
 }
-
-#lastGroup>ul>li, #lastGroup li{
+#lastgroup li{
     list-style: none;
 }
-
-#lastGroup #li2{
+#li1{
     margin: 10px;
     width: 35px;
     height: 35px;
 }
-
-#lastGroup #li1{
+#li2{
     margin: 10px;
-    margin-right: 30px;
-    width: 80px;
+    width: 35px;
     height: 35px;
 }
-
-#feedEnrollBtn{
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 5%;
-	vertical-align: center;
-	text-align: center;
-	text-decoration: none;
-    font-family: 'SUIT-Regular';
-    font-weight: 500;
-    font-size: 15px;
-    color: white;
-    background-color: rgb(67, 115, 176);
-    border: 1px solid rgb(67, 115, 176);
-    /*width: 100%;
-    height: 100%;
-    display: block;*/
-}
-
-#lastGroup img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 50%;
-}
-
-#lastGroup>ul>li:hover img, #feedEnrollBtn:hover{
-    filter: invert(20%);
-}
+/*#li3{
+    width: 35px;
+    height: 39px;
+    padding: 15px 10px 10px 10px;
+}*/
 
 /* 마이페이지서브메뉴 */
-#subMenu{
-    width: 300px;
+#submenu{
+    width: 100px;
     height: auto;
     margin: 0;
     padding: 0;
-    padding-top: 10px;
+    padding-top: 5px;
     display: none;
-    background-color: white;
 }
-
-#alert{
-	border: 1px solid gray;
-	padding: 0px;
-	width: 280px;
-	height: auto;
+#submenu>li{
+    padding-top: 5px;
 }
-
-#subMenu>li{
-    padding: 5px 0px;
-}
-
-#subMenu>.subMenuList:hover{
-    background-color: rgb(67, 115, 176);
-}
-
-#subMenu>.subMenuList>a{
-    font-family: 'SUIT-Regular';
+#submenu>li>a{
     text-decoration: none;
     color: black;
-    /*width: 100%;
-	height: 100%;
-	object-fit: cover;*/
-	display: block;
-    text-align: center;
-    /*line-height: 10px;*/
+    font-family: 'SUIT-Regular';
+}
+#submenu>li>a:hover{
+    color: darkgray;
 }
 
-#subMenu>.subMenuList>a:hover{
-    color: white;
-}
-
-/*#li1:checked>ul{
+#li2:checked>ul{
     display: block;
 
-}*/
-
-.menu>div{cursor:pointer;}
-
-.menu .hide{display:none;}
-
-
-/*#li1,#li2{
+}
+#li2/*,#li3*/{
     cursor: pointer;
-}*/
-
+}
 /*서브메뉴 끝*/
 
-/*#lastGroup>ul>li>div {
-	display: table-cell;
-	vertical-align: middle;
-}*/
 
-/*#alarm img{
+#li4{
+    /* width: 28px; */
+    /* height: 39px; */
+    width: 35px;
+    height: 35px;
+    margin: 10px 10px 10px 80px;
+    /* margin: 10px 10px 10px 20px; */
+    /* margin: auto; */
+}
+
+#alarm img{
     width: 100%;
     height: 100%;
-}*/
+}
 
-/*#alarm:hover{
+#alarm:hover{
     filter: invert(50%);
-}*/
+}
 
 /* #mp{
     margin: 0;
@@ -256,10 +206,11 @@ body{
 
 } */
 
-
-/*#myPage img{
+#myPage img{
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-}*/
+}
 
 /* #downbtn{
     width: 35px;
@@ -274,15 +225,13 @@ body{
     height: 35px;
     padding: 0;
 }*/
-
-/*#feed>img{
+#feed>img{
     width: 100%;
     height: 100%;
-}*/
-
-/*#feed:hover{
+}
+#feed:hover{
     cursor: pointer;
-}*/
+}
 
 
 /* #feed>a{
@@ -292,5 +241,9 @@ body{
     margin: 0;
     color: black;
     text-decoration: none;
-} */
+}
 
+#feed>a:hover{
+    color: rgb(67, 115, 176);
+
+} */
