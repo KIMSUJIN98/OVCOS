@@ -42,8 +42,7 @@
         });
     });
 </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
 </head>
 <body>
@@ -54,16 +53,8 @@
 	<% session.removeAttribute("alertMsg"); %>
 	<%} %>
 	
-=======
-</head>
-<body>
 
->>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
-=======
-</head>
-<body>
 
->>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
     <div id="wrap">
         <div id="wrapnav">
             <div id="fistgroup">
@@ -115,12 +106,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
-=======
->>>>>>> parent of ab9ae00 (Merge pull request #58 from KIMSUJIN98/team1)
 </body>
 </html>
