@@ -138,7 +138,12 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="" id="enrollfrm">
+                    <form action="<%=contextPath %>/enroll.feed" method="post" id="enrollfrm" enctype="multipart/form-data">
+                    	<input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
+                    	<input type="hidden" name="startLon" id="startLon" value="">
+                    	<input type="hidden" name="startLat" id="startLat" value="">
+                    	<input type="hidden" name="distance" id="distance" value="">
+                        <input type="hidden" name="rate" id="rate" value="">
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
@@ -205,7 +210,7 @@
                 <div class="modal-footer">
                 <div id="dist1">총길이 : <span id="dist"></span> </div>
                     <button type="reset" class="btn btn-primary" id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary">작성</button>
+                    <button type="submit" class="btn btn-primary" id="insert">작성</button>
                 </div>
             </form>
             </div>
@@ -214,6 +219,21 @@
 
 
     <script>
+
+        $("#insert").click(function(){
+            $("#distance").val($("#dist").text());
+            $("#startLat").val(startLat);
+            $("#startLon").val(startLon);
+            $(":radio").each(function(index, value){
+                if($(this).attr("checked")){
+                    $("#rate").val($(this).val());
+                } 
+            })
+        })
+
+        
+
+        
 
             $(function(){
                     
@@ -230,7 +250,7 @@
             });
             $("#reset").click(function(){
                 $("#map").css("visibility","hidden");
-                console.log($("#map"))
+                $("#dist").text("");
             })
 
 
