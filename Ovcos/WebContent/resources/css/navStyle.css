@@ -60,15 +60,15 @@ body{
 
 #menu>ul>li{
     list-style: none;
-    width: 50px;
+    width: 110px;
     height: 50px;
-    margin: 0px 30px;
+    /* margin: 0px 30px; */
     text-align: center;
 }
 
 #menu>ul>li:hover{
     border-bottom: 3px solid rgb(67, 115, 176) ;
-    margin: 0px 30px;
+    /* margin: 0px 30px; */
 }
 
 #menu>ul>li a{
@@ -102,7 +102,7 @@ body{
 }
 
 #challenge>ul>li{
-    width: 80px;
+    width: 110px;
     height: 50px;
     line-height: 50px;
     background-color: white;
