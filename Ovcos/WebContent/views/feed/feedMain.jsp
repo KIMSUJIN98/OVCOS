@@ -89,8 +89,6 @@
                     <div class="feedContent">
                     
 
-                    <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe>
-                    
                     </div>
 
                     
