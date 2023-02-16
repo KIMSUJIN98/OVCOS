@@ -28,7 +28,7 @@
                             <div id="profile_img">
                                 <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
                             </div>
-                            <a href="#" id="username"><h3><%= loginUser.getMemName() %></h3></a>
+                            <a href="#" id="username"><h3>김이름</h3></a>
                             
                         </div>
                         <div id="ac_recode">
@@ -50,7 +50,7 @@
                         
                     </div>
                 </div>
-                <div id="notice"><a href="<%= contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
+                <div id="notice"><a href="#">서버 점검 예정 2023-03-03</a></div>
             </div>
 
 
@@ -92,8 +92,6 @@
 
                     <div class="feedContent">
                     
-
-
                     <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe>
                     
                     </div>

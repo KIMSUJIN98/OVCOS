@@ -24,5 +24,11 @@
 	
 	</entry>
 	
-
+	<entry key="deleteNotice">
+	
+	UPDATE
+            NOTICE
+        SET STATUS = 'N'
+    WHERE NOTICE_NO =?
+    </entry>
 </properties>
