@@ -13,7 +13,6 @@ public class Feed {
 	private String feedPathNy;// 경로등록여부
 	private String feedRprNy;//	피드신고여부
 	private Date feedRprDate; // 신고시간
-	private String gpxUrl; // 파일 경로
 	private double distance; // 거리
 	private double startLat; // 시작 위도
 	private double startLon;// 시작 경도
@@ -26,9 +25,11 @@ public class Feed {
 	public Feed() {}
 
 
+
+
 	public Feed(int feedIndex, Date feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
-			String feedPathNy, String feedRprNy, Date feedRprDate, String gpxUrl, double distance, double startLat,
-			double startLon, String feedDelNy, String memId) {
+			String feedPathNy, String feedRprNy, Date feedRprDate, double distance, double startLat, double startLon,
+			String feedDelNy, String memId) {
 		super();
 		this.feedIndex = feedIndex;
 		this.feedDate = feedDate;
@@ -39,7 +40,6 @@ public class Feed {
 		this.feedPathNy = feedPathNy;
 		this.feedRprNy = feedRprNy;
 		this.feedRprDate = feedRprDate;
-		this.gpxUrl = gpxUrl;
 		this.distance = distance;
 		this.startLat = startLat;
 		this.startLon = startLon;
@@ -176,20 +176,6 @@ public class Feed {
 
 
 
-	public String getGpxUrl() {
-		return gpxUrl;
-	}
-
-
-
-
-	public void setGpxUrl(String gpxUrl) {
-		this.gpxUrl = gpxUrl;
-	}
-
-
-
-
 	public double getDistance() {
 		return distance;
 	}
@@ -264,10 +250,11 @@ public class Feed {
 	public String toString() {
 		return "Feed [feedIndex=" + feedIndex + ", feedDate=" + feedDate + ", feedTitle=" + feedTitle + ", feedCnt="
 				+ feedCnt + ", feedEval=" + feedEval + ", feedPublicType=" + feedPublicType + ", feedPathNy="
-				+ feedPathNy + ", feedRprNy=" + feedRprNy + ", feedRprDate=" + feedRprDate + ", gpxUrl=" + gpxUrl
-				+ ", distance=" + distance + ", startLat=" + startLat + ", startLon=" + startLon + ", feedDelNy="
-				+ feedDelNy + ", MemId=" + MemId + "]";
+				+ feedPathNy + ", feedRprNy=" + feedRprNy + ", feedRprDate=" + feedRprDate + ", distance=" + distance
+				+ ", startLat=" + startLat + ", startLon=" + startLon + ", feedDelNy=" + feedDelNy + ", MemId=" + MemId
+				+ "]";
 	}
+
 
 	
 	

@@ -1,6 +1,8 @@
 package com.ovcos.feed.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.ovcos.common.GpxFileRenamePolicy;
+import com.ovcos.feed.model.service.FeedService;
 import com.ovcos.feed.model.vo.Feed;
+import com.ovcos.upload.model.vo.Gpx;
 
 @WebServlet("/enroll.feed")
 public class FeedEnrollController extends HttpServlet {
@@ -49,7 +53,6 @@ public class FeedEnrollController extends HttpServlet {
 			
 			// 파일 명, 경로
 			String fileName = multi.getFilesystemName("avatar");
-			String fileUrl = "resources/gpx_upfiles/"+fileName;
 			
 			Feed f = new Feed();
 			f.setMemId(userId);
@@ -61,10 +64,27 @@ public class FeedEnrollController extends HttpServlet {
 			f.setFeedCnt(content);
 			f.setFeedPublicType(feedPublicType);
 			f.setFeedPathNy(feedPathNy);
-			f.setGpxUrl(fileUrl);
 			
-			System.out.println(f);
+			//Gpx 객체
+			Gpx gpx = null;
+			if(multi.getOriginalFileName("avatar") != null) {
+				gpx = new Gpx();
+				gpx.setOriginName(multi.getOriginalFileName("avatar"));
+				gpx.setChangeName(fileName);
+				gpx.setFilePath("resources/gpx_upfiles/");
+			}
 			
+			PrintWriter out = response.getWriter();
+			
+			//서비스 요청 
+			int result = new FeedService().insertFeed(f,gpx);
+			
+			//응답뷰 지정
+			if(result>0) {
+				response.sendRedirect("/Ovcos/feed");
+			}else {
+				out.print("why not");
+			}
 			
 			
 			
