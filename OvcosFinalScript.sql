@@ -25,6 +25,8 @@ DROP TABLE CONTEST;
 DROP TABLE NORMAL_CHALLENGE;
 DROP TABLE MEMBER;
 
+
+
 ----------------------------------------------
 ---------------- DROP SEQUENCE ---------------
 ----------------------------------------------
