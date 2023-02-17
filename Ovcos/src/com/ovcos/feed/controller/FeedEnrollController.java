@@ -11,6 +11,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.ovcos.common.GpxFileRenamePolicy;
+import com.ovcos.feed.model.vo.Feed;
 
 @WebServlet("/enroll.feed")
 public class FeedEnrollController extends HttpServlet {
@@ -35,8 +36,40 @@ public class FeedEnrollController extends HttpServlet {
 			// 전달된 파일명 수정
 			MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"utf-8", new GpxFileRenamePolicy());
 			
+			String userId = multi.getParameter("userId");
+			double startLon = Double.parseDouble(multi.getParameter("startLon"));
+			double startLat = Double.parseDouble(multi.getParameter("startLat"));
+			double distance = Double.parseDouble(multi.getParameter("distance"));
+			int rate = Integer.parseInt(multi.getParameter("rate"));
+			
 			String title = multi.getParameter("title");
 			String content = multi.getParameter("content");
+			String feedPublicType = multi.getParameter("displayNy");
+			String feedPathNy = multi.getParameter("trackNy");
+			
+			// 파일 명, 경로
+			String fileName = multi.getFilesystemName("avatar");
+			String fileUrl = "resources/gpx_upfiles/"+fileName;
+			
+			Feed f = new Feed();
+			f.setMemId(userId);
+			f.setStartLon(startLon);
+			f.setStartLat(startLat);
+			f.setDistance(distance);
+			f.setFeedEval(rate);
+			f.setFeedTitle(title);
+			f.setFeedCnt(content);
+			f.setFeedPublicType(feedPublicType);
+			f.setFeedPathNy(feedPathNy);
+			f.setGpxUrl(fileUrl);
+			
+			System.out.println(f);
+			
+			
+			
+			
+			
+			
 			
 			
 			

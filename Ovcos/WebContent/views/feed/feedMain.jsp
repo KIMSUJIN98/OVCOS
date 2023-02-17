@@ -196,7 +196,7 @@
 
                     <div>
                         <b style="margin-left: 50px;">공개여부</b>
-                        <select>
+                        <select name="displayNy" id="displayNy">
                             <option>전채공개</option>
                             <option>비공개</option>
                             <option>친구에게만</option>
@@ -204,11 +204,11 @@
                     </div>
                     <div style="margin-left: 460px;">
                         <b style="margin-right: 5px;">경로등록하기</b>
-                        <input type="checkbox">
+                        <input type="checkbox" name="trackNy" id="trackNy" value="" >
                     </div>
                 </div>
                 <div class="modal-footer">
-                <div id="dist1">총길이 : <span id="dist"></span> </div>
+                <div id="dist1">총길이 : <span id="dist"></span> <div>km</div> </div>
                     <button type="reset" class="btn btn-primary" id="reset">초기화</button>
                     <button type="submit" class="btn btn-primary" id="insert">작성</button>
                 </div>
@@ -229,11 +229,12 @@
                     $("#rate").val($(this).val());
                 } 
             })
+            if($("#trackNy").attr("checked")){
+                $("#trackNy").val("Y");
+            }else{
+                $("#trackNy").val("N");
+            }
         })
-
-        
-
-        
 
             $(function(){
                     
@@ -338,7 +339,7 @@
                     $("#distance").val(sum.toFixed(1));
                     
                     // 화면에 경로 표시하기
-                    $("#dist").text(sum.toFixed(1)+' km');
+                    $("#dist").text(sum.toFixed(1));
                     
     
     

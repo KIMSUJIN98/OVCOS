@@ -62,6 +62,10 @@ article {
   left: 50px;
   width: 300px;
 }
+#dist1>span{
+  display: inline-block;
+  width: 50px;
+}
 
 .modal-title{
   width: 100%;
