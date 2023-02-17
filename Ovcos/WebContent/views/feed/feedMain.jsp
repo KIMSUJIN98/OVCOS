@@ -138,7 +138,12 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="" id="enrollfrm">
+                    <form action="<%=contextPath %>/enroll.feed" method="post" id="enrollfrm" enctype="multipart/form-data">
+                    	<input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
+                    	<input type="hidden" name="startLon" id="startLon" value="">
+                    	<input type="hidden" name="startLat" id="startLat" value="">
+                    	<input type="hidden" name="distance" id="distance" value="">
+                        <input type="hidden" name="rate" id="rate" value="">
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
@@ -191,21 +196,25 @@
 
                     <div>
                         <b style="margin-left: 50px;">공개여부</b>
-                        <select>
-                            <option>전채공개</option>
-                            <option>비공개</option>
-                            <option>친구에게만</option>
+                        <select name="displayNy" id="displayNy">
+                            <option value="전체">전채공개</option>
+                            <option value="비공개">비공개</option>
+                            <option value="친구">친구에게만</option>
                         </select>
                     </div>
-                    <div style="margin-left: 460px;">
+                    <div style="margin-left: 400px;">
                         <b style="margin-right: 5px;">경로등록하기</b>
-                        <input type="checkbox">
+                        <select name="trackNy" id="trackNy">
+                            <option value="Y">등록</option>
+                            <option value="N">미등록</option>
+                        </select>
+                        <!-- <input type="checkbox" name="trackNy" id="trackNy" value="" > -->
                     </div>
                 </div>
                 <div class="modal-footer">
-                <div id="dist1">총길이 : <span id="dist"></span> </div>
+                <div id="dist1">총길이 :<span id="dist"></span></div>
                     <button type="reset" class="btn btn-primary" id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary">작성</button>
+                    <button type="submit" class="btn btn-primary" id="insert">작성</button>
                 </div>
             </form>
             </div>
@@ -214,6 +223,19 @@
 
 
     <script>
+
+        $("#insert").click(function(){
+            var last = $("#dist").text().lastIndexOf("k");
+            $("#distance").val($("#dist").text().substring(0,last));
+            $("#startLat").val(startLat);
+            $("#startLon").val(startLon);
+            $(":radio").each(function(index, value){
+                if($(this).attr("checked")){
+                    $("#rate").val($(this).val());
+                } 
+            })
+            
+        })
 
             $(function(){
                     
@@ -230,7 +252,7 @@
             });
             $("#reset").click(function(){
                 $("#map").css("visibility","hidden");
-                console.log($("#map"))
+                $("#dist").text("");
             })
 
 
@@ -318,7 +340,7 @@
                     $("#distance").val(sum.toFixed(1));
                     
                     // 화면에 경로 표시하기
-                    $("#dist").text(sum.toFixed(1)+' km');
+                    $("#dist").text(sum.toFixed(2)+'km');
                     
     
     
