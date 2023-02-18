@@ -157,7 +157,6 @@
                     	<input type="hidden" name="startLon" id="startLon" value="">
                     	<input type="hidden" name="startLat" id="startLat" value="">
                     	<input type="hidden" name="distance" id="distance" value="">
-                        <input type="hidden" name="rate" id="rate" value="">
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
@@ -180,7 +179,7 @@
                         <div style=" display: flex;">
                             <div>
                                 <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
-                                <input type="file" id="avatar" name="avatar" accept="">
+                                <input type="file" id="avatar" name="avatar" accept=".gpx">
                             </div>
                             <div style="display: flex; float: right;">
                                 <b style="padding-top: 5px; padding-right: 5px; margin-left: 160px;">별점</b>
@@ -199,7 +198,9 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="map" style="width:700px;height:350px; margin: auto;"></div>
+                        <div id="exmap" style="width:700px;height:350px; margin: auto;">
+                            <div id="map" style="width:100%;height:100%;"></div>
+                        </div>
                        
                     
                 </div>
@@ -228,7 +229,7 @@
                 <div class="modal-footer">
                 <div id="dist1">총길이 :<span id="dist"></span></div>
                     <button type="reset" class="btn btn-primary" id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary" id="insert">작성</button>
+                    <button type="button" class="btn btn-primary" id="insert">작성</button>
                 </div>
             </form>
             </div>
@@ -239,6 +240,12 @@
     <script>
 
         $("#insert").click(function(){
+            
+            console.log($("#avater"));
+
+
+            
+            
             var last = $("#dist").text().lastIndexOf("k");
             $("#distance").val($("#dist").text().substring(0,last));
             $("#startLat").val(startLat);
@@ -248,6 +255,7 @@
                     $("#rate").val($(this).val());
                 } 
             })
+
             
         })
 
@@ -305,10 +313,13 @@
                 lats = [];
                 lons = [];
                 sum=0;
-                $("#map").css("visibility","visible");
+                $("#map").remove();
+                var map = "<div id='map' style='width:100%;height:100%;''></div>"
+                $("#exmap").append(map);
     
                 
                 var file = event.target.files[0];
+                console.log(file);
                 var reader = new FileReader();
     
                 reader.onload = function (event) {
@@ -369,21 +380,36 @@
                         path: array,      //선 위치 변수배열
                         strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
                         strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                        strokeWeight: 2,   //선 두께
+                        strokeWeight: 3,   //선 두께
                         map: map           //오버레이할 지도
                     });
                     
                     //지도에 마커 표시하기
                     marker = new naver.maps.Marker({
                         position: new naver.maps.LatLng(startLat, startLon),
-                        map: map
+                        map: map,
+                        icon: {
+                            content: '<img src=/Ovcos/resources/image/location.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            size: new naver.maps.Size(45, 45),
+                            anchor: new naver.maps.Point(26, 40)
+                        }
                     });
+                    marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(lats[lats.length-1], lons[lons.length-1]),
+                        map: map,
+                        icon: {
+                            content: '<img src=/Ovcos/resources/image/endlocation.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            size: new naver.maps.Size(45, 45),
+                            anchor: new naver.maps.Point(26, 40)
+                        }
+                    });
+                    console.log(marker);
     
                 };
                 reader.readAsText(file);
             };
     </script>
-
+    <img src="" alt="">
 
 </body>
 </html>
