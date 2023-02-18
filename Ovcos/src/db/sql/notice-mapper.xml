@@ -5,15 +5,15 @@
 
 <entry key="selectNoticeList">
 	SELECT
-	        NTC_NO
-	      , NTC_TITLE
-	      , NTC_DATE
-	      , NTC_WRITER
-	      , NTC_COUNT
-	 FROM NOTICE
-	WHERE NTC_DEL_NY='N'
-	ORDER
-	   BY NTC_NO DESC
+	       NTC_NO
+	     , NTC_TITLE
+	     , NTC_DATE
+	     , NTC_WRITER
+	     , NTC_COUNT
+	  FROM NOTICE
+	 WHERE NTC_DEL_NY='N'
+	 ORDER
+	    BY NTC_NO DESC
 </entry>
 	
 
@@ -62,7 +62,6 @@
 </entry>
 
 
-
 <entry key="updateNotice">
 	UPDATE
 	       NOTICE
@@ -70,6 +69,15 @@
 	     , NTC_CNT=?
 	 WHERE NTC_NO =?
 </entry>
+
+
+<entry key="deleteNotice">
+	UPDATE
+           NOTICE
+	   SET NTC_DEL_NY = 'Y'
+     WHERE NTC_NO = ?
+</entry>
+
     
     
 </properties>

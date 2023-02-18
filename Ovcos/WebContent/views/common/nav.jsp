@@ -4,6 +4,8 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +30,15 @@
 
 </head>
 <body>
+
+<%if(alertMsg != null){ %>
+	<script>
+		alert("<%= alertMsg%>");
+	</script>
+	
+	<% session.removeAttribute("alertMsg"); %>
+<%} %>
+	
     <div id="wrap">
         <div id="wrapnav">
             

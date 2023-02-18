@@ -46,10 +46,11 @@ public class NoticeUpdateController extends HttpServlet {
 		
 		System.out.println( ntcNo+ntcTitle+ntcCnt);
 		if(result>0) {//성공 => /jsp/detail.no?num=현재글번호 => 현재 공지글에 대한 상세보기 페이지
-			
+			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 수정 되었습니다.");
 			response.sendRedirect(request.getContextPath()+"/detail.no?num="+ntcNo);
 		}else {
-			request.setAttribute("errorMsg", "공지사항 수정 실패");
+			
+			request.getSession().setAttribute("alertMsg", "공지사항 수정 실패.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
