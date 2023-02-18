@@ -1,8 +1,6 @@
 package com.ovcos.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import com.ovcos.notice.model.service.NoticeService;
 import com.ovcos.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeListController
+ * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/list.no")
-public class NoticeListController extends HttpServlet {
+@WebServlet("/update.no")
+public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListController() {
+    public NoticeUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +29,31 @@ public class NoticeListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//updateForm.jsp에서  action으로 form데이터(게시글번호,제목,내용) 보내주고있음
+		request.setCharacterEncoding("UTF-8");
+		int ntcNo = Integer.parseInt(request.getParameter("num"));
+		String ntcTitle = request.getParameter("title");
+		String ntcCnt = request.getParameter("content");
 		
-		ArrayList<Notice> list = new NoticeService().selectNoticeList();
-		request.setAttribute("list",list);
-		request.getRequestDispatcher("views/notice/noticeMain.jsp").forward(request, response);
+		Notice n = new Notice();
+		
+		n.setNtcNo(ntcNo);
+		n.setNtcTitle(ntcTitle);
+		n.setNtcCnt(ntcCnt);
+		
+		int result = new NoticeService().updateNotice(n);
+		
+		System.out.println( ntcNo+ntcTitle+ntcCnt);
+		if(result>0) {//성공 => /jsp/detail.no?num=현재글번호 => 현재 공지글에 대한 상세보기 페이지
+			
+			response.sendRedirect(request.getContextPath()+"/detail.no?num="+ntcNo);
+		}else {
+			request.setAttribute("errorMsg", "공지사항 수정 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 	/**

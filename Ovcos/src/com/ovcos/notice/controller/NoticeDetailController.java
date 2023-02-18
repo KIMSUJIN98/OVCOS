@@ -1,8 +1,6 @@
 package com.ovcos.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import com.ovcos.notice.model.service.NoticeService;
 import com.ovcos.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeListController
+ * Servlet implementation class NoticeDetailController
  */
-@WebServlet("/list.no")
-public class NoticeListController extends HttpServlet {
+@WebServlet("/detail.no")
+public class NoticeDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListController() {
+    public NoticeDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +30,26 @@ public class NoticeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Notice> list = new NoticeService().selectNoticeList();
-		request.setAttribute("list",list);
-		request.getRequestDispatcher("views/notice/noticeMain.jsp").forward(request, response);
+		int ntcNo = Integer.parseInt(request.getParameter("num"));
+		int result = new NoticeService().increaseCount(ntcNo);
+
+		if(result>0) { 
+
+
+			Notice n = new NoticeService().selectNotice(ntcNo);
+
+
+			request.setAttribute("notice", n);
+			request.getRequestDispatcher("views/notice/noticeDetailView.jsp").forward(request, response);
+
+		}else {
+
+			request.setAttribute("errorMsg","공지사항 상세 조회 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+
+		}
+
+		
 	}
 
 	/**
