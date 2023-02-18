@@ -5,6 +5,7 @@
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,14 @@
 			alert("로그인 정보가 만료되었습니다.")
 		</script>
 	<%} %>
+
+<%if(alertMsg != null){ %>
+	<script>
+		alert("<%= alertMsg%>");
+	</script>
+	
+	<% session.removeAttribute("alertMsg"); %>
+<%} %>
 	
     <div id="wrap">
         <div id="wrapnav">
