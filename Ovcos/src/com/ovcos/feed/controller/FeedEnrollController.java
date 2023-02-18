@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -78,12 +79,14 @@ public class FeedEnrollController extends HttpServlet {
 			
 			//서비스 요청 
 			int result = new FeedService().insertFeed(f,gpx);
-			
+			HttpSession session = request.getSession();
 			//응답뷰 지정
 			if(result>0) {
 				response.sendRedirect("/Ovcos/feed");
+				session.setAttribute("enrollFeed", "success");
 			}else {
-				out.print("why not");
+				response.sendRedirect("/Ovcos/feed");
+				session.setAttribute("enrollFeed", "fail");
 			}
 			
 			

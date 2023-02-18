@@ -313,3 +313,13 @@ iframe{
     margin: auto;
     margin-top: 40px;
 }
+
+/*피드 성공실패 alert 부분*/
+
+#succ{
+    width: 800px;
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}

@@ -4,6 +4,7 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,13 @@
 
 </head>
 <body>
+	<%if(loginUser == null){ %>
+		<script>
+			location.href="<%=contextPath%>/login";
+			alert("로그인 정보가 만료되었습니다.")
+		</script>
+	<%} %>
+	
     <div id="wrap">
         <div id="wrapnav">
             

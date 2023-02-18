@@ -14,6 +14,7 @@
     <%@ include file="views/common/navForIndex.jsp" %>
 
     <script>
+    
       $(function(){
         $("#lastgroup ul").hide();
       })

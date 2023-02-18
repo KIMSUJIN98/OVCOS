@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String message = (String)session.getAttribute("enrollFeed");
+	System.out.print(message);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +17,25 @@
 <body>
 <!-- feed관련 페이지 작성 -->
 <%@ include file="../common/nav.jsp" %>
-
-<script>
-    
-</script>
+	<%if(message != null && message.equals("success")){ %>
+		<div class="alert alert-primary alert-dismissable" id="succ">
+		    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+		    <strong>피드등록에 성공헀습니다!</strong>	
+  		</div>
+	<%}%>
+	<%if(message != null && message.equals("fail")){ %>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <strong>피드등록에 실패했습니다!!</strong>
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	<%}%>
+	<%session.removeAttribute("enrollFeed"); %>
+	
+	<script>
+		
+	</script>
+	
+	
 
 <div id="feedWrap">
         
@@ -119,11 +138,6 @@
                 </div>
             </div>
     </div>
-
-    <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal">
-        Open modal
-    </button>
-
 
     <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
