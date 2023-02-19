@@ -10,7 +10,7 @@
 		      , FEED_CNT
 		      , FEED_EVAL
 		      , FEED_PUBLIC_TYPE
-		      , FEED_PAHT_NY
+		      , FEED_PATH_NY
 		      , DISTANCE
 		      , START_LAT
 		      , START_LON

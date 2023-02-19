@@ -229,7 +229,7 @@
                 <div class="modal-footer">
                 <div id="dist1">총길이 :<span id="dist"></span></div>
                     <button type="reset" class="btn btn-primary" id="reset">초기화</button>
-                    <button type="button" class="btn btn-primary" id="insert">작성</button>
+                    <button type="submit" class="btn btn-primary" id="insert">작성</button>
                 </div>
             </form>
             </div>
@@ -386,15 +386,6 @@
                     
                     //지도에 마커 표시하기
                     marker = new naver.maps.Marker({
-                        position: new naver.maps.LatLng(startLat, startLon),
-                        map: map,
-                        icon: {
-                            content: '<img src=/Ovcos/resources/image/location.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                            size: new naver.maps.Size(45, 45),
-                            anchor: new naver.maps.Point(26, 40)
-                        }
-                    });
-                    marker = new naver.maps.Marker({
                         position: new naver.maps.LatLng(lats[lats.length-1], lons[lons.length-1]),
                         map: map,
                         icon: {
@@ -403,7 +394,18 @@
                             anchor: new naver.maps.Point(26, 40)
                         }
                     });
-                    console.log(marker);
+                    
+                    
+                    marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(startLat, startLon),
+                        map: map,
+                        icon: {
+                            content: '<img src=/Ovcos/resources/image/location.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            size: new naver.maps.Size(45, 45),
+                            anchor: new naver.maps.Point(26, 40)
+                        }
+                    });
+                    
     
                 };
                 reader.readAsText(file);

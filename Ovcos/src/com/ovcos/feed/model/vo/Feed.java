@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Feed {
 
 	private int feedIndex;    //	피드번호
-	private Date feedDate;//	작성일자
+	private String feedDate;//	작성일자
 	private String feedTitle;//	피드제목
 	private String feedCnt;//	피드내용
 	private int feedEval;//	별점
@@ -27,7 +27,7 @@ public class Feed {
 
 
 
-	public Feed(int feedIndex, Date feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
 			String feedPathNy, String feedRprNy, Date feedRprDate, double distance, double startLat, double startLon,
 			String feedDelNy, String memId) {
 		super();
@@ -44,6 +44,25 @@ public class Feed {
 		this.startLat = startLat;
 		this.startLon = startLon;
 		this.feedDelNy = feedDelNy;
+		MemId = memId;
+	}
+
+	
+	
+
+
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
+			double startLat, double startLon, String memId) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
 		MemId = memId;
 	}
 
@@ -64,14 +83,14 @@ public class Feed {
 
 
 
-	public Date getFeedDate() {
+	public String getFeedDate() {
 		return feedDate;
 	}
 
 
 
 
-	public void setFeedDate(Date feedDate) {
+	public void setFeedDate(String feedDate) {
 		this.feedDate = feedDate;
 	}
 
