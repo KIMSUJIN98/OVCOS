@@ -36,7 +36,7 @@ public class MemberLoginController extends HttpServlet {
 			session.setAttribute("erroMsg", "로그인에 실패했습니다");
 		}else {
 			session.setAttribute("loginUser", m);
-			response.sendRedirect(request.getContextPath()+"/feed");
+			response.sendRedirect(request.getContextPath()+"/list.feed");
 		}
 		
 	}
