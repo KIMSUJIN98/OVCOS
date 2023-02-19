@@ -1,8 +1,13 @@
+<%@page import="com.ovcos.feed.model.vo.Feed"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String message = (String)session.getAttribute("enrollFeed");
 	System.out.print(message);
+
+	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +15,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css?문자열">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
+
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
@@ -111,8 +118,61 @@
 
                     <div class="feedContent">
                     
-                    <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe>
-                    
+                    <!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
+                    <% for(Feed f : allList) {%>
+                        <div class="feeddiv">
+					        <div class="feed_table">
+					            <table border="0px" id="f_table">
+					                <tr id="tr1">
+					                    <td id="feed_profile" colspan="2">
+					                        <div>
+					                            <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
+					                            <div id="p_name"><%=f.getMemId() %></div>
+					                            <div id="p_loca"><%=f.getFeedDate() %></div>
+					                        </div>
+					                    </td>
+					                    <td id="plus">
+					                    <div>
+					                        <img src="${pageContext.request.contextPath}/resources/image/more.png" alt="더보기 버튼">
+					                    </div>
+					                    </td>
+					                </tr>
+					                <tr>
+					                    <td colspan="3" id="td2_1">
+					                        <div id="f_title">
+					                        <a href=""><%=f.getFeedTitle() %></a>
+					                        </div>
+					                    </td>
+					                </tr>
+					                <tr>
+					                    <td colspan="3" id="f_content">
+					                        <p><%=f.getFeedCnt() %></p>
+					                    </td>
+					                </tr>
+					             
+					                <tr>
+					                    <td colspan="3" id="gpx">
+					                        <div>
+					                            <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt="">
+					                        </div>
+					                    </td>
+					                </tr>
+					                <tr>
+					                    <td >
+					                        <div id="star">⭐⭐⭐⭐</div>
+					                    </td>
+					                    <td id="like">
+					                        <i class="fa-regular fa-heart"></i>
+					                    </td>
+					                    <td id="comment">댓글</td>
+					                </tr>
+					            </table>  
+					        
+					        </div>
+					    
+					    </div><!-- feeddiv끝 -->
+					       <% } %>
+			
                     </div>
 
                     
