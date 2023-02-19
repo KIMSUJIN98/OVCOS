@@ -1,5 +1,17 @@
+<%@page import="com.ovcos.common.model.vo.Pageinfo"%>
+<%@page import="com.ovcos.feed.model.vo.Feed"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
+	Pageinfo pi = (Pageinfo)request.getAttribute("pi");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +29,7 @@
         <div id="course_nav">
             <ul>
                 <li class="li1">
-                    <a href="course">
+                    <a onclick="location.href='<%=contextPath%>/course?epage=1'">
                         <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagWhite.png" alt="깃발"></span>
                         <span class="li1text" align="center">코스검색</span>
                     </a>
@@ -49,142 +61,56 @@
             </div>
             <div id="left_content">
                 <div id="content_list">
+                    <!-- case 1  조회 결과가 없다.-->
+                	<%if(list == null){ %>
+				 		<p>조회된 결과가 없습니다.</p>
+				 	<%}else{ %>
+                    <!-- case 2 반복문으로  -->
+                    	<%for(Feed f: list){ %>
                     <div>
-                        <span class="list_num">1</span>
+                        <span class="list_num"><%=f.getFeedIndex() %></span>
                         <div class="innertext">
-                            <h5>백두대간_20230212</h5>
+                            <h5><%=f.getFeedTitle() %></h5>
                             <table>
                                 <tr>
                                     <td>전체 거리</td>
-                                    <td>xx.x km</td>
+                                    <td><%=f.getDistance()%> km</td>
                                 </tr>
                                 <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
+                                    <td>등록유저</td>
+                                    <td><%=f.getMemId() %></td>
                                 </tr>
                                 <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
+                                    <td>별점</td>
+                                    <td><%=f.getFeedEval() %></td>
                                 </tr>
                             </table>
-                            <span>xxxx-xx-xx</span>
+                            <span><%=f.getFeedDate() %></span>
                         </div>
                     </div>
-                    <div>
-                        <span class="list_num">2</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">3</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">4</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">5</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">6</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
+                    	<%} %>
+                    <%} %>
+                    
                 </div>
                 <div id="list_page">
                     <ul>
-                        <li class="befpage">&lt;</li>
-                        <li class="on pagenum">1</li>
-                        <li class="pagenum">2</li>
-                        <li class="pagenum">3</li>
-                        <li class="pagenum">4</li>
-                        <li class="pagenum">5</li>
-                        <li class="aftpage">&gt;</li>
+                    	<%if(currentPage != 1){ %>
+                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage-1%>'">&lt;</li>
+                        <%} else{%>
+                        	<li class="befpage">&lt;</li>
+                        <%} %>
+                        <%for(int i = startPage; i<=endPage; i++){ %>
+                        	<%if(i== currentPage){ %>
+                        		<li class="pagenum on"><%=i%></li>
+                        	<%}else{ %>
+                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?epage=<%=i%>'"><%=i%></li>
+                        	<%} %>
+                        <%} %>
+                        <%if(currentPage != maxPage){ %>
+                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage+1%>'">&gt;</li>
+                        <%} else{%>
+                        	<li class="aftpage">&gt;</li>
+                        <%} %>
                     </ul>
                 </div>
             </div>
@@ -207,17 +133,41 @@
                     // 위도, 경도 설정
                     var mapOptions = {
                         center: new naver.maps.LatLng(lat, lng),
-                        zoom: 12
+                        zoom: 10
                     };
                     
                     var map = new naver.maps.Map('map', mapOptions);
-                    var marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(lat, lng),
-                    map: map,
-                    clickable: true
-                    });
-                    }
+
                     
+                    
+                    var markers = [];
+
+                    <%for(Feed f: list){%>
+                        markers.push({position: new naver.maps.LatLng(<%=f.getStartLat()%>,<%=f.getStartLon()%>), path:'resources/gpx_upfiles/20230219114855-f_10634.gpx'})
+                    <%}%>
+                    
+
+                    for (var i = 0; i < markers.length; i++) {
+                        var marker = new naver.maps.Marker({
+                            position: markers[i].position,
+                            map: map
+                        });
+
+                        naver.maps.Event.addListener(marker, 'click', (function(marker, path) {
+                            naver.maps.Event.once(map, 'init', function () {
+                            $.ajax({
+                                url: HOME_PATH +'/data/seorak.gpx',
+                                dataType: 'xml',
+                                success: startDataLayer
+                            });
+                        });
+                        }));
+                        function startDataLayer(xmlDoc) {
+                            map.data.addGpx(xmlDoc);
+                        }
+
+                    }
+                    }
                 </script>
             </div>
         </div>
@@ -225,8 +175,18 @@
     </div>
     </div>
 
+    
     <script>
         $(function(){
+            // 배열의 마커를 찍어보자
+			
+            var marker = null;
+            
+            
+
+
+
+
             $(".tabon1").click(function(){
                 console.log("성공");
                 $(this).addClass("tabon")
@@ -234,12 +194,6 @@
                 $(this).siblings().removeClass("tabon");
             });
 
-            $("#list_page>ul>li").click(function(){
-                if($(this).text() != "<" && $(this).text() !=">"){
-                    $(this).addClass("on");
-                    $(this).siblings().removeClass("on");
-                }
-            })
         })
     </script>
 

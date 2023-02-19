@@ -10,7 +10,7 @@
 		      , FEED_CNT
 		      , FEED_EVAL
 		      , FEED_PUBLIC_TYPE
-		      , FEED_PAHT_NY
+		      , FEED_PATH_NY
 		      , DISTANCE
 		      , START_LAT
 		      , START_LON
@@ -50,4 +50,30 @@
 		    , ?
 		    )
 	</entry>
+	
+	
+	<entry key="selectAllFeedList">
+		SELECT 
+		       FEED_INDEX
+		     , FEED_DATE
+		     , FEED_TITLE
+		     , FEED_CNT
+		     , FEED_EVAL
+		     , FEED_PAHT_NY
+		     , FEED_RPR_DATE
+		     , DISTANCE
+		     , START_LAT
+		     , START_LON
+		     , MEM_NICK
+		 FROM FEED
+		 JOIN MEMBER USING(MEM_ID)
+		WHERE FEED_PUBLIC_TYPE ='전체'
+		  AND FEED_RPR_NY = 'N'
+		  AND FEED_DEL_NY = 'N'
+		ORDER
+		    BY FEED_INDEX DESC
+	</entry>
+	
+	
+	
 </properties>
