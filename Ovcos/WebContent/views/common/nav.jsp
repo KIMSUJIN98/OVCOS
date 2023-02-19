@@ -30,6 +30,12 @@
 
 </head>
 <body>
+	<%if(loginUser == null){ %>
+		<script>
+			location.href="<%=contextPath%>/login";
+			alert("로그인 정보가 만료되었습니다.")
+		</script>
+	<%} %>
 
 <%if(alertMsg != null){ %>
 	<script>
@@ -49,7 +55,7 @@
                 <div id="menu">
                     <ul>
                         <li id="feed"><a href="<%= contextPath %>/views/feed/feedMain.jsp"  >피드</a></li>
-                        <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
+                        <li id="explore"><a href="<%= contextPath %>/course?epage=1">탐색</a></li>
                         <li id="challenge"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
 	                        <ul>
 	                        	<li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>

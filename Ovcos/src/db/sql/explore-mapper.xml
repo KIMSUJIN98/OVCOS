@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectListCount">
+	select 
+    count(*) count
+    from feed
+    where FEED_PATH_NY = 'Y'
+    AND FEED_PUBLIC_TYPE IN('전체','친구')
+    AND FEED_DEL_NY = 'N'
+</entry>
+
+<entry key="selecList">
+	SELECT *
+		FROM (SELECT ROWNUM "RNUM",A.*
+		FROM (SELECT
+		        FEED_INDEX
+		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
+		      , FEED_TITLE
+		      , FEED_CNT
+		      , FEED_EVAL
+		      , DISTANCE
+		      , START_LAT
+		      , START_LON
+		      , MEM_ID
+		FROM FEED
+		WHERE FEED_PATH_NY = 'Y'
+		AND FEED_RPR_NY ='N'
+		AND FEED_DEL_NY = 'N'
+		ORDER BY FEED_INDEX DESC) A)
+		WHERE 
+		    RNUM BETWEEN ? AND ?
+</entry>
+
+    
+    
+</properties>

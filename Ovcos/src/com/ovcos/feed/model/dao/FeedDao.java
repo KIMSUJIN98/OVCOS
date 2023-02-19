@@ -18,7 +18,7 @@ public class FeedDao {
 	Properties prop = new Properties();
 	
 	public FeedDao() {
-		String filePath = FeedDao.class.getResource("/db/sql/Feed-mapper.xml").getPath();
+		String filePath = FeedDao.class.getResource("/db/sql/feed-mapper.xml").getPath();
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
 			
