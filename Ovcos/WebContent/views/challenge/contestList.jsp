@@ -11,6 +11,18 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
+
+<style>
+    .modal-body input {
+        width: 300px;
+    }
+
+    .newUpload span{
+        font-size: 13px;
+        color: gray;
+    }
+</style>
+
 </head>
 
 <body>
@@ -42,7 +54,7 @@
                             <br><br>
                             <div class="text-center">
                                 <!-- Button to Open the Modal -->
-                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCnts">새로운 모험</button>
+                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeContest">새로운 모험</button>
                             </div>
                         </div>
                         <!-- actions-->
@@ -99,26 +111,59 @@
                             </div>
                         </div>
                             <!-- The Modal -->
-                            <div class="modal" id="cntsDetail">
+                            <div class="modal" id="newCallengeContest">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
                                         <!-- Modal Header -->
                                         <div class="modal-header">
-                                            <h4 class="modal-title">챌린지 상세보기</h4>
+                                            <h4 class="modal-title">챌린지 생성</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
 
                                         <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Modal body..
+                                        <div class="modal-body" align="center">
+                                            <form action="test.do" method="post" id="updatechallenge-form">
+                                                <table class="newUpload">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" name="challengeName" required placeholder="챌린지명">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="date" min="2020-01-01" name="challengeDate" disabled>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <select name="location" id="selectLocation" disabled>
+                                                                <option name="selectLocation" value="서울">서울마라톤</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="number" name="challengeMax" min="2" placeholder="최대인원 (최소 2명이상)">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="file" name="contestImg">
+                                                            <br>
+                                                            <span>이미지 파일을 업로드 해주세요.</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <textarea name="challengeContent" cols="38" rows="10" style="resize: none;" placeholder="상세설명"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <button type="submit" class="btn btn-secondary">등록</button>
+                                            </form>
                                         </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
