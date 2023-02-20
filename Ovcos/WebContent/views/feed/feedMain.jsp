@@ -123,7 +123,10 @@
 
                     <div class="feedContent">
                     
-                    <!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
+                    <%if(allList == null){ %>
+                   		<!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
+                   	<%}else{ %>
+                    
                     <% for(Feed f : allList) {%>
                         <div class="feeddiv">
 					        <div class="feed_table">
@@ -177,6 +180,7 @@
 					    
 					    </div><!-- feeddiv끝 -->
 					       <% } %>
+					       <%} %>
 			
                     </div>
 
