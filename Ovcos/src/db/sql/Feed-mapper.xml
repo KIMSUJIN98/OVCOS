@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertFeed">
+		INSERT
+		    INTO FEED
+		    (   
+		        FEED_INDEX
+		      , FEED_TITLE
+		      , FEED_CNT
+		      , FEED_EVAL
+		      , FEED_PUBLIC_TYPE
+		      , FEED_PAHT_NY
+		      , DISTANCE
+		      , START_LAT
+		      , START_LON
+		      , MEM_ID
+		    )
+		    VALUES
+		    (
+		       SEQ_FEED_INDEX.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		    )
+	</entry>
+	
+	<entry key="insertGpx">
+		INSERT
+		    INTO GPX_FILES
+		    (
+		       GPX_NO
+		     , FEED_INDEX
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		    )
+		    VALUES
+		    (
+		      SEQ_GPX_FILES.NEXTVAL
+		    , SEQ_FEED_INDEX.CURRVAL
+		    , ?
+		    , ?
+		    , ?
+		    )
+	</entry>
+	
+	
+	<entry key="selectAllFeedList">
+		SELECT 
+		       FEED_INDEX
+		     , FEED_DATE
+		     , FEED_TITLE
+		     , FEED_CNT
+		     , FEED_EVAL
+		     , FEED_PAHT_NY
+		     , FEED_RPR_DATE
+		     , DISTANCE
+		     , START_LAT
+		     , START_LON
+		     , MEM_NICK
+		 FROM FEED
+		 JOIN MEMBER USING(MEM_ID)
+		WHERE FEED_PUBLIC_TYPE ='전체'
+		  AND FEED_RPR_NY = 'N'
+		  AND FEED_DEL_NY = 'N'
+		ORDER
+		    BY FEED_INDEX DESC
+	</entry>
+	
+	
+	
+</properties>

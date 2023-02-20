@@ -1,4 +1,4 @@
-package com.ovcos.feed.controller;
+package com.ovcos.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Ex
+ * Servlet implementation class NoticeEnrollFormController
  */
-@WebServlet(name = "Ex1", urlPatterns = { "/Ex1" })
-public class Ex extends HttpServlet {
+@WebServlet("/enrollForm.no")
+public class NoticeEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Ex() {
+    public NoticeEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,9 @@ public class Ex extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp").forward(request, response);
+		
 	}
 
 	/**

@@ -39,7 +39,7 @@
 </head>    
 <body>
 
-    <%@ include file="../../views/common/navForIndex.jsp" %>
+    <%-- include file="../../views/common/navForIndex.jsp" --%>
 
     <script>
       $(function(){

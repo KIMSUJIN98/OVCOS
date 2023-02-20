@@ -1,11 +1,18 @@
+<%@page import="com.ovcos.feed.model.vo.Feed"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedMainStyle.css?문자열">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
+
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
@@ -13,6 +20,10 @@
 <body>
 <!-- feed관련 페이지 작성 -->
 <%@ include file="../common/nav.jsp" %>
+
+<script>
+    
+</script>
 
 <div id="feedWrap">
         
@@ -24,7 +35,7 @@
                             <div id="profile_img">
                                 <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
                             </div>
-                            <a href="#" id="username"><h3>김이름</h3></a>
+                            <a href="#" id="username"><h3><%= loginUser.getMemName() %></h3></a>
                             
                         </div>
                         <div id="ac_recode">
@@ -46,7 +57,7 @@
                         
                     </div>
                 </div>
-                <div id="notice"><a href="#">서버 점검 예정 2023-03-03</a></div>
+                <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
             </div>
 
 
@@ -88,8 +99,61 @@
 
                     <div class="feedContent">
                     
-                    <iframe src="feedContent.jsp"></iframe>
-                    
+                    <!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
+                    <% for(Feed f : allList) {%>
+                        <div class="feeddiv">
+					        <div class="feed_table">
+					            <table border="0px" id="f_table">
+					                <tr id="tr1">
+					                    <td id="feed_profile" colspan="2">
+					                        <div>
+					                            <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
+					                            <div id="p_name"><%=f.getMemId() %></div>
+					                            <div id="p_loca"><%=f.getFeedDate() %></div>
+					                        </div>
+					                    </td>
+					                    <td id="plus">
+					                    <div>
+					                        <img src="${pageContext.request.contextPath}/resources/image/more.png" alt="더보기 버튼">
+					                    </div>
+					                    </td>
+					                </tr>
+					                <tr>
+					                    <td colspan="3" id="td2_1">
+					                        <div id="f_title">
+					                        <a href=""><%=f.getFeedTitle() %></a>
+					                        </div>
+					                    </td>
+					                </tr>
+					                <tr>
+					                    <td colspan="3" id="f_content">
+					                        <p><%=f.getFeedCnt() %></p>
+					                    </td>
+					                </tr>
+					             
+					                <tr>
+					                    <td colspan="3" id="gpx">
+					                        <div>
+					                            <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt="">
+					                        </div>
+					                    </td>
+					                </tr>
+					                <tr>
+					                    <td >
+					                        <div id="star">⭐⭐⭐⭐</div>
+					                    </td>
+					                    <td id="like">
+					                        <i class="fa-regular fa-heart"></i>
+					                    </td>
+					                    <td id="comment">댓글</td>
+					                </tr>
+					            </table>  
+					        
+					        </div>
+					    
+					    </div><!-- feeddiv끝 -->
+					       <% } %>
+			
                     </div>
 
                     
@@ -116,6 +180,11 @@
             </div>
     </div>
 
+    <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal">
+        Open modal
+    </button>
+
+
     <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -123,17 +192,18 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">피드 작성</h4>
-                    <button type="button" class="close close1" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="" id="enrollfrm">
-                        <!--위도와 경도 넣을 hidden-->
-                        <input type="hidden" id="startLat" name="startLat" value="">
-                        <input type="hidden" id="startLon" name="startLon" value="">
-                        <input type="hidden" id="distance" name="distance" value="">
+                    <form action="<%=contextPath %>/enroll.feed" method="post" id="enrollfrm" enctype="multipart/form-data">
+                    	<input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
+                    	<input type="hidden" name="startLon" id="startLon" value="">
+                    	<input type="hidden" name="startLat" id="startLat" value="">
+                    	<input type="hidden" name="distance" id="distance" value="">
+                        <input type="hidden" name="rate" id="rate" value="">
                         <table id="text1">
                             <tr>
                                 <th>제목</th>
@@ -155,7 +225,7 @@
 
                         <div style=" display: flex;">
                             <div>
-                                <label for="avatar" style="margin-left: 50px;"><b>파일 첨부 :</b></label>
+                                <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
                                 <input type="file" id="avatar" name="avatar" accept="">
                             </div>
                             <div style="display: flex; float: right;">
@@ -175,8 +245,9 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="map" style="width:750px;height:350px;"></div>
-                    </form>
+                        <div id="map" style="width:700px;height:350px; margin: auto;"></div>
+                       
+                    
                 </div>
 
 
@@ -185,37 +256,67 @@
 
                     <div>
                         <b style="margin-left: 50px;">공개여부</b>
-                        <select>
-                            <option>전채공개</option>
-                            <option>비공개</option>
-                            <option>친구에게만</option>
+                        <select name="displayNy" id="displayNy">
+                            <option value="전체">전채공개</option>
+                            <option value="비공개">비공개</option>
+                            <option value="친구">친구에게만</option>
                         </select>
                     </div>
-                    <div style="margin-left: 460px;">
+                    <div style="margin-left: 400px;">
                         <b style="margin-right: 5px;">경로등록하기</b>
-                        <input type="checkbox">
+                        <select name="trackNy" id="trackNy">
+                            <option value="Y">등록</option>
+                            <option value="N">미등록</option>
+                        </select>
+                        <!-- <input type="checkbox" name="trackNy" id="trackNy" value="" > -->
                     </div>
                 </div>
-
                 <div class="modal-footer">
-                    <div id="dist">총길이 : </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">작성</button>
-                        <button type="button" class="btn btn-danger close1" data-dismiss="modal">Close</button>
-                    </div>
+                <div id="dist1">총길이 :<span id="dist"></span></div>
+                    <button type="reset" class="btn btn-primary" id="reset">초기화</button>
+                    <button type="submit" class="btn btn-primary" id="insert">작성</button>
                 </div>
-
+            </form>
             </div>
         </div>
     </div>
+
+
     <script>
-        console.log($("body"));
-        
-            $(".close1").click(function(){
-                            location.href="<%=contextPath%>/feed"
+
+        $("#insert").click(function(){
+            var last = $("#dist").text().lastIndexOf("k");
+            $("#distance").val($("#dist").text().substring(0,last));
+            $("#startLat").val(startLat);
+            $("#startLon").val(startLon);
+            $(":radio").each(function(index, value){
+                if($(this).attr("checked")){
+                    $("#rate").val($(this).val());
+                } 
+            })
+            
+        })
+
+            $(function(){
+                    
+                    $("#reset").click(function(){
+                        $("#title").val("");
+                        $("textarea").val("");
+                        $("#avatar").val("");
+                        $(".star-rating label")
+                    })
+
+                    
+                
+                
+            });
+            $("#reset").click(function(){
+                $("#map").css("visibility","hidden");
+                $("#dist").text("");
             })
 
-            
+
+
             var polyline=null;
             var marker = null;
             var map = null;
@@ -246,6 +347,12 @@
             gpxFileInput.addEventListener('change', handleFileSelect, false);
     
             function handleFileSelect(event) {
+                array = [];
+                lats = [];
+                lons = [];
+                sum=0;
+                $("#map").css("visibility","visible");
+    
                 
                 var file = event.target.files[0];
                 var reader = new FileReader();
@@ -293,8 +400,8 @@
                     $("#distance").val(sum.toFixed(1));
                     
                     // 화면에 경로 표시하기
-                    $("#dist").text($("#dist").text()+sum.toFixed(1)+' km');
-                    console.log(sum);
+                    $("#dist").text(sum.toFixed(2)+'km');
+                    
     
     
                     // 지도 표시

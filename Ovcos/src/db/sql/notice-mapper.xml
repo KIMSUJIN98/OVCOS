@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+<entry key="selectNoticeList">
+	SELECT
+	       NTC_NO
+	     , NTC_TITLE
+	     , NTC_DATE
+	     , NTC_WRITER
+	     , NTC_COUNT
+	  FROM NOTICE
+	 WHERE NTC_DEL_NY='N'
+	 ORDER
+	    BY NTC_NO DESC
+</entry>
+	
+
+	
+<entry key="increaseCount">
+	UPDATE
+		   NOTICE
+       SET NTC_COUNT = NTC_COUNT+1
+     WHERE NTC_NO = ?
+       AND NTC_DEL_NY = 'N'
+</entry>
+		
+	
+	
+<entry key="selectNotice">
+	SELECT 
+           NTC_NO
+         , NTC_TITLE
+         , NTC_CNT
+         , NTC_DATE
+         , NTC_WRITER
+      FROM NOTICE
+     WHERE NTC_NO = ?
+</entry>
+    
+    
+<entry key="insertNotice">
+	INSERT 
+		  INTO NOTICE 
+		(
+		  NTC_NO
+		, NTC_TITLE
+		, NTC_CNT
+		, NTC_DATE
+		, NTC_WRITER
+		)
+		VALUES
+		(
+		  SEQ_NTC_NO.NEXTVAL
+		, ?
+		, ?
+		, SYSDATE
+		, ?
+		)
+
+</entry>
+
+
+<entry key="updateNotice">
+	UPDATE
+	       NOTICE
+	   SET NTC_TITLE =?
+	     , NTC_CNT=?
+	 WHERE NTC_NO =?
+</entry>
+
+
+<entry key="deleteNotice">
+	UPDATE
+           NOTICE
+	   SET NTC_DEL_NY = 'Y'
+     WHERE NTC_NO = ?
+</entry>
+
+    
+    
+</properties>
