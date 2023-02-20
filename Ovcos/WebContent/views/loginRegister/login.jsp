@@ -37,7 +37,7 @@ String contextPath = request.getContextPath();
                 </div>
             </div>
 
-            <button id="register_btn">회원가입</button>
+            <button id="register_btn" onclick="location.href='/Ovcos/views/loginRegister/signin_agree.jsp'">회원가입</button>
             <span id="test1">간편 로그인</span>
             <div id="login_img">
                 <img src="${pageContext.request.contextPath}/resources/image/naver.png" alt="">
