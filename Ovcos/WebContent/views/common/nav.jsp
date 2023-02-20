@@ -5,6 +5,7 @@
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,14 @@
 			alert("로그인 정보가 만료되었습니다.")
 		</script>
 	<%} %>
+
+<%if(alertMsg != null){ %>
+	<script>
+		alert("<%= alertMsg%>");
+	</script>
+	
+	<% session.removeAttribute("alertMsg"); %>
+<%} %>
 	
     <div id="wrap">
         <div id="wrapnav">
@@ -46,7 +55,7 @@
                 <div id="menu">
                     <ul>
                         <li id="feed"><a href="<%= contextPath %>/views/feed/feedMain.jsp"  >피드</a></li>
-                        <li id="explore"><a href="<%= contextPath %>/course">탐색</a></li>
+                        <li id="explore"><a href="<%= contextPath %>/course?epage=1">탐색</a></li>
                         <li id="challenge"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
 	                        <ul>
 	                        	<li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>

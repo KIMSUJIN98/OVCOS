@@ -45,7 +45,12 @@ public class FeedEnrollController extends HttpServlet {
 			double startLon = Double.parseDouble(multi.getParameter("startLon"));
 			double startLat = Double.parseDouble(multi.getParameter("startLat"));
 			double distance = Double.parseDouble(multi.getParameter("distance"));
-			int rate = Integer.parseInt(multi.getParameter("rate"));
+			int rate = 0;
+			if(multi.getParameter("rating") != null) {
+				rate = Integer.parseInt(multi.getParameter("rating"));
+			}
+			System.out.println(rate);
+			
 			
 			String title = multi.getParameter("title");
 			String content = multi.getParameter("content");
@@ -88,14 +93,6 @@ public class FeedEnrollController extends HttpServlet {
 				response.sendRedirect("/Ovcos/feed");
 				session.setAttribute("enrollFeed", "fail");
 			}
-			
-			
-			
-			
-			
-			
-			
-			
 			
 		}
 		

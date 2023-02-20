@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.ovcos.common.JDBCTemplate.*;
@@ -16,7 +18,7 @@ public class FeedDao {
 	Properties prop = new Properties();
 	
 	public FeedDao() {
-		String filePath = FeedDao.class.getResource("/db/sql/Feed-mapper.xml").getPath();
+		String filePath = FeedDao.class.getResource("/db/sql/feed-mapper.xml").getPath();
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
 			
@@ -78,4 +80,43 @@ public class FeedDao {
 		return result;
 	}
 
+	
+	public ArrayList<Feed> selectAllFeedList(Connection conn){
+		
+		ArrayList<Feed> allList = new ArrayList<Feed>();
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAllFeedList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				allList.add(new Feed(rset.getInt("FEED_INDEX"),
+							rset.getDate("FEED_DATE"),
+							rset.getString("FEED_TITLE"),
+							rset.getString("FEED_CNT"),
+							rset.getInt("FEED_EVAL"),
+							rset.getString("FEED_PAHT_NY"),
+							rset.getDate("FEED_RPR_DATE"),
+							rset.getInt("DISTANCE"),
+							rset.getInt("START_LAT"),
+							rset.getInt("START_LON"),
+							rset.getString("MEM_NICK")				
+							));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return allList;
+	}
 }

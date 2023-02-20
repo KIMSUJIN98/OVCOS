@@ -17,7 +17,7 @@
         <div id="course_nav">
             <ul>
                 <li>
-                    <a href="<%=contextPath%>/course">
+                    <a href="<%=contextPath%>/course?epage=1">
                         <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagGray.png" alt="깃발"></span>
                         <span class="li1text" align="center">코스검색</span>
                     </a>

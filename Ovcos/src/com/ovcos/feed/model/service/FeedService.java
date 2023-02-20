@@ -3,6 +3,7 @@ package com.ovcos.feed.model.service;
 import static com.ovcos.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.ovcos.feed.model.dao.FeedDao;
 import com.ovcos.feed.model.vo.Feed;
@@ -25,5 +26,17 @@ public class FeedService {
 		
 		close(conn);
 		return result*result2;
+	}
+	
+	
+	public ArrayList<Feed> selectAllFeedList(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> allList = new FeedDao().selectAllFeedList(conn);
+		
+		close(conn);
+		
+		return allList; 
 	}
 }
