@@ -96,7 +96,7 @@ public class FeedDao {
 			while(rset.next()) {
 				
 				allList.add(new Feed(rset.getInt("FEED_INDEX"),
-							rset.getDate("FEED_DATE"),
+							rset.getString("FEED_DATE"),
 							rset.getString("FEED_TITLE"),
 							rset.getString("FEED_CNT"),
 							rset.getInt("FEED_EVAL"),

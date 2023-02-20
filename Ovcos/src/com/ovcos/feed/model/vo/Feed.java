@@ -52,7 +52,7 @@ public class Feed {
 	
 
 
-	public Feed(int feedIndex, Date feedDate, String feedTitle, String feedCnt, int feedEval, String feedPathNy,
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPathNy,
 			Date feedRprDate, double distance, double startLat, double startLon, String memId) {
 		super();
 		this.feedIndex = feedIndex;
