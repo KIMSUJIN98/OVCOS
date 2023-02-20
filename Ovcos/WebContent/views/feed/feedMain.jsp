@@ -112,6 +112,8 @@
                             <option value="">내용</option>
                             </select>
                         </div>
+
+ 
                         <div id="f_search">
                             <input type="search" id="search" name="search" placeholder="피드검색">
                         </div>
@@ -124,7 +126,7 @@
                     <div class="feedContent">
                     
                     <%if(allList == null){ %>
-                   		<!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
+                   	<!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
                    	<%}else{ %>
                     
                     <% for(Feed f : allList) {%>
@@ -220,7 +222,7 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body" style="padding-left: 0px; padding-right: 0px;">
                     <form action="<%=contextPath %>/enroll.feed" method="post" id="enrollfrm" enctype="multipart/form-data">
                     	<input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
                     	<input type="hidden" name="startLon" id="startLon" value="">
@@ -229,7 +231,9 @@
                         <table id="text1">
                             
                        
-                        <div id="map" align="center">경로 미리보기</div>
+                       <div id="exmap" style="width:799px;height:500px; margin: auto;">
+                            <div id="map" style="width:100%;height:100%;"></div>
+                        </div>
                        
                         <hr>
                         <div style=" display: flex;">
@@ -271,12 +275,10 @@
 
                     </table>
 
-                        <div id="exmap" style="width:700px;height:350px; margin: auto;">
-                            <div id="map" style="width:100%;height:100%;"></div>
-                        </div>
+                         
                        
                     
-
+	
                 </div>
                 <!-- Modal footer -->
                 <div style="display: flex;">
@@ -307,8 +309,70 @@
             </div>
         </div>
     </div>
+    <!-- 피드 상세 -->
+    
+    <!-- Extra large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large
+        modal</button>
+    
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" style="margin-left: auto;">&times;</button>
+                <!--course_left 시작-->
+        <div id="course_left">
+            <div id="sectiontop">
+                <div id="title">피드 상세</div>
+                
+            </div>
+            <div id="tab_manu">
+                <ul>
+                    <li class="tabon tabon1">최신순</li>
+                    
+                </ul>
+            </div>
+            <div id="content">
+                <div id="map"> 
+                    <script>
+                        navigator.geolocation.getCurrentPosition(geoSuccess);
+                        function geoSuccess(position) {
+                        // 위도
+                        const lat = position.coords.latitude;
+                        // 경도
+                        const lng = position.coords.longitude;
+                        
+                        setMap(lat, lng);
+                        }
+    
+                        function setMap(lat, lng) {
+                        // 위도, 경도 설정
+                        var mapOptions = {
+                            center: new naver.maps.LatLng(lat, lng),
+                            zoom: 12
+                        };
+                        
+                        var map = new naver.maps.Map('map', mapOptions);
+                        var marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(lat, lng),
+                        map: map,
+                        clickable: true
+                        });
+                        }
+                        
+                    </script>
+                </div>
+            </div>
+            <!-- course_left 끝-->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+        </div>
+    </div>
+    </div>
+    
 
-
+ <!-- 피드 상세 -->
     <script>
     $(document).ready(function () {
         //여기 아래 부분
@@ -496,5 +560,8 @@
     </script>
     <img src="" alt="">
 
+
+  
+    
 </body>
 </html>
