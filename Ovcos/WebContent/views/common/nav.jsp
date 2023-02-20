@@ -50,7 +50,8 @@
             
             <div id="firstGroup">
                 <div id="logo">
-                    <img src="<%= contextPath %>/resources/image/logo.png" alt="ovcos 로고" id="logoimg" >
+                    <a href="<%= contextPath %>/views/feed/feedMain.jsp"><img src="<%= contextPath %>/resources/image/logo.png" alt="ovcos 로고" id="logoimg"></a>
+                    
                 </div>
                 <div id="menu">
                     <ul>

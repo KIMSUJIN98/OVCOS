@@ -100,7 +100,7 @@ public class FeedDao {
 							rset.getString("FEED_TITLE"),
 							rset.getString("FEED_CNT"),
 							rset.getInt("FEED_EVAL"),
-							rset.getString("FEED_PAHT_NY"),
+							rset.getString("FEED_PATH_NY"),
 							rset.getDate("FEED_RPR_DATE"),
 							rset.getInt("DISTANCE"),
 							rset.getInt("START_LAT"),

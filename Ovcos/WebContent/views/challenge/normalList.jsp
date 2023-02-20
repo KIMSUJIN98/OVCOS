@@ -11,6 +11,18 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
+
+<style>
+    .modal-body input {
+        width: 300px;
+    }
+
+    .newUpload span{
+        font-size: 13px;
+        color: gray;
+    }
+</style>
+
 </head>
 
 <body>
@@ -65,14 +77,14 @@
                                 생성해보세요!
                             </div>
                             <br><br>
-                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCnts">새로운 모험</button></div>
+                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeNormal">새로운 모험</button></div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <!-- Button to Open the Modal -->
                                         
                             <!-- The Modal -->
-                            <div class="modal" id="newCnts">
+                            <div class="modal" id="newCallengeNormal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
@@ -85,21 +97,18 @@
                                         <!-- Modal body -->
                                         <div class="modal-body" align="center">
                                             <form action="test.do" method="post" id="updatechallenge-form">
-                                                <table>
+                                                <table class="newUpload">
                                                     <tr>
-                                                        <th>챌린지명</th>
                                                         <td>
-                                                            <input type="text" name="challengeName" required>
+                                                            <input type="text" name="challengeName" required placeholder="챌린지명">
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th>날짜</th>
                                                         <td>
                                                             <input type="date" min="2020-01-01" name="challengeDate">
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th>지역선택</th>
                                                         <td>
                                                             <select name="location" id="selectLocation">
                                                                 <option name="selectLocation" value="서울">서울</option>
@@ -123,21 +132,20 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th>최대인원</th>
                                                         <td>
-                                                            <input type="number" name="challengeMax" min="2">
+                                                            <input type="number" name="challengeMax" min="2" placeholder="최대인원 (최소 2명이상)">
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th>이미지</th>
                                                         <td>
                                                             <input type="file" name="contestImg">
+                                                            <br>
+                                                            <span>이미지 파일을 업로드 해주세요.</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th>상세설명</th>
                                                         <td>
-                                                            <textarea name="challengeContent"cols="30" rows="10" style="resize: none;"></textarea>
+                                                            <textarea name="challengeContent" cols="38" rows="10" style="resize: none;" placeholder="상세설명"></textarea>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -145,12 +153,6 @@
                                                 <button type="submit" class="btn btn-secondary">등록</button>
                                             </form>
                                         </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
