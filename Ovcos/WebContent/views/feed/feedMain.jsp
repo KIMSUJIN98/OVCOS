@@ -13,6 +13,11 @@
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
+
+<script src="../../resources/js/summernote-lite.js"></script>
+<script src="../../resources/js/lang/summernote-ko-KR.js"></script>
+
+<link rel="stylesheet" href="../../resources/css/summernote-lite.css">
 </head>
 <body>
 <!-- feed관련 페이지 작성 -->
@@ -146,7 +151,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">피드 등록</h4>
+                    <h4 class="modal-title"><b>피드 등록</b></h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -159,24 +164,11 @@
                     	<input type="hidden" name="distance" id="distance" value="">
                         <input type="hidden" name="rate" id="rate" value="">
                         <table id="text1">
-                            <tr>
-                                <th>제목</th>
-                                <td><input type="text" name="title" size="62" placeholder="제목입력해주세요"></td>
-                            </tr>
-                        </table>
-                        <br>
-                        <table id="text">
-                            <tr>
-                                <th style="padding-bottom: 160px;">내용</th>
-                                <td>
-                                    <textarea type="text" name="content" cols="62" rows="7"
-                                        style="resize: none;"></textarea>
-                                </td>
-                            </tr>
-
-                        </table>
+                            
+                       
+                        <div id="map" align="center">경로 미리보기</div>
+                       
                         <hr>
-
                         <div style=" display: flex;">
                             <div>
                                 <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
@@ -199,12 +191,22 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="map" style="width:700px;height:350px; margin: auto;"></div>
-                       
-                    
+                        <tr>
+                            <th>제목</th>
+                            <td><input type="text" name="title" size="62" placeholder="제목입력해주세요"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="text">
+                        <tr>
+                            <th style="padding-bottom: 100px;">내용</th>
+                            <td>
+                                <textarea id="summernote" name="editordata"></textarea>
+                            </td>
+                        </tr>
+
+                    </table>
                 </div>
-
-
                 <!-- Modal footer -->
                 <div style="display: flex;">
 
@@ -237,6 +239,17 @@
 
 
     <script>
+    $(document).ready(function () {
+        //여기 아래 부분
+        $('#summernote').summernote({
+            height: 300,                 // 에디터 높이
+            minHeight: null,             // 최소 높이
+            maxHeight: null,             // 최대 높이
+            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR",					// 한글 설정
+            placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+        });
+    });
 
         $("#insert").click(function(){
             var last = $("#dist").text().lastIndexOf("k");
