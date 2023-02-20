@@ -59,7 +59,7 @@
 		     , FEED_TITLE
 		     , FEED_CNT
 		     , FEED_EVAL
-		     , FEED_PAHT_NY
+		     , FEED_PATH_NY
 		     , FEED_RPR_DATE
 		     , DISTANCE
 		     , START_LAT
