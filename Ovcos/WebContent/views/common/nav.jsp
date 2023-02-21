@@ -57,9 +57,9 @@
                     <ul>
                         <li id="feed"><a href="<%= contextPath %>/views/feed/feedMain.jsp"  >피드</a></li>
                         <li id="explore"><a href="<%= contextPath %>/course?epage=1">탐색</a></li>
-                        <li id="challenge"><a href="<%= contextPath %>/views/challenge/contestMain.jsp">챌린지</a>
+                        <li id="challenge"><a href="<%= contextPath %>/views/challenge/challengeMain.jsp">챌린지</a>
 	                        <ul>
-	                        	<li><a href="<%= contextPath %>/views/challenge/contestMain.jsp">대회</a></li>
+	                        	<li><a href="<%= contextPath %>/cntsMain.ch">대회</a></li>
 	                        	<li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
 	                        </ul>
                         </li>
