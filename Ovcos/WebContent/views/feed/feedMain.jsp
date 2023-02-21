@@ -331,13 +331,12 @@
                     
                 </ul>
             </div>
-            <div id="content">
-                <div id="map"> 
-                    
-                </div>
-            </div>
+            <div id="content"></div>
             <!-- course_left 끝-->
         </div>
+
+        <div class="position_set" style="display: inline;"></div>
+        
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
         </div>

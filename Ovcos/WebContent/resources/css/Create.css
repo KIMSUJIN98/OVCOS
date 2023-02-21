@@ -183,3 +183,8 @@ input:focus {outline: none;}
   padding-top: 15px;
 }
 
+.position_set{
+  /* display: flex; */
+  display: inline;
+}
+
