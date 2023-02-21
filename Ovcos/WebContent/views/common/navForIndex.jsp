@@ -37,7 +37,7 @@
                 </div>
                 <div id="menu">
                     <ul>
-                        <li id="feed"><a href="#"  >피드</a></li>
+                        <li id="feed"><a href="#">피드</a></li>
                         <li id="explore"><a href="#">탐색</a></li>
                         <li id="challenge"><a href="#">챌린지</a></li>
                     </ul>

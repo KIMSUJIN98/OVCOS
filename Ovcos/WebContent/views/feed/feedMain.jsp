@@ -4,10 +4,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String message = (String)session.getAttribute("enrollFeed");
-	System.out.print(message);
-
+	//System.out.print(message);
 	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
-
 %>
 <!DOCTYPE html>
 <html>
