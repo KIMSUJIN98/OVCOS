@@ -309,11 +309,10 @@
             </div>
         </div>
     </div>
-    <!-- 피드 상세 -->
+    <!-- 피드 상세 조회 -->
     
     <!-- Extra large modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large
-        modal</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">피드 상세 조회</button>
     
     <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
         aria-hidden="true">
@@ -334,33 +333,7 @@
             </div>
             <div id="content">
                 <div id="map"> 
-                    <script>
-                        navigator.geolocation.getCurrentPosition(geoSuccess);
-                        function geoSuccess(position) {
-                        // 위도
-                        const lat = position.coords.latitude;
-                        // 경도
-                        const lng = position.coords.longitude;
-                        
-                        setMap(lat, lng);
-                        }
-    
-                        function setMap(lat, lng) {
-                        // 위도, 경도 설정
-                        var mapOptions = {
-                            center: new naver.maps.LatLng(lat, lng),
-                            zoom: 12
-                        };
-                        
-                        var map = new naver.maps.Map('map', mapOptions);
-                        var marker = new naver.maps.Marker({
-                        position: new naver.maps.LatLng(lat, lng),
-                        map: map,
-                        clickable: true
-                        });
-                        }
-                        
-                    </script>
+                    
                 </div>
             </div>
             <!-- course_left 끝-->
@@ -370,7 +343,7 @@
         </div>
     </div>
     </div>
-    
+    <!-- 피드 상세 조회 끝 -->
 
  <!-- 피드 상세 -->
     <script>
