@@ -108,7 +108,7 @@
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
-                                <a href="<%= c.getCntsUrl() %>">
+                                <a href="<%= c.getCntsUrl() %>" target="_blank">
                                     <img class="card-img-top" src="../../resources/image/서울마라톤.PNG" alt="..." />
                                 </a>
                                 <!-- Product details-->
