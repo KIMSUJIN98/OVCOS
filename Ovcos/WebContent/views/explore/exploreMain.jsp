@@ -23,8 +23,9 @@
 
 <style>
     path{
-        visibility: hidden;
+        stroke: red !important;
     }
+    
 </style>
 
 </head>
@@ -76,6 +77,7 @@
                     	<%for(Explore f: list){ %>
                     <div class="exList">
                         <span class="list_num"><%=f.getFeedIndex() %></span>
+                        <input type="hidden" name="path" value="<%=f.getPath()%>">
                         <div class="innertext">
                             <h5><%=f.getFeedTitle() %></h5>
                             <table>
@@ -132,30 +134,141 @@
                     function startDataLayer(xmlDoc) {
                             map.data.addGpx(xmlDoc);
                             }
-                    navigator.geolocation.getCurrentPosition(geoSuccess);
-                    function geoSuccess(position) {
-                    // 위도
-                    var lat = position.coords.latitude;
-                    // 경도
-                    var lng = position.coords.longitude;
                     
-                    setMap(lat, lng);
+                    var lat = 37.4923615;
+                    var lng = 127.0292881
+
+                    var map = new naver.maps.Map('map',{
+                        center:new naver.maps.LatLng(lat, lng),
+                        zoom: 10
+                    })
+
+                    var marker = null;
+                    var markers = [];
+                    <%for(Explore e:list){%>
+                        marker = new naver.maps.Marker({
+                            map:map,
+                            position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
+                            icon: {
+                                content: 
+                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
+                                // size: new naver.maps.Size(38, 58),
+                                anchor: new naver.maps.Point(19, 40),
+                            }
+                        })
+                        markers.push(marker)
+                    <%}%>
+ 
+                    $(".exList").click(function(e){
+                        $("path").remove();
+                        console.log(markers)
+                        var index = $(this).children("span").text()%10;
+                        if($(this).children("span").text() == 10){
+                            index = 10;
+                        }
+                        console.log(index);
+
+                        let path = $(this).children("input").val();
+                        console.log(path);
+                           
+                        e.preventDefault();
+                        $.ajax({
+                            url: 'resources/gpx_upfiles/'+path,
+                            dataType: 'xml',
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 3,   //선 두께
+                            success: startDataLayer
+                            });
+                            
+                    })
+
+                    for(let i=0; i<markers.length; i++){
+                        naver.maps.Event.addListener(markers[i], "click", function(e) {
+                            console.log("이벤트")
+                            var window = new naver.maps.InfoWindow({
+                                content: [
+                                '<div class="iw_inner">',
+                                '   <h3>혜민누나 집</h3>',
+                                '</div>'
+                            ].join('')
+                            })
+                            window.open(map, markers[i]);
+                            
+                        });
                     }
 
-                    function setMap(lat, lng){
-                        var markers = [];
-                        var marker;
 
-                        map = new naver.maps.Map('map',{
-                            center: new naver.maps.LatLng(lat,lng),
-                            zoom: 8
-                        })
+                    
+                    // navigator.geolocation.getCurrentPosition(geoSuccess);
+                    // function geoSuccess(position) {
+                    // // 위도
+                    // lat = position.coords.latitude;
+                    // // 경도
+                    // lng = position.coords.longitude;
+                    // console.log(lat);
+                    // console.log(lng);
+                    
+                    // setMap(lat, lng);
+                    // }
+                    
+
+                    // function setMap(lat, lng){
+                    //     var markers = [];
+                    //     var marker;
+
+                    //     map = new naver.maps.Map('map',{
+                    //         center: new naver.maps.LatLng(lat,lng),
+                    //         zoom: 8
+                    //     })
                                     
                                                      
  						
-                        <%for(Explore e:list){%>
+                    //     <%for(Explore e:list){%>
+                    //         $.ajax({
+                    //                 url: 'resources/gpx_upfiles/<%=e.getPath()%>',
+                    //                 dataType: 'xml',
+                    //                 strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                    //                 strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                    //                 strokeWeight: 3,   //선 두께
+                    //                 success: startDataLayer
+                    //             });
+                    //             function startDataLayer(xmlDoc) {
+                    //                 map.data.addGpx(xmlDoc);
+                    //                 }   
+                    //     <%}%>
+
+                    //     <%for(Explore e:list){%>
+                    //         marker = new naver.maps.Marker({
+                    //             map:map,
+                    //             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
+                    //             icon: {
+                    //                 content: 
+                    //                 "<span class='list_num'><%=e.getFeedIndex()%></span>",
+                    //                 // size: new naver.maps.Size(38, 58),
+                    //                 anchor: new naver.maps.Point(19, 58),
+                    //             }
+
+                    //         })
+                    //         markers.push(marker);
+                    //     <%}%>
+                        
+                    //     map.panTo(new naver.maps.LatLng(lat,lng));
+                        
+                    //     $(".exList").click(function(e){
+                    //         console.log(markers)
+                    //         var index = $(this).children("span").text()%10;
+                    //         if($(this).children("span").text() == 10){
+                    //             index = 10;
+                    //         }
+                    //         console.log(index);
+                           
+                    //         e.preventDefault();
+
+                           
+                            
                             // $.ajax({
-                            //         url: 'resources/gpx_upfiles/<%=e.getPath()%>',
+                            //         url: 'resources/gpx_upfiles/20230219114357-f_95529.gpx',
                             //         dataType: 'xml',
                             //         strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
                             //         strokeOpacity: 0.8, //선 투명도 0 ~ 1
@@ -164,65 +277,28 @@
                             //     });
                             //     function startDataLayer(xmlDoc) {
                             //         map.data.addGpx(xmlDoc);
-                            //         }   
-                        <%}%>
+                            //         }  
 
-                        <%for(Explore e:list){%>
-                            marker = new naver.maps.Marker({
-                                map:map,
-                                position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
-                                icon: {
-                                    content: 
-                                    "<span class='list_num'><%=e.getFeedIndex()%></span>",
-                                    // size: new naver.maps.Size(38, 58),
-                                    anchor: new naver.maps.Point(19, 58),
-                                }
+                            // map.panTo(markers[index-1].position);
 
-                            })
-                            markers.push(marker);
-                        <%}%>
-                        
-                        map.panTo(new naver.maps.LatLng(lat,lng));
-                        
-                        $(".exList").click(function(e){
-                            console.log(markers)
-                            var index = $(this).children("span").text()%10;
-                            if($(this).children("span").text() == 10){
-                                index = 10;
-                            }
-                            console.log(index);
-                           
-                            e.preventDefault();
+
+
+                            // var paths = document.getElementsByTagName("path");
+                            // console.log($("path").eq(0));
+                            // $("path").eq(index-1).css("visibility","visible");
                             
-                            $.ajax({
-                                    url: 'resources/gpx_upfiles/20230219114357-f_95529.gpx',
-                                    dataType: 'xml',
-                                    strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                    strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                    strokeWeight: 3,   //선 두께
-                                    success: startDataLayer
-                                });
-                                function startDataLayer(xmlDoc) {
-                                    map.data.addGpx(xmlDoc);
-                                    }  
-
-                            map.panTo(markers[index-1].position);
-                            var paths = document.getElementsByTagName("path");
-                            console.log($("path").eq(0));
-                            $("path").eq(index-1).css("visibility","visible");
-                            
-                            for(var i = 0; i<$("path").length; i++){
-                                if(i != (index-1)){
-                                    $("path").eq(i).css("visibility","hidden");
-                                }
-                            }
+                            // for(var i = 0; i<$("path").length; i++){
+                            //     if(i != (index-1)){
+                            //         $("path").eq(i).css("visibility","hidden");
+                            //     }
+                            // }
                             
 
-                        })
+                    //     })
                         
 
 
-                    }
+                    // }
                     
 
                 
