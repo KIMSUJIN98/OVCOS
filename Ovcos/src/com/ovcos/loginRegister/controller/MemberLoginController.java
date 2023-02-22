@@ -22,7 +22,7 @@ public class MemberLoginController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("시작");
+		System.out.println("로그인 컨트롤러 시작");
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		

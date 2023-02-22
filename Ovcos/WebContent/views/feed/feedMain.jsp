@@ -1,8 +1,11 @@
+
 <%@page import="com.ovcos.feed.model.vo.Feed" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% String message=(String)session.getAttribute("enrollFeed"); System.out.print(message); ArrayList<Feed>
-allList = (ArrayList<Feed>)request.getAttribute("allList");
+
+<%
+	String message = (String)session.getAttribute("enrollFeed");
+	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
 
 %>
 <!DOCTYPE html>
