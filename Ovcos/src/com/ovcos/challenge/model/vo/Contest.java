@@ -3,78 +3,78 @@ package com.ovcos.challenge.model.vo;
 import java.sql.Date;
 
 public class Contest {
-	private int cntsNo;
-	private String cntsName;
-	private Date cntsDate;
-	private String cntsUrl;
-	private String delStatuss;
+	private int contestNo;
+	private String contestName;
+	private Date contestDate;
+	private String contestUrl;
+	private String delStatus;
 	
 	public Contest() {}
 
-	public Contest(int cntsNo, String cntsName, Date cntsDate, String cntsUrl, String delStatuss) {
+	public Contest(int contestNo, String contestName, Date contestDate, String contestUrl, String delStatus) {
 		super();
-		this.cntsNo = cntsNo;
-		this.cntsName = cntsName;
-		this.cntsDate = cntsDate;
-		this.cntsUrl = cntsUrl;
-		this.delStatuss = delStatuss;
+		this.contestNo = contestNo;
+		this.contestName = contestName;
+		this.contestDate = contestDate;
+		this.contestUrl = contestUrl;
+		this.delStatus = delStatus;
 	}
-
 	
 	
-	public Contest(String cntsName, Date cntsDate, String cntsUrl) {
+
+	public Contest(String contestName, Date contestDate, String contestUrl) {
 		super();
-		this.cntsName = cntsName;
-		this.cntsDate = cntsDate;
-		this.cntsUrl = cntsUrl;
+		this.contestName = contestName;
+		this.contestDate = contestDate;
+		this.contestUrl = contestUrl;
 	}
 
-	public int getCntsNo() {
-		return cntsNo;
+	public int getContestNo() {
+		return contestNo;
 	}
 
-	public void setCntsNo(int cntsNo) {
-		this.cntsNo = cntsNo;
+	public void setContestNo(int contestNo) {
+		this.contestNo = contestNo;
 	}
 
-	public String getCntsName() {
-		return cntsName;
+	public String getContestName() {
+		return contestName;
 	}
 
-	public void setCntsName(String cntsName) {
-		this.cntsName = cntsName;
+	public void setContestName(String contestName) {
+		this.contestName = contestName;
 	}
 
-	public Date getCntsDate() {
-		return cntsDate;
+	public Date getContestDate() {
+		return contestDate;
 	}
 
-	public void setCntsDate(Date cntsDate) {
-		this.cntsDate = cntsDate;
+	public void setContestDate(Date contestDate) {
+		this.contestDate = contestDate;
 	}
 
-	public String getCntsUrl() {
-		return cntsUrl;
+	public String getContestUrl() {
+		return contestUrl;
 	}
 
-	public void setCntsUrl(String cntsUrl) {
-		this.cntsUrl = cntsUrl;
+	public void setContestUrl(String contestUrl) {
+		this.contestUrl = contestUrl;
 	}
 
-	public String getDelStatuss() {
-		return delStatuss;
+	public String getDelStatus() {
+		return delStatus;
 	}
 
-	public void setDelStatuss(String delStatuss) {
-		this.delStatuss = delStatuss;
+	public void setDelStatus(String delStatus) {
+		this.delStatus = delStatus;
 	}
 
 	@Override
 	public String toString() {
-		return "Contest [cntsNo=" + cntsNo + ", cntsName=" + cntsName + ", cntsDate=" + cntsDate + ", cntsUrl="
-				+ cntsUrl + ", delStatuss=" + delStatuss + "]";
+		return "Contest [contestNo=" + contestNo + ", contestName=" + contestName + ", contestDate=" + contestDate
+				+ ", contestUrl=" + contestUrl + ", delStatus=" + delStatus + "]";
 	}
-	
+
 	
 	
 }
