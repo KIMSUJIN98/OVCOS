@@ -100,7 +100,12 @@
                 <script>
                     $(function(){
                         $.ajax({
-                            url:
+                            url:"course1",
+                            data: {currentPage:<%=currentPage%>},
+                            type:"get",
+                            success:function(result){
+                                console.log("성공");
+                            }
                         })
                     })
 
@@ -124,7 +129,7 @@
                     var paths = [];
 
                     // 마커 세팅
-                    <%for(Explore e:list){%>
+                    <%-- <%for(Explore e:list){%>
                         marker = new naver.maps.Marker({
                             map:map,
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
@@ -137,10 +142,10 @@
                         })
                         markers.push(marker);
                         paths.push("<%=e.getPath()%>");
-                    <%}%>
+                    <%}%> --%>
 
                     // window 세팅
-                   <%for(Explore e: list){%>
+                   <%-- <%for(Explore e: list){%>
                     infowindows.push(new naver.maps.InfoWindow({
                         content:[
                             '<div class="iw_inner">',
@@ -151,7 +156,7 @@
                         ].join('')
                     }))
                     
-                    <%}%>
+                    <%}%> --%>
                     
  
                     $(".exList").click(function(e){

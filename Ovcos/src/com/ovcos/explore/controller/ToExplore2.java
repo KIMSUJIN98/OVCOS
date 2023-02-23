@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.explore.model.service.ExploreService;
 import com.ovcos.explore.model.vo.Explore;
@@ -62,11 +63,13 @@ public class ToExplore2 extends HttpServlet {
 		ArrayList<Explore> list = new ExploreService().selectList(pi);
 		
 //		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
+//		request.setAttribute("list", list);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
 		
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");
-		view.forward(request, response);
+//		RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");
+//		view.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
