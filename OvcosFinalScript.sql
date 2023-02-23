@@ -49,6 +49,7 @@ DROP SEQUENCE SEQ_CMN_HIST_NO;
 DROP SEQUENCE SEQ_GEN_HIST_NO;
 DROP SEQUENCE SEQ_GPX_FILES;
 
+
 --------------------------------------------------
 --------------     MEMBER 관련	------------------
 --------------------------------------------------
@@ -59,7 +60,6 @@ CREATE TABLE MEMBER (
 	MEM_NICK VARCHAR2(24) NOT NULL,
 	MEM_INTRO VARCHAR2(300),
 	MEM_BIRTH DATE,
-	-- MEM_ADMIN_NY CHAR(10) DEFAULT '일반' NOT NULL CONSTRAINT MEM_ADMIN_NY_CK CHECK(MEM_ADMIN_NY IN('일반','관리자')),
 	MEM_STATUS NUMBER DEFAULT 1 NOT NULL CONSTRAINT MEM_STATUS_CK CHECK(MEM_STATUS IN(1,2,3,4,5)), -- 회원1/정지2/휴면3/탈퇴4/관리자5
 	MEM_LOC_INFO VARCHAR(200),
 	MEM_PUBLIC_NY CHAR(1) DEFAULT 'Y' CONSTRAINT MEM_PUBLIC_NY_CK CHECK(MEM_PUBLIC_NY IN('Y','N')),
@@ -78,7 +78,6 @@ COMMENT ON COLUMN MEMBER.MEM_NAME IS '이름';
 COMMENT ON COLUMN MEMBER.MEM_NICK IS '닉네임';
 COMMENT ON COLUMN MEMBER.MEM_INTRO IS '자기소개 글';
 COMMENT ON COLUMN MEMBER.MEM_BIRTH IS '생년월일';
--- COMMENT ON COLUMN MEMBER.MEM_ADMIN_NY IS '관리자/회원';
 COMMENT ON COLUMN MEMBER.MEM_STATUS IS '회원상태';
 COMMENT ON COLUMN MEMBER.MEM_LOC_INFO IS '위치정보';
 COMMENT ON COLUMN MEMBER.MEM_PUBLIC_NY IS '마이페이지 공개여부';
@@ -96,6 +95,7 @@ INSERT INTO MEMBER VALUES('cvxzv34','pouih1!','김준식','flag123','안녕하세요','1
 INSERT INTO MEMBER VALUES('vdfety1111','jryff3#','존박','jhon','하이요','19970203',2,'인천 계양구','N',60,'PYJYJYU',3,3, 'AFCETEDF','vdfety1111@gamil.com','N');
 INSERT INTO MEMBER VALUES('user01','pass01','강지희','kangji','같이 노력해봐요','20001013',1,'인천 연수구','Y',70,'afewrq',3,3, 'asdfewr','user01@gamil.com','N');
 INSERT INTO MEMBER VALUES('admin','admin','관리자','관리자','관리를 빡세게 하자',NULL,5,NULL,DEFAULT,DEFAULT,NULL,0,1, NULL,'ADMIN@gamil.com','Y');
+
 
 ----------------------------------------------
 ----------------- CONTEST 관련 ----------------
@@ -134,45 +134,46 @@ COMMENT ON COLUMN CONTEST.DEL_STATUS IS '삭제여부';
 --------------------------------------------------
 CREATE TABLE UPLOAD(
     UPL_ID VARCHAR2(20) NOT NULL,
-    UPL_STT NUMBER NOT NULL CHECK(UPL_STT IN(1,2,3,4)), -- 대회1/챌린지2/프로필3/배경이미지4
-    UPL_NO NUMBER NOT NULL,
+    UPL_MENU NUMBER NOT NULL CHECK(UPL_MENU IN(1,2,3,4)), -- 대회1/챌린지2/프로필3/배경이미지4
+    UPL_NO NUMBER NULL,
     ORIGIN_NAME VARCHAR2(60) NOT NULL,
     CHANGE_NAME VARCHAR2(60) NOT NULL,
-    UPL_VER CHAR(1) DEFAULT 'F' CHECK(UPL_VER IN('F','T')),
-    UPL_DEL_NY CHAR(1) DEFAULT 'N' CHECK(UPL_DEL_NY IN('Y','N'))
+    VER_STATUS CHAR(1) DEFAULT 'N' CHECK(VER_STATUS IN('Y','N')),
+    DEL_STATUS CHAR(1) DEFAULT 'N' CHECK(DEL_STATUS IN('Y','N'))
 );
 
-INSERT INTO UPLOAD VALUES('admin',1,1,'contest1.img','20221225081523-c_15684.png','T','N');
-INSERT INTO UPLOAD VALUES('Qdfca12',3,3,'odfcprofile.img','20230125155854-m_54320.png','F','N');
-INSERT INTO UPLOAD VALUES('wSDF23',3,2,'dmz.gpx','20230218234856-m_03598.jpg','T','N');
-INSERT INTO UPLOAD VALUES('cvxzv34',2,4,'chal4.img','20230227142832-c_23548.png','F','N');
-INSERT INTO UPLOAD VALUES('vdfety1111',4,2,'back2.img','20230317172554-mk_55489.jpg','F','N');
+INSERT INTO UPLOAD VALUES('admin',1,1,'contest1.img','20221225081523-c_15684.png','Y','N');
+INSERT INTO UPLOAD VALUES('Qdfca12',3,3,'odfcprofile.img','20230125155854-m_54320.png','N','N');
+INSERT INTO UPLOAD VALUES('wSDF23',3,2,'dmz.gpx','20230218234856-m_03598.jpg','Y','N');
+INSERT INTO UPLOAD VALUES('cvxzv34',2,4,'chal4.img','20230227142832-c_23548.png','N','N');
+INSERT INTO UPLOAD VALUES('vdfety1111',4,2,'back2.img','20230317172554-mk_55489.jpg','N','N');
 
 -- UPLOAD COMMENTS
 COMMENT ON COLUMN UPLOAD.UPL_ID IS '업로드한 유저 아이디';
-COMMENT ON COLUMN UPLOAD.UPL_STT IS '카테고리 분류';
+COMMENT ON COLUMN UPLOAD.UPL_MENU IS '카테고리 분류';
 COMMENT ON COLUMN UPLOAD.UPL_NO IS '게시글 번호';
 COMMENT ON COLUMN UPLOAD.ORIGIN_NAME IS '원본 파일명';
 COMMENT ON COLUMN UPLOAD.CHANGE_NAME IS '수정 파일명';
-COMMENT ON COLUMN UPLOAD.UPL_VER IS '검증여부';
+COMMENT ON COLUMN UPLOAD.VER_STATUS IS '검증여부';
+COMMENT ON COLUMN UPLOAD.DEL_STATUS IS '삭제여부';
+
 
 --------------------------------------------------
 --------------     INQUIRY 관련	------------------
 --------------------------------------------------
 CREATE TABLE INQUIRY(
     INQ_NO NUMBER NOT NULL CONSTRAINT INQ_NO_PK PRIMARY KEY,
-    INQ_CTG VARCHAR2(30) NOT NULL CONSTRAINT INQ_CTG_CK CHECK(INQ_CTG IN ('피드', '챌린지', '업로드', '기타')),
+    INQ_MENU NUMBER NOT NULL CONSTRAINT INQ_MENU_CK CHECK(INQ_MENU IN (1,2,3,4,5)), -- 피드1/탐색2/챌린지3/마이페이지4/기타5
     INQ_TITLE VARCHAR2(100) NOT NULL,
     INQ_DATE DATE DEFAULT SYSDATE NOT NULL,
     INQ_CNT VARCHAR2(2000) NOT NULL,
     ANS_CNT VARCHAR(3000),
     INQ_DEL_NY CHAR(1) DEFAULT 'N' CHECK(INQ_DEL_NY IN('N','Y')),
     MEM_ID VARCHAR2(20) NOT NULL REFERENCES MEMBER
-    
 );
 
 COMMENT ON COLUMN INQUIRY.INQ_NO IS '문의번호';
-COMMENT ON COLUMN INQUIRY.INQ_CTG IS '카테고리';
+COMMENT ON COLUMN INQUIRY.INQ_MENU IS '카테고리';
 COMMENT ON COLUMN INQUIRY.INQ_TITLE IS '문의제목';
 COMMENT ON COLUMN INQUIRY.INQ_DATE IS '문의작성일';
 COMMENT ON COLUMN INQUIRY.INQ_CNT IS '문의내용';
@@ -185,11 +186,12 @@ INCREMENT BY 1
 NOCYCLE
 NOCACHE;
 
-INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'피드','이 글 너무 불편합니다',SYSDATE,'음란물 관련내용이 있는거 같습니다. 삭제 부탁드립니다', '회원님 불편을 드려 죄송합니다.해당 글 삭제 처리 되었습니다.', 'N','Qdfca12' );
-INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'챌린지','이 대회관련 문의',SYSDATE,'이 대회에 관해 알고 싶은데 정보가 부족한거 같아요.', '회원님 안녕하십니까 말씀하신 대회는 해당 대회 클릭 시 홈페이지로 이동합니다 즐거운 운동되십시오.','N','wSDF23');
-INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'업로드','업로드 관련 문의드립니다.',SYSDATE,'파일을 올리려는데 추가가 되지 않습니다.수정부탁드립니다.', '회원님 불편을 드려 죄송합니다. 업로드 오류발생으로 인하여 수정중입니다.','N','cvxzv34');
-INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'기타','광고 관련문의',SYSDATE,'광고가 너무 많이 나오는거 같아요', '회원님 불편을 드려 죄송합니다. 제휴회사와 논의하도록 하겠습니다','N','vdfety1111');
-INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,'피드','광고 문의',SYSDATE,'이 광고를 올리고 싶습니다 관리자와 통화 할 수 있을까요?', '광고를 하지 않습니다.죄송합니다.','N','vdfety1111');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,1,'이 글 너무 불편합니다',SYSDATE,'음란물 관련내용이 있는거 같습니다. 삭제 부탁드립니다', '회원님 불편을 드려 죄송합니다.해당 글 삭제 처리 되었습니다.', 'N','Qdfca12' );
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,3,'이 대회관련 문의',SYSDATE,'이 대회에 관해 알고 싶은데 정보가 부족한거 같아요.', '회원님 안녕하십니까 말씀하신 대회는 해당 대회 클릭 시 홈페이지로 이동합니다 즐거운 운동되십시오.','N','wSDF23');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,5,'업로드 관련 문의드립니다.',SYSDATE,'파일을 올리려는데 추가가 되지 않습니다.수정부탁드립니다.', '회원님 불편을 드려 죄송합니다. 업로드 오류발생으로 인하여 수정중입니다.','N','cvxzv34');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,5,'광고 관련문의',SYSDATE,'광고가 너무 많이 나오는거 같아요', '회원님 불편을 드려 죄송합니다. 제휴회사와 논의하도록 하겠습니다','N','vdfety1111');
+INSERT INTO INQUIRY VALUES(SEQ_INQ_NO.NEXTVAL,1,'광고 문의',SYSDATE,'이 광고를 올리고 싶습니다 관리자와 통화 할 수 있을까요?', '광고를 하지 않습니다.죄송합니다.','N','vdfety1111');
+
 
 --------------------------------------------------
 --------------     CUT 관련	----------------------
@@ -208,6 +210,7 @@ INSERT INTO CUT VALUES('Qdfca12','vdfety1111');
 INSERT INTO CUT VALUES('vdfety1111','Qdfca12');
 INSERT INTO CUT VALUES('vdfety1111','cvxzv34');
 
+
 --------------------------------------------------
 --------------     FOLLOW 관련	------------------
 --------------------------------------------------
@@ -225,6 +228,7 @@ INSERT INTO FOLLOW VALUES('wSDF23','cvxzv34',DEFAULT);
 INSERT INTO FOLLOW VALUES('user01','wSDF23',DEFAULT);
 INSERT INTO FOLLOW VALUES('user01','Qdfca12',DEFAULT);
 INSERT INTO FOLLOW VALUES('user01','vdfety1111',DEFAULT);
+
 
 --------------------------------------------------
 --------------     FEED 관련	----------------------
@@ -267,12 +271,12 @@ INCREMENT BY 1
 NOCYCLE
 NOCACHE;
 
-
 --INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '오늘 뛴 호수공원 코스 추천합니다','뷰도 좋고 사람도 많지 않아서 좋네요',5,'전체','Y','N',null,12.5,3.123,12.321,'N','Qdfca12');
 --INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '오늘의 기록','안양천,30분',4,'친구','Y','N',null,12.5,3.123,12.321,'N','wSDF23');
 --INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '2023/02/05 달리기 ','1시간 달렸는데 개빡셌다. 페이스조절해야지 ',3.5 ,'친구','N','N',null,12.5,3.123,12.321,'N','cvxzv34');
 --INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, DEFAULT, '2021 안양공원 달리기 코스 ','날씨가 춥긴 춥다',3,'비공개','N','N',null,12.5,3.123,12.321,'N','vdfety1111');
 --INSERT INTO FEED VALUES(SEQ_FEED_INDEX.NEXTVAL, SYSDATE, '한강달리기는 옳다','갓생사는기분',5,DEFAULT,'Y','N',null,12.5,3.123,12.321,DEFAULT,'wSDF23');
+
 
 --------------------------------------------------
 --------------     FEED_COMMENTS 관련--------------
@@ -309,6 +313,7 @@ NOCACHE;
 --INSERT INTO FEED_COMMENTS VALUES(SEQ_FEED_CMN_NO.NEXTVAL,'followme7777',SYSDATE,'겨우 이걸로 힘들다니..ㅋㅋ', 'Y', SYSDATE, DEFAULT, 2);
 --INSERT INTO FEED_COMMENTS VALUES(SEQ_FEED_CMN_NO.NEXTVAL,'rogen0',SYSDATE,'저도 맨날 페이스 조절 실패하는데...ㅋㅋㅋ', 'N', SYSDATE, DEFAULT, 3);
 
+
 --------------------------------------------------
 ------------     GPX_FILES 관련	------------------
 --------------------------------------------------
@@ -337,20 +342,21 @@ NOCYCLE
 NOCACHE;
 
 --INSERT INTO GPX_FILES VALUES(SEQ_GPX_FILES.NEXTVAL, 1, 'ADSF','ADSF','ADSF',SYSDATE,'Y');
-COMMIT;
+--COMMIT;
+
 
 --------------------------------------------------
 ------------     GENERAL_HISTORY 관련	----------
 --------------------------------------------------
 CREATE TABLE GENERAL_HISTORY (  --게시글 히스토리
-    GEN_HIST_CTG CHAR(10) CONSTRAINT GEN_HIST_CTG CHECK(GEN_HIST_CTG IN ('피드', '대회','일반')) , --알람객체분류
+    GEN_HIST_MENU NUMBER CONSTRAINT GEN_HIST_MENU_CK CHECK(GEN_HIST_MENU IN (1,2,3)) , -- 피드1/대회2/일반3
     GEN_HIST_NO NUMBER NOT NULL , --알람 객체 고유번호(시퀀스생성)
     GEN_HIST_RPR_NY CHAR(1) DEFAULT'N' NOT NULL CONSTRAINT GEN_HIST_RPR_NY_CK CHECK(GEN_HIST_RPR_NY IN('Y','N')),--신고여부
     GEN_HIST_DATE DATE DEFAULT SYSDATE NOT NULL -- 신고들어온시간
 );
 
-COMMENT ON COLUMN GENERAL_HISTORY.GEN_HIST_CTG IS '알람객체번호';
-COMMENT ON COLUMN GENERAL_HISTORY.GEN_HIST_NO IS '알람객체고유번호';
+COMMENT ON COLUMN GENERAL_HISTORY.GEN_HIST_MENU IS '카테고리';
+COMMENT ON COLUMN GENERAL_HISTORY.GEN_HIST_NO IS '알람번호';
 COMMENT ON COLUMN GENERAL_HISTORY.GEN_HIST_RPR_NY IS '신고여부';
 COMMENT ON COLUMN GENERAL_HISTORY.GEN_HIST_DATE IS '알람시간';
 
@@ -362,18 +368,19 @@ NOCACHE;
 
 
 --게시물 히스토리 INSERT문 
-INSERT INTO GENERAL_HISTORY VALUES ('피드', SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
-INSERT INTO GENERAL_HISTORY VALUES ('대회', SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
-INSERT INTO GENERAL_HISTORY VALUES ('일반', SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
-INSERT INTO GENERAL_HISTORY VALUES ('피드', SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
-INSERT INTO GENERAL_HISTORY VALUES ('피드', SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
+INSERT INTO GENERAL_HISTORY VALUES (1, SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
+INSERT INTO GENERAL_HISTORY VALUES (2, SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
+INSERT INTO GENERAL_HISTORY VALUES (3, SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
+INSERT INTO GENERAL_HISTORY VALUES (1, SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
+INSERT INTO GENERAL_HISTORY VALUES (1, SEQ_GEN_HIST_NO.NEXTVAL,'Y',SYSDATE);
+
 
 --------------------------------------------------
 --------------    CMN_HISTORY 관련	--------------
 --------------------------------------------------
 --댓글히스토리 테이블
 CREATE TABLE CMN_HISTORY (
-    CMN_HIST_CTG VARCHAR2(9) NOT NULL CONSTRAINT CMN_HIST_CTG_CK CHECK(CMN_HIST_CTG IN ('피드', '일반')),
+    CMN_HIST_MENU NUMBER NOT NULL CONSTRAINT CMN_HIST_MENU_CK CHECK(CMN_HIST_MENU IN (1,2,3)), -- 피드1/대회2/일반3
     CMN_HIST_NO NUMBER NOT NULL,
     CMN_HIST_RPR_NY CHAR(1) DEFAULT 'N' NOT NULL CONSTRAINT CMN_HIST_RPR_NY_CK CHECK(CMN_HIST_RPR_NY IN ('Y', 'N')),
     CMN_HIST_NEW_NY CHAR(1) DEFAULT 'Y' NOT NULL CONSTRAINT CMN_HIST_NEW_NY_CK CHECK(CMN_HIST_NEW_NY IN ('Y','N')),
@@ -381,7 +388,7 @@ CREATE TABLE CMN_HISTORY (
     CMN_HIST_DATE DATE DEFAULT SYSDATE NOT NULL
 );
 
-COMMENT ON COLUMN CMN_HISTORY.CMN_HIST_CTG IS '알림객체분류';
+COMMENT ON COLUMN CMN_HISTORY.CMN_HIST_MENU IS '카테고리';
 COMMENT ON COLUMN CMN_HISTORY.CMN_HIST_NO IS '알림객체고유번호';
 COMMENT ON COLUMN CMN_HISTORY.CMN_HIST_RPR_NY IS '신고여부';
 COMMENT ON COLUMN CMN_HISTORY.CMN_HIST_NEW_NY IS '최신여부';
@@ -395,11 +402,11 @@ NOCYCLE
 NOCACHE;
 
 --댓글히스토리 인서트
-INSERT INTO CMN_HISTORY VALUES('피드', SEQ_CMN_HIST_NO.NEXTVAL, 'N', 'N', 'N', SYSDATE);
-INSERT INTO CMN_HISTORY VALUES('피드', SEQ_CMN_HIST_NO.NEXTVAL, 'Y', 'Y', 'N', '22/01/23');
-INSERT INTO CMN_HISTORY VALUES('일반', SEQ_CMN_HIST_NO.NEXTVAL, 'N', 'N', 'N', SYSDATE);
-INSERT INTO CMN_HISTORY VALUES('피드', SEQ_CMN_HIST_NO.NEXTVAL, 'N', 'Y', 'N', '22/02/04');
-INSERT INTO CMN_HISTORY VALUES('일반', SEQ_CMN_HIST_NO.NEXTVAL, 'Y', 'N', 'Y', '23/01/10');
+INSERT INTO CMN_HISTORY VALUES(1, SEQ_CMN_HIST_NO.NEXTVAL, 'N', 'N', 'N', SYSDATE);
+INSERT INTO CMN_HISTORY VALUES(1, SEQ_CMN_HIST_NO.NEXTVAL, 'Y', 'Y', 'N', '22/01/23');
+INSERT INTO CMN_HISTORY VALUES(3, SEQ_CMN_HIST_NO.NEXTVAL, 'N', 'N', 'N', SYSDATE);
+INSERT INTO CMN_HISTORY VALUES(1, SEQ_CMN_HIST_NO.NEXTVAL, 'N', 'Y', 'N', '22/02/04');
+INSERT INTO CMN_HISTORY VALUES(3, SEQ_CMN_HIST_NO.NEXTVAL, 'Y', 'N', 'Y', '23/01/10');
 
 
 --------------------------------------------------
@@ -499,6 +506,7 @@ COMMENT ON COLUMN CONTEST_CHALLENGE.RPR_ID IS '신고자아이디';
 COMMENT ON COLUMN CONTEST_CHALLENGE.CNTS_NO IS '연결된대회번호';
 COMMENT ON COLUMN CONTEST_CHALLENGE.CNTS_CHLG_ID IS '등록자아이디';
 
+
 ----------------------------------------------
 ------------------ LOCAL 관련 -----------------
 ----------------------------------------------
@@ -529,6 +537,7 @@ INSERT INTO LOCAL VALUES(17, '제주');
 -- LOCAL COMMENT
 COMMENT ON COLUMN LOCAL.LOCAL_NO IS '지역번호';
 COMMENT ON COLUMN LOCAL.LOCAL_NAME IS '지역명';
+
 
 ----------------------------------------------
 ------------ NORMAL_CHALLENGE 관련 ------------
@@ -573,6 +582,7 @@ COMMENT ON COLUMN NORMAL_CHALLENGE.RPR_ID IS '신고자아이디';
 COMMENT ON COLUMN NORMAL_CHALLENGE.NOR_CHLG_ID IS '등록자아이디';
 COMMENT ON COLUMN NORMAL_CHALLENGE.NOR_CHLG_LOCAL IS '연결된지역번호';
 
+
 ----------------------------------------------
 --------------- CHLG_COMMENTS 관련 ------------
 ----------------------------------------------
@@ -611,6 +621,7 @@ COMMENT ON COLUMN CHLG_COMMENTS.CHLG_CMN_DEL_NY IS '댓글삭제여부';
 COMMENT ON COLUMN CHLG_COMMENTS.CHLG_CMN_ID IS '작성자아이디';
 COMMENT ON COLUMN CHLG_COMMENTS.CHLG_CMN_RPR_ID IS '신고자아이디';
 COMMENT ON COLUMN CHLG_COMMENTS.MATCH_CHLG_NO IS '연결된챌린지번호';
+
 
 ----------------------------------------------
 ------------- NCHLG_COMMENTS 관련 -------------
@@ -651,6 +662,7 @@ COMMENT ON COLUMN NCHLG_COMMENTS.NCHLG_CMN_ID IS '작성자아이디';
 COMMENT ON COLUMN NCHLG_COMMENTS.NCHLG_CMN_RPR_ID IS '신고자아이디';
 COMMENT ON COLUMN NCHLG_COMMENTS.MATCH_NCHLG_NO IS '연결된챌린지번호';
 
+
 ----------------------------------------------
 ---------------- ENTRY_LIST 관련 --------------
 ----------------------------------------------
@@ -670,6 +682,7 @@ INSERT INTO ENTRY_LIST VALUES(5,'Qdfca12');
 -- ENTRY_LIST COMMENT
 COMMENT ON COLUMN ENTRY_LIST.CHLG_NO_INLIST IS '챌린지번호';
 COMMENT ON COLUMN ENTRY_LIST.CHLG_ENTRY_ID IS '아이디';
+
 
 ----------------------------------------------
 --------------- NENTRY_LIST 관련 --------------
@@ -691,6 +704,7 @@ INSERT INTO NENTRY_LIST VALUES(5,'Qdfca12');
 COMMENT ON COLUMN NENTRY_LIST.NCHLG_NO_INLIST IS '일반챌린지번호';
 COMMENT ON COLUMN NENTRY_LIST.NCHLG_ENTRY_ID IS '연결된아이디';
 
+
 ----------------------------------------------
 --------------- WITHDRAWAL 관련 ---------------
 ----------------------------------------------
@@ -709,6 +723,7 @@ COMMENT ON COLUMN WITHDRAWAL.WTH_NO IS '탈퇴사유';
 COMMENT ON COLUMN WITHDRAWAL.WTH_RSN IS '기타입력란';
 COMMENT ON COLUMN WITHDRAWAL.WTH_DATE IS '탈퇴일자';
 COMMENT ON COLUMN WITHDRAWAL.WTH_ID IS '회원아이디';
+
 
 ----------------------------------------------
 ----------------- NOTICE 관련 -----------------

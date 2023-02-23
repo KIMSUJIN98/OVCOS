@@ -107,18 +107,15 @@
                     <% for(Contest c : list) { %>
                         <div class="col mb-5">
                             <div class="card h-100">
-                                <!-- Product image-->
-                                <a href="<%= c.getCntsUrl() %>" target="_blank">
+                                <a href="<%= c.getContestUrl() %>" target="_blank">
                                     <img class="card-img-top" src="../../resources/image/서울마라톤.PNG" alt="..." />
                                 </a>
-                                <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <h5 class="fw-bolder"><%= c.getCntsName() %></h5>
-                                        <%= c.getCntsDate() %>
+                                        <h5 class="fw-bolder"><%= c.getContestName() %></h5>
+                                        <%= c.getContestDate() %>
                                     </div>
                                 </div>
-                                <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="contestList.jsp">참가하기</a></div>
                                 </div>

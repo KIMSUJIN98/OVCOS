@@ -3,53 +3,53 @@ package com.ovcos.challenge.model.vo;
 import java.sql.Date;
 
 public class NormalChallenge {
-	private int norChlgNo;
-	private String norChlgTitle;
+	private int normalChallNo;
+	private String normalChallTitle;
 	private Date enrollDate;
-	private Date norChlgDate;
+	private Date normalChallDate;
 	private String time;
-	private String norChlgLocal;
-	private int norChlgMax;
+	private String normalChallLocal;
+	private int normalChallMax;
 	private String rprStatus;
 	private Date rprDate;
 	private String delStatus;
 	private String rprId;
-	private String norChlgId;
+	private String normalChallId;
 	
 	public NormalChallenge() {}
 
-	public NormalChallenge(int norChlgNo, String norChlgTitle, Date enrollDate, Date norChlgDate, String time,
-			String norChlgLocal, int norChlgMax, String rprStatus, Date rprDate, String delStatus, String rprId,
-			String norChlgId) {
+	public NormalChallenge(int normalChallNo, String normalChallTitle, Date enrollDate, Date normalChallDate,
+			String time, String normalChallLocal, int normalChallMax, String rprStatus, Date rprDate, String delStatus,
+			String rprId, String normalChallId) {
 		super();
-		this.norChlgNo = norChlgNo;
-		this.norChlgTitle = norChlgTitle;
+		this.normalChallNo = normalChallNo;
+		this.normalChallTitle = normalChallTitle;
 		this.enrollDate = enrollDate;
-		this.norChlgDate = norChlgDate;
+		this.normalChallDate = normalChallDate;
 		this.time = time;
-		this.norChlgLocal = norChlgLocal;
-		this.norChlgMax = norChlgMax;
+		this.normalChallLocal = normalChallLocal;
+		this.normalChallMax = normalChallMax;
 		this.rprStatus = rprStatus;
 		this.rprDate = rprDate;
 		this.delStatus = delStatus;
 		this.rprId = rprId;
-		this.norChlgId = norChlgId;
+		this.normalChallId = normalChallId;
 	}
 
-	public int getNorChlgNo() {
-		return norChlgNo;
+	public int getNormalChallNo() {
+		return normalChallNo;
 	}
 
-	public void setNorChlgNo(int norChlgNo) {
-		this.norChlgNo = norChlgNo;
+	public void setNormalChallNo(int normalChallNo) {
+		this.normalChallNo = normalChallNo;
 	}
 
-	public String getNorChlgTitle() {
-		return norChlgTitle;
+	public String getNormalChallTitle() {
+		return normalChallTitle;
 	}
 
-	public void setNorChlgTitle(String norChlgTitle) {
-		this.norChlgTitle = norChlgTitle;
+	public void setNormalChallTitle(String normalChallTitle) {
+		this.normalChallTitle = normalChallTitle;
 	}
 
 	public Date getEnrollDate() {
@@ -60,12 +60,12 @@ public class NormalChallenge {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getNorChlgDate() {
-		return norChlgDate;
+	public Date getNormalChallDate() {
+		return normalChallDate;
 	}
 
-	public void setNorChlgDate(Date norChlgDate) {
-		this.norChlgDate = norChlgDate;
+	public void setNormalChallDate(Date normalChallDate) {
+		this.normalChallDate = normalChallDate;
 	}
 
 	public String getTime() {
@@ -76,20 +76,20 @@ public class NormalChallenge {
 		this.time = time;
 	}
 
-	public String getNorChlgLocal() {
-		return norChlgLocal;
+	public String getNormalChallLocal() {
+		return normalChallLocal;
 	}
 
-	public void setNorChlgLocal(String norChlgLocal) {
-		this.norChlgLocal = norChlgLocal;
+	public void setNormalChallLocal(String normalChallLocal) {
+		this.normalChallLocal = normalChallLocal;
 	}
 
-	public int getNorChlgMax() {
-		return norChlgMax;
+	public int getNormalChallMax() {
+		return normalChallMax;
 	}
 
-	public void setNorChlgMax(int norChlgMax) {
-		this.norChlgMax = norChlgMax;
+	public void setNormalChallMax(int normalChallMax) {
+		this.normalChallMax = normalChallMax;
 	}
 
 	public String getRprStatus() {
@@ -124,21 +124,24 @@ public class NormalChallenge {
 		this.rprId = rprId;
 	}
 
-	public String getNorChlgId() {
-		return norChlgId;
+	public String getNormalChallId() {
+		return normalChallId;
 	}
 
-	public void setNorChlgId(String norChlgId) {
-		this.norChlgId = norChlgId;
+	public void setNormalChallId(String normalChallId) {
+		this.normalChallId = normalChallId;
 	}
 
 	@Override
 	public String toString() {
-		return "NormalChallenge [norChlgNo=" + norChlgNo + ", norChlgTitle=" + norChlgTitle + ", enrollDate="
-				+ enrollDate + ", norChlgDate=" + norChlgDate + ", time=" + time + ", norChlgLocal=" + norChlgLocal
-				+ ", norChlgMax=" + norChlgMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate + ", delStatus="
-				+ delStatus + ", rprId=" + rprId + ", norChlgId=" + norChlgId + "]";
+		return "NormalChallenge [normalChallNo=" + normalChallNo + ", normalChallTitle=" + normalChallTitle
+				+ ", enrollDate=" + enrollDate + ", normalChallDate=" + normalChallDate + ", time=" + time
+				+ ", normalChallLocal=" + normalChallLocal + ", normalChallMax=" + normalChallMax + ", rprStatus="
+				+ rprStatus + ", rprDate=" + rprDate + ", delStatus=" + delStatus + ", rprId=" + rprId
+				+ ", normalChallId=" + normalChallId + "]";
 	}
+
+	
 	
 	
 }

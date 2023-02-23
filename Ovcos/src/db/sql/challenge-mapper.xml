@@ -8,6 +8,24 @@
 		     , CNTS_URL
 		  FROM CONTEST
 	</entry>
+	
+	<entry key="contestProgressCount">
+		SELECT 
+		       COUNT(*) COUNT
+		  FROM ENTRY_LIST
+		  JOIN CHALLENGE ON (CHLG_NO = CHLG_NO_INLIST)
+		 WHERE CHLG_ENTRY_ID = ?
+		   AND CHLG_DATE > SYSDATE
+	</entry>
+	
+	<entry key="contestCompleteCount">
+		SELECT 
+		       COUNT(*) COUNT
+		  FROM ENTRY_LIST
+		  JOIN CHALLENGE ON (CHLG_NO = CHLG_NO_INLIST)
+		 WHERE CHLG_ENTRY_ID = ?
+		   AND CHLG_DATE &lt; SYSDATE
+	</entry>
 
 
 </properties>
