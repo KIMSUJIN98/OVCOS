@@ -5,7 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Explore> list = (ArrayList<Explore>)request.getAttribute("list");
 	Pageinfo pi = (Pageinfo)request.getAttribute("pi");
 
 	int currentPage = pi.getCurrentPage();
@@ -67,38 +66,7 @@
             </div>
             <div id="left_content">
                 <div id="content_list">
-                    <!-- case 1  조회 결과가 없다. -->
-                	<%if(list == null){ %>
-				 		<p>조회된 결과가 없습니다.</p>
-				 	<%}else{ %>
-                    <!-- case 2 반복문으로  -->
-                    	<%for(Explore f: list){ %>
-                    <div class="exList">
-                        <span class="list_num"><%=f.getFeedIndex() %></span>
-                        <div class="innertext">
-                            <h5><%=f.getFeedTitle() %></h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td><%=f.getDistance()%> km</td>
-                                </tr>
-                                <tr>
-                                    <td>등록유저</td>
-                                    <td><%=f.getMemId() %></td>
-                                </tr>
-                                <tr>
-                                    <td>별점</td>
-                                    <td><%=f.getFeedEval() %>/5</td>
-                                </tr>
-                            </table>
-                            <div id="bottom">
-                                <span><%=f.getFeedDate() %></span>
-                                <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
-                            </div>
-                        </div>
-                    </div>
-                    	<%} %>
-                    <%} %>
+                   <!-- 조회된 데이터 들어갈 자리 -->
                     
                 </div>
                 <div id="list_page">
@@ -130,6 +98,11 @@
 
 
                 <script>
+                    $(function(){
+                        $.ajax({
+                            url:
+                        })
+                    })
 
                     function startDataLayer(xmlDoc) {
                             map.data.addGpx(xmlDoc);
