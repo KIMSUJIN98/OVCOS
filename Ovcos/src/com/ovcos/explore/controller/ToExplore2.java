@@ -15,11 +15,11 @@ import com.ovcos.explore.model.service.ExploreService;
 import com.ovcos.explore.model.vo.Explore;
 import com.ovcos.feed.model.vo.Feed;
 
-@WebServlet("/course")
-public class ToExplore extends HttpServlet {
+@WebServlet("/course1")
+public class ToExplore2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ToExplore() {
+    public ToExplore2() {
         super();
     }
 
@@ -61,7 +61,7 @@ public class ToExplore extends HttpServlet {
 		
 		ArrayList<Explore> list = new ExploreService().selectList(pi);
 		
-		request.setAttribute("pi", pi);
+//		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
 		
