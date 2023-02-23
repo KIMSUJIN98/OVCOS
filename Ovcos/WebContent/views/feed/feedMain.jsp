@@ -5,8 +5,8 @@
 
 <%
 	String message = (String)session.getAttribute("enrollFeed");
-	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
 
+	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
 %>
 <!DOCTYPE html>
 <html>
