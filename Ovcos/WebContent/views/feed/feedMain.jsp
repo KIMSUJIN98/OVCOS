@@ -29,25 +29,25 @@
 <%@ include file="../common/nav.jsp" %>
 	<%if(message != null && message.equals("success")){ %>
 		<div class="alert alert-primary alert-dismissable" id="succ">
-		    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-		    <strong>피드등록에 성공헀습니다!</strong>	
-  		</div>
-	<%}%>
-	<%if(message != null && message.equals("fail")){ %>
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-		  <strong>피드등록에 실패했습니다!!</strong>
-		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-	<%}%>
-	<%session.removeAttribute("enrollFeed"); %>
-	
-	<script>
-		
-	</script>
-	
-	
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>피드등록에 성공헀습니다!</strong>	
+        </div>
+    <%}%>
+    <%if(message != null && message.equals("fail")){ %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>피드등록에 실패했습니다!!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <%}%>
+    <%session.removeAttribute("enrollFeed"); %>
 
-<div id="feedWrap">
+    <script>
+        
+    </script>
+
+
+
+    <div id="feedWrap">
         
             <div id="ct1">
                 <div id="record">
@@ -122,70 +122,122 @@
                     <div class="feedContent">
                     
                     <%if(allList == null){ %>
-                   		<!-- <iframe src="<%=contextPath%>/views/feed/feedContent.jsp"></iframe> -->
-                   	<%}else{ %>
+                        <p>조회결과없음<p>
+                    <%}else{ %>
                     
                     <% for(Feed f : allList) {%>
                         <div class="feeddiv">
-					        <div class="feed_table">
-					            <table border="0px" id="f_table">
-					                <tr id="tr1">
-					                    <td id="feed_profile" colspan="2">
-					                        <div>
-					                            <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
-					                            <div id="p_name"><%=f.getMemId() %></div>
-					                            <div id="p_loca"><%=f.getFeedDate() %></div>
-					                        </div>
-					                    </td>
-					                    <td id="plus">
-					                    <div>
-					                        <img src="${pageContext.request.contextPath}/resources/image/more.png" alt="더보기 버튼">
-					                    </div>
-					                    </td>
-					                </tr>
-					                <tr>
-					                    <td colspan="3" id="td2_1">
-					                        <div id="f_title">
-					                        <a href=""><%=f.getFeedTitle() %></a>
-					                        </div>
-					                    </td>
-					                </tr>
-					                <tr>
-					                    <td colspan="3" id="f_content">
-					                        <p><%=f.getFeedCnt() %></p>
-					                    </td>
-					                </tr>
-					             
-					                <tr>
-					                    <td colspan="3" id="gpx">
-					                        <div>
-					                            <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt="">
-					                        </div>
-					                    </td>
-					                </tr>
-					                <tr>
-					                    <td >
-					                        <div id="star">⭐⭐⭐⭐</div>
-					                    </td>
-					                    <td id="like">
-					                        <i class="fa-regular fa-heart"></i>
-					                    </td>
-					                    <td id="comment">댓글</td>
-					                </tr>
-					            </table>  
-					        
-					        </div>
-					    
-					    </div><!-- feeddiv끝 -->
-					       <% } %>
-					       <%} %>
+                            <div class="feed_table">
+                                <table border="0px" id="f_table">
+                                    <tr id="tr1">
+                                        <td id="feed_profile" colspan="2">
+                                            <div>
+                                                <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
+                                                <div id="p_name"><%=f.getMemId() %></div>
+                                                <div id="p_loca"><%=f.getFeedDate() %></div>
+                                            </div>
+                                        </td>
+                                        <td id="plus">
+                                        <div>
+                                            <img src="${pageContext.request.contextPath}/resources/image/more.png" alt="더보기 버튼">
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" id="td2_1">
+                                            <div id="f_title">
+                                            <a href=""><%=f.getFeedTitle() %></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" id="f_content">
+                                            <p><%=f.getFeedCnt() %></p>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td colspan="3" id="gpx">
+                                            <div>
+                                                <!-- <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt=""> -->
+
+                                                <img src='https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?w=500&h=260&center=<%=f.getStartLon()%>,<%=f.getStartLat()%>&level=16&X-NCP-APIGW-API-KEY-ID=c7zat5volx&X-NCP-APIGW-API-KEY=nk8UKK78ZO9ZKK6Ru5mT3exDMDTHthhjHRr0oRBk' alt="지도"/>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td >
+                                            <div id="star">
+                                                <% 
+                                                int star = f.getFeedEval();
+    
+                                                switch(star){
+                                                case 1:out.print("⭐"); break;
+                                                case 2:out.print("⭐⭐"); break;
+                                                case 3:out.print("⭐⭐⭐"); break;
+                                                case 4:out.print("⭐⭐⭐⭐"); break;
+                                                case 5:out.print("⭐⭐⭐⭐⭐"); break;
+                                                }
+                                                %>
+
+                                            </div>
+
+
+                                            
+                                        </td>
+                                        <td id="comment">댓글?</td>
+                                        <td id="like" align="center">
+                                            <div class="right_area">
+                                                <a href="javascript:;" class="icon heart">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/812/812327.png" alt="찜하기">
+                                                </a>
+                                            </div>
+                                            
+                                        </td>
+                                        
+                                    </tr>
+                                </table>  
+
+                            
+                            </div>
+                        
+                        </div><!-- feeddiv끝 -->
+                            <% } %>
+                            <%} %>
 			
                     </div>
 
                     
                 </div>
             </div>
+            <script>
+                //heart 좋아요 클릭시! 하트 뿅
+                $(function(){
+                    var $likeBtn =$('.icon.heart');
 
+                        $likeBtn.click(function(){
+                        $likeBtn.toggleClass('active');
+
+                        if($likeBtn.hasClass('active')){          
+                        $(this).find('img').attr({
+                            'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',
+                            alt:'찜하기 완료'
+                                });
+                        
+                        
+                        }else{
+                            $(this).find('i').removeClass('fas').addClass('far')
+                        $(this).find('img').attr({
+                            'src': 'https://cdn-icons-png.flaticon.com/512/812/812327.png',
+                            alt:"찜하기"
+                        })
+                        }
+                    })
+                })
+
+            </script>
             
             <div id="ct3">
                 <div id="dust">미세먼지api 구역</div>
@@ -272,7 +324,6 @@
                         <div id="exmap" style="width:700px;height:350px; margin: auto;">
                             <div id="map" style="width:100%;height:100%;"></div>
                         </div>
-                       
                     
 
                 </div>
