@@ -243,5 +243,83 @@
         })
     </script>
 
+<script>
+                    
+
+    var markers = [];
+
+    navigator.geolocation.getCurrentPosition(geoSuccess);
+    function geoSuccess(position) {
+    // 위도
+    var lat = position.coords.latitude;
+    // 경도
+    var lng = position.coords.longitude;
+    console.log(lat);
+    console.log(lng)
+    }
+
+    map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.4636544, 126.8219904),
+        zoom: 13
+    });
+
+    
+
+    var marker = new naver.maps.Marker({
+        map:map,
+        position: new naver.maps.LatLng(37.4636544, 126.8219904)
+    })
+
+
+    var hyeonjinHouse = new naver.maps.LatLng(36.30260, 127.33838);
+    var jooyeokHouse = new naver.maps.LatLng(36.32611, 127.41263);
+
+
+    // var markers = [];
+    var infowindows = [];
+
+
+    markers.push(new naver.maps.Marker({
+        map: map,
+        position: hyeonjinHouse
+    }));
+
+    infowindows.push(new naver.maps.InfoWindow({
+        content: [
+            '<div class="iw_inner">',
+            '   <h3>현진이네 집</h3>',
+            '</div>'
+        ].join('')
+    }));
+
+
+    markers.push(new naver.maps.Marker({
+        map: map,
+        position: jooyeokHouse
+    }));
+
+    infowindows.push(new naver.maps.InfoWindow({
+        content: [
+            '<div class="iw_inner">',
+            '   <h3>주역이네 집</h3>',
+            '</div>'
+        ].join('')
+    }));
+
+    for(let i=0; i<markers.length; i++){
+        naver.maps.Event.addListener(markers[i], "click", function(e) {
+            console.log("이벤트")
+            if (infowindows[i].getMap()) {
+                infowindows[i].close();
+            } else {
+                infowindows[i].open(map, markers[i]);
+            }
+        });
+    }
+
+    infowindows[0].open(map, markers[0]);
+</script>
+
+
 </body>
 </html>

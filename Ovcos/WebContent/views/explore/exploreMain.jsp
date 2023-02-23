@@ -1,10 +1,11 @@
+<%@page import="com.ovcos.explore.model.vo.Explore"%>
 <%@page import="com.ovcos.common.model.vo.Pageinfo"%>
 <%@page import="com.ovcos.feed.model.vo.Feed"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
+	ArrayList<Explore> list = (ArrayList<Explore>)request.getAttribute("list");
 	Pageinfo pi = (Pageinfo)request.getAttribute("pi");
 
 	int currentPage = pi.getCurrentPage();
@@ -19,6 +20,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+
+<style>
+    path{
+        stroke: red !important;
+    }
+    .iw_inner{
+        border: 1px solid green;
+    }
+    
+</style>
 
 </head>
 <body>
@@ -66,8 +77,8 @@
 				 		<p>조회된 결과가 없습니다.</p>
 				 	<%}else{ %>
                     <!-- case 2 반복문으로  -->
-                    	<%for(Feed f: list){ %>
-                    <div>
+                    	<%for(Explore f: list){ %>
+                    <div class="exList">
                         <span class="list_num"><%=f.getFeedIndex() %></span>
                         <div class="innertext">
                             <h5><%=f.getFeedTitle() %></h5>
@@ -82,10 +93,13 @@
                                 </tr>
                                 <tr>
                                     <td>별점</td>
-                                    <td><%=f.getFeedEval() %></td>
+                                    <td><%=f.getFeedEval() %>/5</td>
                                 </tr>
                             </table>
-                            <span><%=f.getFeedDate() %></span>
+                            <div id="bottom">
+                                <span><%=f.getFeedDate() %></span>
+                                <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                            </div>
                         </div>
                     </div>
                     	<%} %>
@@ -118,57 +132,124 @@
         <!-- course_left 끝-->
         <div id="content">
             <div id="map"> 
+
+
                 <script>
-                    navigator.geolocation.getCurrentPosition(geoSuccess);
-                    function geoSuccess(position) {
-                    // 위도
-                    const lat = position.coords.latitude;
-                    // 경도
-                    const lng = position.coords.longitude;
-                    
-                    setMap(lat, lng);
-                    }
 
-                    function setMap(lat, lng) {
-                    // 위도, 경도 설정
-                    var mapOptions = {
-                        center: new naver.maps.LatLng(lat, lng),
+                    function startDataLayer(xmlDoc) {
+                            map.data.addGpx(xmlDoc);
+                            }
+                    
+                    var lat = 37.4923615;
+                    var lng = 127.0292881
+
+                    var map = new naver.maps.Map('map',{
+                        center:new naver.maps.LatLng(lat, lng),
                         zoom: 10
-                    };
-                    
-                    var map = new naver.maps.Map('map', mapOptions);
+                    })
 
-                    
-                    
+                    var marker = null;
                     var markers = [];
 
-                    <%for(Feed f: list){%>
-                        markers.push({position: new naver.maps.LatLng(<%=f.getStartLat()%>,<%=f.getStartLon()%>), path:'resources/gpx_upfiles/20230219114855-f_10634.gpx'})
+                    var infowindows = [];
+
+                    var paths = [];
+
+                    // 마커 세팅팅
+                    <%for(Explore e:list){%>
+                        marker = new naver.maps.Marker({
+                            map:map,
+                            position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
+                            icon: {
+                                content: 
+                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
+                                // size: new naver.maps.Size(38, 58),
+                                anchor: new naver.maps.Point(19, 40),
+                            }
+                        })
+                        markers.push(marker);
+                        paths.push("<%=e.getPath()%>");
+                    <%}%>
+
+                    // window 세팅
+                   <%for(Explore e: list){%>
+                    infowindows.push(new naver.maps.InfoWindow({
+                        content:[
+                            '<div class="iw_inner">',
+                            '   <h6><%=e.getFeedTitle()%></h6>',
+                            '	<span><%=e.getDistance()%> km</span>	',
+                            '</div>'	
+                        ].join('')
+                    }))
+                    
                     <%}%>
                     
+ 
+                    $(".exList").click(function(e){
+                        $("path").remove();
+                        $(".exList").css("backgroundColor","white");
+                        $(this).css("backgroundColor","#f8f8f8");
+                        $(".btn1").css("visibility","hidden");
 
-                    for (var i = 0; i < markers.length; i++) {
-                        var marker = new naver.maps.Marker({
-                            position: markers[i].position,
-                            map: map
-                        });
+                        $(this).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc")
 
-                        naver.maps.Event.addListener(marker, 'click', (function(marker, path) {
-                            naver.maps.Event.once(map, 'init', function () {
-                            $.ajax({
-                                url: HOME_PATH +'/data/seorak.gpx',
-                                dataType: 'xml',
-                                success: startDataLayer
-                            });
-                        });
-                        }));
-                        function startDataLayer(xmlDoc) {
-                            map.data.addGpx(xmlDoc);
+                        
+                        // index 뽑기
+                        var index = $(this).children("span").text()%10;
+                        if($(this).children("span").text() == 10){
+                            index = 10;
                         }
 
+                        
+
+                        
+                           
+                        e.preventDefault();
+                        
+                      
+                        $.ajax({
+                            url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[index-1],
+                            dataType: 'xml',
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 3,   //선 두께
+                            success: startDataLayer
+                            });
+                            if(infowindows[index-1].getMap()){
+                                infowindows[index-1].close();
+                            }else{
+                                infowindows[index-1].open(map,markers[index-1]);
+                            }
+                            
+                    })
+
+                    for(let i=0; i<markers.length; i++){
+                        naver.maps.Event.addListener(markers[i], "click", function(e) {
+
+                            $("path").remove();
+                            $.ajax({
+                            url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[i],
+                            dataType: 'xml',
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 3,   //선 두께
+                            success: startDataLayer
+                            });
+
+                            console.log("이벤트")
+                            if(infowindows[i].getMap()){
+                                infowindows[i].close();
+                            }else{
+                                infowindows[i].open(map,markers[i]);
+                            }
+                            
+                            
+                        });
                     }
-                    }
+                    
                 </script>
+
+                
             </div>
         </div>
     </div>
@@ -178,14 +259,6 @@
     
     <script>
         $(function(){
-            // 배열의 마커를 찍어보자
-			
-            var marker = null;
-            
-            
-
-
-
 
             $(".tabon1").click(function(){
                 console.log("성공");

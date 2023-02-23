@@ -24,7 +24,9 @@
 		      , START_LAT
 		      , START_LON
 		      , MEM_ID
+              , CHANGE_NAME
 		FROM FEED
+        JOIN GPX_FILES USING(FEED_INDEX)
 		WHERE FEED_PATH_NY = 'Y'
 		AND FEED_RPR_NY ='N'
 		AND FEED_DEL_NY = 'N'

@@ -3,9 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String message = (String)session.getAttribute("enrollFeed");
-	//System.out.print(message);
-	ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
+   String message = (String)session.getAttribute("enrollFeed");
+   //System.out.print(message);
+   ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,10 +27,10 @@
 <body>
 <!-- feed관련 페이지 작성 -->
 <%@ include file="../common/nav.jsp" %>
-	<%if(message != null && message.equals("success")){ %>
-		<div class="alert alert-primary alert-dismissable" id="succ">
+   <%if(message != null && message.equals("success")){ %>
+      <div class="alert alert-primary alert-dismissable" id="succ">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-            <strong>피드등록에 성공헀습니다!</strong>	
+            <strong>피드등록에 성공헀습니다!</strong>   
         </div>
     <%}%>
     <%if(message != null && message.equals("fail")){ %>
@@ -206,7 +206,7 @@
                         </div><!-- feeddiv끝 -->
                             <% } %>
                             <%} %>
-			
+         
                     </div>
 
                     
@@ -236,7 +236,6 @@
                         }
                     })
                 })
-
             </script>
             
             <div id="ct3">
@@ -257,79 +256,105 @@
                 </div>
             </div>
     </div>
-
-    <!-- The Modal -->
+<!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-
+        
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title"><b>피드 등록</b></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close"
+                        data-dismiss="modal">&times;</button>
                 </div>
-
+        
                 <!-- Modal body -->
-                <div class="modal-body">
-                    <form action="<%=contextPath %>/enroll.feed" method="post" id="enrollfrm" enctype="multipart/form-data">
-                    	<input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
-                    	<input type="hidden" name="startLon" id="startLon" value="">
-                    	<input type="hidden" name="startLat" id="startLat" value="">
-                    	<input type="hidden" name="distance" id="distance" value="">
+                <div class="modal-body"
+                    style="padding-left: 0px; padding-right: 0px;">
+                    <form action="<%=contextPath %>/enroll.feed"
+                        method="post" id="enrollfrm"
+                        enctype="multipart/form-data">
+                        <input type="hidden" name="userId"
+                            value="<%= loginUser.getMemId()%>">
+                        <input type="hidden" name="startLon" id="startLon"
+                            value="">
+                        <input type="hidden" name="startLat" id="startLat"
+                            value="">
+                        <input type="hidden" name="distance" id="distance"
+                            value="">
                         <table id="text1">
-                            
-                       
-                        <div id="map" align="center">경로 미리보기</div>
-                       
-                        <hr>
-                        <div style=" display: flex;">
-                            <div>
-                                <label for="avatar" style="margin-left: 30px;"><b>파일 첨부 :</b></label>
-                                <input type="file" id="avatar" name="avatar" accept=".gpx">
+        
+        
+                            <div id="exmap"
+                                style="width:799px;height:500px; margin: auto;">
+                                <div id="map"
+                                    style="width:100%;height:100%;"></div>
                             </div>
-                            <div style="display: flex; float: right;">
-                                <b style="padding-top: 5px; padding-right: 5px; margin-left: 160px;">별점</b>
-                                <div class="star-rating">
-                                    <input type="radio" id="5-stars" name="rating" value="5" />
-                                    <label for="5-stars" class="star">&#9733;</label>
-                                    <input type="radio" id="4-stars" name="rating" value="4" />
-                                    <label for="4-stars" class="star">&#9733;</label>
-                                    <input type="radio" id="3-stars" name="rating" value="3" />
-                                    <label for="3-stars" class="star">&#9733;</label>
-                                    <input type="radio" id="2-stars" name="rating" value="2" />
-                                    <label for="2-stars" class="star">&#9733;</label>
-                                    <input type="radio" id="1-star" name="rating" value="1" />
-                                    <label for="1-star" class="star">&#9733;</label>
+        
+                            <hr>
+                            <div style=" display: flex;">
+                                <div>
+                                    <label for="avatar"
+                                        style="margin-left: 30px;"><b>파일 첨부
+                                            :</b></label>
+                                    <input type="file" id="avatar"
+                                        name="avatar" accept=".gpx">
+                                </div>
+                                <div style="display: flex; float: right;">
+                                    <b
+                                        style="padding-top: 5px; padding-right: 5px; margin-left: 160px;">별점</b>
+                                    <div class="star-rating">
+                                        <input type="radio" id="5-stars"
+                                            name="rating" value="5" />
+                                        <label for="5-stars"
+                                            class="star">&#9733;</label>
+                                        <input type="radio" id="4-stars"
+                                            name="rating" value="4" />
+                                        <label for="4-stars"
+                                            class="star">&#9733;</label>
+                                        <input type="radio" id="3-stars"
+                                            name="rating" value="3" />
+                                        <label for="3-stars"
+                                            class="star">&#9733;</label>
+                                        <input type="radio" id="2-stars"
+                                            name="rating" value="2" />
+                                        <label for="2-stars"
+                                            class="star">&#9733;</label>
+                                        <input type="radio" id="1-star"
+                                            name="rating" value="1" />
+                                        <label for="1-star"
+                                            class="star">&#9733;</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-
-                        <tr>
-                            <th>제목</th>
-                            <td><input type="text" name="title" size="62" placeholder="제목입력해주세요"></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <table id="text">
-                        <tr>
-                            <th style="padding-bottom: 100px;">내용</th>
-                            <td>
-                                <textarea id="summernote" name="editordata"></textarea>
-                            </td>
-                        </tr>
-
-                    </table>
-
-                        <div id="exmap" style="width:700px;height:350px; margin: auto;">
-                            <div id="map" style="width:100%;height:100%;"></div>
-                        </div>
-                    
-
+                            <hr>
+        
+                            <tr>
+                                <th>제목</th>
+                                <td><input type="text" name="title"
+                                        size="62" placeholder="제목입력해주세요">
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table id="text">
+                            <tr>
+                                <th style="padding-bottom: 100px;">내용</th>
+                                <td>
+                                    <textarea name="content"  cols="62" rows="5" style="resize: none;"></textarea>
+                                </td>
+                            </tr>
+        
+                        </table>
+        
+        
+        
+        
+        
                 </div>
                 <!-- Modal footer -->
                 <div style="display: flex;">
-
+        
                     <div>
                         <b style="margin-left: 50px;">공개여부</b>
                         <select name="displayNy" id="displayNy">
@@ -348,116 +373,128 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <div id="dist1">총길이 :<span id="dist"></span></div>
-                    <button type="reset" class="btn btn-primary" id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary" id="insert">작성</button>
+                    <div id="dist1">총길이 :<span id="dist"></span></div>
+                    <button type="reset" class="btn btn-primary"
+                        id="reset">초기화</button>
+                    <button type="submit" class="btn btn-primary"
+                        id="insert">작성</button>
                 </div>
-            </form>
+                </form>
             </div>
         </div>
-    </div>
-
-
-    <script>
-    $(document).ready(function () {
-        //여기 아래 부분
-        $('#summernote').summernote({
-            height: 300,                 // 에디터 높이
-            minHeight: null,             // 최소 높이
-            maxHeight: null,             // 최대 높이
-            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-            lang: "ko-KR",					// 한글 설정
-            placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-        });
-    });
-
-        $("#insert").click(function(){
-            
-            console.log($("#avater"));
-
-
-            
-            
-            var last = $("#dist").text().lastIndexOf("k");
-            $("#distance").val($("#dist").text().substring(0,last));
-            $("#startLat").val(startLat);
-            $("#startLon").val(startLon);
-            $(":radio").each(function(index, value){
-                if($(this).attr("checked")){
-                    $("#rate").val($(this).val());
-                } 
-            })
-
-            
-        })
-
-            $(function(){
-                    
-                    $("#reset").click(function(){
-                        $("#title").val("");
-                        $("textarea").val("");
-                        $("#avatar").val("");
-                        $(".star-rating label")
-                    })
-
-                    
+        </div>
+        <!-- 피드 상세 조회 -->
+        
+        <!-- Extra large modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+        data-target=".bd-example-modal-xl">피드 상세 조회</button>
+        
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+        aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <!-- <button type="button" class="close" data-dismiss="modal" style="margin-left: auto;">&times;</button> -->
+                <!--course_left 시작-->
                 
+                    <div id="course_left" style="border: 1px solid black; width: 150px; height: 1000px;" >
+                        <div id="sectiontop">
+                            <div id="title">피드 상세</div>
+        
+                        </div>
+                        <div id="tab_manu">
+                            <ul>
+                                <li class="tabon tabon1">최신순</li>
+        
+                            </ul>
+                        </div>
+                        <div id="content"></div>
+                        <div class="position_set">사용자 운동 기록 작성란</div>
+                    </div>
                 
+                <!-- course_left 끝-->
+                <div>
+        
+                </div>
+        
+        
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                        data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+        <!-- 피드 상세 조회 끝 -->
+        
+        <!-- 피드 상세 -->
+        <script>
+            $(document).ready(function () {
+                //여기 아래 부분
+                $('#summernote').summernote({
+                    height: 300,                 // 에디터 높이
+                    minHeight: null,             // 최소 높이
+                    maxHeight: null,             // 최대 높이
+                    focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+                    lang: "ko-KR",					// 한글 설정
+                    placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+                });
             });
-            $("#reset").click(function(){
-                $("#map").css("visibility","hidden");
+            $("#insert").click(function () {
+                console.log($("#avater"));
+                var last = $("#dist").text().lastIndexOf("k");
+                $("#distance").val($("#dist").text().substring(0, last));
+                $("#startLat").val(startLat);
+                $("#startLon").val(startLon);
+                $(":radio").each(function (index, value) {
+                    if ($(this).attr("checked")) {
+                        $("#rate").val($(this).val());
+                    }
+                })
+            })
+            $(function () {
+                $("#reset").click(function () {
+                    $("#title").val("");
+                    $("textarea").val("");
+                    $("#avatar").val("");
+                    $(".star-rating label")
+                })
+            });
+            $("#reset").click(function () {
+                $("#map").css("visibility", "hidden");
                 $("#dist").text("");
             })
-
-
-
-            var polyline=null;
+            var polyline = null;
             var marker = null;
             var map = null;
-
             var array = [];
             var lats = [];
             var lons = [];
-    
             var startLat = null;
             var startLon = null;
-            
-    
             // 거리구하는데 필요한 변수
             var sum = 0;
-            
-    
             function deg2rad(deg) {
-                return (deg*Math.PI/180)
+                return (deg * Math.PI / 180)
             }
-    
-            function rad2deg(deg){
-                return (deg*180/Math.PI);
+            function rad2deg(deg) {
+                return (deg * 180 / Math.PI);
             }
-    
             var R = 6371; // Radius of the earth in km
-    
             var gpxFileInput = document.getElementById('avatar');
             gpxFileInput.addEventListener('change', handleFileSelect, false);
-    
             function handleFileSelect(event) {
                 array = [];
                 lats = [];
                 lons = [];
-                sum=0;
+                sum = 0;
                 $("#map").remove();
                 var map = "<div id='map' style='width:100%;height:100%;''></div>"
                 $("#exmap").append(map);
-    
-                
                 var file = event.target.files[0];
                 console.log(file);
                 var reader = new FileReader();
-    
                 reader.onload = function (event) {
                     var gpx = $.parseXML(event.target.result);
                     var trackPoints = $(gpx).find('trkpt');
-    
                     trackPoints.each(function (index, value) {
                         var lat = $(this).attr('lat');
                         var lon = $(this).attr('lon');
@@ -467,46 +504,37 @@
                         if (index == 0) {
                             startLat = lat;
                             startLon = lon;
-                        
                         }
-    
                     });
                     //거리구하는 반복문
-                    for(let i = 1; i<lats.length;i++){
-                        if(lats[i-1] == lats[i]){
+                    for (let i = 1; i < lats.length; i++) {
+                        if (lats[i - 1] == lats[i]) {
                             dist = 0
-                        }else{
-                            var theta = lons[i-1]-lons[i];
+                        } else {
+                            var theta = lons[i - 1] - lons[i];
                             // console.log(theta)
-                            var dist = Math.sin(deg2rad(lats[i-1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i-1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
-                            
+                            var dist = Math.sin(deg2rad(lats[i - 1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i - 1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
                             dist = Math.acos(dist);
                             dist = rad2deg(dist);
-                            dist = dist*60*1.1515;
-                            dist = dist*1.609344;
-                            if(dist === NaN) {
+                            dist = dist * 60 * 1.1515;
+                            dist = dist * 1.609344;
+                            if (dist === NaN) {
                                 dist = 0;
                             }
-                            sum+=dist;
+                            sum += dist;
                         }
-                        }
-    
+                    }
                     // hidden에 초기 위도와 경도 대입하기
                     $("#startLat").val(startLat);
                     $("#startLon").val(startLon);
                     $("#distance").val(sum.toFixed(1));
-                    
                     // 화면에 경로 표시하기
-                    $("#dist").text(sum.toFixed(2)+'km');
-                    
-    
-    
+                    $("#dist").text(sum.toFixed(2) + 'km');
                     // 지도 표시
                     map = new naver.maps.Map('map', {
                         center: new naver.maps.LatLng(startLat, startLon),
                         zoom: 11
                     });
-    
                     // 지도에 선 그리기
                     polyline = new naver.maps.Polyline({
                         path: array,      //선 위치 변수배열
@@ -515,10 +543,9 @@
                         strokeWeight: 3,   //선 두께
                         map: map           //오버레이할 지도
                     });
-                    
                     //지도에 마커 표시하기
                     marker = new naver.maps.Marker({
-                        position: new naver.maps.LatLng(lats[lats.length-1], lons[lons.length-1]),
+                        position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
                         map: map,
                         icon: {
                             content: '<img src=/Ovcos/resources/image/endlocation.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
@@ -526,8 +553,6 @@
                             anchor: new naver.maps.Point(26, 40)
                         }
                     });
-                    
-                    
                     marker = new naver.maps.Marker({
                         position: new naver.maps.LatLng(startLat, startLon),
                         map: map,
@@ -537,13 +562,8 @@
                             anchor: new naver.maps.Point(26, 40)
                         }
                     });
-                    
-    
                 };
                 reader.readAsText(file);
             };
-    </script>
-    <img src="" alt="">
-
-</body>
-</html>
+        </script>
+        <img src="" alt="">

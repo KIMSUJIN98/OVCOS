@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.explore.model.service.ExploreService;
+import com.ovcos.explore.model.vo.Explore;
 import com.ovcos.feed.model.vo.Feed;
 
 @WebServlet("/course")
@@ -58,7 +59,7 @@ public class ToExplore extends HttpServlet {
 		
 		Pageinfo pi = new Pageinfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Feed> list = new ExploreService().selectList(pi);
+		ArrayList<Explore> list = new ExploreService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

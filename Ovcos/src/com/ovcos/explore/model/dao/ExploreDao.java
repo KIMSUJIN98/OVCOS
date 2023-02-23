@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.ovcos.common.model.vo.Pageinfo;
+import com.ovcos.explore.model.vo.Explore;
 import com.ovcos.feed.model.vo.Feed;
 
 import static com.ovcos.common.JDBCTemplate.*;
@@ -52,11 +53,11 @@ public class ExploreDao {
 		return listCount;
 	}
 
-	public ArrayList<Feed> selectList(Connection conn, Pageinfo pi) {
+	public ArrayList<Explore> selectList(Connection conn, Pageinfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		ArrayList<Feed> list = new ArrayList<Feed>();
+		ArrayList<Explore> list = new ArrayList<Explore>();
 		
 		String sql = prop.getProperty("selecList");
 		
@@ -71,7 +72,7 @@ public class ExploreDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Feed(  rset.getInt("rnum")
+				list.add(new Explore(rset.getInt("rnum")
 						   		  , rset.getString("date")
 						   		  , rset.getString("feed_title")
 						   		  , rset.getString("feed_cnt")
@@ -79,7 +80,8 @@ public class ExploreDao {
 						   		  , rset.getDouble("distance")
 						   		  , rset.getDouble("start_lat")
 						   		  , rset.getDouble("start_lon")
-						   		  , rset.getString("mem_id")));
+						   		  , rset.getString("mem_id")
+						   		  , rset.getString("change_name")));
 			}
 			System.out.println(list);
 			
