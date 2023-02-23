@@ -9,7 +9,6 @@ public class Member {
 	private String memNick;
 	private String memIntro;
 	private Date memBirth;
-	private String memAdminNY;
 	private String memStatus;
 	private String memLocInfo;
 	private String memPublicNy;
@@ -23,7 +22,7 @@ public class Member {
 	public Member() {}
 
 	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, Date memBirth,
-			String memAdminNY, String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn,
+			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn,
 			String memCodeNy, int memRprCum, String memApiType, String memApiToken, String memEml) {
 		this.memId = memId;
 		this.memPwd = memPwd;
@@ -31,7 +30,6 @@ public class Member {
 		this.memNick = memNick;
 		this.memIntro = memIntro;
 		this.memBirth = memBirth;
-		this.memAdminNY = memAdminNY;
 		this.memStatus = memStatus;
 		this.memLocInfo = memLocInfo;
 		this.memPublicNy = memPublicNy;
@@ -91,13 +89,6 @@ public class Member {
 		this.memBirth = memBirth;
 	}
 
-	public String getMemAdminNY() {
-		return memAdminNY;
-	}
-
-	public void setMemAdminNY(String memAdminNY) {
-		this.memAdminNY = memAdminNY;
-	}
 
 	public String getMemStatus() {
 		return memStatus;
@@ -174,11 +165,12 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memId=" + memId + ", memPwd=" + memPwd + ", memName=" + memName + ", memNick=" + memNick
-				+ ", memIntro=" + memIntro + ", memBirth=" + memBirth + ", memAdminNY=" + memAdminNY + ", memStatus="
-				+ memStatus + ", memLocInfo=" + memLocInfo + ", memPublicNy=" + memPublicNy + ", memGoalDtn="
-				+ memGoalDtn + ", memCodeNy=" + memCodeNy + ", memRprCum=" + memRprCum + ", memApiType=" + memApiType
-				+ ", memApiToken=" + memApiToken + ", memEml=" + memEml + "]";
+				+ ", memIntro=" + memIntro + ", memBirth=" + memBirth + ", memStatus=" + memStatus + ", memLocInfo="
+				+ memLocInfo + ", memPublicNy=" + memPublicNy + ", memGoalDtn=" + memGoalDtn + ", memCodeNy="
+				+ memCodeNy + ", memRprCum=" + memRprCum + ", memApiType=" + memApiType + ", memApiToken=" + memApiToken
+				+ ", memEml=" + memEml + "]";
 	}
+
 	
 	
 	
