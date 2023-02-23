@@ -140,13 +140,53 @@
     height: 100%;
 }
 
+
+/* 별점 */
 #star{
     width: 50%;
     height: 40px;
-    margin: 0px 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    
+    
 }
 
 /* 찜 */
 #like:hover{
     margin: 0px 20px;
+}
+a{
+text-decoration:none; color:inherit; cursor: pointer;
+}
+.right_area .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw * (45 / 1920));
+    height: calc(100vw * (45 / 1920));
+
+    border-radius: 50%;
+    border: solid 2px #eaeaea;
+    background-color: #fff;
+}
+
+.icon.heart img{
+    width: calc(100vw * (24 / 1920));
+    height: calc(100vw * (24 / 1920));
+}
+
+.icon.heart.fas{
+color:red
+}
+.heart{
+    transform-origin: center;
+}
+.heart.active img{
+    animation: animateHeart .3s linear forwards;
+}
+
+@keyframes animateHeart{
+    0%{transform:scale(.2);}
+    40%{transform:scale(1.2);}
+    100%{transform:scale(1);}
 }
