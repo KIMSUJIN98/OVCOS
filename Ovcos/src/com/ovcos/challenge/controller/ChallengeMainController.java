@@ -6,8 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.challenge.model.vo.NEntryList;
+import com.ovcos.loginRegister.model.vo.Member;
 
 /**
  * Servlet implementation class ChallengeMainController
@@ -29,8 +33,21 @@ public class ChallengeMainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		EntryList eList = new EntryList();
+		HttpSession session = request.getSession();
 		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userId = loginUser.getMemId();
+		
+		ChallengeService cService = new ChallengeService();
+		
+		int contestProgressCount = cService.contestProgressCount(userId);
+		int contestCompleteCount = cService.contestCompleteCount(userId);
+		
+		
+		
+		request.setAttribute("contestProgressCount", contestProgressCount);
+		request.setAttribute("contestCompleteCount", contestCompleteCount);
+		request.getRequestDispatcher("views/challenge/challengeMain.jsp").forward(request, response);
 		
 	}
 

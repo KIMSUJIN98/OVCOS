@@ -1,12 +1,12 @@
 package com.ovcos.challenge.model.vo;
 
-public class NentryList {
+public class NEntryList {
 	private int normalChallNo;
 	private String normalEntryId;
 	
-	public NentryList() {}
+	public NEntryList() {}
 
-	public NentryList(int normalChallNo, String normalEntryId) {
+	public NEntryList(int normalChallNo, String normalEntryId) {
 		super();
 		this.normalChallNo = normalChallNo;
 		this.normalEntryId = normalEntryId;
