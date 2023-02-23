@@ -8,7 +8,6 @@
 		      , MEM_NICK
 		      , MEM_INTRO
 		      , MEM_BIRTH
-		      , MEM_ADMIN_NY
 		      , MEM_STATUS
 		      , MEM_LOC_INFO
 		      , MEM_PUBLIC_NY
