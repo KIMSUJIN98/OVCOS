@@ -3,53 +3,53 @@ package com.ovcos.challenge.model.vo;
 import java.sql.Date;
 
 public class ContestChallenge {
-	private int cntsChlgNo;
-	private String cntsChlgTitle;
+	private int contestChallNo;
+	private String contestChallTitle;
 	private Date enrollDate;
-	private Date cntsChlgDate;
+	private Date contestChallDate;
 	private String time;
-	private int cntsChlgMax;
+	private int contestChallMax;
 	private String rprStatus;
 	private Date rprDate;
 	private String delStatus;
 	private String rprId;
-	private int cntsNo;
-	private String cntsChlgId;
+	private int contestNo;
+	private String contestChallId;
 	
 	public ContestChallenge() {}
 
-	public ContestChallenge(int cntsChlgNo, String cntsChlgTitle, Date enrollDate, Date cntsChlgDate, String time,
-			int cntsChlgMax, String rprStatus, Date rprDate, String delStatus, String rprId, int cntsNo,
-			String cntsChlgId) {
+	public ContestChallenge(int contestChallNo, String contestChallTitle, Date enrollDate, Date contestChallDate,
+			String time, int contestChallMax, String rprStatus, Date rprDate, String delStatus, String rprId,
+			int contestNo, String contestChallId) {
 		super();
-		this.cntsChlgNo = cntsChlgNo;
-		this.cntsChlgTitle = cntsChlgTitle;
+		this.contestChallNo = contestChallNo;
+		this.contestChallTitle = contestChallTitle;
 		this.enrollDate = enrollDate;
-		this.cntsChlgDate = cntsChlgDate;
+		this.contestChallDate = contestChallDate;
 		this.time = time;
-		this.cntsChlgMax = cntsChlgMax;
+		this.contestChallMax = contestChallMax;
 		this.rprStatus = rprStatus;
 		this.rprDate = rprDate;
 		this.delStatus = delStatus;
 		this.rprId = rprId;
-		this.cntsNo = cntsNo;
-		this.cntsChlgId = cntsChlgId;
+		this.contestNo = contestNo;
+		this.contestChallId = contestChallId;
 	}
 
-	public int getCntsChlgNo() {
-		return cntsChlgNo;
+	public int getContestChallNo() {
+		return contestChallNo;
 	}
 
-	public void setCntsChlgNo(int cntsChlgNo) {
-		this.cntsChlgNo = cntsChlgNo;
+	public void setContestChallNo(int contestChallNo) {
+		this.contestChallNo = contestChallNo;
 	}
 
-	public String getCntsChlgTitle() {
-		return cntsChlgTitle;
+	public String getContestChallTitle() {
+		return contestChallTitle;
 	}
 
-	public void setCntsChlgTitle(String cntsChlgTitle) {
-		this.cntsChlgTitle = cntsChlgTitle;
+	public void setContestChallTitle(String contestChallTitle) {
+		this.contestChallTitle = contestChallTitle;
 	}
 
 	public Date getEnrollDate() {
@@ -60,12 +60,12 @@ public class ContestChallenge {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getCntsChlgDate() {
-		return cntsChlgDate;
+	public Date getContestChallDate() {
+		return contestChallDate;
 	}
 
-	public void setCntsChlgDate(Date cntsChlgDate) {
-		this.cntsChlgDate = cntsChlgDate;
+	public void setContestChallDate(Date contestChallDate) {
+		this.contestChallDate = contestChallDate;
 	}
 
 	public String getTime() {
@@ -76,12 +76,12 @@ public class ContestChallenge {
 		this.time = time;
 	}
 
-	public int getCntsChlgMax() {
-		return cntsChlgMax;
+	public int getContestChallMax() {
+		return contestChallMax;
 	}
 
-	public void setCntsChlgMax(int cntsChlgMax) {
-		this.cntsChlgMax = cntsChlgMax;
+	public void setContestChallMax(int contestChallMax) {
+		this.contestChallMax = contestChallMax;
 	}
 
 	public String getRprStatus() {
@@ -116,29 +116,32 @@ public class ContestChallenge {
 		this.rprId = rprId;
 	}
 
-	public int getCntsNo() {
-		return cntsNo;
+	public int getContestNo() {
+		return contestNo;
 	}
 
-	public void setCntsNo(int cntsNo) {
-		this.cntsNo = cntsNo;
+	public void setContestNo(int contestNo) {
+		this.contestNo = contestNo;
 	}
 
-	public String getCntsChlgId() {
-		return cntsChlgId;
+	public String getContestChallId() {
+		return contestChallId;
 	}
 
-	public void setCntsChlgId(String cntsChlgId) {
-		this.cntsChlgId = cntsChlgId;
+	public void setContestChallId(String contestChallId) {
+		this.contestChallId = contestChallId;
 	}
 
 	@Override
 	public String toString() {
-		return "ContestChallenge [cntsChlgNo=" + cntsChlgNo + ", cntsChlgTitle=" + cntsChlgTitle + ", enrollDate="
-				+ enrollDate + ", cntsChlgDate=" + cntsChlgDate + ", time=" + time + ", cntsChlgMax=" + cntsChlgMax
-				+ ", rprStatus=" + rprStatus + ", rprDate=" + rprDate + ", delStatus=" + delStatus + ", rprId=" + rprId
-				+ ", cntsNo=" + cntsNo + ", cntsChlgId=" + cntsChlgId + "]";
+		return "ContestChallenge [contestChallNo=" + contestChallNo + ", contestChallTitle=" + contestChallTitle
+				+ ", enrollDate=" + enrollDate + ", contestChallDate=" + contestChallDate + ", time=" + time
+				+ ", contestChallMax=" + contestChallMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate
+				+ ", delStatus=" + delStatus + ", rprId=" + rprId + ", contestNo=" + contestNo + ", contestChallId="
+				+ contestChallId + "]";
 	}
+
+	
 	
 	
 	

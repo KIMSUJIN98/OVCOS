@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.ovcos.challenge.model.vo.Contest;
+import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.challenge.model.vo.NEntryList;
+
 import static com.ovcos.common.JDBCTemplate.*;
 
 public class ChallengeDao {
@@ -50,6 +53,58 @@ public class ChallengeDao {
 		}
 		
 		return list;
+	}
+
+	public int contestProgressCount(Connection conn, String userId) {
+		int contestProgressCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("contestProgressCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				contestProgressCount = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return contestProgressCount;
+	}
+
+	public int contestCompleteCount(Connection conn, String userId) {
+		int contestCompleteCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("contestCompleteCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				contestCompleteCount = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return contestCompleteCount;
 	}
 	
 }
