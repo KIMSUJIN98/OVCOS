@@ -58,9 +58,13 @@ public class Explore {
 		this.distance = distance;
 		this.startLat = startLat;
 		this.startLon = startLon;
-		MemId = memId;
+		this.MemId = memId;
 		this.path = path;
 	}
+	
+	
+	
+	
 
 	public int getFeedIndex() {
 		return feedIndex;

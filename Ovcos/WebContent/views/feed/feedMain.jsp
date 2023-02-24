@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.explore.model.vo.Explore"%>
 <%@page import="com.ovcos.feed.model.vo.Feed"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +6,7 @@
 <%
    String message = (String)session.getAttribute("enrollFeed");
    //System.out.print(message);
-   ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
+   ArrayList<Explore> allList = (ArrayList<Explore>)request.getAttribute("allList");
 %>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,12 @@
 <script src="../../resources/js/lang/summernote-ko-KR.js"></script>
 
 <link rel="stylesheet" href="../../resources/css/summernote-lite.css">
+
+<style>
+    path{
+    stroke: red !important;
+}
+</style>
 </head>
 <body>
 <!-- feed관련 페이지 작성 -->
@@ -125,7 +132,7 @@
                         <p>조회결과없음<p>
                     <%}else{ %>
                     
-                    <% for(Feed f : allList) {%>
+                    <% for(Explore f : allList) {%>
                         <div class="feeddiv">
                             <div class="feed_table">
                                 <table border="0px" id="f_table">
@@ -161,9 +168,89 @@
                                             <div>
                                                 <!-- <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt=""> -->
 
-                                                <img src='https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?w=500&h=260&center=<%=f.getStartLon()%>,<%=f.getStartLat()%>&level=16&X-NCP-APIGW-API-KEY-ID=c7zat5volx&X-NCP-APIGW-API-KEY=nk8UKK78ZO9ZKK6Ru5mT3exDMDTHthhjHRr0oRBk' alt="지도"/>
-                                                
+                                                <div id="n<%=f.getFeedIndex()%>" style="width: 600px; height: 280px;"></div>
                                             </div>
+                                            <script>
+                                                
+
+                                                    var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
+                                                        center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
+                                                        zoom: 12
+                                                    })
+
+
+                                            $.ajax({
+                                                url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
+                                                dataType: 'xml',
+                                                strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                                                strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                                                strokeWeight: 3,   //선 두께
+                                                success: startDataLayer
+                                                });
+                                                    
+                                                    function startDataLayer(xmlDoc) {
+                                                    	n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
+                                                        }
+                                                
+
+
+                                            //     var xhttp = new XMLHttpRequest();
+                                            //     xhttp.onreadystatechange = function () {
+                                            
+                                            //     if(this.readyState == 4 && this.status == 200){
+                                            //     nodeValfunc( this ); // this == xhttp 
+                                            //     }
+                                            // }
+                                            // xhttp.open("GET", "<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>", true);
+                                            // xhttp.send();
+                                        
+                                            // function nodeValfunc( xml ) { // ( xml ) 객체 넘겨받기
+                                                
+                                            //     xmlDoc = xml.responseXML; 
+                                            //     var array = [];
+                                            //     var lats = [];
+                                            //     var lons = [];
+                                            //     var startLat; 
+                                            //     var startLon;
+                                        
+                                            //     var trackPoints = $(xmlDoc).find('trkpt');
+                                            //     console.log(trackPoints)
+                                            //     trackPoints.each(function (index, value) {
+                                            //         var lat = $(this).attr('lat');
+                                            //         var lon = $(this).attr('lon');
+                                            //         if (index == 0) {
+                                            //                         startLat = lat;
+                                            //                         startLon = lon;
+                                            //                     }
+                                                    
+                                            //         array.push(new naver.maps.LatLng(lat, lon));
+                                            //         lats.push(lat);
+                                            //         lons.push(lon);
+                                            //         if (index == 0) {
+                                            //             startLat = lat;
+                                            //             startLon = lon;
+                                            //             console.log(startLat)
+                                            //             console.log(startLon)
+                                            //         }
+                                            //         console.log(array)
+                                            
+                                            //         var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
+                                            //             center: new naver.maps.LatLng(startLat, startLon),
+                                            //             zoom: 11
+                                            //         })
+                                            //         var polyline = new naver.maps.Polyline({
+                                            //                 path: array,      //선 위치 변수배열
+                                            //                 strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                                            //                 strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                                            //                 strokeWeight: 3,   //선 두께
+                                            //                 map: n<%=f.getFeedIndex()%>   //오버레이할 지도
+                                            //             });
+                                            //     });
+                                        
+                                            // }
+                                        
+                                            </script>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -486,18 +573,23 @@
                 lats = [];
                 lons = [];
                 sum = 0;
+                var total ="";
                 $("#map").remove();
                 var map = "<div id='map' style='width:100%;height:100%;''></div>"
                 $("#exmap").append(map);
+
                 var file = event.target.files[0];
-                console.log(file);
                 var reader = new FileReader();
+
                 reader.onload = function (event) {
                     var gpx = $.parseXML(event.target.result);
                     var trackPoints = $(gpx).find('trkpt');
                     trackPoints.each(function (index, value) {
                         var lat = $(this).attr('lat');
                         var lon = $(this).attr('lon');
+                        total += lat+","+lon+"|";
+
+                        
                         array.push(new naver.maps.LatLng(lat, lon));
                         lats.push(lat);
                         lons.push(lon);
@@ -506,7 +598,8 @@
                             startLon = lon;
                         }
                     });
-                    //거리구하는 반복문
+                    
+                    
                     for (let i = 1; i < lats.length; i++) {
                         if (lats[i - 1] == lats[i]) {
                             dist = 0

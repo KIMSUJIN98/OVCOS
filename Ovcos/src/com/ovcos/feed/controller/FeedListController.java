@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ovcos.explore.model.service.ExploreService;
+import com.ovcos.explore.model.vo.Explore;
 import com.ovcos.feed.model.service.FeedService;
 import com.ovcos.feed.model.vo.Feed;
 
@@ -32,7 +34,8 @@ public class FeedListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Feed> allList = new FeedService().selectAllFeedList();
+//		ArrayList<Feed> allList = new FeedService().selectAllFeedList();
+		ArrayList<Explore> allList = new ExploreService().selectList();
 
 
 		request.setAttribute("allList", allList);

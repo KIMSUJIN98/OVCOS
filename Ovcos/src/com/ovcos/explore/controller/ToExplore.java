@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.explore.model.service.ExploreService;
 import com.ovcos.explore.model.vo.Explore;
-import com.ovcos.feed.model.vo.Feed;
 
 @WebServlet("/course")
 public class ToExplore extends HttpServlet {
