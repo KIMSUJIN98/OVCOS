@@ -136,7 +136,7 @@
                             }
                     
                     var lat = 37.4923615;
-                    var lng = 127.0292881
+                    var lng = 127.0292881;
 
                     var map = new naver.maps.Map('map',{
                         center:new naver.maps.LatLng(lat, lng),

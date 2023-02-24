@@ -93,6 +93,42 @@ public class ExploreDao {
 		
 		return list;
 	}
+	
+	public ArrayList<Explore> selectList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<Explore> list = new ArrayList<Explore>();
+		
+		String sql = prop.getProperty("selecList1");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Explore(rset.getInt("feed_index")
+						   		  , rset.getString("date")
+						   		  , rset.getString("feed_title")
+						   		  , rset.getString("feed_cnt")
+						   		  , rset.getInt("feed_eval")
+						   		  , rset.getDouble("distance")
+						   		  , rset.getDouble("start_lat")
+						   		  , rset.getDouble("start_lon")
+						   		  , rset.getString("mem_id")
+						   		  , rset.getString("change_name")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 	public ArrayList<Explore> selectKeywordList(Connection conn, Pageinfo pi, String search) {
 		ArrayList<Explore> list = new ArrayList<Explore>();
