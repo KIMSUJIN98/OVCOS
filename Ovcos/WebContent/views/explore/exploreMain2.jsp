@@ -5,7 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Explore> list = (ArrayList<Explore>)request.getAttribute("list");
 	Pageinfo pi = (Pageinfo)request.getAttribute("pi");
 
 	int currentPage = pi.getCurrentPage();
@@ -67,38 +66,7 @@
             </div>
             <div id="left_content">
                 <div id="content_list">
-                    <!-- case 1  조회 결과가 없다. -->
-                	<%if(list == null){ %>
-				 		<p>조회된 결과가 없습니다.</p>
-				 	<%}else{ %>
-                    <!-- case 2 반복문으로  -->
-                    	<%for(Explore f: list){ %>
-                    <div class="exList">
-                        <span class="list_num"><%=f.getFeedIndex() %></span>
-                        <div class="innertext">
-                            <h5><%=f.getFeedTitle() %></h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td><%=f.getDistance()%> km</td>
-                                </tr>
-                                <tr>
-                                    <td>등록유저</td>
-                                    <td><%=f.getMemId() %></td>
-                                </tr>
-                                <tr>
-                                    <td>별점</td>
-                                    <td><%=f.getFeedEval() %>/5</td>
-                                </tr>
-                            </table>
-                            <div id="bottom">
-                                <span><%=f.getFeedDate() %></span>
-                                <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
-                            </div>
-                        </div>
-                    </div>
-                    	<%} %>
-                    <%} %>
+                   <!-- 조회된 데이터 들어갈 자리 -->
                     
                 </div>
                 <div id="list_page">
@@ -130,13 +98,23 @@
 
 
                 <script>
+                    $(function(){
+                        $.ajax({
+                            url:"course1",
+                            data: {currentPage:<%=currentPage%>},
+                            type:"get",
+                            success:function(result){
+                                console.log("성공");
+                            }
+                        })
+                    })
 
                     function startDataLayer(xmlDoc) {
                             map.data.addGpx(xmlDoc);
                             }
                     
                     var lat = 37.4923615;
-                    var lng = 127.0292881;
+                    var lng = 127.0292881
 
                     var map = new naver.maps.Map('map',{
                         center:new naver.maps.LatLng(lat, lng),
@@ -151,7 +129,7 @@
                     var paths = [];
 
                     // 마커 세팅
-                    <%for(Explore e:list){%>
+                    <%-- <%for(Explore e:list){%>
                         marker = new naver.maps.Marker({
                             map:map,
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
@@ -164,10 +142,10 @@
                         })
                         markers.push(marker);
                         paths.push("<%=e.getPath()%>");
-                    <%}%>
+                    <%}%> --%>
 
                     // window 세팅
-                   <%for(Explore e: list){%>
+                   <%-- <%for(Explore e: list){%>
                     infowindows.push(new naver.maps.InfoWindow({
                         content:[
                             '<div class="iw_inner">',
@@ -178,7 +156,7 @@
                         ].join('')
                     }))
                     
-                    <%}%>
+                    <%}%> --%>
                     
  
                     $(".exList").click(function(e){

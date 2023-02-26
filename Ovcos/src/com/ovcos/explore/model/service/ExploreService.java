@@ -27,5 +27,23 @@ public class ExploreService {
 		
 		return list;
 	}
+	
+	public ArrayList<Explore> selectList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Explore> list = new ExploreDao().selectList(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Explore> selectKeywordList(Pageinfo pi, String search) {
+		Connection conn = getConnection();
+		System.out.println("서비스 시작");
+		ArrayList<Explore> list = new ExploreDao().selectKeywordList(conn,pi,search);
+		
+		close(conn);
+		
+		return list;
+	}
 
 }

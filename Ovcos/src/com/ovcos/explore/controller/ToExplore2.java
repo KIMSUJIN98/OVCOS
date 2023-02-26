@@ -10,15 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.explore.model.service.ExploreService;
 import com.ovcos.explore.model.vo.Explore;
+import com.ovcos.feed.model.vo.Feed;
 
-@WebServlet("/course")
-public class ToExplore extends HttpServlet {
+@WebServlet("/course1")
+public class ToExplore2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ToExplore() {
+    public ToExplore2() {
         super();
     }
 
@@ -60,12 +62,14 @@ public class ToExplore extends HttpServlet {
 		
 		ArrayList<Explore> list = new ExploreService().selectList(pi);
 		
-		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
+//		request.setAttribute("pi", pi);
+//		request.setAttribute("list", list);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
 		
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");
-		view.forward(request, response);
+//		RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");
+//		view.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

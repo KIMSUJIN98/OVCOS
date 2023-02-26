@@ -87,10 +87,10 @@ public class FeedEnrollController extends HttpServlet {
 			HttpSession session = request.getSession();
 			//응답뷰 지정
 			if(result>0) {
-				response.sendRedirect("/Ovcos/feed");
+				response.sendRedirect("/Ovcos/list.feed");
 				session.setAttribute("enrollFeed", "success");
 			}else {
-				response.sendRedirect("/Ovcos/feed");
+				response.sendRedirect("/Ovcos/list.feed");
 				session.setAttribute("enrollFeed", "fail");
 			}
 			
