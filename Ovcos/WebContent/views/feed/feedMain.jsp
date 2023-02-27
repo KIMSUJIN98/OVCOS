@@ -191,9 +191,7 @@
                                                     function startDataLayer(xmlDoc) {
                                                         n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
                                                         }
-                                                
-                                                    
-                                                    
+
                                             </script>
                                             
                                         </td>
@@ -381,8 +379,6 @@
         
         
         
-        
-        
                 </div>
                 <!-- Modal footer -->
                 <div style="display: flex;">
@@ -415,47 +411,7 @@
             </div>
         </div>
         </div>
-        <!-- 피드 상세 조회 -->
-        
-        <!-- Extra large modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal"
-        data-target=".bd-example-modal-xl">피드 상세 조회</button>
-        
-        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
-        aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <!-- <button type="button" class="close" data-dismiss="modal" style="margin-left: auto;">&times;</button> -->
-                <!--course_left 시작-->
-                
-                    <div id="course_left" style="border: 1px solid black; width: 150px; height: 1000px;" >
-                        <div id="sectiontop">
-                            <div id="title">피드 상세</div>
-        
-                        </div>
-                        <div id="tab_manu">
-                            <ul>
-                                <li class="tabon tabon1">최신순</li>
-        
-                            </ul>
-                        </div>
-                        <div id="content"></div>
-                        <div class="position_set">사용자 운동 기록 작성란</div>
-                    </div>
-                
-                <!-- course_left 끝-->
-                <div>
-        
-                </div>
-        
-        
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">닫기</button>
-                </div>
-            </div>
-        </div>
-        <!-- 피드 상세 조회 끝 -->
+       
         
         <!-- 피드 상세 -->
         <script>
@@ -605,6 +561,5 @@
             };
         </script>
         
-        
 
-        <img src="" alt="">
+
