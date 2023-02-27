@@ -17,17 +17,16 @@
 		      , MEM_API_TYPE
 		      , MEM_API_TOKEN
 		      , MEM_EML
+		      , MARKET_NY
 		FROM MEMBER
 		WHERE MEM_ID = ?
 		AND MEM_PWD = ?
-	
 	</entry>
 	
 	<entry key="deleteNotice">
-	
-	UPDATE
-            NOTICE
-        SET STATUS = 'N'
-    WHERE NOTICE_NO =?
+		UPDATE
+	            NOTICE
+	        SET STATUS = 'N'
+	    WHERE NOTICE_NO =?
     </entry>
 </properties>
