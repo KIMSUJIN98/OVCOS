@@ -7,19 +7,28 @@
     font-weight: normal;
     font-style: normal;
 }
+
+#fix_div{
+	width:100%;
+	height:20px;
+	
+}
 .feedContent{
     border: none;
     width: 100%;
-    height: 90%;
+    height: 95%;
     margin: auto;
-    margin-top: 20px;
     overflow: auto;
 
 }
-
+.feedContent::-webkit-scrollbar {
+    display: none;
+  }
+  
 .feeddiv{
 	border: 1px solid lightgray;
-	width: 85%;
+	width:88%;
+    width: 780px;
 	height: 600px;
     margin: auto;
     background-color :white;
@@ -30,10 +39,9 @@
     width: 96%;
     height: 90%;
     margin: auto;
-    margin-top:30px;
+    margin-top:20px;
 }
 #f_table{
-    padding: 20px;
     width: 100%;
     height: 100%;
     margin: auto;
@@ -46,10 +54,10 @@
     
 }
 #feed_profile>div{
-    width: 90%;
-    height: 90%;
+    width: 94%;
+    height: 100%;
     margin: auto;
-    margin-top: 10px;   
+      
 }
 #p_img{
     width: 50px;
@@ -67,13 +75,13 @@
 #p_name{
     width: 100%;
     height: 40%;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     line-height: 30px;
 }
 #p_loca{
     font-size: 13px;
-    margin-top: 3px;
+    margin-top: 7px;
 }
 /* 더보기버튼 */
 #plus>div{
@@ -107,6 +115,7 @@
     font-size: 18px;
     font-weight: bold;
     line-height: 40px;
+    color: rgb(60, 108, 167);
 }
 /* 피드내용 */
 #f_content{
@@ -115,6 +124,9 @@
 }
 #f_content>p{
     margin: 0px 20px;
+    font-size: 15px;
+    padding: 0;
+    height: 80%;
 }
 /* 피드내용길면 ... 나오게 */
 #f_content>p{
@@ -133,7 +145,7 @@
     width: 95%;
     height: 95%;
     margin: auto;
-    background-color: blue;
+
 }
 #gpx>div>img{
     width: 100%;
@@ -146,17 +158,24 @@
     width: 50%;
     height: 40px;
     margin-top: 20px;
-    margin-left: 20px;
-    
+    margin-left: 20px;   
+}
+.fas{
+    color:rgb(255, 230, 0);
+}
+.fa-regular{
+    color: grey;
     
 }
 
 /* 찜 */
-#like:hover{
-    margin: 0px 20px;
-}
+
+
 a{
 text-decoration:none; color:inherit; cursor: pointer;
+}
+.right_area{
+    margin-right: 20px;
 }
 .right_area .icon{
     display: flex;
@@ -184,6 +203,9 @@ color:red
 .heart.active img{
     animation: animateHeart .3s linear forwards;
 }
+
+
+
 
 @keyframes animateHeart{
     0%{transform:scale(.2);}

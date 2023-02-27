@@ -64,7 +64,7 @@
             
         </div>
     </div>
-    
+    <!-- 피드 -->
     <div id="left" class="floatWrap"> 
         <div id="feed1">
             <div style="border-bottom: 1px solid black;">
