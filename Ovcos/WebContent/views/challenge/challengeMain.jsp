@@ -61,7 +61,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">챌린지</h5>
                                     <!-- Product price-->
-                                    설명요약 (날짜 인원 대회명)
+                                    설명요약 <br> (날짜 인원 대회명)
                                 </div>
                             </div>
                             <!-- Product actions-->
