@@ -37,6 +37,9 @@ public class MemberLoginController extends HttpServlet {
 		}else {
 			session.setAttribute("loginUser", m);
 			response.sendRedirect(request.getContextPath()+"/list.feed");
+			
+			//RequestDispatcher view = request.getRequestDispatcher("views/feed/feedMain.jsp");
+			//view.forward(request, response);
 		}
 		
 	}
