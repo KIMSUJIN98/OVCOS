@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+
+<!-- 페이징을 위한 쿼리문 -->
+<entry key="selectListCount">
+	SELECT
+    COUNT(*) COUNT
+    FROM FOLLOW 
+    WHERE MEM_ID = ?
+</entry>
+
+
+
+<!-- 내(로그인유저)가 팔로우하고있는 유저 목록 -->
+<entry key="selectList">
+select mem_name, mem_intro
+from member m , follow f
+where m.mem_id = f.flw_id
+and f.mem_Id = ?
+
+</entry>
+
+
+<!-- 나를 팔로우 하고 있는 유저 목록 -->
+<entry key="selectaddMeList">
+SELECT MEM_NAME, MEM_INTRO
+FROM MEMBER M, FOLLOW F
+WHERE  M.MEM_ID = F.MEM_ID
+AND flw_id = ?
+
+</entry>
+
+
+</properties>

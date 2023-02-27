@@ -50,13 +50,13 @@
             
             <div id="firstGroup">
                 <div id="logo">
-                    <a href="<%=contextPath%>/list.feed"><img src="<%= contextPath %>/resources/image/logo.png" alt="ovcos 로고" id="logoimg"></a>
+                    <a href="<%= contextPath %>/list.feed"><img src="<%= contextPath %>/resources/image/logo.png" alt="ovcos 로고" id="logoimg"></a>
                     
                 </div>
                 <div id="menu">
                     <ul>
 
-                        <li id="feed"><a href="<%=contextPath%>/list.feed">피드</a></li>
+                        <li id="feed"><a href="<%= contextPath %>/list.feed">피드</a></li>
                         <li id="explore"><a href="<%= contextPath %>/course?epage=1">탐색</a></li>
                         <li id="challenge"><a href="<%= contextPath %>/views/challenge/challengeMain.jsp">챌린지</a>
 	                        <ul>
@@ -91,7 +91,7 @@
                         	</li>
                             <li class="subMenuList"><a href="#">마이페이지</a></li>
                             <li class="subMenuList"><a href="#">개인정보수정</a></li>
-                            <li class="subMenuList"><a href="#">친구목록</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>
                             <li class="subMenuList"><a href="#">로그아웃</a></li>
                         </ul>
                     </li>
