@@ -41,5 +41,26 @@ public class ChallengeService {
 		
 		return contestCompleteCount;
 	}
+
+	public int normalProgressCount(String userId) {
+		Connection conn = getConnection();
+		
+		int normalProgressCount = new ChallengeDao().normalProgressCount(conn, userId);
+		
+		close(conn);
+		
+		return normalProgressCount;
+		
+	}
+
+	public int normalCompleteCount(String userId) {
+		Connection conn = getConnection();
+		
+		int normalCompleteCount = new ChallengeDao().normalCompleteCount(conn, userId);
+		
+		close(conn);
+		
+		return normalCompleteCount;
+	}
 	
 }

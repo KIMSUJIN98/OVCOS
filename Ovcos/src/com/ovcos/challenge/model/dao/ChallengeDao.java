@@ -106,5 +106,59 @@ public class ChallengeDao {
 		
 		return contestCompleteCount;
 	}
+
+	public int normalProgressCount(Connection conn, String userId) {
+		int normalProgressCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("normalProgressCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				normalProgressCount = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return normalProgressCount;
+		
+	}
+
+	public int normalCompleteCount(Connection conn, String userId) {
+		int normalCompleteCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("normalCompleteCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				normalCompleteCount = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return normalCompleteCount;
+		
+	}
 	
 }
