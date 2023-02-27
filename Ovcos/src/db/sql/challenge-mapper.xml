@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<!-- 대회리스트 -->
 	<entry key="selectContest">
 		SELECT 
 		       CNTS_NAME
@@ -9,23 +10,44 @@
 		  FROM CONTEST
 	</entry>
 	
+	<!-- 챌린지 메인 카운트 -->
 	<entry key="contestProgressCount">
 		SELECT 
 		       COUNT(*) COUNT
 		  FROM ENTRY_LIST
-		  JOIN CHALLENGE ON (CHLG_NO = CHLG_NO_INLIST)
+		  JOIN CONTEST_CHALLENGE ON (CNTS_CHLG_NO = CHLG_NO_INLIST)
 		 WHERE CHLG_ENTRY_ID = ?
-		   AND CHLG_DATE > SYSDATE
+		   AND CNTS_CHLG_DATE > SYSDATE
 	</entry>
 	
 	<entry key="contestCompleteCount">
 		SELECT 
 		       COUNT(*) COUNT
 		  FROM ENTRY_LIST
-		  JOIN CHALLENGE ON (CHLG_NO = CHLG_NO_INLIST)
+		  JOIN CONTEST_CHALLENGE ON (CNTS_CHLG_NO = CHLG_NO_INLIST)
 		 WHERE CHLG_ENTRY_ID = ?
-		   AND CHLG_DATE &lt; SYSDATE
+		   AND CNTS_CHLG_DATE &lt; SYSDATE
 	</entry>
+	
+	<entry key="normalProgressCount">
+		SELECT 
+		       COUNT(*) COUNT
+		  FROM NENTRY_LIST
+		  JOIN NORMAL_CHALLENGE ON (NOR_CHLG_NO = NCHLG_NO_INLIST)
+		 WHERE NCHLG_ENTRY_ID = ?
+		   AND NOR_CHLG_DATE > SYSDATE
+	</entry>
+	
+	<entry key="normalCompleteCount">
+		SELECT 
+		       COUNT(*) COUNT
+		  FROM NENTRY_LIST
+		  JOIN NORMAL_CHALLENGE ON (NOR_CHLG_NO = NCHLG_NO_INLIST)
+		 WHERE NCHLG_ENTRY_ID = ?
+		   AND NOR_CHLG_DATE &lt; SYSDATE
+	</entry>
+	
+	<!--  -->
 
 
 </properties>

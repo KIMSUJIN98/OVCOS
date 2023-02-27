@@ -43,10 +43,21 @@ public class ChallengeMainController extends HttpServlet {
 		int contestProgressCount = cService.contestProgressCount(userId);
 		int contestCompleteCount = cService.contestCompleteCount(userId);
 		
+		int normalProgressCount = cService.normalProgressCount(userId);
+		int normalCompleteCount = cService.normalCompleteCount(userId);
 		
+		int totalProgressCount = contestProgressCount + normalProgressCount;
+		int totalCompleteCount = contestCompleteCount + normalCompleteCount;
 		
 		request.setAttribute("contestProgressCount", contestProgressCount);
 		request.setAttribute("contestCompleteCount", contestCompleteCount);
+		
+		request.setAttribute("normalProgressCount", normalProgressCount);
+		request.setAttribute("normalCompleteCount", normalCompleteCount);
+		
+		request.setAttribute("totalProgressCount", totalProgressCount);
+		request.setAttribute("totalCompleteCount", totalCompleteCount);
+		
 		request.getRequestDispatcher("views/challenge/challengeMain.jsp").forward(request, response);
 		
 	}
