@@ -93,9 +93,24 @@
             <div id="ct2">
                 <div id="content_header">
                     <div id="btn_list">
-                        <div id="all_feed"><a href="">전체피드</a></div>
-                        <div id="fw_feed"><a href="">친구피드</a></div>
-                        <div id="my_feed"><a href="">내피드</a></div>
+                        <div id="all_feed"><a href="#" onclick = "allfeed();" >전체피드</a></div>
+                        <div id="fw_feed"><a href="#">친구피드</a></div>
+                        <div id="my_feed"><a href="#">내피드</a></div>
+                    </div>
+                    <div id="feed_search">
+						<div id="f_select">
+						    <select name="f_search_select" id="f_search_select">
+						    <option value="">작성자</option>
+						    <option value="">제목</option>
+						    <option value="">내용</option>
+						    </select>
+						</div>
+						<div id="f_search">
+						    <input type="search" id="search" name="search" placeholder="검색">
+						</div>
+						<div id="search_btn">
+						    <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색">
+						</div>
                     </div>
                     <div id="feed_select">
                         <select name="" id="fs">
@@ -109,23 +124,8 @@
 
                 <div id="content_feed">
 
-                    <div id="feed_search">
-                        <div id="f_select">
-                            <select name="f_search_select" id="f_search_select">
-                            <option value="">작성자</option>
-                            <option value="">제목</option>
-                            <option value="">내용</option>
-                            </select>
-                        </div>
-                        <div id="f_search">
-                            <input type="search" id="search" name="search" placeholder="피드검색">
-                        </div>
-                        <div id="search_btn">
-                            <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색">
-                        </div>
-                    </div>
+					<div id="fix_div"></div>
                     
-
                     <div class="feedContent">
                     
                     <%if(allList == null){ %>
@@ -159,7 +159,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3" id="f_content">
-                                            <p><%=f.getFeedCnt() %></p>
+                                            <p><%=f.getFeedCnt() %> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur sit maiores laudantium, ipsum expedita repellendus minima? Eligendi a sapiente suscipit asperiores illum, reprehenderit unde magnam ipsam harum amet ipsum quod!</p>
                                         </td>
                                     </tr>
                                     
@@ -168,17 +168,17 @@
                                             <div>
                                                 <!-- <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt=""> -->
 
-                                                <div id="n<%=f.getFeedIndex()%>" style="width: 600px; height: 280px;"></div>
+                                                <div id="n<%=f.getFeedIndex()%>" style="width: 700px; height: 340px;"></div>
                                             </div>
                                             <script>
                                                 
-
+                                            
                                                     var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
                                                         center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
                                                         zoom: 12
                                                     })
-
-
+                                                    
+                                                    
                                             $.ajax({
                                                 url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
                                                 dataType: 'xml',
@@ -189,66 +189,11 @@
                                                 });
                                                     
                                                     function startDataLayer(xmlDoc) {
-                                                    	n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
+                                                        n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
                                                         }
                                                 
-
-
-                                            //     var xhttp = new XMLHttpRequest();
-                                            //     xhttp.onreadystatechange = function () {
-                                            
-                                            //     if(this.readyState == 4 && this.status == 200){
-                                            //     nodeValfunc( this ); // this == xhttp 
-                                            //     }
-                                            // }
-                                            // xhttp.open("GET", "<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>", true);
-                                            // xhttp.send();
-                                        
-                                            // function nodeValfunc( xml ) { // ( xml ) 객체 넘겨받기
-                                                
-                                            //     xmlDoc = xml.responseXML; 
-                                            //     var array = [];
-                                            //     var lats = [];
-                                            //     var lons = [];
-                                            //     var startLat; 
-                                            //     var startLon;
-                                        
-                                            //     var trackPoints = $(xmlDoc).find('trkpt');
-                                            //     console.log(trackPoints)
-                                            //     trackPoints.each(function (index, value) {
-                                            //         var lat = $(this).attr('lat');
-                                            //         var lon = $(this).attr('lon');
-                                            //         if (index == 0) {
-                                            //                         startLat = lat;
-                                            //                         startLon = lon;
-                                            //                     }
                                                     
-                                            //         array.push(new naver.maps.LatLng(lat, lon));
-                                            //         lats.push(lat);
-                                            //         lons.push(lon);
-                                            //         if (index == 0) {
-                                            //             startLat = lat;
-                                            //             startLon = lon;
-                                            //             console.log(startLat)
-                                            //             console.log(startLon)
-                                            //         }
-                                            //         console.log(array)
-                                            
-                                            //         var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
-                                            //             center: new naver.maps.LatLng(startLat, startLon),
-                                            //             zoom: 11
-                                            //         })
-                                            //         var polyline = new naver.maps.Polyline({
-                                            //                 path: array,      //선 위치 변수배열
-                                            //                 strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                            //                 strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                            //                 strokeWeight: 3,   //선 두께
-                                            //                 map: n<%=f.getFeedIndex()%>   //오버레이할 지도
-                                            //             });
-                                            //     });
-                                        
-                                            // }
-                                        
+                                                    
                                             </script>
                                             
                                         </td>
@@ -274,8 +219,8 @@
 
                                             
                                         </td>
-                                        <td id="comment">댓글?</td>
-                                        <td id="like" align="center">
+                                        <td id="comment"></td>
+                                        <td id="like" align="right">
                                             <div class="right_area">
                                                 <a href="javascript:;" class="icon heart">
                                                     <img src="https://cdn-icons-png.flaticon.com/512/812/812327.png" alt="찜하기">
@@ -303,10 +248,10 @@
                 //heart 좋아요 클릭시! 하트 뿅
                 $(function(){
                     var $likeBtn =$('.icon.heart');
-
+                    
                         $likeBtn.click(function(){
                         $likeBtn.toggleClass('active');
-
+                        
                         if($likeBtn.hasClass('active')){          
                         $(this).find('img').attr({
                             'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',
@@ -577,10 +522,10 @@
                 $("#map").remove();
                 var map = "<div id='map' style='width:100%;height:100%;''></div>"
                 $("#exmap").append(map);
-
+                
                 var file = event.target.files[0];
                 var reader = new FileReader();
-
+                
                 reader.onload = function (event) {
                     var gpx = $.parseXML(event.target.result);
                     var trackPoints = $(gpx).find('trkpt');
@@ -588,7 +533,7 @@
                         var lat = $(this).attr('lat');
                         var lon = $(this).attr('lon');
                         total += lat+","+lon+"|";
-
+                        
                         
                         array.push(new naver.maps.LatLng(lat, lon));
                         lats.push(lat);
@@ -659,4 +604,7 @@
                 reader.readAsText(file);
             };
         </script>
+        
+        
+
         <img src="" alt="">
