@@ -40,21 +40,22 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				m = new Member(
-								  rset.getString(1)
-								, rset.getString(2)
-								, rset.getString(3)
-								, rset.getString(4)
-								, rset.getString(5)
-								, rset.getDate(6)
-								, rset.getString(7)
-								, rset.getString(8)
-								, rset.getString(9)
-								, rset.getInt(10)
-								, rset.getString(11)
-								, rset.getInt(12)
-								, rset.getString(13)
-								, rset.getString(14)
-								, rset.getString(15)
+								  rset.getString("MEM_ID")
+								, rset.getString("MEM_PWD")
+								, rset.getString("MEM_NAME")
+								, rset.getString("MEM_NICK")
+								, rset.getString("MEM_INTRO")
+								, rset.getDate("MEM_BIRTH")
+								, rset.getString("MEM_STATUS")
+								, rset.getString("MEM_LOC_INFO")
+								, rset.getString("MEM_PUBLIC_NY")
+								, rset.getInt("MEM_GOAL_DTN")
+								, rset.getString("MEM_CODE_NY")
+								, rset.getInt("MEM_RPR_CUM")
+								, rset.getString("MEM_API_TYPE")
+								, rset.getString("MEM_API_TOKEN")
+								, rset.getString("MEM_EML")
+								, rset.getString("MARKET_NY")
 						);
 			}
 			
