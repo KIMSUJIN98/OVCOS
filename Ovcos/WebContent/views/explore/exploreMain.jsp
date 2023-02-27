@@ -171,8 +171,7 @@
                     infowindows.push(new naver.maps.InfoWindow({
                         content:[
                             '<div class="iw_inner">',
-                            '   <h6><%=e.getFeedTitle()%></h6>',
-                            '    <span src="<%=contextPath%>/resources/image/route.png">',
+                            '   <span><%=e.getFeedTitle()%></span>',
                             '	<span><%=e.getDistance()%> km</span>	',
                             '</div>'	
                         ].join('')
@@ -203,7 +202,7 @@
                             dataType: 'xml',
                             strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
                             strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                            strokeWeight: 3,   //선 두께
+                            strokeWeight: 5,   //선 두께
                             success: startDataLayer
                             });
                             if(infowindows[index-1].getMap()){
@@ -211,11 +210,14 @@
                             }else{
                                 infowindows[index-1].open(map,markers[index-1]);
                             }
-
-                            
-                            
-                    })
-
+                        
+                        })
+                        
+                        naver.maps.Event.addListener(map, 'click', function(e) {
+                            for(let i = 0; i<infowindows.length; i++){
+                                infowindows[i].close();
+                            }
+                        });
                    
 
                     for(let i=0; i<markers.length; i++){
@@ -241,6 +243,8 @@
                             
                         });
                     }
+
+                    
                     
                 </script>
 

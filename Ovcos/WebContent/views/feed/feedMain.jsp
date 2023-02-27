@@ -191,9 +191,7 @@
                                                     function startDataLayer(xmlDoc) {
                                                         n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
                                                         }
-                                                
-                                                    
-                                                    
+
                                             </script>
                                             
                                         </td>
@@ -381,8 +379,6 @@
         
         
         
-        
-        
                 </div>
                 <!-- Modal footer -->
                 <div style="display: flex;">
@@ -565,6 +561,5 @@
             };
         </script>
         
-        
 
-        <img src="" alt="">
+

@@ -243,18 +243,19 @@ td{
 }
 
 path{
-    stroke: red !important;
+    stroke: orangered !important;
 }
 
 .iw_inner{
-    width: 200px;
+    width: 180px;
     height: 70px;
     text-align: center;
-    border-color: red;
     
 }
 
-
-.iw_inner span{
-    display: block;
+.iw_inner>span:first-child{
+    margin-top: 10px;
+    font-weight: bold;
 }
+
+
