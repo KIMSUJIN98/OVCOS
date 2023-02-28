@@ -1,6 +1,8 @@
 package com.ovcos.challenge.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ovcos.challenge.model.service.ChallengeService;
+import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.EntryList;
 import com.ovcos.challenge.model.vo.NEntryList;
+import com.ovcos.challenge.model.vo.NormalChallenge;
 import com.ovcos.loginRegister.model.vo.Member;
 
 /**
@@ -42,21 +46,24 @@ public class ChallengeMainController extends HttpServlet {
 		
 		int contestProgressCount = cService.contestProgressCount(userId);
 		int contestCompleteCount = cService.contestCompleteCount(userId);
-		
-		int normalProgressCount = cService.normalProgressCount(userId);
-		int normalCompleteCount = cService.normalCompleteCount(userId);
-		
-		int totalProgressCount = contestProgressCount + normalProgressCount;
-		int totalCompleteCount = contestCompleteCount + normalCompleteCount;
-		
 		request.setAttribute("contestProgressCount", contestProgressCount);
 		request.setAttribute("contestCompleteCount", contestCompleteCount);
 		
+		int normalProgressCount = cService.normalProgressCount(userId);
+		int normalCompleteCount = cService.normalCompleteCount(userId);
 		request.setAttribute("normalProgressCount", normalProgressCount);
 		request.setAttribute("normalCompleteCount", normalCompleteCount);
 		
+		int totalProgressCount = contestProgressCount + normalProgressCount;
+		int totalCompleteCount = contestCompleteCount + normalCompleteCount;
 		request.setAttribute("totalProgressCount", totalProgressCount);
 		request.setAttribute("totalCompleteCount", totalCompleteCount);
+		
+		ArrayList<ContestChallenge> list1 = new ChallengeService().mainContestList(userId);
+		ArrayList<NormalChallenge> list2 = new ChallengeService().mainNormalList(userId);
+		request.setAttribute("list1", list1);
+		request.setAttribute("list2", list2);
+		
 		
 		request.getRequestDispatcher("views/challenge/challengeMain.jsp").forward(request, response);
 		

@@ -20,10 +20,11 @@ public class Contest {
 		this.delStatus = delStatus;
 	}
 	
-	
 
-	public Contest(String contestName, Date contestDate, String contestUrl) {
+
+	public Contest(int contestNo, String contestName, Date contestDate, String contestUrl) {
 		super();
+		this.contestNo = contestNo;
 		this.contestName = contestName;
 		this.contestDate = contestDate;
 		this.contestUrl = contestUrl;

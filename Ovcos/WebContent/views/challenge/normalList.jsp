@@ -77,11 +77,13 @@
                                 생성해보세요!
                             </div>
                             <br><br>
-                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeNormal">새로운 모험</button></div>
+                            <!-- Button to Open the Modal -->
+                            <div class="text-center">
+                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeNormal">새로운 모험</button>
+                            </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <!-- Button to Open the Modal -->
                                         
                             <!-- The Modal -->
                             <div class="modal" id="newCallengeNormal">

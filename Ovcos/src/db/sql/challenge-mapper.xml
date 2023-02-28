@@ -4,7 +4,8 @@
 	<!-- 대회리스트 -->
 	<entry key="selectContest">
 		SELECT 
-		       CNTS_NAME
+		       CNTS_NO
+		     , CNTS_NAME
 		     , CNTS_DATE
 		     , CNTS_URL
 		  FROM CONTEST
@@ -47,7 +48,60 @@
 		   AND NOR_CHLG_DATE &lt; SYSDATE
 	</entry>
 	
-	<!--  -->
+	<!-- 챌린지 메인 리스트 -->
+	<entry key="mainContestList">
+		SELECT 
+		       CNTS_CHLG_TITLE
+		     , ENROLL_DATE
+		     , CNTS_CHLG_DATE
+		     , CNTS_CHLG_MAX
+		     , CNTS_CHLG_ID
+		     , CNTS_NAME
+		  FROM CONTEST_CHALLENGE C
+		  JOIN CONTEST USING (CNTS_NO)
+		  JOIN ENTRY_LIST ON (CHLG_NO_INLIST = CNTS_NO)
+		 WHERE
+		       CHLG_ENTRY_ID = ?
+		   AND C.DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+	</entry>
+	
+	<entry key="mainNormalList">
+		SELECT 
+		       NOR_CHLG_TITLE
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+		  FROM NORMAL_CHALLENGE
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+		  JOIN NENTRY_LIST ON (NCHLG_NO_INLIST = NOR_CHLG_NO)
+		 WHERE
+		       NCHLG_ENTRY_ID = ?
+		   AND DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+	</entry>
 
+	<!-- 대회 챌린지 리스트 -->
+	<entry key="contestChallengeList">
+		SELECT 
+		       CNTS_CHLG_TITLE
+		     , ENROLL_DATE
+		     , CNTS_CHLG_DATE
+		     , CNTS_CHLG_MAX
+		     , CNTS_CHLG_ID
+		     , CNTS_NAME
+		     , (SELECT 
+		               COUNT(CHLG_ENTRY_ID)
+		          FROM ENTRY_LIST 
+		         WHERE CHLG_NO_INLIST = CNTS_CHLG_NO) COUNT
+		  FROM CONTEST_CHALLENGE C
+		  JOIN CONTEST USING (CNTS_NO)
+		 WHERE
+		       C.DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+		   AND CNTS_NAME = ?
+	</entry>
 
 </properties>

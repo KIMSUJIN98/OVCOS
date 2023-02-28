@@ -3,53 +3,81 @@ package com.ovcos.challenge.model.vo;
 import java.sql.Date;
 
 public class ContestChallenge {
-	private int contestChallNo;
-	private String contestChallTitle;
+	private int contestChallengeNo;
+	private String contestChallengeTitle;
 	private Date enrollDate;
-	private Date contestChallDate;
-	private String time;
-	private int contestChallMax;
+	private Date contestChallengeDate;
+	private int contestChallengeMax;
 	private String rprStatus;
 	private Date rprDate;
 	private String delStatus;
 	private String rprId;
-	private int contestNo;
-	private String contestChallId;
+	private String contestChallengeId;
+	private String contestNo;
+	
+	private int count;
 	
 	public ContestChallenge() {}
 
-	public ContestChallenge(int contestChallNo, String contestChallTitle, Date enrollDate, Date contestChallDate,
-			String time, int contestChallMax, String rprStatus, Date rprDate, String delStatus, String rprId,
-			int contestNo, String contestChallId) {
+	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, Date enrollDate,
+			Date contestChallengeDate, int contestChallengeMax, String rprStatus, Date rprDate, String delStatus,
+			String rprId, String contestChallengeId, String contestNo) {
 		super();
-		this.contestChallNo = contestChallNo;
-		this.contestChallTitle = contestChallTitle;
+		this.contestChallengeNo = contestChallengeNo;
+		this.contestChallengeTitle = contestChallengeTitle;
 		this.enrollDate = enrollDate;
-		this.contestChallDate = contestChallDate;
-		this.time = time;
-		this.contestChallMax = contestChallMax;
+		this.contestChallengeDate = contestChallengeDate;
+		this.contestChallengeMax = contestChallengeMax;
 		this.rprStatus = rprStatus;
 		this.rprDate = rprDate;
 		this.delStatus = delStatus;
 		this.rprId = rprId;
+		this.contestChallengeId = contestChallengeId;
 		this.contestNo = contestNo;
-		this.contestChallId = contestChallId;
+	}
+	
+	public ContestChallenge(String contestChallengeTitle, Date enrollDate, Date contestChallengeDate,
+			int contestChallengeMax, String contestChallengeId, String contestNo) {
+		super();
+		this.contestChallengeTitle = contestChallengeTitle;
+		this.enrollDate = enrollDate;
+		this.contestChallengeDate = contestChallengeDate;
+		this.contestChallengeMax = contestChallengeMax;
+		this.contestChallengeId = contestChallengeId;
+		this.contestNo = contestNo;
 	}
 
-	public int getContestChallNo() {
-		return contestChallNo;
+	public ContestChallenge(String contestChallengeTitle, Date enrollDate, Date contestChallengeDate,
+			int contestChallengeMax, String contestChallengeId, String contestNo, int count) {
+		super();
+		this.contestChallengeTitle = contestChallengeTitle;
+		this.enrollDate = enrollDate;
+		this.contestChallengeDate = contestChallengeDate;
+		this.contestChallengeMax = contestChallengeMax;
+		this.contestChallengeId = contestChallengeId;
+		this.contestNo = contestNo;
+		this.count = count;
 	}
 
-	public void setContestChallNo(int contestChallNo) {
-		this.contestChallNo = contestChallNo;
+	public ContestChallenge(int count) {
+		super();
+		this.count = count;
 	}
 
-	public String getContestChallTitle() {
-		return contestChallTitle;
+	public int getContestChallengeNo() {
+		return contestChallengeNo;
 	}
 
-	public void setContestChallTitle(String contestChallTitle) {
-		this.contestChallTitle = contestChallTitle;
+	public void setContestChallengeNo(int contestChallengeNo) {
+		this.contestChallengeNo = contestChallengeNo;
+	}
+
+	public String getContestChallengeTitle() {
+		return contestChallengeTitle;
+	}
+
+	public void setContestChallengeTitle(String contestChallengeTitle) {
+		this.contestChallengeTitle = contestChallengeTitle;
 	}
 
 	public Date getEnrollDate() {
@@ -60,28 +88,20 @@ public class ContestChallenge {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getContestChallDate() {
-		return contestChallDate;
+	public Date getContestChallengeDate() {
+		return contestChallengeDate;
 	}
 
-	public void setContestChallDate(Date contestChallDate) {
-		this.contestChallDate = contestChallDate;
+	public void setContestChallengeDate(Date contestChallengeDate) {
+		this.contestChallengeDate = contestChallengeDate;
 	}
 
-	public String getTime() {
-		return time;
+	public int getContestChallengeMax() {
+		return contestChallengeMax;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public int getContestChallMax() {
-		return contestChallMax;
-	}
-
-	public void setContestChallMax(int contestChallMax) {
-		this.contestChallMax = contestChallMax;
+	public void setContestChallengeMax(int contestChallengeMax) {
+		this.contestChallengeMax = contestChallengeMax;
 	}
 
 	public String getRprStatus() {
@@ -116,30 +136,42 @@ public class ContestChallenge {
 		this.rprId = rprId;
 	}
 
-	public int getContestNo() {
+	public String getContestChallengeId() {
+		return contestChallengeId;
+	}
+
+	public void setContestChallengeId(String contestChallengeId) {
+		this.contestChallengeId = contestChallengeId;
+	}
+
+	public String getContestNo() {
 		return contestNo;
 	}
 
-	public void setContestNo(int contestNo) {
+	public void setContestNo(String contestNo) {
 		this.contestNo = contestNo;
 	}
-
-	public String getContestChallId() {
-		return contestChallId;
+	
+	
+	
+	
+	public int getCount() {
+		return count;
 	}
 
-	public void setContestChallId(String contestChallId) {
-		this.contestChallId = contestChallId;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	@Override
 	public String toString() {
-		return "ContestChallenge [contestChallNo=" + contestChallNo + ", contestChallTitle=" + contestChallTitle
-				+ ", enrollDate=" + enrollDate + ", contestChallDate=" + contestChallDate + ", time=" + time
-				+ ", contestChallMax=" + contestChallMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate
-				+ ", delStatus=" + delStatus + ", rprId=" + rprId + ", contestNo=" + contestNo + ", contestChallId="
-				+ contestChallId + "]";
+		return "ContestChallenge [contestChallengeNo=" + contestChallengeNo + ", contestChallengeTitle="
+				+ contestChallengeTitle + ", enrollDate=" + enrollDate + ", contestChallengeDate="
+				+ contestChallengeDate + ", contestChallengeMax=" + contestChallengeMax + ", rprStatus=" + rprStatus
+				+ ", rprDate=" + rprDate + ", delStatus=" + delStatus + ", rprId=" + rprId + ", contestChallengeId="
+				+ contestChallengeId + ", contestNo=" + contestNo + ", count=" + count + "]";
 	}
+
 
 	
 	

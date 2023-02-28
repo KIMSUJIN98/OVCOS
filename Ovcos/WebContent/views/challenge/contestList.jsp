@@ -1,5 +1,11 @@
+<%@page import="com.ovcos.challenge.model.vo.ContestChallenge"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<ContestChallenge> list = (ArrayList<ContestChallenge>)request.getAttribute("list");
+	String contestName = (String)request.getAttribute("contestName");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +37,7 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">대회명 챌린지</h1>
+                <h1 class="display-4 fw-bolder"><%= contestName %></h1>
                 <p class="lead fw-normal text-white-50 mb-0"></p>
             </div>
         </div>
@@ -59,68 +65,15 @@
                         </div>
                         <!-- actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        
-                            <!-- The Modal -->
-                            <div class="modal" id="newCnts">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">챌린지 생성</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div>
-                        <!-- image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- content -->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <!-- Button to Open the Modal -->
-                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#cntsDetail">참가하기</button>
-                            </div>
-                        </div>
                             <!-- The Modal -->
                             <div class="modal" id="newCallengeContest">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-
                                         <!-- Modal Header -->
                                         <div class="modal-header">
                                             <h4 class="modal-title">챌린지 생성</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-
                                         <!-- Modal body -->
                                         <div class="modal-body" align="center">
                                             <form action="test.do" method="post" id="updatechallenge-form">
@@ -167,128 +120,34 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">참여중</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">참여중</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">참여중</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
+				<% for(ContestChallenge c : list) { %>
+                   <div class="col mb-5">
+                       <div class="card h-100">
+                           <!-- Product image-->
+                           <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                               alt="..." />
+                           <!-- Product details-->
+                           <div class="card-body p-4">
+                               <div class="text-center">
+                                   <!-- Product name-->
+                                   <h5 class="fw-bolder"><%= c.getContestChallengeTitle() %></h5>
+                                   <!-- Product price-->
+                                   <%= c.getContestNo() %><br>
+                                   <%= c.getContestChallengeDate() %><br>
+                                   <%= c.getCount() %>
+                               </div>
+                           </div>
+                           <!-- Product actions-->
+                           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                               <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <% } %>
             </div>
         </div>
     </section>

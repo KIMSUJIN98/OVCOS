@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import com.ovcos.challenge.model.dao.ChallengeDao;
 import com.ovcos.challenge.model.vo.Contest;
+import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.EntryList;
 import com.ovcos.challenge.model.vo.NEntryList;
+import com.ovcos.challenge.model.vo.NormalChallenge;
 
 import static com.ovcos.common.JDBCTemplate.*;
 
@@ -61,6 +63,36 @@ public class ChallengeService {
 		close(conn);
 		
 		return normalCompleteCount;
+	}
+
+	public ArrayList<ContestChallenge> mainContestList(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<ContestChallenge> list1 = new ChallengeDao().mainContestList(conn, userId);
+		
+		close(conn);
+		
+		return list1;
+	}
+
+	public ArrayList<NormalChallenge> mainNormalList(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<NormalChallenge> list2 = new ChallengeDao().mainNormalList(conn, userId);
+		
+		close(conn);
+		
+		return list2;
+	}
+
+	public ArrayList<ContestChallenge> contestChallengeList(String contestName) {
+		Connection conn = getConnection();
+		
+		ArrayList<ContestChallenge> list = new ChallengeDao().contestChallengeList(conn, contestName);
+		
+		close(conn);
+		
+		return list;
 	}
 	
 }
