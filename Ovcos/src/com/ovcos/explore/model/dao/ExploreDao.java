@@ -53,13 +53,21 @@ public class ExploreDao {
 		return listCount;
 	}
 
-	public ArrayList<Explore> selectList(Connection conn, Pageinfo pi) {
+	public ArrayList<Explore> selectList(Connection conn, Pageinfo pi, String status) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		ArrayList<Explore> list = new ArrayList<Explore>();
 		
-		String sql = prop.getProperty("selecList");
+		String sql = "";
+		
+		if(status.equals("f")) {
+			sql = prop.getProperty("selecFList");
+		}else {
+			sql = prop.getProperty("selecEList");
+			
+		}
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
