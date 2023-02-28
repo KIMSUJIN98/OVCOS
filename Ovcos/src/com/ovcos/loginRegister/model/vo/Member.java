@@ -18,8 +18,41 @@ public class Member {
 	private String memApiType;
 	private String memApiToken;
 	private String memEml;
+	private String marketNy;
 	
 	public Member() {}
+	
+	
+	
+	
+	
+
+	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, Date memBirth,
+			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn, String memCodeNy, int memRprCum,
+			String memApiType, String memApiToken, String memEml, String marketNy) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.memIntro = memIntro;
+		this.memBirth = memBirth;
+		this.memStatus = memStatus;
+		this.memLocInfo = memLocInfo;
+		this.memPublicNy = memPublicNy;
+		this.memGoalDtn = memGoalDtn;
+		this.memCodeNy = memCodeNy;
+		this.memRprCum = memRprCum;
+		this.memApiType = memApiType;
+		this.memApiToken = memApiToken;
+		this.memEml = memEml;
+		this.marketNy = marketNy;
+	}
+
+
+
+
+
 
 	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, Date memBirth,
 			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn,
@@ -161,6 +194,22 @@ public class Member {
 	public void setMemEml(String memEml) {
 		this.memEml = memEml;
 	}
+	
+	
+
+	public String getMarketNy() {
+		return marketNy;
+	}
+
+
+	public void setMarketNy(String marketNy) {
+		this.marketNy = marketNy;
+	}
+
+
+
+
+
 
 	@Override
 	public String toString() {
@@ -168,8 +217,15 @@ public class Member {
 				+ ", memIntro=" + memIntro + ", memBirth=" + memBirth + ", memStatus=" + memStatus + ", memLocInfo="
 				+ memLocInfo + ", memPublicNy=" + memPublicNy + ", memGoalDtn=" + memGoalDtn + ", memCodeNy="
 				+ memCodeNy + ", memRprCum=" + memRprCum + ", memApiType=" + memApiType + ", memApiToken=" + memApiToken
-				+ ", memEml=" + memEml + "]";
+				+ ", memEml=" + memEml + ", marketNy=" + marketNy + "]";
 	}
+
+
+
+
+
+
+	
 
 	
 	
