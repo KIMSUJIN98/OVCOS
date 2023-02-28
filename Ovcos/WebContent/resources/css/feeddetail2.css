@@ -35,3 +35,22 @@
 #fontth{
     padding-right: 9px;
 }
+#feeds{
+    font-size: 1.3rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 15px;
+}
+#feeds1{
+    width: 410px;
+    height: 150px;
+}
+#com{
+    padding-left: 15px;
+}
+#love, #download1{
+    width: 13px; 
+    padding-bottom: 2px;
+    margin-left: 170px; 
+    /* padding-left: 170px; */
+}

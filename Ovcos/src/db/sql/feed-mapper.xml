@@ -66,14 +66,33 @@
 		     , START_LON
 		     , MEM_NICK
 		 FROM FEED
-		 JOIN MEMBER USING(MEM_ID)
+		 JOIN MEMBER USING(ME
+		 M_ID)
 		WHERE FEED_PUBLIC_TYPE ='전체'
 		  AND FEED_RPR_NY = 'N'
 		  AND FEED_DEL_NY = 'N'
 		ORDER
 		    BY FEED_INDEX DESC
 	</entry>
-	
+	<entry key="selectMember">
+		SELECT 
+		FEED_INDEX
+	  , FEED_DATE
+	  , FEED_TITLE
+	  , FEED_CNT
+	  , FEED_EVAL
+	  , DISTANCE
+	  , START_LAT
+	  , START_LON
+      , MEM_ID
+      , CHANGE_NAME
+      , HIT
+		 FROM FEED
+		LEFT JOIN UPLOAD ON(MEM_ID =UPL_ID)
+	WHERE FEED_INDEX = ?
+		  AND FEED_RPR_NY = 'N'
+		  AND FEED_DEL_NY = 'N'
+	</entry>
 	
 	
 </properties>

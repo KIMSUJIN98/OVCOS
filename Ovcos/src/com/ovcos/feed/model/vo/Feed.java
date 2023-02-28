@@ -18,6 +18,7 @@ public class Feed {
 	private double startLon;// 시작 경도
 	private String feedDelNy;//	피드삭제여부
 	private String MemId;//	회원 아이디
+	
 
 
 
@@ -86,7 +87,16 @@ public class Feed {
 		this.startLon = startLon;
 		MemId = memId;
 	}
+	
+	
+	
+	
+	
 
+
+
+
+	
 
 
 

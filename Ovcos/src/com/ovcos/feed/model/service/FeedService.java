@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import com.ovcos.feed.model.dao.FeedDao;
 import com.ovcos.feed.model.vo.Feed;
+import com.ovcos.feed.model.vo.Feeddetails;
+import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
 public class FeedService {
@@ -39,4 +41,19 @@ public class FeedService {
 		
 		return allList; 
 	}
+
+
+	public Feeddetails selectMember(int feedNo) {
+		Connection conn = getConnection();
+		
+		Feeddetails m = new FeedDao().selectMember(conn, feedNo); 
+		
+		close(conn);
+
+		
+		return m;
+	}
+
+
+	
 }

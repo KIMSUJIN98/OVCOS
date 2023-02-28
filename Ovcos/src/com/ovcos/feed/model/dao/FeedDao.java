@@ -11,6 +11,8 @@ import java.util.Properties;
 
 import static com.ovcos.common.JDBCTemplate.*;
 import com.ovcos.feed.model.vo.Feed;
+import com.ovcos.feed.model.vo.Feeddetails;
+import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
 public class FeedDao {
@@ -118,5 +120,51 @@ public class FeedDao {
 		}
 
 		return allList;
+	}
+
+	public Feeddetails selectMember(Connection conn, int feedNo) {
+		
+		Feeddetails m = new Feeddetails();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, feedNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Feeddetails(rset.getInt("feed_index"),
+									  rset.getString("feed_date"),
+									  rset.getString("feed_title"),
+									  rset.getString("feed_cnt"),
+									  rset.getInt("feed_eval"),
+									  rset.getInt("distance"),
+									  rset.getInt("start_lat"),
+									  rset.getInt("start_lon"),
+									  rset.getString("mem_id"),
+									  rset.getString("change_name"),
+									  rset.getInt("hit")
+						);
+			}
+							
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return m;
+	}
+
+	public Feed selectFeed(Connection conn, int feedNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

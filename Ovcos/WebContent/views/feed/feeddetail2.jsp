@@ -1,14 +1,21 @@
+<%@page import="com.ovcos.feed.model.vo.Feeddetails"%>
+<%@page import="com.ovcos.feed.model.vo.Feed"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% Feeddetails m = (Feeddetails)request.getAttribute("m"); 
+    
+    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMy.css">
-<link rel="stylesheet" href="../../resources/css/feeddetail2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feeddetail2.css">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
-<%-- <%= contextPath %>'/views/feeddetall2.jsp' --%>
+<%-- <%= contextPath %>'/views/feeddetail2.jsp' --%>
+
+
 </head>
 <body>
 <%@ include file="../common/nav.jsp" %>
@@ -17,30 +24,49 @@
         <div id="left" class="floatWrap"> 
             <div id="feed1">
                 <div style="border-bottom: 1px solid black;">
-                    <h5 align="center" style="padding-top: 8px;">피드 상세</h5>
+                    <div  id="feeds" >피드 상세</div>
                 </div>
             </div>
             
-            <div id="mypage1" style="border-bottom: 1px solid black;">
+            <div id="mypage1" >
                 
                 <span style="margin-left:15px;">
-                    <img width="60px;" src="../../resources/image/mypage.png">
+                    <img width="40px;"style="border-radius: 50%;" src="../../resources/image/mypage.png">
                     <br>
                       
                 </span>
                 <span>
                     <div>
-                        <b id="name">닉네임 구간</b>
+                        <b id="name"><%=m.getMemId()%></b>
                     </div>
     
                     <div>
-                        <div id="detail">피드내용</div>
+                        <div id="detail"><%=m.getFeedDate()%></div>
                     </div>
                 </span>
-
+            </div>
+            
+            <div style="border-bottom: 1px solid black; padding-bottom: 15px; padding-left: 15px;display: flex; ">
+                <img src="../../resources/image/eye.png" style="width: 17px; margin-left: 15px;" alt=""><span></span>
+                <img style="box-sizing: none;" id="love" src="../../resources/image/love.png" alt=""><span></span>
+                <img  id="download1" src="../../resources/image/download.png" alt=""><span></span>
                 
             </div>
-
+            
+                
+            <!-- 피드 내용 -->
+            <div id="run" align="center" style="border-bottom: 1px solid black;">
+                <b>피드 내용</b>
+                
+            </div>
+            <div id="distance" style="border-bottom: 1px solid black;">
+                
+                <div style="padding-left: 15px;">
+                    <div id="feeds1" >
+                       <%=m.getFeedCnt() %>
+                    </div>
+                </div>
+            </div>
 
             <div id="run" align="center" style="border-bottom: 1px solid black;">
                 <b>운동기록</b>
@@ -56,7 +82,22 @@
                 </div>
             </div>
     
-            <div style="height: 550px;">댓글 저장 공간</div>
+            <div id="com" style="height: 280px; overflow:auto; height:290px;">
+                 <div>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
+                </div>  
+                
+            </div>
             <div id="reply-area">
                 <table style="margin: auto;">
                     <thead> 
