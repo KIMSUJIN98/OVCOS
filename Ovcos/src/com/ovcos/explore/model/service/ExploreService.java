@@ -20,10 +20,10 @@ public class ExploreService {
 		return result;
 	}
 
-	public ArrayList<Explore> selectList(Pageinfo pi) {
+	public ArrayList<Explore> selectList(Pageinfo pi, String status) {
 		Connection conn = getConnection();
 		
-		ArrayList<Explore> list = new ExploreDao().selectList(conn, pi);
+		ArrayList<Explore> list = new ExploreDao().selectList(conn, pi, status);
 		
 		return list;
 	}
@@ -45,5 +45,7 @@ public class ExploreService {
 		
 		return list;
 	}
+
+	
 
 }

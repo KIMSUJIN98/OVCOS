@@ -12,6 +12,8 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	String status = String.valueOf(request.getAttribute("status"));
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +21,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
 
 
 </head>
@@ -37,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="course/my">
+                    <a href="course/my?npage=1">
                         <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/exploreuser.png" alt="유저"></span>
                         <span class="li2text" align="center">나의코스</span>
                     </a>
@@ -56,14 +58,21 @@
                         <button type="submit" id="submitimg"></button>
                         <!-- <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색"> -->
                     </form>
-                    <!--여기에 form태그를 넣어야 할지 고민이다.-->
                 </div>
             </div>
             <div id="tab_manu">
+           
                 <ul>
-                    <li class="tabon1 tabon">최신기록</li>
-                    <li class="tabon2">인기기록</li>
+                <!-- 조건문으로 인기기록일 떄 아니면 최신기록일 때  -->
+                <%if(status.equals("e")){ %>
+	                    <li class="tabon1 tabon" onclick="location.href='<%=contextPath%>/course?epage=1'">최신기록</li>
+	                    <li class="tabon2" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
+	                <%}else{ %>
+		                <li class="tabon1" onclick="location.href='<%=contextPath%>/course?epage=1'">최신기록</li>
+	                    <li class="tabon2 tabon" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
+	                <%} %>    
                 </ul>
+                  
             </div>
             <div id="left_content">
                 <div id="content_list">
@@ -73,55 +82,114 @@
 				 	<%}else{ %>
                     <!-- case 2 반복문으로  -->
                     	<%for(Explore f: list){ %>
-                    <div class="exList">
+                    <div class="exList" id="f<%=f.getFeedIndex()%>">
                         <span class="list_num"><%=f.getFeedIndex() %></span>
                         <div class="innertext">
-                            <h5><%=f.getFeedTitle() %></h5>
+                            <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
                                 <tr>
-                                    <td>전체 거리</td>
+                                    <td class="ct1">전체 거리</td>
                                     <td><%=f.getDistance()%> km</td>
                                 </tr>
                                 <tr>
-                                    <td>등록유저</td>
-                                    <td><%=f.getMemId() %></td>
+                                    <td class="ct1">별점</td>
+                                    <td><%=f.getFeedEval() %>/5</td>
                                 </tr>
                                 <tr>
-                                    <td>별점</td>
-                                    <td><%=f.getFeedEval() %>/5</td>
+                                    <td class="ct1">주소</td>
+                                    <td id="add<%=f.getFeedIndex()%>" data-toggle="tooltip" data-placement="right" title="" ></td>
+                                    <input type="hidden" name="lat" id="lat<%=f.getFeedIndex()%>" value="<%=f.getStartLat()%>">
+                                    <input type="hidden" name="lng" id="lng<%=f.getFeedIndex()%>" value="<%=f.getStartLon()%>">
                                 </tr>
                             </table>
                             <div id="bottom">
-                                <span><%=f.getFeedDate() %></span>
+                                <span style="font-size: 0.8rem;"><%=f.getFeedDate() %></span>
                                 <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
                             </div>
                         </div>
                     </div>
+                    
+                    <script>
+                    
+                    	var lat = $("#lat<%=f.getFeedIndex()%>").val();
+                        var lng = $("#lng<%=f.getFeedIndex()%>").val();
+                    
+	                    naver.maps.Service.reverseGeocode({
+	                        location: new naver.maps.LatLng(lat, lng),
+	                    }, function(status, response) {
+	                        if (status !== naver.maps.Service.Status.OK) {
+	                            return alert('Something wrong!');
+	                        }
+	
+	                        var result = response.result, // 검색 결과의 컨테이너
+	                            items = result.items; // 검색 결과의 배열
+	
+	                       
+	
+	                        var item = items[0].address;
+                            var fianl;
+	                        if(item.length >9){
+                               final = item.substring(0,9)+'...';
+                            }
+                            $("#add<%=f.getFeedIndex()%>").attr("title",item);
+	
+	                        $("#add<%=f.getFeedIndex()%>").text(final);
+	                    });
+                        console.log($(".exList"))
+
+                        
+                    </script>
                     	<%} %>
                     <%} %>
                     
                 </div>
+                <!-- 페이지바 시작 -->
+                
                 <div id="list_page">
-                    <ul>
-                    	<%if(currentPage != 1){ %>
-                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage-1%>'">&lt;</li>
-                        <%} else{%>
-                        	<li class="befpage">&lt;</li>
-                        <%} %>
-                        <%for(int i = startPage; i<=endPage; i++){ %>
-                        	<%if(i== currentPage){ %>
-                        		<li class="pagenum on"><%=i%></li>
-                        	<%}else{ %>
-                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?epage=<%=i%>'"><%=i%></li>
-                        	<%} %>
-                        <%} %>
-                        <%if(currentPage != maxPage){ %>
-                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage+1%>'">&gt;</li>
-                        <%} else{%>
-                        	<li class="aftpage">&gt;</li>
-                        <%} %>
-                    </ul>
+                	<%if(status.equals("e")){ %>
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?epage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+	                 <%}else{ %>
+                    
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?fpage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?fpage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?fpage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+                    <%} %>
                 </div>
+                <!-- 페이지바 끝 -->
             </div>
         </div>
         <!-- course_left 끝-->
@@ -183,11 +251,11 @@
                     $(".exList").click(function(e){
                         $("path").remove();
                         $(".exList").css("backgroundColor","white");
-                        $(this).css("backgroundColor","#f8f8f8");
+                        $(this).css("backgroundColor","#eceaea");
                         $(".btn1").css("visibility","hidden");
 
                         $(this).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc")
-
+                        console.log($(this));
                         
                         // index 뽑기
                         var index = $(this).children("span").text()%10;
@@ -239,7 +307,16 @@
                             }else{
                                 infowindows[i].open(map,markers[i]);
                             }
+
+                            $(".exList").css("backgroundColor","white");
+                            $(".btn1").css("visibility","hidden");
                             
+                            var num = Number(i+1);
+                            $("#f"+num).css("backgroundColor","#eceaea");
+                            $("#f"+num).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc");
+                            
+                            var docu = document.getElementById("f"+num);
+                            docu.scrollIntoView({ behavior: "smooth" });
                             
                         });
                     }
@@ -254,27 +331,6 @@
     </div>
     </div>
     </div>
-
-    
-    <script>
-        $(function(){
-
-            $(".tabon1").click(function(){
-                $(this).addClass("tabon")
-                //ajax로 left_content와 content를 리로딩 시켜야함
-                $(".tabon2").removeClass("tabon");
-                location.href="course?epage=1";
-            });
-            
-            $(".tabon2").click(function(){
-            	$(this).addClass("tabon");
-            	$(".tab")
-            })
-            
-            
-
-        })
-    </script>
 
 </body>
 </html>
