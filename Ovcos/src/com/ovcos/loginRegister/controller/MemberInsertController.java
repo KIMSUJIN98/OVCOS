@@ -50,7 +50,7 @@ public class MemberInsertController extends HttpServlet {
 		m.setMemPwd(request.getParameter("memPwd"));
 		m.setMemName(request.getParameter("memName"));
 		m.setMemNick(request.getParameter("memNick"));
-		m.setMemBirth(request.getParameter("memBirth"));gr
+		m.setMemBirth(request.getParameter("memBirth"));
 		m.setMemEml(request.getParameter("memEml"));
 		
 		System.out.println(m);
