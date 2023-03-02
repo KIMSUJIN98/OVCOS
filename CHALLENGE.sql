@@ -91,7 +91,7 @@ SELECT
  WHERE
        N.DEL_STATUS = 'N'
    AND RPR_STATUS = 'N'
-   AND 1 = 1;
+   AND LOCAL_NO = '1';
    
 SELECT 
        NOR_CHLG_NO
