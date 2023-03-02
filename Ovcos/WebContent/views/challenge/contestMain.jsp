@@ -60,7 +60,7 @@
 
                         <!-- Modal body -->
                         <div class="modal-body" align="center">
-                            <form action="test.do" method="post" id="updateContest-form">
+                            <form action="insertContest.ch" method="post" id="updateContest-form">
                                 <table>
                                     <tr>
                                         <th>대회명</th>

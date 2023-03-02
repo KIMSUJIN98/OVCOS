@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.ovcos.challenge.model.service.ChallengeService;
@@ -33,9 +34,13 @@ public class NormalChallengeListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		HttpSession session = request.getSession();
+		
 		ArrayList<Local> list1 = new ChallengeService().selectLocalList();
 		
 		int local = Integer.parseInt(request.getParameter("local"));
+		
+//		session.setAttribute("local2", local);
 		
 		ArrayList<NormalChallenge> list2 = new ChallengeService().normalChallengeList(local);
 		
@@ -43,9 +48,9 @@ public class NormalChallengeListViewController extends HttpServlet {
 		request.setAttribute("list2", list2);
 		request.getRequestDispatcher("views/challenge/normalList.jsp").forward(request, response);
 		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list1, response.getWriter());
-		new Gson().toJson(list2, response.getWriter());
+//		response.setContentType("application/json; charset=utf-8");
+//		new Gson().toJson(list1, response.getWriter());
+//		new Gson().toJson(list2, response.getWriter());
 		
 	}
 
