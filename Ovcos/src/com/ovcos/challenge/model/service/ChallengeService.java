@@ -116,14 +116,5 @@ public class ChallengeService {
 		return list2;
 	}
 
-//	public ArrayList<NormalChallenge> normalChallengeListLocal(int local) {
-//		Connection conn = getConnection();
-//		
-//		ArrayList<NormalChallenge> list3 = new ChallengeDao().normalChallengeListLocal(conn, local);
-//		
-//		close(conn);
-//		
-//		return list3;
-//	}
 	
 }

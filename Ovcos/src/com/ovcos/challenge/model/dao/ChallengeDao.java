@@ -293,14 +293,12 @@ public class ChallengeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("normalChallengeList");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
 			
 			if(local == 0) {
-				pstmt.setInt(1, 1);
-				pstmt.setInt(2, 1);
+				String sql = prop.getProperty("normalChallengeList");
+				pstmt = conn.prepareStatement(sql);
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
@@ -317,8 +315,9 @@ public class ChallengeDao {
 				
 				
 			}else {
-				pstmt.setString(1, "LOCAL_NO");
-				pstmt.setInt(2, local);
+				String sql = prop.getProperty("normalChallengeListLocal");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, local);
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
@@ -342,43 +341,11 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 		
+		System.out.println(local);
 		System.out.println(list2);
 		return list2;
 		
 	}
 
-//	public ArrayList<NormalChallenge> normalChallengeListLocal(Connection conn, int local) {
-//		ArrayList<NormalChallenge> list3 = new ArrayList<NormalChallenge>();
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		
-//		String sql = prop.getProperty("normalChallengeListLocal");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, local);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			while(rset.next()) {
-//				list3.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
-//											  rset.getString("NOR_CHLG_TITLE"),
-//											  rset.getDate("ENROLL_DATE"),
-//											  rset.getDate("NOR_CHLG_DATE"),
-//											  rset.getInt("NOR_CHLG_MAX"),
-//											  rset.getString("NOR_CHLG_ID"),
-//											  rset.getString("LOCAL_NAME"),
-//											  rset.getInt("COUNT")
-//											  ));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		return list3;
-//	}
 	
 }

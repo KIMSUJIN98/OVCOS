@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.Local;
 import com.ovcos.challenge.model.vo.NormalChallenge;
@@ -36,16 +37,15 @@ public class NormalChallengeListViewController extends HttpServlet {
 		
 		int local = Integer.parseInt(request.getParameter("local"));
 		
-		System.out.println(local);
-		
 		ArrayList<NormalChallenge> list2 = new ChallengeService().normalChallengeList(local);
-		
-//		ArrayList<NormalChallenge> list3 = new ChallengeService().normalChallengeListLocal(local);
-//		request.setAttribute("list3", list3);
 		
 		request.setAttribute("list1", list1);
 		request.setAttribute("list2", list2);
 		request.getRequestDispatcher("views/challenge/normalList.jsp").forward(request, response);
+		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list1, response.getWriter());
+		new Gson().toJson(list2, response.getWriter());
 		
 	}
 
