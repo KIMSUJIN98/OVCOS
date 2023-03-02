@@ -108,9 +108,24 @@
                                     <input type="hidden" name="lng" id="lng<%=f.getFeedIndex()%>" value="<%=f.getStartLon()%>">
                                 </tr>
                             </table>
-                            <div id="bottom">
-                                <span style="font-size: 0.8rem;"><%=f.getFeedDate() %></span>
-                                <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;">1</span>
+                                </div>
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">
+                                    <span style="display: inline;font-size: 0.8rem;">1</span>
+                                </div>
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/download.png" class="eximg" alt="">
+                                    <span style="display: inline;font-size: 0.8rem;">1</span>
+                                </div>
+                                <div class="date">
+                                    <%=f.getFeedDate()%>
+                                </div>
+                                <div class="detailBtn">
+                                    <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -243,10 +258,14 @@
                    <%for(Explore e: list){%>
                     infowindows.push(new naver.maps.InfoWindow({
                         content:[
-                            '<div class="iw_inner">',
+                        '<div class="iw_inner">',
                             '   <span><%=e.getFeedTitle()%></span>',
-                            '	<span><%=e.getDistance()%> km</span>	',
-                            '</div>'	
+                            '   <div style="display:flex; padding-left:10px">',
+                            '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
+                            '	    <span><%=e.getDistance()%> km</span>	',
+                            '       <a style="width:40%" href="#">Detail</a>',
+                            '   </div>',
+                            '</div>'		
                         ].join('')
                     }))
                     
@@ -257,10 +276,11 @@
                         $("path").remove();
                         $(".exList").css("backgroundColor","white");
                         $(this).css("backgroundColor","#eceaea");
-                        $(".btn1").css("visibility","hidden");
+                        $(".detailBtn").css("display","none");
+                        $(".date").css("display","block");
 
-                        $(this).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc")
-                        console.log($(this));
+                        $(this).find(".date").css("display","none");
+                        $(this).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
                         
                         // index 뽑기
                         var index = $(this).children("span").text()%10;

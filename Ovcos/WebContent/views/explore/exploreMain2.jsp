@@ -248,6 +248,64 @@
             
 
         })
+        // var xhttp = new XMLHttpRequest();
+                        // xhttp.onreadystatechange = function () {
+
+                        // if(this.readyState == 4 && this.status == 200){
+                        // nodeValfunc( this ); // this == xhttp 
+                        // }
+                        // }
+                        // xhttp.open("GET", "<%=contextPath%>/resources/gpx_upfiles/"+paths[index-1], true);
+                        // xhttp.send();
+
+                        // function nodeValfunc( xml ) { // ( xml ) 객체 넘겨받기
+
+                        // xmlDoc = xml.responseXML; 
+                        // var array = [];
+                        // var lats = [];
+                        // var lons = [];
+                        // var startLat; 
+                        // var startLon;
+                        // var start;
+
+                        // var trackPoints = $(xmlDoc).find('trkpt');
+                        // console.log(trackPoints)
+                        // trackPoints.each(function (index, value) {
+                        //     var lat = $(this).attr('lat');
+                        //     var lon = $(this).attr('lon');
+                        //     if (index == 0) {
+                        //         startLat = lat;
+                        //         startLon = lon;
+                        //         }
+                        //     start = new naver.maps.LatLng(startLat,startLon);
+                            
+                        //     array.push(new naver.maps.LatLng(lat, lon));
+                        //     lats.push(lat);
+                        //     lons.push(lon);
+                        //     if (index == 0) {
+                        //         startLat = lat;
+                        //         startLon = lon;
+                        //         console.log(startLat)
+                        //         console.log(startLon)
+                        //     }
+                    
+                        // });
+
+                        // console.log(array)
+                        // var polyline = new naver.maps.Polyline({
+                        //         path: array,      //선 위치 변수배열
+                        //         strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,
+                        //         strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                        //         strokeWeight: 3,   //선 두께
+                        //         map: map   //오버레이할 지도
+                        //     });
+                        //      if(infowindows[index-1].getMap()){
+                        //         infowindows[index-1].close();
+                        //     }else{
+                        //         infowindows[index-1].open(map,markers[index-1]);
+                        //     }
+
+                        // map.setZoom(13);
     </script>
 
 </body>
