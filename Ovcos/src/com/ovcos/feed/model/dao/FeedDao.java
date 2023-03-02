@@ -12,6 +12,7 @@ import java.util.Properties;
 import static com.ovcos.common.JDBCTemplate.*;
 import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.feed.model.vo.Feeddetails;
+import com.ovcos.feed.model.vo.detail2comments;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
@@ -163,8 +164,63 @@ public class FeedDao {
 		return m;
 	}
 
-	public Feed selectFeed(Connection conn, int feedNo) {
-		// TODO Auto-generated method stub
-		return null;
+	
+
+	public int insertcomments(Connection conn, int feedin, String cmnid, String cmncnt) {
+		 int result = 0;
+		 PreparedStatement pstmt = null;
+		 
+		 String sql = prop.getProperty("insertcomments");
+//		System.out.println(sql);
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cmnid);
+			pstmt.setString(2, cmncnt);
+			pstmt.setInt(3, feedin);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
+
+	public ArrayList<detail2comments> selectdetail2(Connection conn, int feedin) {
+		ArrayList<detail2comments> list = new ArrayList<detail2comments>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectdetail2");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, feedin);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new detail2comments(rset.getInt("feed_cmn_no"),
+											 rset.getString("feed_cmn_id"),
+											 rset.getString("feed_cmn_cnt"),
+											 rset.getString("feed_cmn_date")
+											 ));
+			}
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+	
+		return list;
+	}
+
+
 }

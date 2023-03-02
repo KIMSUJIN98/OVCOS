@@ -45,12 +45,21 @@
     width: 410px;
     height: 150px;
 }
-#com{
+#reply-area{
     padding-left: 15px;
+    position: absolute;
+    bottom: 15px;
+    position: fixed;
 }
 #love, #download1{
     width: 13px; 
     padding-bottom: 2px;
     margin-left: 170px; 
     /* padding-left: 170px; */
+}
+#feedt{
+   text-align: center;
+   font-weight: 400;
+   padding-bottom: 10px;
+   padding-top: 10px;
 }

@@ -2,9 +2,12 @@
 <%@page import="com.ovcos.feed.model.vo.Feed"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% Feeddetails m = (Feeddetails)request.getAttribute("m"); 
-    
+    <% 
+    	Feeddetails m = (Feeddetails)request.getAttribute("m"); 
+    	
+
     %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +24,7 @@
 <%@ include file="../common/nav.jsp" %>
 
     <div id="course">
-        <div id="left" class="floatWrap"> 
+        <div id="left" class="floatWrap" > 
             <div id="feed1">
                 <div style="border-bottom: 1px solid black;">
                     <div  id="feeds" >피드 상세</div>
@@ -30,8 +33,8 @@
             
             <div id="mypage1" >
                 
-                <span style="margin-left:15px;">
-                    <img width="40px;"style="border-radius: 50%;" src="../../resources/image/mypage.png">
+                <span style="margin-left:15px; ">
+                    <img width="40px;"style="border-radius: 50%;" src="${pageContext.request.contextPath}/resources/image/mypage.png">
                     <br>
                       
                 </span>
@@ -47,24 +50,30 @@
             </div>
             
             <div style="border-bottom: 1px solid black; padding-bottom: 15px; padding-left: 15px;display: flex; ">
-                <img src="../../resources/image/eye.png" style="width: 17px; margin-left: 15px;" alt=""><span></span>
-                <img style="box-sizing: none;" id="love" src="../../resources/image/love.png" alt=""><span></span>
-                <img  id="download1" src="../../resources/image/download.png" alt=""><span></span>
+                <img src="${pageContext.request.contextPath}/resources/image/eye.png" style="width: 17px; margin-left: 15px;" alt=""><span></span>
+                <img style="box-sizing: none;" id="love" src="${pageContext.request.contextPath}/resources/image/love.png" alt=""><span></span>
+                <a href=""><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
                 
             </div>
             
                 
             <!-- 피드 내용 -->
+            <div id="run" align="center">
+                <div style="font-weight: 900;">피드 제목</div>
+                
+            </div> 
+                <div align="center" id="feedt" style="border-bottom: 1px solid black;">
+                    <%=m.getFeedTitle() %>
+                </div>
+
             <div id="run" align="center" style="border-bottom: 1px solid black;">
                 <b>피드 내용</b>
                 
             </div>
             <div id="distance" style="border-bottom: 1px solid black;">
                 
-                <div style="padding-left: 15px;">
-                    <div id="feeds1" >
-                       <%=m.getFeedCnt() %>
-                    </div>
+                <div style="padding-left: 15px; height: 150px;">
+                    <%=m.getFeedCnt() %>
                 </div>
             </div>
 
@@ -81,21 +90,12 @@
                     <b style="padding-left: 15px;">시작위치 : </b>
                 </div>
             </div>
-    
-            <div id="com" style="height: 280px; overflow:auto; height:290px;">
-                 <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illum dolorem qui blanditiis veniam assumenda quas molestiae ducimus, quia et odit eveniet aspernatur quis modi culpa at eos natus facere?
-                </div>  
+            <!-- 댓글 구간 -->
+            <div id="com" style="height: 280px;  height:20%; overflow: auto;">
+               <table>
+               	
+               
+               </table>
                 
             </div>
             <div id="reply-area">
@@ -104,9 +104,9 @@
                         <tr>
                             <th id="fontth">댓글</th>
                             <td style="padding-right: 0;">
-                                <textarea rows="1" cols="40" style="resize: none; margin-top: 10px;"></textarea>
+                                <textarea rows="1" id="feed_cmn_cnt" cols="40" style="resize: none; margin-top: 10px;"></textarea>
                             </td>
-                            <td style="padding-right: 0;"><button  id="btn00" type="submit" class="btn btn-sm btn-info">전송</button></td>
+                            <td style="padding-right: 0;"><button onclick="insertReply();" id="btn00" type="submit" class="btn btn-sm btn-info">전송</button></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,6 +116,59 @@
                
             
             </div>
+            <script>
+            
+            $(function () {
+            	selectdetail2();
+               // setInterval(selectdetail2, 1000);
+            })
+            
+            
+            function insertReply() {
+                $.ajax({
+                    url: "insertcomm.de",
+                    data: {
+                    	feed_index: <%= m.getFeedIndex()%>,
+                    	feed_cmn_id: "<%= loginUser.getMemId()%>",
+                    	feed_cmn_cnt: $("#feed_cmn_cnt").val()
+            },
+                    type: "post",
+                    success: function (result) {
+                        if (result > 0) { //댓글 작성 성공
+                            selectReplyList();
+                            $("#feed_cmn_cnt").val("");
+                        }
+                    },
+                    error: function () {
+                        console.log("댓글 작성용 ajax 통신 실패");
+                    }
+                })
+            }
+            
+            function selectdetail2() {
+                $.ajax({
+                    url: "rselect.de",
+                    data: { feed_index:<%=m.getFeedIndex() %>},
+                    success: function (result) {
+                        let value = "";
+                        for (let i = 0; i < result.length; i++) {
+                            value += "<tr>"
+                                + "<td>" + result[i].feed_cmn_id + "</td>"
+                                + "<td>" + result[i].feed_cmn_cnt + "</td>"
+                                + "<td>" + result[i].feed_cmn_date + "</td>"
+                                + "</tr>";
+                        }
+
+                        $("#com table").html(value);
+
+                    },
+                    error: function () {
+                        console.log("ajax 통신 실패");
+                    }
+                })
+            } 
+            
+            </script>
         </div>
        
         
@@ -173,7 +226,7 @@
         })
     </script>
 
-<script>
+	<script>
                     
 
     var markers = [];

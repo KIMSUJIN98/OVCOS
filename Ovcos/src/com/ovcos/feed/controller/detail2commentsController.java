@@ -1,9 +1,6 @@
 package com.ovcos.feed.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ovcos.feed.model.service.FeedService;
-import com.ovcos.feed.model.vo.Feed;
-import com.ovcos.feed.model.vo.Feeddetails;
-import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class feeddetail2
+ * Servlet implementation class detail2ReplyController
  */
-@WebServlet("/detail2.fe")
-public class feeddetail2Controller extends HttpServlet {
+@WebServlet("/insertcomm.de")
+public class detail2commentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public feeddetail2Controller() {
+    public detail2commentsController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,29 +29,15 @@ public class feeddetail2Controller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int feedNo = Integer.parseInt(request.getParameter("fno"));
-		Feeddetails m = new FeedService().selectMember(feedNo);
+		int feedin = Integer.parseInt(request.getParameter("feed_index"));
+		//System.out.println(feedin);
+		String cmnid = request.getParameter("feed_cmn_id");
+		//System.out.println(cmnid);
+		String cmncnt = request.getParameter("feed_cmn_cnt");
+		//System.out.println(cmncnt);
 		
-		System.out.println(m);
-		
-		if(m != null) {
-			// 성공했을때
-		
-			request.setAttribute("m", m);
-			
-			request.getRequestDispatcher("views/feed/feeddetail2.jsp").forward(request, response);
-		
-//			RequestDispatcher view = request.getRequestDispatcher("views/feed/feeddetail2.jsp");
-//			view.forward(request, response);
-		
-		}else {
-	
-			// 에러페이지
-			request.getSession().setAttribute("alertMsg", "불러오기 실패");
-			response.sendRedirect("/list.feed");
-			
-		}
-		
+		int result = new FeedService().insertcomments(feedin, cmnid, cmncnt);
+		response.getWriter().print(result);
 		
 	}
 
