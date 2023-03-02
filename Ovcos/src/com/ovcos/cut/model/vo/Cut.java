@@ -1,57 +1,42 @@
-package com.ovcos.follow.model.vo;
+package com.ovcos.cut.model.vo;
 
-import java.sql.Date;
-
-public class Follow {
-
+public class Cut {
 	
 	 private String memId;
-	 private String flwId;
-	 private Date flwDate;
+	 private String cutId;
+	 private String cutStatus;
 	 private String memName;
 	 private String memIntro;
 	 private String memNick;
 	 
 	 
-	 public Follow() {}
+	 public Cut() {}
 
-	 
 
-	public Follow(String memId) {
+	public Cut(String memId, String cutId, String cutStatus, String memName, String memIntro, String memNick) {
 		super();
 		this.memId = memId;
+		this.cutId = cutId;
+		this.cutStatus = cutStatus;
+		this.memName = memName;
+		this.memIntro = memIntro;
+		this.memNick = memNick;
 	}
 
 
-
-	public Follow(String memId, String flwId, Date flwDate, String memName, String memIntro) {
+	public Cut(String memId, String memName, String memIntro) {
 		super();
 		this.memId = memId;
-		this.flwId = flwId;
-		this.flwDate = flwDate;
 		this.memName = memName;
 		this.memIntro = memIntro;
 	}
 
 
 	
-	public Follow(String memId, String memName, String memIntro) {
+	public Cut(String memId) {
 		super();
 		this.memId = memId;
-		this.memName = memName;
-		this.memIntro = memIntro;
 	}
-
-
-	public Follow(String memName, String memIntro) {
-		super();
-		this.memName = memName;
-		this.memIntro = memIntro;
-	}
-
-	
-
-
 
 
 	public String getMemId() {
@@ -64,23 +49,23 @@ public class Follow {
 	}
 
 
-	public String getFlwId() {
-		return flwId;
+	public String getCutId() {
+		return cutId;
 	}
 
 
-	public void setFlwId(String flwId) {
-		this.flwId = flwId;
+	public void setCutId(String cutId) {
+		this.cutId = cutId;
 	}
 
 
-	public Date getFlwDate() {
-		return flwDate;
+	public String getCutStatus() {
+		return cutStatus;
 	}
 
 
-	public void setFlwDate(Date flwDate) {
-		this.flwDate = flwDate;
+	public void setCutStatus(String cutStatus) {
+		this.cutStatus = cutStatus;
 	}
 
 
@@ -116,16 +101,12 @@ public class Follow {
 
 	@Override
 	public String toString() {
-		return "Follow [memId=" + memId + ", flwId=" + flwId + ", flwDate=" + flwDate + ", memName=" + memName
+		return "Cut [memId=" + memId + ", cutId=" + cutId + ", cutStatus=" + cutStatus + ", memName=" + memName
 				+ ", memIntro=" + memIntro + ", memNick=" + memNick + "]";
 	}
 
-
-
-
+	
 	 
-
-
 	
-	
+
 }

@@ -14,23 +14,92 @@
 
 
 
+
 <!-- 내(로그인유저)가 팔로우하고있는 유저 목록 -->
 <entry key="selectList">
-select mem_name, mem_intro
+select m.mem_id, mem_name, mem_intro
 from member m , follow f
 where m.mem_id = f.flw_id
 and f.mem_Id = ?
+AND FLW_STATUS='Y'
 
 </entry>
 
 
 <!-- 나를 팔로우 하고 있는 유저 목록 -->
 <entry key="selectaddMeList">
-SELECT MEM_NAME, MEM_INTRO
+SELECT M.MEM_ID, MEM_NAME, MEM_INTRO
 FROM MEMBER M, FOLLOW F
 WHERE  M.MEM_ID = F.MEM_ID
 AND flw_id = ?
+AND FLW_STATUS='Y'
+<!-- 유저 팔로우 아이디가 내 아이디일때 -->
+</entry>
 
+
+<!-- 검색한 유저 네임 -->
+<entry key="selectSearchList">
+
+SELECT MEM_ID,MEM_NAME, MEM_INTRO
+FROM MEMBER
+WHERE MEM_NAME LIKE '%' || ? || '%'
+
+</entry>
+
+
+<entry key="friendCheck">
+
+select m.mem_id
+from follow f, member m
+where f.flw_id = m.mem_id
+and f.mem_id = ? and m.mem_id = ?
+AND FLW_STATUS='Y'
+
+</entry>
+
+
+
+<!-- 팔로테이블에 인서트하기전 존재하는지 체크 -->
+<entry key="selectInsertList">
+SELECT MEM_ID
+FROM FOLLOW
+WHERE MEM_ID= ?
+AND FLW_ID =?
+</entry>
+
+
+
+<!-- 친구추가 -->
+<entry key="insertFollow">
+	INSERT 
+	  INTO FOLLOW 
+	     (
+	       MEM_ID
+	     , FLW_ID
+	     )
+	     VALUES
+	     (
+	        ?
+	      , ?
+	      )
+</entry>
+
+<!-- 친구삭제 -->
+<entry key="deleteFollow">
+	UPDATE
+	       FOLLOW
+	   SET FLW_STATUS='N'
+	 WHERE MEM_ID = ?
+	   AND FLW_ID = ?
+</entry>
+
+<!-- 기존테이블에 존재할시 친구추가 업데이트 -->
+<entry key="updateInsertFollow">
+	UPDATE
+	       FOLLOW
+	   SET FLW_STATUS='Y'
+	 WHERE MEM_ID = ?
+	   AND FLW_ID = ?
 </entry>
 
 
