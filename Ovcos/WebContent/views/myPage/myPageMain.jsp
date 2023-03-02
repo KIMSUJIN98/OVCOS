@@ -82,7 +82,7 @@
                             <div class="panel">
                                 <div class="body">
                                     <div class="input-group">
-                                        <label for="searchBox">검색</label>
+                                        <label for="searchBox"></label>
                                         <input type="search" id="searchBox" placeholder="키워드를 입력하세요">
                                     </div>
                                 </div>
