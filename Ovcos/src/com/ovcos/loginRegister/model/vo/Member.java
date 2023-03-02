@@ -242,6 +242,5 @@ public class Member {
 				+ ", memEml=" + memEml + ", marketNy=" + marketNy + "]";
 	}
 
-	
-	
+
 }

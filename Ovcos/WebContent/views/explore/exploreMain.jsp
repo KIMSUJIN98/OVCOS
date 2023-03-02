@@ -14,6 +14,7 @@
 	int maxPage = pi.getMaxPage();
 	
 	String status = String.valueOf(request.getAttribute("status"));
+	String search = String.valueOf(request.getAttribute("search"));
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +34,7 @@
         <div id="course_nav">
             <ul>
                 <li class="li1">
-                    <a onclick="location.href='<%=contextPath%>/course?epage=1'">
+                    <a href='<%=contextPath%>/course?epage=1'>
                         <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagWhite.png" alt="깃발"></span>
                         <span class="li1text" align="center">코스검색</span>
                     </a>
@@ -54,14 +55,15 @@
                 <div id="search">
                     <form action="search.ex">
                         <input type="text" name="searchcourse" placeholder="제목,코스명 검색" autocomplete="off">
-
                         <button type="submit" id="submitimg"></button>
                         <!-- <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색"> -->
                     </form>
                 </div>
             </div>
             <div id="tab_manu">
-           
+            <%if(search.equals("y")){ %>
+            	<div id="seardiv">코스검색 결과</div>
+            <%}else{ %>
                 <ul>
                 <!-- 조건문으로 인기기록일 떄 아니면 최신기록일 때  -->
                 <%if(status.equals("e")){ %>
@@ -72,6 +74,7 @@
 	                    <li class="tabon2 tabon" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
 	                <%} %>    
                 </ul>
+            <%} %>
                   
             </div>
             <div id="left_content">
@@ -135,7 +138,7 @@
 	
 	                        $("#add<%=f.getFeedIndex()%>").text(final);
 	                    });
-                        console.log($(".exList"))
+                        
 
                         
                     </script>
