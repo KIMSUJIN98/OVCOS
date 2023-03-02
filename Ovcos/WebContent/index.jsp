@@ -12,7 +12,7 @@
 <body>
   
     <%@ include file="views/common/navForIndex.jsp" %>
-
+    
     <script>
     
       $(function(){
@@ -30,7 +30,7 @@
             </p>
             <p id="imtext2">ovcos</p>
           </div>
-          <button id="startBtn" onclick="location.href='<%=contextPath%>/login'">시작하기</button>
+          <button id="startBtn" onclick="location.href='login'">시작하기</button>
       </div>     
       <div style="background-color: black; width: 100vw; height: 100vh;">
         
