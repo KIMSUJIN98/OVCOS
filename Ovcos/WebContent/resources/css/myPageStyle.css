@@ -1,5 +1,5 @@
-.mp-wrap{
-    border: 1px solid red;
+div{
+	/* border: 1px solid red; */
 }
 
 .mp-wrap{
@@ -7,10 +7,172 @@
     height: 100%;
 }
 
-.mp-section1{
+.mp-section1, #back-table{
+	width: 100%;
+	height: 350px;
+}
+
+.mp-section2{
+	width: 100%;
+	height: 600px;
+}
+
+.mp-section3{
+	width: 100%;
+	height: 1000px;
+	/* border: 5px solid blue; */
+}
+
+
+/* -------------------------------------------- */
+
+/* 배경이미지 */
+.back-img{
+	width: 100%;
+	height: 100%;
+	background-image: url("../upload/hd-wallpaper-g12c2685ac_1920.jpg");
+	background-repeat: no-repeat;
+	background-size : cover;
+	opacity: 0.75;	
+}
+
+/* 사용자 프로필사진 */
+#back-table img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin-top: 100px;
+}
+
+/* 사용자 이름 */
+#name{
+	font-family: 'SUIT-Regular';
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight: 600;
+	font-size: 25px;
+	padding-top: 250px;
+	padding-left: 25px;
+}
+
+/* 사용자 자기소개 */
+#introduce{
+	font-family: 'SUIT-Regular';
+	color: gray;
+	font-weight: 500;
+	font-size: 20px;
+	padding-left: 25px;
+}
+
+
+/* -------------------------------------------- */
+
+#myHealth{
+	width: 100%;
+	height: 100%;
+	/* text-align: center; */
+}
+
+#display_list{
+	height: 70%;
+}
+
+#display_list>div{
+	height: 100%;
+	float: left;
+}
+
+.sec2-blank{
+	height: 15%;
+}
+
+.sec2-blank2{
+	width: 20%;
+}
+
+#list_content{
+	width: 60%;
+	border: 1px solid black;
+}
+
+#list_content h1{
+	font-family: 'SUIT-Regular';
+	color: rgb(67, 115, 176);
+}
+
+
+/* -------------------------------------------- */
+
+#myActivity{
+	width: 100%;
+	height: 100%;
+	/* text-align: center; */
+}
+
+#activity_list{
+	height: 70%;
+}
+
+#activity_list>div{
+	height: 100%;
+	float: left;
+}
+
+#activity_content{
+	width: 60%;
+	border: 1px solid black;
+}
+
+
+
+
+
+
+/* 조회 텍스트 */
+.container h1{
+	font-family: 'SUIT-Regular';
+	color: rgb(67, 115, 176);
+}
+
+
+
+
+
+
+
+
+
+#sec1-top{
 	width: 100%;
 	height: 300px;
-	background-image: url("../upload/hd-wallpaper-g12c2685ac_1920.jpg");
-    background-repeat:no-repeat;
 }
+
+#sec1-bottom{
+	width: 100%;
+	height: 50px;
+}
+
+/* 프로필사진 */
+.mp-section1 img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	/* margin-left: 300px;
+	margin-top: 250px; */
+	position: absolute;
+}
+
+
+
+#sec1-tr1{
+	width: 100%;
+	height: 250px;
+}
+
+#sec1-tr2{
+	width: 100%;
+	height: 50px;
+}
+
+
 
