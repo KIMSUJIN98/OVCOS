@@ -47,9 +47,12 @@ public class ContestChallenge {
 		this.contestNo = contestNo;
 	}
 
-	public ContestChallenge(String contestChallengeTitle, Date enrollDate, Date contestChallengeDate,
-			int contestChallengeMax, String contestChallengeId, String contestNo, int count) {
+
+	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, Date enrollDate,
+			Date contestChallengeDate, int contestChallengeMax, String contestChallengeId, String contestNo,
+			int count) {
 		super();
+		this.contestChallengeNo = contestChallengeNo;
 		this.contestChallengeTitle = contestChallengeTitle;
 		this.enrollDate = enrollDate;
 		this.contestChallengeDate = contestChallengeDate;

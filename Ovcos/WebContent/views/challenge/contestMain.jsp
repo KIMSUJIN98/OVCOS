@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="cclist.ch?contestName=<%= c.getContestName() %>">참가하기</a></div>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>">참가하기</a></div>
                                 </div>
                             </div>
                         </div>

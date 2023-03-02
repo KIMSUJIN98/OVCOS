@@ -7,6 +7,7 @@ import com.ovcos.challenge.model.dao.ChallengeDao;
 import com.ovcos.challenge.model.vo.Contest;
 import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.challenge.model.vo.Local;
 import com.ovcos.challenge.model.vo.NEntryList;
 import com.ovcos.challenge.model.vo.NormalChallenge;
 
@@ -94,5 +95,35 @@ public class ChallengeService {
 		
 		return list;
 	}
+
+	public ArrayList<Local> selectLocalList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Local> list1 = new ChallengeDao().selectLocalList(conn);
+		
+		close(conn);
+		
+		return list1;
+	}
+
+	public ArrayList<NormalChallenge> normalChallengeList(int local) {
+		Connection conn = getConnection();
+		
+		ArrayList<NormalChallenge> list2 = new ChallengeDao().normalChallengeList(conn, local);
+		
+		close(conn);
+		
+		return list2;
+	}
+
+//	public ArrayList<NormalChallenge> normalChallengeListLocal(int local) {
+//		Connection conn = getConnection();
+//		
+//		ArrayList<NormalChallenge> list3 = new ChallengeDao().normalChallengeListLocal(conn, local);
+//		
+//		close(conn);
+//		
+//		return list3;
+//	}
 	
 }

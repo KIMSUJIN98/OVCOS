@@ -12,6 +12,7 @@ import java.util.Properties;
 import com.ovcos.challenge.model.vo.Contest;
 import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.challenge.model.vo.Local;
 import com.ovcos.challenge.model.vo.NEntryList;
 import com.ovcos.challenge.model.vo.NormalChallenge;
 
@@ -240,7 +241,8 @@ public class ChallengeDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new ContestChallenge(rset.getString("CNTS_CHLG_TITLE"),
+				list.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
+											  rset.getString("CNTS_CHLG_TITLE"),
 											  rset.getDate("ENROLL_DATE"),
 											  rset.getDate("CNTS_CHLG_DATE"),
 											  rset.getInt("CNTS_CHLG_MAX"),
@@ -258,5 +260,125 @@ public class ChallengeDao {
 		
 		return list;
 	}
+
+	public ArrayList<Local> selectLocalList(Connection conn) {
+		
+		ArrayList<Local> list1 = new ArrayList<Local>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectLocalList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list1.add(new Local(rset.getInt("LOCAL_NO"),
+									  rset.getString("LOCAL_NAME")
+									  ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list1;
+	}
+
+	public ArrayList<NormalChallenge> normalChallengeList(Connection conn, int local) {
+		ArrayList<NormalChallenge> list2 = new ArrayList<NormalChallenge>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("normalChallengeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			if(local == 0) {
+				pstmt.setInt(1, 1);
+				pstmt.setInt(2, 1);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
+							rset.getString("NOR_CHLG_TITLE"),
+							rset.getDate("ENROLL_DATE"),
+							rset.getDate("NOR_CHLG_DATE"),
+							rset.getInt("NOR_CHLG_MAX"),
+							rset.getString("NOR_CHLG_ID"),
+							rset.getString("LOCAL_NAME"),
+							rset.getInt("COUNT")
+							));
+				}
+				
+				
+			}else {
+				pstmt.setString(1, "LOCAL_NO");
+				pstmt.setInt(2, local);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
+							rset.getString("NOR_CHLG_TITLE"),
+							rset.getDate("ENROLL_DATE"),
+							rset.getDate("NOR_CHLG_DATE"),
+							rset.getInt("NOR_CHLG_MAX"),
+							rset.getString("NOR_CHLG_ID"),
+							rset.getString("LOCAL_NAME"),
+							rset.getInt("COUNT")
+							));
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		System.out.println(list2);
+		return list2;
+		
+	}
+
+//	public ArrayList<NormalChallenge> normalChallengeListLocal(Connection conn, int local) {
+//		ArrayList<NormalChallenge> list3 = new ArrayList<NormalChallenge>();
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("normalChallengeListLocal");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, local);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				list3.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
+//											  rset.getString("NOR_CHLG_TITLE"),
+//											  rset.getDate("ENROLL_DATE"),
+//											  rset.getDate("NOR_CHLG_DATE"),
+//											  rset.getInt("NOR_CHLG_MAX"),
+//											  rset.getString("NOR_CHLG_ID"),
+//											  rset.getString("LOCAL_NAME"),
+//											  rset.getInt("COUNT")
+//											  ));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return list3;
+//	}
 	
 }

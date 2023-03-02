@@ -86,7 +86,8 @@
 	<!-- 대회 챌린지 리스트 -->
 	<entry key="contestChallengeList">
 		SELECT 
-		       CNTS_CHLG_TITLE
+			   CNTS_CHLG_NO
+		     , CNTS_CHLG_TITLE
 		     , ENROLL_DATE
 		     , CNTS_CHLG_DATE
 		     , CNTS_CHLG_MAX
@@ -103,5 +104,34 @@
 		   AND RPR_STATUS = 'N'
 		   AND CNTS_NAME = ?
 	</entry>
-
+	
+	<!-- 일반 챌린지 리스트 -->
+	<entry key="selectLocalList">
+		SELECT
+		       LOCAL_NO
+		     , LOCAL_NAME
+		  FROM LOCAL
+	</entry>
+	
+	<entry key="normalChallengeList">
+		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+		   AND ? = ?
+	</entry>
+	
 </properties>

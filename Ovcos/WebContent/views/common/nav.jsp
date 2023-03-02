@@ -61,7 +61,7 @@
                         <li id="challenge"><a href="<%= contextPath %>/main.ch">챌린지</a>
 	                        <ul>
 	                        	<li><a href="<%= contextPath %>/cntsMain.ch">대회</a></li>
-	                        	<li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
+	                        	<li><a href="<%= contextPath %>/ncList.ch?local=0">일반</a></li>
 	                        </ul>
                         </li>
                     </ul>
