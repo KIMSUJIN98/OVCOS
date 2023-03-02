@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectCutList">
+SELECT M.MEM_ID, MEM_NAME, MEM_INTRO
+FROM MEMBER M, CUT C
+WHERE  M.MEM_ID = C.CUT_ID
+AND C.MEM_ID = ?
+AND CUT_STATUS = 'Y'
+</entry>
+
+<entry key="cutCheck">
+SELECT M.MEM_ID
+FROM CUT C, MEMBER M
+WHERE CUT_ID = M.MEM_ID
+AND C.MEM_ID = ? AND M.MEM_ID =?
+AND CUT_STATUS ='Y'
+</entry>
+
+
+<!-- cut테이블에 인서트하기전 존재하는지 체크 -->
+<entry key="selectInsertList">
+	SELECT MEM_ID
+	  FROM CUT
+	 WHERE MEM_ID= ?
+	   AND CUT_ID =?
+</entry>
+
+
+<!-- 컷테이블에 존재할시 컷status Y로 업데이트 -->
+<entry key="updateInsertCut">
+	UPDATE
+	       CUT
+	   SET CUT_STATUS='Y'
+	 WHERE MEM_ID = ?
+	   AND CUT_ID = ?
+</entry>
+
+
+<!-- 차단 추가 -->
+<entry key="insertCut">
+	INSERT 
+	  INTO CUT 
+	     (
+	       MEM_ID
+	     , CUT_ID
+	     )
+	     VALUES
+	     (
+	        ?
+	      , ?
+	      )
+</entry>
+
+<!-- 친구삭제 -->
+<entry key="deleteCut">
+	UPDATE
+	       CUT
+	   SET CUT_STATUS='N'
+	 WHERE MEM_ID = ?
+	   AND CUT_ID = ?
+</entry>
+
+
+</properties>

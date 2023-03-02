@@ -1,6 +1,8 @@
-package com.ovcos.cut.controller;
+package com.ovcos.loginRegister.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Ex6
+ * Servlet implementation class MemberEnrollFormController
  */
-@WebServlet("/Ex6")
-public class Ex6 extends HttpServlet {
+@WebServlet("/enrollForm.me")
+public class MemberEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Ex6() {
+    public MemberEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +28,10 @@ public class Ex6 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/loginRegister/insertInfo.jsp");
+		view.forward(request, response);
 	}
 
 	/**

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectInsertList">
+	SELECT SEND_ID
+	  FROM FOLLOW_REQUEST
+	 WHERE SEND_ID= ?
+	   AND RESPONSE_ID= ?
+</entry>
+
+<entry key="updateInsertFollowRequest">
+	UPDATE
+	       FOLLOW_REQUEST
+	   SET REQUEST_STATUS='Y'
+	 WHERE RESPONSE_ID = ?
+	   AND SEND_ID = ?
+</entry>
+
+<entry key="insertFollowRequest">
+	INSERT 
+	  INTO FOLLOW_REQUEST 
+	     (
+	       SEND_ID
+	     , RESPONSE_ID
+	     )
+	     VALUES
+	     (
+	        ?
+	      , ?
+	      )
+
+
+</entry>
+
+
+<entry key="selectFollowRequestList">
+
+SELECT MEM_ID, MEM_NAME, MEM_INTRO, MEM_NICK
+FROM MEMBER M, FOLLOW_REQUEST
+WHERE  M.MEM_ID = SEND_ID
+AND RESPONSE_ID = ?
+AND REQUEST_STATUS = 'Y'
+
+</entry>
+
+<entry key="deleteFollowRequest">
+	UPDATE
+	       FOLLOW_REQUEST
+	   SET REQUEST_STATUS='N'
+	 WHERE RESPONSE_ID = ?
+	   AND SEND_ID = ?
+	   
+</entry>
+
+
+</properties>

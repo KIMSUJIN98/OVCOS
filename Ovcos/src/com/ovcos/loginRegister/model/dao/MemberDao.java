@@ -40,22 +40,22 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				m = new Member(
-								  rset.getString("MEM_ID")
-								, rset.getString("MEM_PWD")
-								, rset.getString("MEM_NAME")
-								, rset.getString("MEM_NICK")
-								, rset.getString("MEM_INTRO")
-								, rset.getDate("MEM_BIRTH")
-								, rset.getString("MEM_STATUS")
-								, rset.getString("MEM_LOC_INFO")
-								, rset.getString("MEM_PUBLIC_NY")
-								, rset.getInt("MEM_GOAL_DTN")
-								, rset.getString("MEM_CODE_NY")
-								, rset.getInt("MEM_RPR_CUM")
-								, rset.getString("MEM_API_TYPE")
-								, rset.getString("MEM_API_TOKEN")
-								, rset.getString("MEM_EML")
-								, rset.getString("MARKET_NY")
+								  rset.getString(1)
+								, rset.getString(2)
+								, rset.getString(3)
+								, rset.getString(4)
+								, rset.getString(5)
+								, rset.getString(6)
+								, rset.getString(7)
+								, rset.getString(8)
+								, rset.getString(9)
+								, rset.getInt(10)
+								, rset.getString(11)
+								, rset.getInt(12)
+								, rset.getString(13)
+								, rset.getString(14)
+								, rset.getString(15)
+								, rset.getString(16)
 						);
 			}
 			
@@ -67,5 +67,86 @@ public class MemberDao {
 		}
 		return m;
 		
+	}
+	
+	public int insertMember(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMember"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemPwd());
+			pstmt.setString(3, m.getMemName());
+			pstmt.setString(4, m.getMemNick());
+			pstmt.setString(5, m.getMemBirth());
+			pstmt.setString(6, m.getMemEml());
+			pstmt.setString(7, m.getMarketNy());
+			
+			result = pstmt.executeUpdate(); 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int idCheck(Connection conn, String checkId) {
+		// select문 => rset => int
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public int nickCheck(Connection conn, String checkNick) {
+		// select문 => rset => int
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		
+		String sql = prop.getProperty("nickCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkNick);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
 	}
 }

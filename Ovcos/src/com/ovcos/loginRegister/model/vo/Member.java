@@ -8,7 +8,7 @@ public class Member {
 	private String memName;
 	private String memNick;
 	private String memIntro;
-	private Date memBirth;
+	private String memBirth;
 	private String memStatus;
 	private String memLocInfo;
 	private String memPublicNy;
@@ -22,7 +22,8 @@ public class Member {
 	
 	public Member() {}
 
-	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, Date memBirth,
+
+	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, String memBirth,
 			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn, String memCodeNy, int memRprCum,
 			String memApiType, String memApiToken, String memEml, String marketNy) {
 		super();
@@ -40,6 +41,19 @@ public class Member {
 		this.memRprCum = memRprCum;
 		this.memApiType = memApiType;
 		this.memApiToken = memApiToken;
+		this.memEml = memEml;
+		this.marketNy = marketNy;
+	}
+
+	
+	public Member(String memId, String memPwd, String memName, String memNick, String memBirth, String memEml,
+			String marketNy) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.memBirth = memBirth;
 		this.memEml = memEml;
 		this.marketNy = marketNy;
 	}
@@ -84,11 +98,11 @@ public class Member {
 		this.memIntro = memIntro;
 	}
 
-	public Date getMemBirth() {
+	public String getMemBirth() {
 		return memBirth;
 	}
 
-	public void setMemBirth(Date memBirth) {
+	public void setMemBirth(String memBirth) {
 		this.memBirth = memBirth;
 	}
 
@@ -180,6 +194,6 @@ public class Member {
 				+ memCodeNy + ", memRprCum=" + memRprCum + ", memApiType=" + memApiType + ", memApiToken=" + memApiToken
 				+ ", memEml=" + memEml + ", marketNy=" + marketNy + "]";
 	}
-
-
 }
+	
+	
