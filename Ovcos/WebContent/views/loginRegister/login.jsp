@@ -9,6 +9,8 @@ String contextPath = request.getContextPath();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/loginStyle.css">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
 <body>
@@ -32,20 +34,35 @@ String contextPath = request.getContextPath();
             </div>
             <div id="login_menu">
                 <div>
-                    <a href="#" class="a1">아이디 찾기</a>
-                    <a href="#">비밀번호 재설정</a>
+                    <a href="/Ovcos/views/loginRegister/findId.jsp" class="a1">아이디 찾기</a>
+                    <a href="/Ovcos/views/loginRegister/findPwd.jsp">비밀번호 재설정</a>
                 </div>
             </div>
 
-            <button id="register_btn" onclick="location.href='/Ovcos/views/loginRegister/signin_agree.jsp'">회원가입</button>
+            <button id="register_btn" onclick="location.href='<%=contextPath%>/agree.me'">회원가입</button>
             <span id="test1">간편 로그인</span>
             <div id="login_img">
-                <img src="${pageContext.request.contextPath}/resources/image/naver.png" alt="">
+            <div id="naver_id_login">
+                <img src="${pageContext.request.contextPath}/resources/image/naver.png" alt="" onclick="loginNaver();">
+            </div>
                 <img src="${pageContext.request.contextPath}/resources/image/kakao.png" alt="">
                 <img src="${pageContext.request.contextPath}/resources/image/google.png" alt="">
             </div>
         </div>
     </div>
+    
+    <script>
+    	function naverLogin(){
+    		const naver_id_login = new naver_id_login("KcHVwRHK_KE6cV1dfnlJ", "http://localhost:8581/Ovcos/index.jsp/naverLogin");
+    	  	const state = naver_id_login.getUniqState();
+    	  	naver_id_login.setButton("white", 2,40);
+    	  	naver_id_login.setDomain("http://localhost:8581/Ovcos/index.jsp");
+    	  	naver_id_login.setState(state);
+    	  	naver_id_login.setPopup();
+    	  	naver_id_login.init_naver_id_login();
+    	}
+    
+    </script>
 
 
 </body>
