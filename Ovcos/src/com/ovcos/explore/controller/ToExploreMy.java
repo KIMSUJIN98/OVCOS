@@ -42,22 +42,22 @@ public class ToExploreMy extends HttpServlet {
 		
 		listCount = new ExploreService().selectListCount();
 		
-		String npage = request.getParameter("epage");
-		String dpage = request.getParameter("fpage");
+		String npage = request.getParameter("npage");
+		String dpage = request.getParameter("dpage");
 		
-		if(epage == null) {
-			currentPage = Integer.parseInt(fpage);
-			status = "f";
+		if(npage == null) {
+			currentPage = Integer.parseInt(dpage);
+			status = "d";
 		}else {
-			currentPage = Integer.parseInt(epage);
-			status="e";
+			currentPage = Integer.parseInt(npage);
+			status="n";
 		}
 		
 		
 		
 		pageLimit = 5; //페이지바 최대개수
 		
-		boardLimit = 7; // 보여질 게시글 총개수
+		boardLimit = 10; // 보여질 게시글 총개수
 		
 		//제일 마지막 페이지
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
@@ -78,7 +78,7 @@ public class ToExploreMy extends HttpServlet {
 		
 		
 		
-		list = new ExploreService().selectList(pi,status);
+		list = new ExploreService().selectMyNewList(pi,status,userId);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

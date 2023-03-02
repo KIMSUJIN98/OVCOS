@@ -194,9 +194,9 @@
                                                 success: startDataLayer
                                                 });
                                                     
-                                                    function startDataLayer(xmlDoc) {
-                                                        n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
-                                                        }
+                                            function startDataLayer(xmlDoc) {
+                                                n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
+                                                }
 
                                             </script>
                                             

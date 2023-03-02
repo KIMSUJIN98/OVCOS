@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	
 	ArrayList<Explore> list = (ArrayList<Explore>)request.getAttribute("list");
 	Pageinfo pi = (Pageinfo)request.getAttribute("pi");
 
@@ -14,6 +15,7 @@
 	int maxPage = pi.getMaxPage();
 	
 	String status = String.valueOf(request.getAttribute("status"));
+	String search = String.valueOf(request.getAttribute("search"));
 %>
 <!DOCTYPE html>
 <html>
@@ -32,16 +34,16 @@
         <!-- course_nav 시작-->
         <div id="course_nav">
             <ul>
-                <li class="li1">
-                    <a onclick="location.href='<%=contextPath%>/course?epage=1'">
-                        <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagWhite.png" alt="깃발"></span>
-                        <span class="li1text" align="center">코스검색</span>
+                <li>
+                    <a href='<%=contextPath%>/course?epage=1'>
+                        <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagGray.png" alt="깃발"></span>
+                        <span class="li2text" align="center">코스검색</span>
                     </a>
                 </li>
-                <li>
+                <li class="li1">
                     <a href="course/my?npage=1">
-                        <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/exploreuser.png" alt="유저"></span>
-                        <span class="li2text" align="center">나의코스</span>
+                        <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/exUserWhite.png" alt="유저"></span>
+                        <span class="li1text" align="center">나의코스</span>
                     </a>
                 </li>
             </ul>
@@ -50,29 +52,32 @@
         <!--course_left 시작-->
         <div id="course_left">
             <div id="sectiontop">
-                <div id="title">코스검색</div>
+                <div id="title">나의 코스</div>
                 <div id="search">
-                    <form action="search.ex">
+                    <form action="<%=contextPath%>/search.ex">
                         <input type="text" name="searchcourse" placeholder="제목,코스명 검색" autocomplete="off">
-
+						<input type="hidden" name="search" value="y">
                         <button type="submit" id="submitimg"></button>
                         <!-- <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색"> -->
                     </form>
                 </div>
             </div>
             <div id="tab_manu">
-           
+           	<%if(search.equals("y")){ %>
+            	<div id="seardiv">코스검색 결과</div>
+            <%}else{ %>
                 <ul>
                 <!-- 조건문으로 인기기록일 떄 아니면 최신기록일 때  -->
-                <%if(status.equals("e")){ %>
-	                    <li class="tabon1 tabon" onclick="location.href='<%=contextPath%>/course?epage=1'">최신기록</li>
-	                    <li class="tabon2" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
+                <%if(status.equals("n")){ %>
+	                    <li class="tabon1 tabon" onclick="location.href='<%=contextPath%>/course/my?npage=1'">최신순</li>
+	                    <li class="tabon2" onclick="location.href='<%=contextPath%>/course/my?dpage=1'">거리순</li>
 	                <%}else{ %>
-		                <li class="tabon1" onclick="location.href='<%=contextPath%>/course?epage=1'">최신기록</li>
-	                    <li class="tabon2 tabon" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
+		                <li class="tabon1" onclick="location.href='<%=contextPath%>/course/my?npage=1'">최신순</li>
+	                    <li class="tabon2 tabon" onclick="location.href='<%=contextPath%>/course/my?dpage=1'">거리순</li>
 	                <%} %>    
                 	
                 </ul>
+            <%} %>
                   
             </div>
             <div id="left_content">
@@ -147,25 +152,47 @@
                 <!-- 페이지바 시작 -->
                 
                 <div id="list_page">
-                    <ul>
-                    	<%if(currentPage != 1){ %>
-                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage-1%>'">&lt;</li>
-                        <%} else{%>
-                        	<li class="befpage">&lt;</li>
-                        <%} %>
-                        <%for(int i = startPage; i<=endPage; i++){ %>
-                        	<%if(i== currentPage){ %>
-                        		<li class="pagenum on"><%=i%></li>
-                        	<%}else{ %>
-                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?epage=<%=i%>'"><%=i%></li>
-                        	<%} %>
-                        <%} %>
-                        <%if(currentPage != maxPage){ %>
-                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage+1%>'">&gt;</li>
-                        <%} else{%>
-                        	<li class="aftpage">&gt;</li>
-                        <%} %>
-                    </ul>
+                	<%if(status.equals("n")){ %> <!-- 최신순 페이지 -->
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course/my?npage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course/my?npage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course/my?npage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+                    <%}else{ %> <!-- 거리순 페이지 -->
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course/my?dpage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course/my?dpage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course/my?dpage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+	                    <%} %>
                 </div>
                 <!-- 페이지바 끝 -->
             </div>
