@@ -94,6 +94,7 @@
 
 .nav-link.active {
     color: rgb(67, 115, 176) !important;
+    font-weight: bold;
 }
 
 /*검색 시작~*/
