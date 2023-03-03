@@ -111,5 +111,61 @@ SELECT
        N.DEL_STATUS = 'N'
    AND RPR_STATUS = 'N';
 
- 
+
+SELECT * FROM CONTEST;
+SELECT * FROM UPLOAD;
+
+INSERT
+  INTO CONTEST
+     (
+       CNTS_NO
+     , CNTS_NAME
+     , CNTS_DATE
+     , CNTS_URL
+     , DEL_STATUS
+     )
+VALUES
+     (
+       SEQ_CNTS_NO.NEXTVAL
+     , ?
+     , SYSDATE
+     , ?
+     , DEFAULT
+     );
+
+INSERT
+  INTO UPLOAD
+     (
+       UPL_ID
+     , UPL_MENU
+     , UPL_NO
+     , ORIGIN_NAME
+     , CHANGE_NAME
+     , VER_STATUS
+     , DEL_STATUS
+     )
+VALUES
+     (
+       ?
+     , ?
+     , SEQ_CNTS_NO.CURRVAL
+     , ?
+     , ?
+     , DEFAULT
+     , DEFAULT
+     );     
+
+
+SELECT 
+       CNTS_NO
+     , CNTS_NAME
+     , CNTS_DATE
+     , CNTS_URL
+     , CHANGE_NAME
+  FROM CONTEST
+  JOIN UPLOAD ON (CNTS_NO = UPL_NO);
+  
+DELETE CONTEST;
+
+COMMIT;
   

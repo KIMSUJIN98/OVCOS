@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.upload.model.vo.ImageUpload"%>
 <%@page import="com.ovcos.challenge.model.vo.ContestChallenge"%>
 <%@page import="com.ovcos.challenge.model.vo.Contest"%>
 <%@page import="java.util.ArrayList"%>
@@ -60,7 +61,7 @@
 
                         <!-- Modal body -->
                         <div class="modal-body" align="center">
-                            <form action="insertContest.ch" method="post" id="updateContest-form">
+                            <form action="insertContest.ch" method="post" id="insertContest-form" enctype="multipart/form-data">
                                 <table>
                                     <tr>
                                         <th>대회명</th>
@@ -71,7 +72,7 @@
                                     <tr>
                                         <th>대회날짜</th>
                                         <td>
-                                            <input type="date" min="2020-01-01" name="contestDate">
+                                            <input type="datetime-local" min="2020-01-01" name="contestDate">
                                         </td>
                                     </tr>
                                     <tr>
@@ -105,23 +106,30 @@
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-">
-                    <% for(Contest c : list) { %>
-                        <div class="col mb-5">
-                            <div class="card h-100">
-                                <a href="<%= c.getContestUrl() %>" target="_blank">
-                                    <img class="card-img-top" src="../../resources/image/서울마라톤.PNG" alt="..." />
-                                </a>
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <h5 class="fw-bolder"><%= c.getContestName() %></h5>
-                                        <%= c.getContestDate() %>
+                    
+                    <% if(list != null) { %>
+                        <% for(Contest c : list) { %>
+                            <% String url = c.getContestUrl(); %>
+                            <% int index = url.indexOf("www"); %>
+                            <% url = url.substring(index); %>
+                            <% System.out.println(url); %>
+                            <div class="col mb-5">
+                                <div class="card h-100">
+                                    <a href="<%= url %>" target="_blank">
+                                        <img class="card-img-top" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
+                                    </a>
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <h5 class="fw-bolder"><%= c.getContestName() %></h5>
+                                            <%= c.getContestDate() %>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>">참가하기</a></div>
                                     </div>
                                 </div>
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>">참가하기</a></div>
-                                </div>
                             </div>
-                        </div>
+                            <% } %>
                         <% } %>
                     </div>
                 </div>
@@ -138,6 +146,20 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Core theme JS-->
             <script src="../../resources/js/scripts.js"></script>
+
+            <!-- <script>
+                $(documnet).ready(function(){
+                $('input.timepicker').timepicker({
+                        timeFormat: 'HH:mm',
+                        interval: 30,
+                        startTime: '00:00',
+                        dynamic: false,
+                        dropdown: true,
+                        scrollbar: true
+                    });
+                })
+            </script> -->
+
 
     </body>
 

@@ -6,6 +6,11 @@ import java.util.Date;
 
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
+/**
+ * 대회 이미지 이름설정
+ * @author user1
+ *
+ */
 public class ChallengeFileRenamePolicy implements FileRenamePolicy {
 	
 	@Override
@@ -19,7 +24,7 @@ public class ChallengeFileRenamePolicy implements FileRenamePolicy {
 		
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		String changeName = currentTime + ranNum + ext;
+		String changeName = currentTime + "-c_" + ranNum + ext;
 		
 		return new File(originFile.getParent(), changeName);
 	}

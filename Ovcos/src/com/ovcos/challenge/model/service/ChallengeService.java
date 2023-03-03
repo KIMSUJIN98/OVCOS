@@ -10,6 +10,7 @@ import com.ovcos.challenge.model.vo.EntryList;
 import com.ovcos.challenge.model.vo.Local;
 import com.ovcos.challenge.model.vo.NEntryList;
 import com.ovcos.challenge.model.vo.NormalChallenge;
+import com.ovcos.upload.model.vo.ImageUpload;
 
 import static com.ovcos.common.JDBCTemplate.*;
 
@@ -114,6 +115,24 @@ public class ChallengeService {
 		close(conn);
 		
 		return list2;
+	}
+
+	public int insertContest(Contest c, ImageUpload img) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertContest(conn, c);
+				
+		int result2 = new ChallengeDao().insertContestImg(conn, img);
+		
+		if(result * result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result * result2;
 	}
 
 	

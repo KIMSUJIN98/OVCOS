@@ -208,13 +208,13 @@
     <script src="../../resources/js/scripts.js"></script>
 
     <script>
-        // var selectBox = function(){
-        //     var selectLocal = document.getElementById("selectLocal");
-        //     var local = (selectLocal.options[selectLocal.selectedIndex].value);
-        //     console.log(local);
-        //     location.href='<%= contextPath %>/ncList.ch?local=' + local;
-        // }
-        // document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
+        var selectBox = function(){
+            var selectLocal = document.getElementById("selectLocal");
+            var local = (selectLocal.options[selectLocal.selectedIndex].value);
+            console.log(local);
+            location.href='<%= contextPath %>/ncList.ch?local=' + local;
+        }
+        document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
         // $('#selectLocal option[value=' + value + ']').prop('selected', true);
 
 
@@ -223,21 +223,21 @@
         //     $("#selectLocal").val("${param.sb_cate}").attr("selected","selected");
         // });
 
-        function selectBox(){
-            $.ajax({
-                url:"ncList.ch",
-                data:{
-                    local:$("#selectLocal option:selected").val()
-                },
-                type:"get",
-                success:function(e){
-                    console.log(e);
-                    location.href='<%= contextPath %>/ncList.ch?local=' + local;
-                },
-                // contentType: "application/json; charset=utf-8",
-                // dataType: "json"
-            })
-        }
+        // function selectBox(){
+        //     $.ajax({
+        //         url:"ncList.ch",
+        //         data:{
+        //             local:$("#selectLocal option:selected").val()
+        //         },
+        //         type:"get",
+        //         success:function(e){
+        //             console.log(e);
+        //             location.href='<%= contextPath %>/ncList.ch?local=' + local;
+        //         },
+        //         // contentType: "application/json; charset=utf-8",
+        //         // dataType: "json"
+        //     })
+        // }
     </script>
 
 </body>

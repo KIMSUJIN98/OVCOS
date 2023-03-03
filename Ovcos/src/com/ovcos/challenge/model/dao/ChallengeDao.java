@@ -15,6 +15,7 @@ import com.ovcos.challenge.model.vo.EntryList;
 import com.ovcos.challenge.model.vo.Local;
 import com.ovcos.challenge.model.vo.NEntryList;
 import com.ovcos.challenge.model.vo.NormalChallenge;
+import com.ovcos.upload.model.vo.ImageUpload;
 
 import static com.ovcos.common.JDBCTemplate.*;
 
@@ -45,8 +46,9 @@ public class ChallengeDao {
 			while(rset.next()) {
 				list.add(new Contest(rset.getInt("CNTS_NO"),
 						             rset.getString("CNTS_NAME"),
-									 rset.getDate("CNTS_DATE"),
-									 rset.getString("CNTS_URL")
+									 rset.getString("CNTS_DATE"),
+									 rset.getString("CNTS_URL"),
+									 rset.getString("CHANGE_NAME")
 									 ));
 			}
 		} catch (SQLException e) {
@@ -341,10 +343,55 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 		
-		System.out.println(local);
-		System.out.println(list2);
 		return list2;
 		
+	}
+
+	public int insertContest(Connection conn, Contest c) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertContest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getContestName());
+			pstmt.setString(2, c.getContestDate());
+			pstmt.setString(3, c.getContestUrl());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertContestImg(Connection conn, ImageUpload img) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertContestImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, img.getUplId());
+			pstmt.setInt(2, img.getUplMenu());
+			pstmt.setString(3, img.getOriginName());
+			pstmt.setString(4, img.getChangeName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	
