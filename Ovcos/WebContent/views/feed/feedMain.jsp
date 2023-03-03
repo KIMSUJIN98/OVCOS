@@ -159,7 +159,7 @@
                                     <tr>
                                         <td colspan="3" id="td2_1">
                                             <div id="f_title">
-                                            <a href="<%= contextPath %>/detail2.fe?fno=<%=f.getFeedIndex() %>"><%=f.getFeedTitle() %></a>
+                                            <a href="<%= contextPath %>/detail.fe?fno=<%=f.getFeedIndex() %>"><%=f.getFeedTitle() %></a>
                                             </div>
                                         </td>
                                     </tr>

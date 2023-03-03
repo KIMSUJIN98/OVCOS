@@ -18,14 +18,14 @@ import com.ovcos.loginRegister.model.vo.Member;
 /**
  * Servlet implementation class feeddetail2
  */
-@WebServlet("/detail2.fe")
-public class feeddetail2Controller extends HttpServlet {
+@WebServlet("/detail.fe")
+public class feeddetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public feeddetail2Controller() {
+    public feeddetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,7 +46,7 @@ public class feeddetail2Controller extends HttpServlet {
 			
 				request.setAttribute("f", f);
 				
-				request.getRequestDispatcher("views/feed/feeddetail2.jsp").forward(request, response);
+				request.getRequestDispatcher("views/feed/feeddetail.jsp").forward(request, response);
 			
 //				RequestDispatcher view = request.getRequestDispatcher("views/feed/feeddetail2.jsp");
 //				view.forward(request, response);
