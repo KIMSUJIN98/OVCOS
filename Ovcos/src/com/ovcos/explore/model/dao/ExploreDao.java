@@ -83,13 +83,14 @@ public class ExploreDao {
 				list.add(new Explore(rset.getInt("rnum")
 						   		  , rset.getString("date")
 						   		  , rset.getString("feed_title")
-						   		  , rset.getString("feed_cnt")
 						   		  , rset.getInt("feed_eval")
 						   		  , rset.getDouble("distance")
 						   		  , rset.getDouble("start_lat")
 						   		  , rset.getDouble("start_lon")
 						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+						   		  , rset.getString("change_name")
+						   		  , rset.getInt("hit")
+						   		  , rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {
@@ -125,7 +126,8 @@ public class ExploreDao {
 						   		  , rset.getDouble("start_lat")
 						   		  , rset.getDouble("start_lon")
 						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+						   		  , rset.getString("change_name")
+						   		  , rset.getInt("hit")));
 			}
 			
 		} catch (SQLException e) {
@@ -159,15 +161,16 @@ public class ExploreDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
-						   		  , rset.getString("date")
-						   		  , rset.getString("feed_title")
-						   		  , rset.getString("feed_cnt")
-						   		  , rset.getInt("feed_eval")
-						   		  , rset.getDouble("distance")
-						   		  , rset.getDouble("start_lat")
-						   		  , rset.getDouble("start_lon")
-						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+				   		  , rset.getString("date")
+				   		  , rset.getString("feed_title")
+				   		  , rset.getInt("feed_eval")
+				   		  , rset.getDouble("distance")
+				   		  , rset.getDouble("start_lat")
+				   		  , rset.getDouble("start_lon")
+				   		  , rset.getString("mem_id")
+				   		  , rset.getString("change_name")
+				   		  , rset.getInt("hit")
+				   		  , rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {
@@ -209,15 +212,16 @@ public class ExploreDao {
 			
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
-						   		  , rset.getString("date")
-						   		  , rset.getString("feed_title")
-						   		  , rset.getString("feed_cnt")
-						   		  , rset.getInt("feed_eval")
-						   		  , rset.getDouble("distance")
-						   		  , rset.getDouble("start_lat")
-						   		  , rset.getDouble("start_lon")
-						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+				   		  , rset.getString("date")
+				   		  , rset.getString("feed_title")
+				   		  , rset.getInt("feed_eval")
+				   		  , rset.getDouble("distance")
+				   		  , rset.getDouble("start_lat")
+				   		  , rset.getDouble("start_lon")
+				   		  , rset.getString("mem_id")
+				   		  , rset.getString("change_name")
+				   		  , rset.getInt("hit")
+				   		  , rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {
@@ -254,15 +258,16 @@ public class ExploreDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
-						   		  , rset.getString("date")
-						   		  , rset.getString("feed_title")
-						   		  , rset.getString("feed_cnt")
-						   		  , rset.getInt("feed_eval")
-						   		  , rset.getDouble("distance")
-						   		  , rset.getDouble("start_lat")
-						   		  , rset.getDouble("start_lon")
-						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+				   		  , rset.getString("date")
+				   		  , rset.getString("feed_title")
+				   		  , rset.getInt("feed_eval")
+				   		  , rset.getDouble("distance")
+				   		  , rset.getDouble("start_lat")
+				   		  , rset.getDouble("start_lon")
+				   		  , rset.getString("mem_id")
+				   		  , rset.getString("change_name")
+				   		  , rset.getInt("hit")
+				   		  , rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {

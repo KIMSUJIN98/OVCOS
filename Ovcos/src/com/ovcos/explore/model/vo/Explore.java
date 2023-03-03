@@ -18,10 +18,50 @@ public class Explore {
 	private String feedDelNy;//	피드삭제여부
 	private String MemId;//	회원 아이디
 	private String path;//파일경로
+	private int hit;// 조회수
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+
+
+	private int count;// 찜수
 	
 	
 	public Explore() {}
 	
+	
+	public Explore(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval,
+			String feedPublicType, String feedPathNy, String feedRprNy, Date feedRprDate, double distance,
+			double startLat, double startLon, String feedDelNy, String memId, String path, int hit) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.feedPublicType = feedPublicType;
+		this.feedPathNy = feedPathNy;
+		this.feedRprNy = feedRprNy;
+		this.feedRprDate = feedRprDate;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		this.feedDelNy = feedDelNy;
+		this.MemId = memId;
+		this.path = path;
+		this.hit = hit;
+	}
+
+
+
+
 	public Explore(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval,
 			String feedPublicType, String feedPathNy, String feedRprNy, Date feedRprDate, double distance,
 			double startLat, double startLon, String feedDelNy, String memId, String path) {
@@ -39,7 +79,7 @@ public class Explore {
 		this.startLat = startLat;
 		this.startLon = startLon;
 		this.feedDelNy = feedDelNy;
-		MemId = memId;
+		this.MemId = memId;
 		this.path = path;
 	}
 	
@@ -48,7 +88,7 @@ public class Explore {
 	
 
 	public Explore(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
-			double startLat, double startLon, String memId, String path) {
+			double startLat, double startLon, String memId, String path, int hit) {
 		super();
 		this.feedIndex = feedIndex;
 		this.feedDate = feedDate;
@@ -60,11 +100,26 @@ public class Explore {
 		this.startLon = startLon;
 		this.MemId = memId;
 		this.path = path;
+		this.hit = hit;
 	}
 	
 	
-	
-	
+	public Explore(int feedIndex, String feedDate, String feedTitle, int feedEval, double distance, double startLat,
+			double startLon, String memId, String path, int hit, int count) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedEval = feedEval;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		MemId = memId;
+		this.path = path;
+		this.hit = hit;
+		this.count = count;
+	}
+
 
 	public int getFeedIndex() {
 		return feedIndex;
@@ -185,6 +240,20 @@ public class Explore {
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
+	
+
+	public int getHit() {
+		return hit;
+	}
+
+
+
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
 
 	@Override
 	public String toString() {
@@ -192,8 +261,17 @@ public class Explore {
 				+ feedCnt + ", feedEval=" + feedEval + ", feedPublicType=" + feedPublicType + ", feedPathNy="
 				+ feedPathNy + ", feedRprNy=" + feedRprNy + ", feedRprDate=" + feedRprDate + ", distance=" + distance
 				+ ", startLat=" + startLat + ", startLon=" + startLon + ", feedDelNy=" + feedDelNy + ", MemId=" + MemId
-				+ ", path=" + path + "]";
+				+ ", path=" + path + ", hit=" + hit + ", count=" + count + "]";
 	}
+
+
+
+
+
+
+
+
+	
 	
 	
 	

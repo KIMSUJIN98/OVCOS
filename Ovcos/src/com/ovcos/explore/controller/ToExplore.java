@@ -74,8 +74,8 @@ public class ToExplore extends HttpServlet {
 		ArrayList<Explore> list = new ArrayList<Explore>();
 		
 		
-		
 		list = new ExploreService().selectList(pi,status);
+		
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

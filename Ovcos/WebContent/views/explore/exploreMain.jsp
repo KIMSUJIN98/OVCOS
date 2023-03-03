@@ -107,23 +107,19 @@
                                     <input type="hidden" name="lng" id="lng<%=f.getFeedIndex()%>" value="<%=f.getStartLon()%>">
                                 </tr>
                             </table>
-                            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                            <div style="display: flex; width: 100%; justify-content: space-around;">
                                 <div>
-                                    <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;">1</span>
+                                    <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;"><%=f.getCount() %></span>
                                 </div>
                                 <div>
                                     <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">
-                                    <span style="display: inline;font-size: 0.8rem;">1</span>
-                                </div>
-                                <div>
-                                    <img src="<%=contextPath%>/resources/image/download.png" class="eximg" alt="">
-                                    <span style="display: inline;font-size: 0.8rem;">1</span>
+                                    <span style="display: inline;font-size: 0.8rem;"><%=f.getHit() %></span>
                                 </div>
                                 <div class="date">
                                     <%=f.getFeedDate()%>
                                 </div>
                                 <div class="detailBtn">
-                                    <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                                    <span id="bttn" class="btn1 btn btn-sm" onclick="location.href='<%=contextPath%>/detail.fe?fno=<%=f.getFeedIndex()%>'">코스 상세</span>
                                 </div>
                             </div>
                             
