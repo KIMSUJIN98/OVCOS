@@ -46,14 +46,28 @@
                     <div>
                         <div id="detail"><%=f.getFeedDate()%></div>
                     </div>
+                    <div style="display: flex; padding-left: 10px; ">
+                        <div id="eval">
+                            <img src="${pageContext.request.contextPath}/resources/image/eval.png" style="width: 20px; padding-top: 2px;" alt="">
+                        </div>
+                        <div style="padding-left: 3px;"><%=f.getFeedEval()%></div> 
+                    </div>
                 </span>
             </div>
-            
-            <div style="border-bottom: 1px solid black; padding-bottom: 15px; padding-left: 15px;display: flex; ">
-                <img src="${pageContext.request.contextPath}/resources/image/eye.png" style="width: 17px; margin-left: 15px;" alt="">
-                <span style="padding-left: 5px; font-weight: 400;"><%=f.getHit() %></span>
-                <img style="box-sizing: none;" id="love" src="${pageContext.request.contextPath}/resources/image/love.png" alt=""><span></span>
-                <a href=""><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
+            <!-- 조회수, 찜, 다운로든 -->
+            <div style="border-bottom: 1px solid black;  padding-left: 15px;display: flex; padding-bottom: 15px;">
+                <div>
+                    <img id="eye" src="${pageContext.request.contextPath}/resources/image/eye.png" alt="">
+                </div>
+                <div style="padding-left: 5px;"><%=f.getHit() %></div>
+                <div>
+                    <img style="box-sizing: none;" id="love" src="${pageContext.request.contextPath}/resources/image/love.png" alt="">
+                    <span></span>
+                </div>
+                
+                <div>
+                    <a href=""><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
+                </div>
                 
             </div>
             
@@ -92,39 +106,46 @@
                 </div>
             </div>
             <!-- 댓글 구간 -->
-            <div id="com" style="height: 280px;  height:20%; overflow: auto;">
+            <div id="com" style="height: 280px;  height:20%; overflow: auto; padding-left: 10px;">
                <table>
                	
                
                </table>
                 
             </div>
-            <div id="reply-area">
-                <table style="margin: auto;">
-                    <thead> 
-                        <tr>
-                            <th id="fontth">댓글</th>
-                            <td style="padding-right: 0;">
-                                <textarea  rows="1" id="feed_cmn_cnt" cols="40" style="resize: none; margin-top: 10px;"></textarea>
-                            </td>
-                            <td style="padding-right: 0;"><button onclick="insertReply();" id="btn00" type="submit" class="btn btn-sm btn-info">전송</button></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-               
-            
-            </div>
+           
+                <div id="reply-area">
+                    <table style="margin: auto;">
+                        <thead> 
+                            <tr>
+                                <th id="fontth">댓글</th>
+                                <td style="padding-right: 0;">
+                                    <input  type="text" id="feed_cmn_cnt"  style="resize: none; margin-top: 5px; width: 320px;"></input>
+                                </td>
+                                <td style="padding-right: 0;"><button onclick="insertReply();" id="btn00" type="submit" class="btn btn-sm btn-info">전송</button></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+  
             <script>
+             
             
             $(function () {
             	selectdetail2();
                // setInterval(selectdetail2, 1000);
             })
             
-            
+            $(document).keyup(function (e) {
+                if ($("#feed_cmn_cnt").is(":focus") && (e.keyCode == 13)) {
+                    // Do something
+                    insertReply();
+                }
+            });
+
             function insertReply() {
                 $.ajax({
                     url: "insertcomm.de",
@@ -154,12 +175,38 @@
                         let value = "";
                         for (let i = 0; i < result.length; i++) {
                             value += "<tr>"
+                                
                                 + "<td>" + result[i].feed_cmn_id + "</td>"
                                 + "<td>" + result[i].feed_cmn_cnt + "</td>"
-                                + "<td>" + result[i].feed_cmn_date + "</td>"
+                                + "<td style='font-size:0.8rem'>" + elapsedTime(result[i].feed_cmn_date) + "</td>"
                                 + "</tr>";
+                                //console.log(result[i].feed_cmn_date)
                         }
+                        function elapsedTime(date) {
+                        	  const start = new Date(date);
+                        	  const end = new Date();
 
+                        	  const diff = (end - start) / 1000;
+                        	  
+                        	  const times = [
+                        	    { name: '년', milliSeconds: 60 * 60 * 24 * 365 },
+                        	    { name: '개월', milliSeconds: 60 * 60 * 24 * 30 },
+                        	    { name: '일', milliSeconds: 60 * 60 * 24 },
+                        	    { name: '시간', milliSeconds: 60 * 60 },
+                        	    { name: '분', milliSeconds: 60 },
+                        	  ];
+
+                        	  for (const value of times) {
+                        	    const betweenTime = Math.floor(diff / value.milliSeconds);
+
+                        	    if (betweenTime > 0) {
+                        	      return `${betweenTime}${value.name} 전`;
+                        	    }
+                        	  }
+                        	  return '방금 전';
+                        	}
+
+                        	
                         $("#com table").html(value);
 
                     },

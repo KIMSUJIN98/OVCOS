@@ -121,7 +121,7 @@
 		        FEED_CMN_NO
 		      , FEED_CMN_ID
 		      , FEED_CMN_CNT
-		      , TO_CHAR(FEED_CMN_DATE, 'YY/MM/DD HH:MI') "FEED_CMN_DATE"
+		      , FEED_CMN_DATE
 		   FROM FEED_COMMENTS 
 		  WHERE FEED_INDEX = ?
 		  ORDER

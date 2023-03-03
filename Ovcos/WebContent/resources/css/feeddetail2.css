@@ -51,10 +51,23 @@
     bottom: 15px;
     position: fixed;
 }
-#love, #download1{
+#eye{
+    width: 17px; 
+    margin-left: 15px;
+    padding-top: 5px;
+}
+
+
+#love{
     width: 13px; 
-    padding-bottom: 2px;
-    margin-left: 170px; 
+    margin-left: 150px; 
+    padding-top: 5px;
+    /* padding-left: 170px; */
+}
+#download1{
+    width: 13px; 
+    margin-left: 150px; 
+    padding-top: 5px;
     /* padding-left: 170px; */
 }
 #feedt{

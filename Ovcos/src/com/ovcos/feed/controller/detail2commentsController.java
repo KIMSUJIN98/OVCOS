@@ -36,6 +36,7 @@ public class detail2commentsController extends HttpServlet {
 		String cmncnt = request.getParameter("feed_cmn_cnt");
 		//System.out.println(cmncnt);
 		
+		
 		int result = new FeedService().insertcomments(feedin, cmnid, cmncnt);
 		response.getWriter().print(result);
 		

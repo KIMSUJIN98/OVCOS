@@ -20,6 +20,7 @@ public class Explore {
 	private String path;//파일경로
 	private int hit;// 조회수
 	private int count;// 찜수
+
 	
 	public int getCount() {
 		return count;
