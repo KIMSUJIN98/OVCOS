@@ -6,7 +6,6 @@
 <%
 	ArrayList<Local> list1 = (ArrayList<Local>)request.getAttribute("list1");
 	ArrayList<NormalChallenge> list2 = (ArrayList<NormalChallenge>)request.getAttribute("list2");
-    //ArrayList<NormalChallenge> list3 = (ArrayList<NormalChallenge>)request.getAttribute("list3");
 %>
     
 <!DOCTYPE html>
@@ -143,6 +142,7 @@
                         </div>
                     </div>
                 </div>
+
                 <% for(NormalChallenge n : list2) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -169,6 +169,7 @@
                         </div>
                     </div>
                 <% } %>
+                
                 <!-- The Modal -->
                 <div class="modal" id="cntsDetail">
                     <div class="modal-dialog">
@@ -207,26 +208,36 @@
     <script src="../../resources/js/scripts.js"></script>
 
     <script>
-        // var selectBox = function(){
-        //     var selectLocation = document.getElementById("selectLocal");
-        //     var local = (selectLocation.options[selectLocation.selectedIndex].value);
-        //     console.log(local);
-        //     location.href='<%= contextPath %>/ncList.ch?local=' + local;
-        // }
-
-        function selectBox(){
-            $.ajax({
-                url:"ncList.ch",
-                data:{
-                    local:$("#selectLocal").val()
-                },
-                type:"post",
-                success:function(local){
-                    console.log(local)
-                    location.href='<%= contextPath %>/ncList.ch?local=' + local;
-                }
-            })
+        var selectBox = function(){
+            var selectLocal = document.getElementById("selectLocal");
+            var local = (selectLocal.options[selectLocal.selectedIndex].value);
+            console.log(local);
+            location.href='<%= contextPath %>/ncList.ch?local=' + local;
         }
+        document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
+        // $('#selectLocal option[value=' + value + ']').prop('selected', true);
+
+
+
+        // $(function(){
+        //     $("#selectLocal").val("${param.sb_cate}").attr("selected","selected");
+        // });
+
+        // function selectBox(){
+        //     $.ajax({
+        //         url:"ncList.ch",
+        //         data:{
+        //             local:$("#selectLocal option:selected").val()
+        //         },
+        //         type:"get",
+        //         success:function(e){
+        //             console.log(e);
+        //             location.href='<%= contextPath %>/ncList.ch?local=' + local;
+        //         },
+        //         // contentType: "application/json; charset=utf-8",
+        //         // dataType: "json"
+        //     })
+        // }
     </script>
 
 </body>
