@@ -34,29 +34,39 @@ public class feeddetail2Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int feedNo = Integer.parseInt(request.getParameter("fno"));
-		Feeddetails m = new FeedService().selectMember(feedNo);
+		Feeddetails f = null;
 		
-		System.out.println(m);
-		
-		if(m != null) {
-			// 성공했을때
-		
-			request.setAttribute("m", m);
+		int result = new FeedService().updateCount(feedNo);
+		if(result > 0) {
+			f= new FeedService().selectMember(feedNo);
 			
-			request.getRequestDispatcher("views/feed/feeddetail2.jsp").forward(request, response);
+			if(f != null) {
+				// 성공했을때
+			
+				request.setAttribute("f", f);
+				
+				request.getRequestDispatcher("views/feed/feeddetail2.jsp").forward(request, response);
+			
+//				RequestDispatcher view = request.getRequestDispatcher("views/feed/feeddetail2.jsp");
+//				view.forward(request, response);
+			
+			}else {
 		
-//			RequestDispatcher view = request.getRequestDispatcher("views/feed/feeddetail2.jsp");
-//			view.forward(request, response);
-		
+				// 에러페이지
+				request.getSession().setAttribute("alertMsg", "불러오기 실패");
+				response.sendRedirect("/list.feed");
+				
+			}
 		}else {
-	
-			// 에러페이지
-			request.getSession().setAttribute("alertMsg", "불러오기 실패");
-			response.sendRedirect("/list.feed");
-			
+			//조회수 증가 안될 때 에러메세지
 		}
+		
+		
+		
+//		System.out.println(m);
+		
+		
 		
 		
 	}

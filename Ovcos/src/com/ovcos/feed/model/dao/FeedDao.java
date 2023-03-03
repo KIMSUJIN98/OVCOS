@@ -222,5 +222,30 @@ public class FeedDao {
 		return list;
 	}
 
+	
+
+	public int updateCount(Connection conn, int feedNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, feedNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }

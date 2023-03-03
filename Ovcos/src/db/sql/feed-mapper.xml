@@ -127,7 +127,15 @@
 		  ORDER
 		     BY FEED_CMN_NO DESC
 
+</entry>
 
+
+<entry key="updateCount">
+	UPDATE
+        FEED
+    SET HIT = HIT + 1
+    WHERE FEED_INDEX = ?
+    AND FEED_RPR_NY = 'N'
 
 
 </entry>

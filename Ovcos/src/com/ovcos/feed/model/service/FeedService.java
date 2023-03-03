@@ -85,4 +85,23 @@ public class FeedService {
 
 
 	
+
+
+	public int updateCount(int feedNo) {
+	Connection conn = getConnection();
+	int result = new FeedDao().updateCount(conn, feedNo);
+		
+	if(result > 0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+		close(conn);
+	
+		return result;
+		
+	}
+
+
+	
 }

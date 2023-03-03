@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
-    	Feeddetails m = (Feeddetails)request.getAttribute("m"); 
+    	Feeddetails f = (Feeddetails)request.getAttribute("f"); 
     	
 
     %>
@@ -40,17 +40,18 @@
                 </span>
                 <span>
                     <div>
-                        <b id="name"><%=m.getMemId()%></b>
+                        <b id="name"><%=f.getMemId()%></b>
                     </div>
     
                     <div>
-                        <div id="detail"><%=m.getFeedDate()%></div>
+                        <div id="detail"><%=f.getFeedDate()%></div>
                     </div>
                 </span>
             </div>
             
             <div style="border-bottom: 1px solid black; padding-bottom: 15px; padding-left: 15px;display: flex; ">
-                <img src="${pageContext.request.contextPath}/resources/image/eye.png" style="width: 17px; margin-left: 15px;" alt=""><span></span>
+                <img src="${pageContext.request.contextPath}/resources/image/eye.png" style="width: 17px; margin-left: 15px;" alt="">
+                <span><%=f.getHit() %></span>
                 <img style="box-sizing: none;" id="love" src="${pageContext.request.contextPath}/resources/image/love.png" alt=""><span></span>
                 <a href=""><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
                 
@@ -63,7 +64,7 @@
                 
             </div> 
                 <div align="center" id="feedt" style="border-bottom: 1px solid black;">
-                    <%=m.getFeedTitle() %>
+                    <%=f.getFeedTitle() %>
                 </div>
 
             <div id="run" align="center" style="border-bottom: 1px solid black;">
@@ -73,7 +74,7 @@
             <div id="distance" style="border-bottom: 1px solid black;">
                 
                 <div style="padding-left: 15px; height: 150px;">
-                    <%=m.getFeedCnt() %>
+                    <%=f.getFeedCnt() %>
                 </div>
             </div>
 
@@ -128,14 +129,14 @@
                 $.ajax({
                     url: "insertcomm.de",
                     data: {
-                    	feed_index: <%= m.getFeedIndex()%>,
+                    	feed_index: <%= f.getFeedIndex()%>,
                     	feed_cmn_id: "<%= loginUser.getMemId()%>",
                     	feed_cmn_cnt: $("#feed_cmn_cnt").val()
             },
                     type: "post",
                     success: function (result) {
                         if (result > 0) { //댓글 작성 성공
-                            selectReplyList();
+                        	selectdetail2();
                             $("#feed_cmn_cnt").val("");
                         }
                     },
@@ -148,7 +149,7 @@
             function selectdetail2() {
                 $.ajax({
                     url: "rselect.de",
-                    data: { feed_index:<%=m.getFeedIndex() %>},
+                    data: { feed_index:<%=f.getFeedIndex() %>},
                     success: function (result) {
                         let value = "";
                         for (let i = 0; i < result.length; i++) {
