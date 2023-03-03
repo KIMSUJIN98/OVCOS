@@ -23,6 +23,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
+<script src="${pageContext.request.contextPath}/resources/js/cluster.js"></script>
+
 
 
 </head>
@@ -105,15 +107,30 @@
                                     <input type="hidden" name="lng" id="lng<%=f.getFeedIndex()%>" value="<%=f.getStartLon()%>">
                                 </tr>
                             </table>
-                            <div id="bottom">
-                                <span style="font-size: 0.8rem;"><%=f.getFeedDate() %></span>
-                                <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;">1</span>
+                                </div>
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">
+                                    <span style="display: inline;font-size: 0.8rem;">1</span>
+                                </div>
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/download.png" class="eximg" alt="">
+                                    <span style="display: inline;font-size: 0.8rem;">1</span>
+                                </div>
+                                <div class="date">
+                                    <%=f.getFeedDate()%>
+                                </div>
+                                <div class="detailBtn">
+                                    <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                     
                     <script>
-                    
                     	var lat = $("#lat<%=f.getFeedIndex()%>").val();
                         var lng = $("#lng<%=f.getFeedIndex()%>").val();
                     
@@ -211,7 +228,7 @@
 
                     var map = new naver.maps.Map('map',{
                         center:new naver.maps.LatLng(lat, lng),
-                        zoom: 10
+                        zoom: 8
                     })
 
                     var marker = null;
@@ -243,7 +260,11 @@
                         content:[
                             '<div class="iw_inner">',
                             '   <span><%=e.getFeedTitle()%></span>',
-                            '	<span><%=e.getDistance()%> km</span>	',
+                            '   <div style="display:flex; padding-left:10px">',
+                            '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
+                            '	    <span><%=e.getDistance()%> km</span>	',
+                            '       <a style="width:40%" href="#">Detail</a>',
+                            '   </div>',
                             '</div>'	
                         ].join('')
                     }))
@@ -255,10 +276,13 @@
                         $("path").remove();
                         $(".exList").css("backgroundColor","white");
                         $(this).css("backgroundColor","#eceaea");
-                        $(".btn1").css("visibility","hidden");
+                        $(".detailBtn").css("display","none");
+                        $(".date").css("display","block");
 
-                        $(this).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc")
-                        console.log($(this));
+                        $(this).find(".date").css("display","none");
+                        $(this).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
+
+                        
                         
                         // index 뽑기
                         var index = $(this).children("span").text()%10;
@@ -267,7 +291,8 @@
                         }
 
                         e.preventDefault();
-                      
+                        
+
                         $.ajax({
                             url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[index-1],
                             dataType: 'xml',
@@ -282,13 +307,16 @@
                                 infowindows[index-1].open(map,markers[index-1]);
                             }
                         
-                        })
                         
-                        naver.maps.Event.addListener(map, 'click', function(e) {
-                            for(let i = 0; i<infowindows.length; i++){
-                                infowindows[i].close();
-                            }
-                        });
+                    })
+                        
+                      
+                        
+                    naver.maps.Event.addListener(map, 'click', function(e) {
+                        for(let i = 0; i<infowindows.length; i++){
+                            infowindows[i].close();
+                        }
+                    });
                    
 
                     for(let i=0; i<markers.length; i++){
@@ -324,6 +352,45 @@
                         });
                     }
 
+                var htmlMarker1 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker2 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-2.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker3 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-3.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker4 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-4.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker5 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-5.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        };
+
+	    var markerClustering = new MarkerClustering({
+	        minClusterSize: 2,
+	        maxZoom: 10,
+	        map: map,
+	        markers: markers,
+	        disableClickZoom: false,
+	        gridSize: 120,
+	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+	        indexGenerator: [10, 100, 200, 500, 1000],
+	        stylingFunction: function(clusterMarker, count) {
+	            $(clusterMarker.getElement()).find('div:first-child').text(count);
+	        }
+	    });
                     
                     
                 </script>

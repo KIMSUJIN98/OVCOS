@@ -177,27 +177,26 @@
                                                 <div id="n<%=f.getFeedIndex()%>" style="width: 700px; height: 340px;"></div>
                                             </div>
                                             <script>
-                                                
+                                                    function startDataLayer(xmlDoc) {
+                                                    n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
+                                                    }
                                             
-                                                    var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
-                                                        center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
-                                                        zoom: 12
+                                                var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
+                                                    center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
+                                                    zoom: 10
                                                     })
                                                     
                                                     
-                                            $.ajax({
-                                                url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
-                                                dataType: 'xml',
-                                                strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                                strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                                strokeWeight: 3,   //선 두께
-                                                success: startDataLayer
-                                                });
+                                                $.ajax({
+                                                    url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
+                                                    dataType: 'xml',
+                                                    strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                                                    strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                                                    strokeWeight: 3,   //선 두께
+                                                    success: startDataLayer
+                                                    });
                                                     
-                                            function startDataLayer(xmlDoc) {
-                                                n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
-                                                }
-
+                                                    n<%=f.getFeedIndex()%>.setZoom(12);
                                             </script>
                                             
                                         </td>

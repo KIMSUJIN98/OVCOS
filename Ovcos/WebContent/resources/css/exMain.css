@@ -238,16 +238,32 @@ td{
     justify-content: space-between;
 }
 
+.eximg{
+    width: 13px;
+    display: inline-block;
+}
+
+.date{
+    font-size: 0.7rem;
+    line-height: 27px;
+    padding-left: 30px;
+    margin-bottom: 18px;
+}
+
+.detailBtn{
+    display: none;
+    margin-bottom: 10px;
+}
+
 .btn1{
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 0;
-    width: 90px;
-    height: 28px;
-    margin-right: 10px;
-    font-size: 0.4rem;
-    visibility: hidden;
-    margin-bottom: 5px;
+    width: 87px;
+    height: 10px;
+    font-size: 0.2rem;
+    margin-bottom: 18px;
+
 }
 
 path{
@@ -255,15 +271,27 @@ path{
 }
 
 .iw_inner{
-    width: 180px;
-    height: 70px;
+    width: 200px;
+    height: 40px;
     text-align: center;
     
 }
 
 .iw_inner>span:first-child{
-    margin-top: 10px;
+    margin: 10px;
     font-weight: bold;
+}
+
+.iw_inner>div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.iw_inner a{
+    color: black;
+    border: 1px solid grey;
+    border-radius: 5px;
+
 }
 
 #left_content::-webkit-scrollbar {
