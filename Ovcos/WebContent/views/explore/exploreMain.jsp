@@ -252,6 +252,7 @@
 
                     // window 세팅
                    <%for(Explore e: list){%>
+                   
                     infowindows.push(new naver.maps.InfoWindow({
                         content:[
                             '<div class="iw_inner">',
@@ -259,7 +260,7 @@
                             '   <div style="display:flex; padding-left:10px">',
                             '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
                             '	    <span><%=e.getDistance()%> km</span>	',
-                            '       <a style="width:40%" href="#">Detail</a>',
+                            '       <a style="width:40%;" href="">Detail</a>',
                             '   </div>',
                             '</div>'	
                         ].join('')
@@ -279,15 +280,11 @@
                         $(this).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
 
                         
-                        
                         // index 뽑기
                         var index = $(this).children("span").text()%10;
                         if($(this).children("span").text() == 10){
                             index = 10;
                         }
-
-                        e.preventDefault();
-                        
 
                         $.ajax({
                             url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[index-1],
@@ -302,8 +299,6 @@
                             }else{
                                 infowindows[index-1].open(map,markers[index-1]);
                             }
-                        
-                        
                     })
                         
                       

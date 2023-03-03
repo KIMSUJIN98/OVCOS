@@ -183,7 +183,7 @@
                                             
                                                 var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
                                                     center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
-                                                    zoom: 10
+                                                    zoom: 11
                                                     })
                                                     
                                                     
@@ -532,7 +532,7 @@
                     // 지도 표시
                     map = new naver.maps.Map('map', {
                         center: new naver.maps.LatLng(startLat, startLon),
-                        zoom: 11
+                        zoom: 12
                     });
                     // 지도에 선 그리기
                     polyline = new naver.maps.Polyline({

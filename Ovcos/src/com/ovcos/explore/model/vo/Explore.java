@@ -19,6 +19,8 @@ public class Explore {
 	private String MemId;//	회원 아이디
 	private String path;//파일경로
 	private int hit;// 조회수
+	private int count;// 찜수
+	
 	public int getCount() {
 		return count;
 	}
@@ -31,7 +33,7 @@ public class Explore {
 
 
 
-	private int count;// 찜수
+	
 	
 	
 	public Explore() {}
