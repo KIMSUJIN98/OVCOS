@@ -205,7 +205,7 @@ public class FeedDao {
 				list.add(new detail2comments(rset.getInt("feed_cmn_no"),
 											 rset.getString("feed_cmn_id"),
 											 rset.getString("feed_cmn_cnt"),
-											 rset.getString("feed_cmn_date")
+											 rset.getDate("feed_cmn_date")
 											 ));
 			}
 

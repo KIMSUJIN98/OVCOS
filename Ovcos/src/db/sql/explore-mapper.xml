@@ -19,7 +19,7 @@
 		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
 		      , FEED_TITLE
 		      , FEED_EVAL
-		      , DISTANCE
+		      , DISTANCE5
 		      , START_LAT
 		      , START_LON
               , MEM_ID

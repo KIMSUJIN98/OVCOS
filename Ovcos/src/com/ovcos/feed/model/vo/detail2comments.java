@@ -1,18 +1,20 @@
 package com.ovcos.feed.model.vo;
 
+import java.sql.Date;
+
 public class detail2comments {
 
 	  private int 	 feed_cmn_no;
 	  private String feed_cmn_id;
 	  private String feed_cmn_cnt;
-	  private String feed_cmn_date;
+	  private Date feed_cmn_date;
 	  private int    feed_index;
 	  
 	  
 	  public detail2comments() {}
 
 
-	public detail2comments(int feed_cmn_no, String feed_cmn_id, String feed_cmn_cnt, String feed_cmn_date,
+	public detail2comments(int feed_cmn_no, String feed_cmn_id, String feed_cmn_cnt, Date feed_cmn_date,
 			int feed_index) {
 		super();
 		this.feed_cmn_no = feed_cmn_no;
@@ -23,7 +25,7 @@ public class detail2comments {
 	}
 	
 
-	public detail2comments(int feed_cmn_no, String feed_cmn_id, String feed_cmn_cnt, String feed_cmn_date) {
+	public detail2comments(int feed_cmn_no, String feed_cmn_id, String feed_cmn_cnt, Date feed_cmn_date) {
 		super();
 		this.feed_cmn_no = feed_cmn_no;
 		this.feed_cmn_id = feed_cmn_id;
@@ -62,12 +64,12 @@ public class detail2comments {
 	}
 
 
-	public String getFeed_cmn_date() {
+	public Date getFeed_cmn_date() {
 		return feed_cmn_date;
 	}
 
 
-	public void setFeed_cmn_date(String feed_cmn_date) {
+	public void setFeed_cmn_date(Date feed_cmn_date) {
 		this.feed_cmn_date = feed_cmn_date;
 	}
 
