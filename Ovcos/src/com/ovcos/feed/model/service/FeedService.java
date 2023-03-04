@@ -48,7 +48,8 @@ public class FeedService {
 		Connection conn = getConnection();
 		
 		Feeddetails m = new FeedDao().selectMember(conn, feedNo); 
-		
+		int wishCount = new FeedDao().selectWishCount(conn, feedNo);
+		m.setWishCount(wishCount);
 		close(conn);
 
 		

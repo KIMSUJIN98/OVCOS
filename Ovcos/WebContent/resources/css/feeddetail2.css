@@ -66,7 +66,7 @@
 }
 #download1{
     width: 13px; 
-    margin-left: 150px; 
+    /* margin-left: 150px;  */
     padding-top: 5px;
     /* padding-left: 170px; */
 }
@@ -76,12 +76,22 @@
    padding-bottom: 10px;
    padding-top: 10px;
 }
-#com:-webkit-scrollbar-thumb {
-    background-color: #1348b8;
+/* #com {
+    width: 250px;
+    height: 140px;
+    overflow: auto;
+  } */
+  #com::-webkit-scrollbar {
+    width: 10px;
+  }
+  #com::-webkit-scrollbar-thumb {
+    background-color: #3273ff;
     border-radius: 10px;
-}
-#com::-webkit-scrollbar-track {
-    background-color: grey;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  #com::-webkit-scrollbar-track {
+    background-color: rgb(122, 171, 255);
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }

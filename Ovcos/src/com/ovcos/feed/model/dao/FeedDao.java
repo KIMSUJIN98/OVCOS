@@ -205,7 +205,7 @@ public class FeedDao {
 				list.add(new detail2comments(rset.getInt("feed_cmn_no"),
 											 rset.getString("feed_cmn_id"),
 											 rset.getString("feed_cmn_cnt"),
-											 rset.getDate("feed_cmn_date")
+											 rset.getString("feed_cmn_date")
 											 ));
 			}
 
@@ -245,6 +245,36 @@ public class FeedDao {
 		}
 		
 		return result;
+	}
+
+	public int selectWishCount(Connection conn, int feedNo) {
+		
+		int wishCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("wishListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, feedNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				wishCount = rset.getInt("count"); 
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return wishCount;
 	}
 
 

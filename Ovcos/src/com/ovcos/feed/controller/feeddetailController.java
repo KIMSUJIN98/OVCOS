@@ -39,7 +39,7 @@ public class feeddetailController extends HttpServlet {
 		
 		int result = new FeedService().updateCount(feedNo);
 		if(result > 0) {
-			f= new FeedService().selectMember(feedNo);
+			f = new FeedService().selectMember(feedNo);
 			
 			if(f != null) {
 				// 성공했을때

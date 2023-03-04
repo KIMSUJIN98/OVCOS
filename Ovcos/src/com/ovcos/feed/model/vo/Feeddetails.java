@@ -13,6 +13,7 @@ public class Feeddetails {
 	private String MemId;
 	private String changeName;
 	private int hit;
+	private int wishCount;
 	
 	public Feeddetails(){}
 	
@@ -31,6 +32,16 @@ public class Feeddetails {
 		MemId = memId;
 		this.changeName = changeName;
 		this.hit = hit;
+	}
+
+	
+	public int getWishCount() {
+		return wishCount;
+	}
+
+
+	public void setWishCount(int wishCount) {
+		this.wishCount = wishCount;
 	}
 
 

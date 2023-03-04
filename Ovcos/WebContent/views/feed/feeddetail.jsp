@@ -62,10 +62,10 @@
                 <div style="padding-left: 5px;"><%=f.getHit() %></div>
                 <div>
                     <img style="box-sizing: none;" id="love" src="${pageContext.request.contextPath}/resources/image/love.png" alt="">
-                    <span></span>
                 </div>
+                <div style="padding-left: 5px;"><%=f.getWishCount() %></div>
                 
-                <div>
+                <div style="margin-left: 150px;">
                     <a href=""><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
                 </div>
                 
@@ -97,12 +97,12 @@
             </div>
             <div id="distance" style="border-bottom: 1px solid black;">
                 <div>
-                    <b style="padding-left: 15px;">운동거리 : </b>
+                    <b style="padding-left: 15px;">운동거리 : <%=f.getDistance()%>KM</b>
     
                 </div>
                 <br>
                 <div>
-                    <b style="padding-left: 15px;">시작위치 : </b>
+                    <b style="padding-left: 15px;">시작위치 : (<%= f.getStartLat()%>, <%=f.getStartLon() %>)</b>
                 </div>
             </div>
             <!-- 댓글 구간 -->
@@ -178,34 +178,37 @@
                                 
                                 + "<td>" + result[i].feed_cmn_id + "</td>"
                                 + "<td>" + result[i].feed_cmn_cnt + "</td>"
-                                + "<td style='font-size:0.8rem'>" + elapsedTime(result[i].feed_cmn_date) + "</td>"
+                                + "<td style='font-size:0.8rem'>" + displayedAt(result[i].feed_cmn_date) + "</td>"
                                 + "</tr>";
                                 //console.log(result[i].feed_cmn_date)
+                                
                         }
-                        function elapsedTime(date) {
-                        	  const start = new Date(date);
-                        	  const end = new Date();
-
-                        	  const diff = (end - start) / 1000;
-                        	  
-                        	  const times = [
-                        	    { name: '년', milliSeconds: 60 * 60 * 24 * 365 },
-                        	    { name: '개월', milliSeconds: 60 * 60 * 24 * 30 },
-                        	    { name: '일', milliSeconds: 60 * 60 * 24 },
-                        	    { name: '시간', milliSeconds: 60 * 60 },
-                        	    { name: '분', milliSeconds: 60 },
-                        	  ];
-
-                        	  for (const value of times) {
-                        	    const betweenTime = Math.floor(diff / value.milliSeconds);
-
-                        	    if (betweenTime > 0) {
-                        	      return `${betweenTime}${value.name} 전`;
-                        	    }
-                        	  }
-                        	  return '방금 전';
-                        	}
-
+                        function displayedAt(createdAt) {
+                            const milliSeconds = new Date() - new Date(createdAt);
+                            const seconds = milliSeconds / 1000;
+                            if (seconds < 60) 
+                                return `방금 전`;
+                            const minutes = seconds / 60;
+                            if (minutes < 60) 
+                                return `${Math.floor(minutes)}분 전`;
+                            const hours = minutes / 60;
+                            if (hours < 24){
+                               console.log(hours);
+                               return `${Math.floor(hours)}시간 전`;
+                            }
+                            const days = hours / 24;
+                            if (days < 7) 
+                                return `${Math.floor(days)}일 전`;
+                            const weeks = days / 7;
+                            if (weeks < 5)
+                                return `${Math.floor(weeks)}주 전`;
+                            const months = days / 30;
+                            if (months < 12) 
+                                return `${Math.floor(months)}개월 전`;
+                            const years = days / 365;
+                            return `${Math.floor(years)}년 전`;
+                        }
+                        
                         	
                         $("#com table").html(value);
 
