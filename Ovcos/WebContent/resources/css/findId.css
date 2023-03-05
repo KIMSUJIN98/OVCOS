@@ -186,3 +186,6 @@ td button{
     border-bottom: 3px solid #ff7920 ;
     /* margin: 0px 30px; */
 }
+.modal {
+    z-index: 1050;
+  }

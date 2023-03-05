@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
   <!DOCTYPE html>
   <html lang="en">
 
@@ -50,15 +51,16 @@
           <div class="popup_body">
             <div class="checkbox_group">
               <div id="allAgree">
+              	<table>
                 <tr>
                   <td><input type="checkbox" id="check_all"></td>
                   <td style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;약관 전체 동의</td>
                 </tr>
-
+                </table>
               </div>
 
               <div id="agree">
-                <form action="#" name="frm" method="post" onsubmit="return validate();">
+                <form action="enrollForm.me" name="frm" method="post" onsubmit="return validate();">
                   <table id="agreeTable">
                     <tr>
                       <td class="checkbox"><input type="checkbox" class="normal" name="admin" required></td>
@@ -95,17 +97,30 @@
                           class="fa-solid fa-angle-right"></i></td>
                     </tr>
                     <tr>
-                      <td><input type="checkbox" class="normal" name="select"></td>
-                      <td id="selection">선택</td>
-                      <td>광고성 정보 수신동의</td>
-                      <td class="detail" align="center" data-bs-toggle="modal" data-bs-target="#exampleModal5"
-                        style="cursor:pointer;"><i class="fa-solid fa-angle-right"></i></td>
-                    </tr>
-                  </table>
-              </div>
-            
-            </div>
-            <script>
+					  <td><input type="checkbox" id="agree_checkbox" name="checkboxSelect"></td>
+					  <td><input type="hidden" class="normal" name="select" value="Y" id="select">선택</td>
+					  <td>광고성 정보 수신동의</td>
+					  <td class="detail" align="center" data-bs-toggle="modal" data-bs-target="#exampleModal5" style="cursor:pointer;">
+					    <i class="fa-solid fa-angle-right"></i>
+					  </td>
+						</tr>
+						</table>
+							<script>
+							  const agreeCheckbox = document.querySelector('#agree_checkbox');
+							  const selectInput = document.querySelector('#select');
+							  
+							  agreeCheckbox.addEventListener('change', function() {
+							    if (agreeCheckbox.checked) {
+							    	
+							      selectInput.value = 'Y';
+							    } else {
+							      selectInput.value = 'N';
+							    }
+							    
+							    console.log(selectInput.value);
+							  });
+							</script>
+			<script>
               $(".checkbox_group").on("click", "#check_all", function () {
                   var checked = $(this).is(":checked");
 
@@ -143,43 +158,10 @@
 
         
        <div>
-        	<a href = "<%=request.getContextPath()%>/enrollForm.me" class="btn" id="next_btn" onclick="return check();" disabled>다음</a>
+       <button type="submit" class="next_btn">다음</button> 
+        	<%-- <a href = "<%=request.getContextPath()%>/enrollForm.me" class="btn" id="next_btn" onclick="return check();">다음</a> --%>
        </div>
-         <script>
-        function check() {
-          let checkbox = $(":checkbox[name='admin']");
-		  let ness=$(":checkbox[class='ness']")	;
-		  let nextButton = document.getElementsByClassName("next-btn");
-          
-          for(let i = 0; i < checkbox.length;i++){
-            let $this = $(checkbox[i]);
-
-            if(!$this.is(":checked")){
-             ;alert('필수약관에 모두 동의하여 주십시오.');
-              $this.focus();
-              return false;
-            } else if(ness.checked){
-            	nextButton.style.backgroundColor="green";
-            	nextButton.disabled=false;
-            }
-            
-            }
-      }
-	
-        function color(){
-        	let checkbox = $(":checkbox[name='admin']");
-
-            for(let i = 0; i < checkbox.length;i++){
-              let $this = $(checkbox[i]);
-        	 
-              if($this.is(":checked")){
-            	  alert("안녕")
-                  /* $(this).css("backgroundColor", "red"); */
-        }
-            }
-        }
-
-        </script>
+        
       </div>
 
     </div>
@@ -789,5 +771,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"></script>
+       <script>
+        function check() {
+          let checkbox = $(":checkbox[name='admin']");
+		  let ness=$(":checkbox[class='ness']")	;
+		  let nextButton = document.getElementsByClassName("next-btn");
+          
+          for(let i = 0; i < checkbox.length;i++){
+            let $this = $(checkbox[i]);
+
+            if(!$this.is(":checked")){
+             ;alert('필수약관에 모두 동의하여 주십시오.');
+              $this.focus();
+              return false;
+            } else if(ness.checked){
+            	nextButton.style.backgroundColor="green";
+            	nextButton.disabled=false;
+            }
+            
+            }
+      }
+	
+        function color(){
+        	let checkbox = $(":checkbox[name='admin']");
+
+            for(let i = 0; i < checkbox.length;i++){
+              let $this = $(checkbox[i]);
+        	 
+              if($this.is(":checked")){
+            	  alert("안녕")
+                  /* $(this).css("backgroundColor", "red"); */
+        }
+            }
+        }
+
+        </script>
     
   </html>
