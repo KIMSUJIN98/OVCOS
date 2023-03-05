@@ -321,3 +321,7 @@ body{
 path{
     stroke: red !important;
 }
+
+img[src*='marker']{
+    display: none !important;
+}

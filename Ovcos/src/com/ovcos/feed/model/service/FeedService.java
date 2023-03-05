@@ -44,16 +44,14 @@ public class FeedService {
 	}
 
 
-	public Feeddetails selectMember(int feedNo) {
+	public Feeddetails selectFeedDetail(int feedNo) {
 		Connection conn = getConnection();
 		
-		Feeddetails m = new FeedDao().selectMember(conn, feedNo); 
-		int wishCount = new FeedDao().selectWishCount(conn, feedNo);
-		m.setWishCount(wishCount);
+		Feeddetails f = new FeedDao().selectFeedDetail(conn, feedNo); 
 		close(conn);
 
 		
-		return m;
+		return f;
 	}
 
 
@@ -102,6 +100,7 @@ public class FeedService {
 		return result;
 		
 	}
+
 
 
 	

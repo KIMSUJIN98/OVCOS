@@ -4,8 +4,6 @@
     pageEncoding="UTF-8"%>
     <% 
     	Feeddetails f = (Feeddetails)request.getAttribute("f"); 
-    	
-
     %>
     
 <!DOCTYPE html>
@@ -66,7 +64,7 @@
                 <div style="padding-left: 5px;"><%=f.getWishCount() %></div>
                 
                 <div style="margin-left: 150px;">
-                    <a href=""><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
+                    <a download="<%=f.getOriginName()%>" href="<%=contextPath%>/resources/gpx_upfiles/<%=f.getChangeName()%>"><img  id="download1" src="${pageContext.request.contextPath}/resources/image/download.png" style="width: 17px;" alt=""></a>
                 </div>
                 
             </div>
@@ -227,30 +225,27 @@
         <div id="content">
             <div id="map"> 
                 <script>
-                    navigator.geolocation.getCurrentPosition(geoSuccess);
-                    function geoSuccess(position) {
-                    // 위도
-                    const lat = position.coords.latitude;
-                    // 경도
-                    const lng = position.coords.longitude;
-                    
-                    setMap(lat, lng);
-                    }
 
-                    function setMap(lat, lng) {
-                    // 위도, 경도 설정
-                    var mapOptions = {
-                        center: new naver.maps.LatLng(lat, lng),
-                        zoom: 12
-                    };
-                    
-                    var map = new naver.maps.Map('map', mapOptions);
-                    var marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(lat, lng),
-                    map: map,
-                    clickable: true
-                    });
+
+                    function startDataLayer(xmlDoc) {
+                        map.data.addGpx(xmlDoc);
                     }
+                    var map = new naver.maps.Map('map',{
+                        center: new naver.maps.LatLng(37.492,127.029),
+                        zoom:12
+                    })
+					setTimeout(function(){
+
+                        $.ajax({
+                            url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getChangeName()%>',
+                            dataType: 'xml',
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 5,   //선 두께
+                            success: startDataLayer
+                        });
+                    },100);
+                    
                     
                 </script>
             </div>
@@ -258,102 +253,6 @@
     </div>
     </div>
     </div>
-
-    <script>
-        $(function(){
-            $(".tabon1").click(function(){
-                console.log("성공");
-                $(this).addClass("tabon")
-                //ajax로 left_content와 content를 리로딩 시켜야함
-                $(this).siblings().removeClass("tabon");
-            });
-
-            $("#list_page>ul>li").click(function(){
-                if($(this).text() != "<" && $(this).text() !=">"){
-                    $(this).addClass("on");
-                    $(this).siblings().removeClass("on");
-                }
-            })
-        })
-    </script>
-
-	<script>
-                    
-
-    var markers = [];
-
-    navigator.geolocation.getCurrentPosition(geoSuccess);
-    function geoSuccess(position) {
-    // 위도
-    var lat = position.coords.latitude;
-    // 경도
-    var lng = position.coords.longitude;
-    console.log(lat);
-    console.log(lng)
-    }
-
-    map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.4636544, 126.8219904),
-        zoom: 13
-    });
-
-    
-
-    var marker = new naver.maps.Marker({
-        map:map,
-        position: new naver.maps.LatLng(37.4636544, 126.8219904)
-    })
-
-
-    var hyeonjinHouse = new naver.maps.LatLng(36.30260, 127.33838);
-    var jooyeokHouse = new naver.maps.LatLng(36.32611, 127.41263);
-
-
-    // var markers = [];
-    var infowindows = [];
-
-
-    markers.push(new naver.maps.Marker({
-        map: map,
-        position: hyeonjinHouse
-    }));
-
-    infowindows.push(new naver.maps.InfoWindow({
-        content: [
-            '<div class="iw_inner">',
-            '   <h3>현진이네 집</h3>',
-            '</div>'
-        ].join('')
-    }));
-
-
-    markers.push(new naver.maps.Marker({
-        map: map,
-        position: jooyeokHouse
-    }));
-
-    infowindows.push(new naver.maps.InfoWindow({
-        content: [
-            '<div class="iw_inner">',
-            '   <h3>주역이네 집</h3>',
-            '</div>'
-        ].join('')
-    }));
-
-    for(let i=0; i<markers.length; i++){
-        naver.maps.Event.addListener(markers[i], "click", function(e) {
-            console.log("이벤트")
-            if (infowindows[i].getMap()) {
-                infowindows[i].close();
-            } else {
-                infowindows[i].open(map, markers[i]);
-            }
-        });
-    }
-
-    infowindows[0].open(map, markers[0]);
-</script>
-
 
 </body>
 </html>

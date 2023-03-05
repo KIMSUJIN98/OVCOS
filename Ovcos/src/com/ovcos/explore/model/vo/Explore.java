@@ -3,6 +3,7 @@ package com.ovcos.explore.model.vo;
 import java.sql.Date;
 
 public class Explore {
+	private int rowNum;
 	private int feedIndex;    //	피드번호
 	private String feedDate;//	작성일자
 	private String feedTitle;//	피드제목
@@ -22,20 +23,8 @@ public class Explore {
 	private int count;// 찜수
 
 	
-	public int getCount() {
-		return count;
-	}
-
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-
-
-
 	
-	
+
 	
 	public Explore() {}
 	
@@ -89,6 +78,26 @@ public class Explore {
 	
 	
 	
+	
+	
+
+	public Explore(int rowNum, int feedIndex, String feedDate, String feedTitle, int feedEval, double distance,
+			double startLat, double startLon, String memId, String path, int hit, int count) {
+		super();
+		this.rowNum = rowNum;
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedEval = feedEval;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		this.MemId = memId;
+		this.path = path;
+		this.hit = hit;
+		this.count = count;
+	}
+
 
 	public Explore(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
 			double startLat, double startLon, String memId, String path, int hit) {
@@ -117,10 +126,30 @@ public class Explore {
 		this.distance = distance;
 		this.startLat = startLat;
 		this.startLon = startLon;
-		MemId = memId;
+		this.MemId = memId;
 		this.path = path;
 		this.hit = hit;
 		this.count = count;
+	}
+
+	
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
+	public int getRowNum() {
+		return rowNum;
+	}
+
+
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
 	}
 
 
@@ -260,27 +289,12 @@ public class Explore {
 
 	@Override
 	public String toString() {
-		return "Explore [feedIndex=" + feedIndex + ", feedDate=" + feedDate + ", feedTitle=" + feedTitle + ", feedCnt="
-				+ feedCnt + ", feedEval=" + feedEval + ", feedPublicType=" + feedPublicType + ", feedPathNy="
-				+ feedPathNy + ", feedRprNy=" + feedRprNy + ", feedRprDate=" + feedRprDate + ", distance=" + distance
-				+ ", startLat=" + startLat + ", startLon=" + startLon + ", feedDelNy=" + feedDelNy + ", MemId=" + MemId
-				+ ", path=" + path + ", hit=" + hit + ", count=" + count + "]";
+		return "Explore [rowNum=" + rowNum + ", feedIndex=" + feedIndex + ", feedDate=" + feedDate + ", feedTitle="
+				+ feedTitle + ", feedCnt=" + feedCnt + ", feedEval=" + feedEval + ", feedPublicType=" + feedPublicType
+				+ ", feedPathNy=" + feedPathNy + ", feedRprNy=" + feedRprNy + ", feedRprDate=" + feedRprDate
+				+ ", distance=" + distance + ", startLat=" + startLat + ", startLon=" + startLon + ", feedDelNy="
+				+ feedDelNy + ", MemId=" + MemId + ", path=" + path + ", hit=" + hit + ", count=" + count + "]";
 	}
 
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

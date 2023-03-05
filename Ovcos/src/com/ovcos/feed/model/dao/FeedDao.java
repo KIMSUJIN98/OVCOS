@@ -123,13 +123,13 @@ public class FeedDao {
 		return allList;
 	}
 
-	public Feeddetails selectMember(Connection conn, int feedNo) {
+	public Feeddetails selectFeedDetail(Connection conn, int feedNo) {
 		
-		Feeddetails m = new Feeddetails();
+		Feeddetails f = new Feeddetails();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectMember");
+		String sql = prop.getProperty("selectFeedDetail");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class FeedDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				m = new Feeddetails(rset.getInt("feed_index"),
+				f = new Feeddetails(rset.getInt("feed_index"),
 									  rset.getString("feed_date"),
 									  rset.getString("feed_title"),
 									  rset.getString("feed_cnt"),
@@ -148,7 +148,9 @@ public class FeedDao {
 									  rset.getInt("start_lon"),
 									  rset.getString("mem_id"),
 									  rset.getString("change_name"),
-									  rset.getInt("hit")
+									  rset.getString("origin_name"),
+									  rset.getInt("hit"),
+									  rset.getInt("count")
 						);
 			}
 							
@@ -161,7 +163,7 @@ public class FeedDao {
 			close(pstmt);
 		}
 
-		return m;
+		return f;
 	}
 
 	

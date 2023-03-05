@@ -12,6 +12,7 @@ public class Feeddetails {
 	private double startLon;
 	private String MemId;
 	private String changeName;
+	private String originName;
 	private int hit;
 	private int wishCount;
 	
@@ -33,8 +34,40 @@ public class Feeddetails {
 		this.changeName = changeName;
 		this.hit = hit;
 	}
+	
+	
+
+	public Feeddetails(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
+			double startLat, double startLon, String memId, String changeName, String originName, int hit,
+			int wishCount) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		MemId = memId;
+		this.changeName = changeName;
+		this.originName = originName;
+		this.hit = hit;
+		this.wishCount = wishCount;
+	}
+
 
 	
+	public String getOriginName() {
+		return originName;
+	}
+
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+
+
 	public int getWishCount() {
 		return wishCount;
 	}

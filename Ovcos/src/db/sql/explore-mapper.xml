@@ -19,13 +19,13 @@
 		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
 		      , FEED_TITLE
 		      , FEED_EVAL
-		      , DISTANCE5
+		      , DISTANCE
 		      , START_LAT
 		      , START_LON
               , MEM_ID
               , CHANGE_NAME
               , HIT
-              , COUNT(CASE WHEN BK_FOLLOEE_NY = 'Y' THEN 1 ELSE NULL END) "COUNT"
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
         LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
@@ -52,7 +52,7 @@
               , MEM_ID
               , CHANGE_NAME
               , HIT
-              , COUNT(CASE WHEN BK_FOLLOEE_NY = 'Y' THEN 1 ELSE NULL END) "COUNT"
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
         LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
@@ -79,7 +79,7 @@
               , MEM_ID
               , CHANGE_NAME
               , HIT
-              , COUNT(CASE WHEN BK_FOLLOEE_NY = 'Y' THEN 1 ELSE NULL END) "COUNT"
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
         LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
@@ -107,7 +107,7 @@
               , MEM_ID
               , CHANGE_NAME
               , HIT
-              , COUNT(CASE WHEN BK_FOLLOEE_NY = 'Y' THEN 1 ELSE NULL END) "COUNT"
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
         LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
@@ -156,7 +156,7 @@
               , MEM_ID
               , CHANGE_NAME
               , HIT
-              , COUNT(CASE WHEN BK_FOLLOEE_NY = 'Y' THEN 1 ELSE NULL END) "COUNT"
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
         LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
@@ -185,7 +185,7 @@
               , MEM_ID
               , CHANGE_NAME
               , HIT
-              , COUNT(CASE WHEN BK_FOLLOEE_NY = 'Y' THEN 1 ELSE NULL END) "COUNT"
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
         LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)

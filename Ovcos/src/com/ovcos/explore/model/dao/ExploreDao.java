@@ -81,6 +81,7 @@ public class ExploreDao {
 			
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
+								  , rset.getInt("feed_index")
 						   		  , rset.getString("date")
 						   		  , rset.getString("feed_title")
 						   		  , rset.getInt("feed_eval")
@@ -161,6 +162,7 @@ public class ExploreDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
+						  , rset.getInt("feed_index")
 				   		  , rset.getString("date")
 				   		  , rset.getString("feed_title")
 				   		  , rset.getInt("feed_eval")
@@ -212,6 +214,7 @@ public class ExploreDao {
 			
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
+						  , rset.getInt("feed_index")
 				   		  , rset.getString("date")
 				   		  , rset.getString("feed_title")
 				   		  , rset.getInt("feed_eval")
@@ -258,6 +261,7 @@ public class ExploreDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
+						  , rset.getInt("feed_index")
 				   		  , rset.getString("date")
 				   		  , rset.getString("feed_title")
 				   		  , rset.getInt("feed_eval")

@@ -315,3 +315,7 @@ path{
     font-weight: 900;
     font-size: 0.8rem;
 }
+
+img[src*='marker']{
+    display: none !important;
+}

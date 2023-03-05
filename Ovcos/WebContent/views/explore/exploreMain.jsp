@@ -87,8 +87,8 @@
 				 	<%}else{ %>
                     <!-- case 2 반복문으로  -->
                     	<%for(Explore f: list){ %>
-                    <div class="exList" id="f<%=f.getFeedIndex()%>">
-                        <span class="list_num"><%=f.getFeedIndex() %></span>
+                    <div class="exList" id="f<%=f.getRowNum()%>">
+                        <span class="list_num"><%=f.getRowNum() %></span>
                         <div class="innertext">
                             <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
@@ -112,7 +112,7 @@
                                     <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;"><%=f.getCount() %></span>
                                 </div>
                                 <div>
-                                    <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">
+                                    <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">&nbsp;
                                     <span style="display: inline;font-size: 0.8rem;"><%=f.getHit() %></span>
                                 </div>
                                 <div class="date">
@@ -241,8 +241,8 @@
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
                             icon: {
                                 content: 
-                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
-                                // size: new naver.maps.Size(38, 58),
+                                "<span class='list_num'><%=e.getRowNum()%></span>",
+                                size: new naver.maps.Size(38, 58),
                                 anchor: new naver.maps.Point(19, 40),
                             }
                         })
@@ -260,16 +260,21 @@
                             '   <div style="display:flex; padding-left:10px">',
                             '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
                             '	    <span><%=e.getDistance()%> km</span>	',
-                            '       <a style="width:40%;" href="">Detail</a>',
+                            '       <a style="width:40%;" href="detail.fe?fno=<%=e.getFeedIndex()%>">Detail</a>',
                             '   </div>',
                             '</div>'	
-                        ].join('')
+                        ].join(''),
+                        
                     }))
                     
                     <%}%>
                     
  
                     $(".exList").click(function(e){
+                        
+                        var lat = $(this).find("input").eq(0).val();
+                        var lon = $(this).find("input").eq(1).val()
+                        
                         $("path").remove();
                         $(".exList").css("backgroundColor","white");
                         $(this).css("backgroundColor","#eceaea");
@@ -279,11 +284,12 @@
                         $(this).find(".date").css("display","none");
                         $(this).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
 
-                        
                         // index 뽑기
-                        var index = $(this).children("span").text()%10;
-                        if($(this).children("span").text() == 10){
-                            index = 10;
+                        var index = $(this).children("span").text()% 50;
+                        console.log(index);
+
+                        if(index == 0){
+                            index = 49;
                         }
 
                         $.ajax({
@@ -299,6 +305,15 @@
                             }else{
                                 infowindows[index-1].open(map,markers[index-1]);
                             }
+                        
+                        var l = document.getElementsByTagName("map");
+                        console.log($("img[src*='marker']"));
+                        
+                        
+                        
+
+                        // console.log($("map").parent());
+                    //    $("map").parent().remove();
                     })
                         
                       
@@ -314,6 +329,7 @@
                         naver.maps.Event.addListener(markers[i], "click", function(e) {
 
                             $("path").remove();
+                            $(".date").css("display","block");
                             $.ajax({
                             url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[i],
                             dataType: 'xml',
@@ -323,6 +339,8 @@
                             success: startDataLayer
                             });
 
+                            
+
                             console.log("이벤트")
                             if(infowindows[i].getMap()){
                                 infowindows[i].close();
@@ -331,11 +349,13 @@
                             }
 
                             $(".exList").css("backgroundColor","white");
-                            $(".btn1").css("visibility","hidden");
+                            $(".detailBtn").css("display","none");
+
                             
                             var num = Number(i+1);
                             $("#f"+num).css("backgroundColor","#eceaea");
-                            $("#f"+num).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc");
+                            $("#f"+num).find(".date").css("display","none");
+                            $("#f"+num).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
                             
                             var docu = document.getElementById("f"+num);
                             docu.scrollIntoView({ behavior: "smooth" });
@@ -349,7 +369,7 @@
 	            anchor: N.Point(20, 20)
 	        },
 	        htmlMarker2 = {
-	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-2.png);background-size:contain;"></div>',
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
 	            size: N.Size(40, 40),
 	            anchor: N.Point(20, 20)
 	        },
@@ -377,7 +397,7 @@
 	        disableClickZoom: false,
 	        gridSize: 120,
 	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-	        indexGenerator: [10, 100, 200, 500, 1000],
+	        indexGenerator: [10, 20, 200, 500, 1000],
 	        stylingFunction: function(clusterMarker, count) {
 	            $(clusterMarker.getElement()).find('div:first-child').text(count);
 	        }

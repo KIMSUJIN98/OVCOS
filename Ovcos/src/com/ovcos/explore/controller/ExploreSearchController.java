@@ -45,7 +45,7 @@ public class ExploreSearchController extends HttpServlet {
 				
 				pageLimit = 5; //페이지바 최대개수
 				
-				boardLimit = 10; // 보여질 게시글 총개수
+				boardLimit = 50; // 보여질 게시글 총개수
 				
 				//제일 마지막 페이지
 				maxPage = (int)Math.ceil((double)listCount/boardLimit);

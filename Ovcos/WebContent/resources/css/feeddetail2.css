@@ -95,3 +95,10 @@
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
+
+path{
+    stroke: red !important;
+}
+img[src*='marker']{
+    display: none !important;
+}
