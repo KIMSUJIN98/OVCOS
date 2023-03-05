@@ -106,6 +106,10 @@ td button{
         color: white;
     
 }
+/* 
+ #authBtn, #checkBtn{
+        margin-left: -84px;
+ } */
 
 #name{
 	background-color : white;
@@ -116,15 +120,15 @@ td button{
 .next_btn{
     width: 320px;
     height: 45px;
-    margin-top: 5px;
+    margin-top: 10px;
     background-color:#ff7920;
     color: white;
     font-weight: bold;
     border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 70px;
-    margin-left : 110px;
+    margin-bottom : 50px;
+    margin-left : 80px;
 }
 
 #x-box{
