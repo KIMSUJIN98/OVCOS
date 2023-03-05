@@ -74,7 +74,6 @@ public class ContestInsertController extends HttpServlet {
 //			System.out.println(HH);
 //			System.out.println(MI);
 			
-			System.out.println(contestDate);
 			Contest c = new Contest();
 			c.setContestName(contestName);
 			c.setContestDate(contestDate);

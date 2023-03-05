@@ -16,10 +16,10 @@ import static com.ovcos.common.JDBCTemplate.*;
 
 public class ChallengeService {
 
-	public ArrayList<Contest> selectContest() {
+	public ArrayList<Contest> selectContestList() {
 		Connection conn = getConnection();
 		
-		ArrayList<Contest> list = new ChallengeDao().selectContest(conn);
+		ArrayList<Contest> list = new ChallengeDao().selectContestList(conn);
 		
 		close(conn);
 		
@@ -133,6 +133,21 @@ public class ChallengeService {
 		close(conn);
 		
 		return result * result2;
+	}
+
+	public int deleteContest(int contestNo) {
+		Connection conn = getConnection();
+		int result = new ChallengeDao().deleteContest(conn, contestNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 	

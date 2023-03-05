@@ -16,13 +16,13 @@ import com.ovcos.challenge.model.vo.Contest;
  * Servlet implementation class ContestMainController
  */
 @WebServlet("/cntsMain.ch")
-public class ContestMainController extends HttpServlet {
+public class ContestMainListViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestMainController() {
+    public ContestMainListViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,7 @@ public class ContestMainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Contest> list = new ChallengeService().selectContest();
+		ArrayList<Contest> list = new ChallengeService().selectContestList();
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/challenge/contestMain.jsp").forward(request, response);

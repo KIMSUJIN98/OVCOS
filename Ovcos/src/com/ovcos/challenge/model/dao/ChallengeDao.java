@@ -32,12 +32,12 @@ public class ChallengeDao {
 		}
 	}
 
-	public ArrayList<Contest> selectContest(Connection conn) {
+	public ArrayList<Contest> selectContestList(Connection conn) {
 		ArrayList<Contest> list = new ArrayList<Contest>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectContest");
+		String sql = prop.getProperty("selectContestList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -388,6 +388,27 @@ public class ChallengeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteContest(Connection conn, int contestNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteContest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, contestNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		

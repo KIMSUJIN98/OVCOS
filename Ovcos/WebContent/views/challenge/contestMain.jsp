@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 	ArrayList<Contest> list = (ArrayList<Contest>)request.getAttribute("list");
+	
 %>
     <!DOCTYPE html>
     <html>
@@ -44,24 +45,21 @@
 
             <!-- Button to Open the Modal -->
             <div style="float: left; padding-top: 30px; width: 84%;" align="right">
-                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal"
-                    data-target="#newCnts">대회추가</button>
+                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCnts">대회추가</button>
             </div>
 
-            <!-- The Modal -->
+            <!-- 대회 추가 Modal -->
             <div class="modal" id="newCnts">
                 <div class="modal-dialog">
                     <div class="modal-content">
-
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h4 class="modal-title">대회 추가</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-
                         <!-- Modal body -->
-                        <div class="modal-body" align="center">
-                            <form action="insertContest.ch" method="post" id="insertContest-form" enctype="multipart/form-data">
+                        <form action="insertContest.ch" method="post" id="insertContest-form" enctype="multipart/form-data">
+                            <div class="modal-body" align="center">
                                 <table>
                                     <tr>
                                         <th>대회명</th>
@@ -88,16 +86,90 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <br>
-                                <button type="submit" class="btn btn-secondary">등록</button>
-                            </form>
-                        </div>
-                        
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">등록</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
+            <!-- 대회 수정 Modal -->
+            <div class="modal" id="updateCnts">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">대회 수정</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <form action="updateContest.ch" method="post" id="updateContest-form" enctype="multipart/form-data">
+                            <div class="modal-body" align="center">
+                                <table>
+                                    <tr>
+                                        <th>대회명</th>
+                                        <td>
+                                            <input type="text" name="contestName" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>대회날짜</th>
+                                        <td>
+                                            <input type="datetime-local" min="2020-01-01" name="contestDate">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>URL</th>
+                                        <td>
+                                            <input type="text" name="contestUrl">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>이미지</th>
+                                        <td>
+                                            <input type="file" name="contestImg">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">수정</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 대회 삭제 Modal -->
+            <div class="modal" id="deleteCnts">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">대회 삭제</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <form action="deleteContest.ch" method="post" id="deleteContest-form">
+                        <input type="hidden" id="delNo" name="contestNo">
+                            <div class="modal-body" align="center">
+                                <p>
+                                    삭제 후 복구가 불가능 합니다. <br>
+                                    정말로 삭제하시겠습니까?
+                                </p>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">삭제</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -109,14 +181,10 @@
                     
                     <% if(list != null) { %>
                         <% for(Contest c : list) { %>
-                            <% String url = c.getContestUrl(); %>
-                            <% int index = url.indexOf("www"); %>
-                            <% url = url.substring(index); %>
-                            <% System.out.println(url); %>
                             <div class="col mb-5">
                                 <div class="card h-100">
-                                    <a href="<%= url %>" target="_blank">
-                                        <img class="card-img-top" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
+                                    <a href="<%= c.getContestUrl() %>" target="_blank">
+                                        <img class="card-img-top" height="200px" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
                                     </a>
                                     <div class="card-body p-4">
                                         <div class="text-center">
@@ -125,12 +193,16 @@
                                         </div>
                                     </div>
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>">참가하기</a></div>
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>">참가하기</a> <br><br>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#updateCnts">수정</button>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#deleteCnts" onclick="contestNo(<%= c.getContestNo() %>)">삭제</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <% } %>
                         <% } %>
+                    <% } %>
                     </div>
                 </div>
             </section>
@@ -147,19 +219,12 @@
             <!-- Core theme JS-->
             <script src="../../resources/js/scripts.js"></script>
 
-            <!-- <script>
-                $(documnet).ready(function(){
-                $('input.timepicker').timepicker({
-                        timeFormat: 'HH:mm',
-                        interval: 30,
-                        startTime: '00:00',
-                        dynamic: false,
-                        dropdown: true,
-                        scrollbar: true
-                    });
-                })
-            </script> -->
-
+            <script>
+                function contestNo(contestNo){
+                    $("#delNo").val(contestNo);
+                    console.log(contestNo);
+                }
+            </script>
 
     </body>
 
