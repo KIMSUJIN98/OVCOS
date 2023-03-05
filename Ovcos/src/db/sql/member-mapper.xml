@@ -69,4 +69,23 @@ SELECT
   FROM MEMBER
  WHERE MEM_NICK = ?
  </entry>
+ 
+ <entry key="insertNy">
+    	INSERT
+    	INTO MEMBER
+    	(
+    	 MARKET_NY  
+    	)
+    	VALUES
+    	(
+    	   ?
+    	)
+    </entry>
+    <entry key="findId">
+    SELECT
+    	   MEM_ID 
+      FROM MEMBER 
+     WHERE MEM_NAME=? 
+       AND MEM_EML=?
+    </entry>
 </properties>
