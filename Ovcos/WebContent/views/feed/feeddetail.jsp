@@ -108,8 +108,10 @@
                         <%=f.getFeedTitle() %>
                     </div>
                 </div>
-                <!-- 피드 제목 끝 -->
+                <!
+                  -- 피드 제목 끝 -->
                 
+                \]
                 
                 <!-- 피드 내용  -->
                 <div id="feed4">
@@ -231,7 +233,7 @@
                             for (let i = 0; i < result.length; i++) {
                                 value += "<tr>"
 
-                                    + "<td style= ''>" + result[i].feed_cmn_id + "</td>"
+                                    + "<td style= 'border-bottom: 3px solid rgb(67, 115, 176); font-weight:600'>" + result[i].feed_cmn_id + "</td>"
                                     + "<td>" + result[i].feed_cmn_cnt + "</td>"
                                     + "<td style='font-size:0.8rem'>" + timeForToday(result[i].feed_cmn_date) + "</td>"
                                     + "</tr>";
