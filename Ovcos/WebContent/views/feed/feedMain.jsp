@@ -766,7 +766,7 @@
                         position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
                         map: map,
                         icon: {
-                            content: '<img src=/Ovcos/resources/image/endlocation4.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            content: '<img src=/Ovcos/resources/image/endlocation5.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
                             size: new naver.maps.Size(45, 45),
                             anchor: new naver.maps.Point(26, 40)
                         }
@@ -775,7 +775,7 @@
                         position: new naver.maps.LatLng(startLat, startLon),
                         map: map,
                         icon: {
-                        	 content: '<img src=/Ovcos/resources/image/location2.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                        	 content: '<img src=/Ovcos/resources/image/location3.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
                             size: new naver.maps.Size(45, 45),
                             anchor: new naver.maps.Point(26, 40)
                         }

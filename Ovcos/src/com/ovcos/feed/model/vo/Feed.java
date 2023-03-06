@@ -168,7 +168,7 @@ public class Feed {
 	
 	
 	
-
+	
 
 
 	
@@ -180,6 +180,29 @@ public class Feed {
 
 
 	
+
+
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
+			double startLat, double startLon, String memId, String path, String memName, String memNick,
+			String originName, int count) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		MemId = memId;
+		this.path = path;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.originName = originName;
+		this.count = count;
+	}
+
 
 
 
