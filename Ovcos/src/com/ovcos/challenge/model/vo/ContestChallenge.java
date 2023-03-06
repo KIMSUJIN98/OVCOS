@@ -16,6 +16,8 @@ public class ContestChallenge {
 	private String contestChallengeId;
 	private String contestNo;
 	
+	private String changeName;
+	
 	private int count;
 	
 	public ContestChallenge() {}
@@ -66,6 +68,23 @@ public class ContestChallenge {
 		this.contestNo = contestNo;
 		this.count = count;
 	}
+
+	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String contestChallengeContent,
+			Date enrollDate, String contestChallengeDate, int contestChallengeMax, String contestChallengeId,
+			String contestNo, String changeName, int count) {
+		super();
+		this.contestChallengeNo = contestChallengeNo;
+		this.contestChallengeTitle = contestChallengeTitle;
+		this.contestChallengeContent = contestChallengeContent;
+		this.enrollDate = enrollDate;
+		this.contestChallengeDate = contestChallengeDate;
+		this.contestChallengeMax = contestChallengeMax;
+		this.contestChallengeId = contestChallengeId;
+		this.contestNo = contestNo;
+		this.changeName = changeName;
+		this.count = count;
+	}
+
 
 	public ContestChallenge(int count) {
 		super();
@@ -179,6 +198,17 @@ public class ContestChallenge {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	
+	
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
 	}
 
 

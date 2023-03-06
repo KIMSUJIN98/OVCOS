@@ -184,18 +184,22 @@
                         <% for(Contest c : list) { %>
                             <div class="col mb-5">
                                 <div class="card h-100">
+                                    <!-- image -->
                                     <a href="<%= c.getContestUrl() %>" target="_blank">
-                                        <img class="card-img-top" height="200px" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
+                                        <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
                                     </a>
+                                    <!-- details -->
                                     <div class="card-body p-4">
                                         <div class="text-center">
+                                            <!-- name -->
                                             <h5 class="fw-bolder"><%= c.getContestName() %></h5>
+                                            <!-- summary -->
                                             <%= c.getContestDate() %>
                                         </div>
                                     </div>
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>&Date=<%= c.getContestDate() %>">참가하기</a> <br><br>
+                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestNo=<%= c.getContestNo() %>">참가하기</a> <br><br>
                                             <% if(loginUser != null && Integer.parseInt(loginUser.getMemStatus()) == 5) { %>
                                             <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#updateCnts">수정</button>
                                             <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#deleteCnts" onclick="contestNo(<%= c.getContestNo() %>);">삭제</button>

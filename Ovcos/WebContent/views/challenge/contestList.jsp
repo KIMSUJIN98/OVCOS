@@ -1,11 +1,12 @@
+<%@page import="com.ovcos.challenge.model.vo.Contest"%>
 <%@page import="com.ovcos.challenge.model.vo.ContestChallenge"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<ContestChallenge> list = (ArrayList<ContestChallenge>)request.getAttribute("list");
-	String contestName = (String)request.getAttribute("contestName");
-    String contestDate = (String)request.getAttribute("contestDate");
+	ArrayList<ContestChallenge> list1 = (ArrayList<ContestChallenge>)request.getAttribute("list1");
+	Contest c = (Contest)request.getAttribute("c");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
 
 <style>
-    .modal-body input {
+    .modal-body input{
         width: 300px;
     }
 
@@ -38,7 +39,7 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder"><%= contestName %></h1>
+                <h1 class="display-4 fw-bolder"><%= c.getContestName() %></h1>
                 <p class="lead fw-normal text-white-50 mb-0"></p>
             </div>
         </div>
@@ -61,13 +62,13 @@
                             <br><br>
                             <div class="text-center">
                                 <!-- Button to Open the Modal -->
-                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeContest" onclick="substringDate('<%= contestDate %>');">새로운 모험</button>
+                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newContestChallenge" onclick="substringDate('<%= c.getContestDate() %>');">새로운 모험</button>
                             </div>
                         </div>
                         <!-- actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <!-- The Modal -->
-                            <div class="modal" id="newCallengeContest">
+                            <div class="modal" id="newContestChallenge">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <!-- Modal Header -->
@@ -78,8 +79,14 @@
                                         <!-- Modal body -->
                                         <form action="newContestChallenge.ch" method="post" id="newchallenge-form" enctype="multipart/form-data">
                                         <input type="hidden" name="userId" value="<%= loginUser.getMemId() %>">
+                                        <input type="hidden" name="contestNo" value="<%= c.getContestNo() %>">
                                             <div class="modal-body" align="center">
                                                 <table class="newUpload">
+                                                    <tr>
+                                                        <td>
+                                                            <h5><%= c.getContestName() %></h5>
+                                                        </td>
+                                                    </tr>
                                                     <tr>
                                                         <td>
                                                             <input type="text" name="challengeName" required placeholder="챌린지명">
@@ -97,13 +104,6 @@
                                                             <input type="time" id="challengeTime" name="challengeTime">
                                                             <br>
                                                             <span>대회 시간보다 늦은 시간은 등록이 불가합니다.</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <select name="contest" id="selectContest" disabled>
-                                                                <option name="contest" value="<%= contestName %>"><%= contestName %></option>
-                                                            </select>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -127,41 +127,109 @@
                                             </div>
                                             <!-- Modal footer -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary" onclick="return checkTime('<%= contestDate %>');">등록</button>
+                                                <button type="submit" class="btn btn-primary" onclick="return checkTime('<%= c.getContestDate() %>');">등록</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                            <!-- The Modal -->
+                            <% for(ContestChallenge c1 : list1) { %>
+                            <div class="modal" id="detailContestChallenge">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title"><%= c.getContestName() %></h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="modal-body" align="center">
+                                            <table class="detail">
+                                                <tr>
+                                                    <td>
+                                                        <h5><%= c1.getContestChallengeTitle() %></h5>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <%= c1.getContestChallengeDate() %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <%= c1.getContestChallengeDate() %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <%= c1.getEnrollDate() %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    	참가인원 : <%= c1.getCount() %> / <%= c1.getContestChallengeMax() %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <% if(c1.getChangeName() != null) { %>
+                                                            <img class="card-img-top" width="500px" height="500px" src="<%= contextPath %>/resources/upload/<%= c1.getChangeName() %>" alt="..."/>
+                                                        <% }else { %>
+                                                            <img class="card-img-top" width="500px" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                                                        <% } %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <%= c1.getContestChallengeContent() %>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">참가하기</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
-				<% for(ContestChallenge c : list) { %>
-                   <div class="col mb-5">
-                       <div class="card h-100">
-                           <!-- image -->
-                           <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                               alt="..." />
-                           <!-- details -->
-                           <div class="card-body p-4">
-                               <div class="text-center">
-                                   <!-- name -->
-                                   <h5 class="fw-bolder"><%= c.getContestChallengeTitle() %></h5>
-                                   <!-- summary -->
-                                   <%= c.getContestNo() %><br>
-                                   <%= c.getContestChallengeDate() %><br>
-                                   참가인원 : <%= c.getCount() %> / <%= c.getContestChallengeMax() %>
-                               </div>
-                           </div>
-                           <!-- actions -->
-                           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                               <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <% } %>
+                <% for(ContestChallenge cc : list) { %>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- image -->
+                            <% if(cc.getChangeName() != null) { %>
+                                <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
+                            <% }else { %>
+                                <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                            <% } %>
+                            <!-- details -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- name -->
+                                    <h5 class="fw-bolder"><%= cc.getContestChallengeTitle() %></h5>
+                                    <!-- summary -->
+                                    <%= c.getContestName() %><br>
+                                    <%= cc.getContestChallengeDate() %><br>
+                                    참가인원 : <%= cc.getCount() %> / <%= cc.getContestChallengeMax() %>
+                                </div>
+                            </div>
+                            <!-- actions -->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <!-- <a class="btn btn-outline-dark mt-auto" href="#">참가하기</a> -->
+                                    <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge" onclick="throwKey(<%= cc.getContestChallengeNo() %>);">상세보기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
             </div>
         </div>
     </section>
@@ -190,13 +258,25 @@
 
         function checkTime(contestTime){
             var inputTime = $("#challengeTime").val();
+            console.log(contestTime);
+            console.log(inputTime);
+
             var date1 = contestTime.split(" ");
+            console.log(date1);
             var date2 = date1[1].substring(0, 5);
+            console.log(date2);
 
             if(inputTime > date2){
                 alert("시간을 다시 확인해주세요.");
                 return false;
             }
+        }
+        
+        function throwKey(challengeNo){
+            // location.href = '<%= contextPath %>/detail.no?num=' + num;
+            location.href = '<%= contextPath %>/detailContestChallenge.ch?challengeNo=' + challengeNo + '&constestNo=' + <%= c.getContestNo() %>;
+            console.log(challengeNo);
+            console.log(<%= c.getContestNo() %>);
         }
 
         // var count = 2;

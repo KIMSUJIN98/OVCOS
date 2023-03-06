@@ -87,10 +87,10 @@ public class ChallengeService {
 		return list2;
 	}
 
-	public ArrayList<ContestChallenge> contestChallengeList(String contestName) {
+	public ArrayList<ContestChallenge> contestChallengeList(int contestNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<ContestChallenge> list = new ChallengeDao().contestChallengeList(conn, contestName);
+		ArrayList<ContestChallenge> list = new ChallengeDao().contestChallengeList(conn, contestNo);
 		
 		close(conn);
 		
@@ -169,6 +169,26 @@ public class ChallengeService {
 		close(conn);
 		
 		return result * result2;
+	}
+
+	public Contest selectContest(int contestNo) {
+		Connection conn = getConnection();
+	
+		Contest c = new ChallengeDao().selectContest(conn, contestNo);
+		
+		close(conn);
+		
+		return c;
+	}
+
+	public ArrayList<ContestChallenge> selectContestChallenge(int contestChallengeNo, int contestNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<ContestChallenge> list1 = new ChallengeDao().selectContestChallenge(conn, contestChallengeNo, contestNo);
+		
+		close(conn);
+		
+		return list1;
 	}
 
 	

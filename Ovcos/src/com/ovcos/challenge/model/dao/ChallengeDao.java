@@ -229,7 +229,7 @@ public class ChallengeDao {
 		return list2;
 	}
 
-	public ArrayList<ContestChallenge> contestChallengeList(Connection conn, String contestName) {
+	public ArrayList<ContestChallenge> contestChallengeList(Connection conn, int contestNo) {
 		ArrayList<ContestChallenge> list = new ArrayList<ContestChallenge>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -238,18 +238,20 @@ public class ChallengeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, contestName);
+			pstmt.setInt(1, contestNo);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
 											  rset.getString("CNTS_CHLG_TITLE"),
+											  rset.getString("CNTS_CHLG_CONTENT"),
 											  rset.getDate("ENROLL_DATE"),
 											  rset.getString("CNTS_CHLG_DATE"),
 											  rset.getInt("CNTS_CHLG_MAX"),
 											  rset.getString("CNTS_CHLG_ID"),
 											  rset.getString("CNTS_NAME"),
+											  rset.getString("CHANGE_NAME"),
 											  rset.getInt("COUNT")
 											  ));
 			}
@@ -423,11 +425,13 @@ public class ChallengeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, cc.getContestChallengeTitle());
 			pstmt.setString(2, cc.getContestChallengeContent());
 			pstmt.setString(3, cc.getContestChallengeDate());
 			pstmt.setInt(4, cc.getContestChallengeMax());
 			pstmt.setString(5, cc.getContestChallengeId());
+			pstmt.setInt(6, Integer.parseInt(cc.getContestNo()));
 			
 			result = pstmt.executeUpdate();
 			
@@ -463,6 +467,76 @@ public class ChallengeDao {
 		
 		return result;
 		
+	}
+
+	public Contest selectContest(Connection conn, int contestNo) {
+		Contest c = new Contest();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectContest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, contestNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Contest(rset.getInt("CNTS_NO"),
+						rset.getString("CNTS_NAME"),
+						rset.getString("CNTS_DATE"),
+						rset.getString("CNTS_URL"),
+						rset.getString("CHANGE_NAME")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+	}
+
+	public ArrayList<ContestChallenge> selectContestChallenge(Connection conn, int contestChallengeNo, int contestNo) {
+		ArrayList<ContestChallenge> list1 = new ArrayList<ContestChallenge>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectContestChallenge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, contestNo);
+			pstmt.setInt(2, contestChallengeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list1.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
+											  rset.getString("CNTS_CHLG_TITLE"),
+											  rset.getString("CNTS_CHLG_CONTENT"),
+											  rset.getDate("ENROLL_DATE"),
+											  rset.getString("CNTS_CHLG_DATE"),
+											  rset.getInt("CNTS_CHLG_MAX"),
+											  rset.getString("CNTS_CHLG_ID"),
+											  rset.getString("CNTS_NAME"),
+											  rset.getString("CHANGE_NAME"),
+											  rset.getInt("COUNT")
+											  ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list1;
+	
 	}
 
 	

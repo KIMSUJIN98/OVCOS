@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ovcos.challenge.model.service.ChallengeService;
+import com.ovcos.challenge.model.vo.Contest;
 import com.ovcos.challenge.model.vo.ContestChallenge;
 
 /**
@@ -33,14 +34,15 @@ public class ContestChallengeListViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String contestName = (String)request.getParameter("contestName");
-		String contestDate = (String)request.getParameter("contestDate");
+		int contestNo = Integer.parseInt(request.getParameter("contestNo"));
 		
-		ArrayList<ContestChallenge> list = new ChallengeService().contestChallengeList(contestName);
+		ArrayList<ContestChallenge> list = new ChallengeService().contestChallengeList(contestNo);
+		
+		Contest c = new ChallengeService().selectContest(contestNo);
+		
 		
 		request.setAttribute("list", list);
-		request.setAttribute("contestName", contestName);
-		request.setAttribute("contestDate", contestDate);
+		request.setAttribute("c", c);
 		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
 		
 		

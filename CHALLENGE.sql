@@ -208,8 +208,62 @@ VALUES
      , ?
      , ?
      , ?
-     , SEQ_CNTS_NO.CURRVAL
+     , (SELECT CNTS_NO FROM CONTEST WHERE CNTS_NAME = ?)
      );
+
+SELECT CNTS_NO 
+FROM CONTEST
+WHERE CNTS_NAME = 'Å×½ºÆ®111';
+
+
+SELECT 
+       CNTS_NO
+     , CNTS_NAME
+     , CNTS_DATE
+     , CNTS_URL
+     , CHANGE_NAME
+  FROM CONTEST 
+  JOIN UPLOAD ON (CNTS_NO = UPL_NO)
+ WHERE 
+       CNTS_NO = 6;
+
+
+
+SELECT 
+       CNTS_CHLG_NO
+     , CNTS_CHLG_TITLE
+     , ENROLL_DATE
+     , CNTS_CHLG_DATE
+     , CNTS_CHLG_MAX
+     , CNTS_CHLG_ID
+     , CNTS_NAME
+     , CHANGE_NAME
+     , (SELECT 
+               COUNT(CHLG_ENTRY_ID)
+          FROM ENTRY_LIST 
+         WHERE CHLG_NO_INLIST = CNTS_CHLG_NO) COUNT
+  FROM CONTEST_CHALLENGE C
+  JOIN CONTEST USING (CNTS_NO)
+ WHERE
+       C.DEL_STATUS = 'N'
+   AND RPR_STATUS = 'N'
+   AND CNTS_NO = ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 COMMIT;

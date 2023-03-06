@@ -8,23 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.Contest;
-import com.ovcos.loginRegister.model.vo.Member;
+import com.ovcos.challenge.model.vo.ContestChallenge;
 
 /**
- * Servlet implementation class ContestMainController
+ * Servlet implementation class ContestChallengeDetailController
  */
-@WebServlet("/cntsMain.ch")
-public class ContestListViewController extends HttpServlet {
+@WebServlet("/detailContestChallenge.ch")
+public class ContestChallengeDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestListViewController() {
+    public ContestChallengeDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +31,14 @@ public class ContestListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		int contestChallengeNo = Integer.parseInt(request.getParameter("challengeNo"));
+		int contestNo = Integer.parseInt(request.getParameter("contestNo"));
 		
-		ArrayList<Contest> list = new ChallengeService().selectContestList();
-		Member loginUser = (Member)session.getAttribute("loginUser");
+		ArrayList<ContestChallenge> list1 = new ChallengeService().selectContestChallenge(contestChallengeNo, contestNo);
+		System.out.println(list1);
 		
-//		int contestNo = 0;
-//		for(Contest c : list) {
-//			contestNo = c.getContestNo();
-//		}
-		
-		request.setAttribute("list", list);
-		request.setAttribute("loginUser", loginUser);
-		request.getRequestDispatcher("views/challenge/contestMain.jsp").forward(request, response);
-		
-//		request.setAttribute("contestNo", contestNo);
-//		request.getRequestDispatcher("views/challenge/ccList.jsp").forward(request, response);
-		
+		request.setAttribute("list1", list1);
+		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
 		
 	}
 
