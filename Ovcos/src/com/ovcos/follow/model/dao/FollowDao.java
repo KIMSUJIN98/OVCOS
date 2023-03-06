@@ -204,7 +204,7 @@ public class FollowDao {
 	 * @param memName
 	 * @return
 	 */
-	public ArrayList<Follow> selectSearchList(Connection conn, String memName){
+	public ArrayList<Follow> selectSearchList(Connection conn, String memName, String userId){
 			
 			ArrayList<Follow> list = new ArrayList<Follow>();
 			
@@ -218,6 +218,7 @@ public class FollowDao {
 				pstmt = conn.prepareStatement(sql);
 				
 				pstmt.setString(1, memName);
+				pstmt.setString(2, userId);
 				
 				rset = pstmt.executeQuery();
 				
@@ -267,7 +268,7 @@ public class FollowDao {
 			
 			while(rset.next()) {
 				
-				list.add(new Follow(rset.getString("mem_id")
+				list.add(new Follow(rset.getString("BK_NO")
 						));
 			}
 		

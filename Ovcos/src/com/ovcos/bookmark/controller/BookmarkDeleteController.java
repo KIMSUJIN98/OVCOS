@@ -1,8 +1,6 @@
-package com.ovcos.follow.controller;
+package com.ovcos.bookmark.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.ovcos.follow.model.service.FollowService;
-import com.ovcos.follow.model.vo.Follow;
+import com.ovcos.bookmark.model.service.BookMarkService;
 
 /**
- * Servlet implementation class SearchListController
+ * Servlet implementation class BookmarkDeleteController
  */
-@WebServlet("/searchList.fw")
-public class SearchListController extends HttpServlet {
+@WebServlet("/delete.bk")
+public class BookmarkDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchListController() {
+    public BookmarkDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +29,17 @@ public class SearchListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
-		String memName = request.getParameter("memName");
+		int feedIndex = Integer.parseInt(request.getParameter("feedIndex"));
 		String userId = request.getParameter("userId");
 		
-		ArrayList<Follow> list = new FollowService().selectSearchList(memName,userId); 
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list,response.getWriter());
+		
+		int result = new BookMarkService().deleteBookMark(feedIndex,userId);
+		
+		System.out.println(result);
+		new Gson().toJson(result,response.getWriter());
+		
 	}
 
 	/**

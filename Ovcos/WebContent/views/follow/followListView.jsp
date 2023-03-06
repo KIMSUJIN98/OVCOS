@@ -167,7 +167,6 @@ int maxPage = pi.getMaxPage();
                     var html = generateHTML(data);
                     $(".tablecontent").html(html);
                     $("#fix_div").text("나의 친구 목록");
-
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("Error: " + textStatus + " " + errorThrown);
@@ -239,7 +238,7 @@ int maxPage = pi.getMaxPage();
             $.ajax({
                 url: "searchList.fw",
                 type: "POST",
-                data: { memName: $("#searchMem").val() }, //검색한 유저네임
+                data: { memName: $("#searchMem").val(), userId: $("#userId").val() }, //검색한 유저네임, 내 아이디
                 success: function(data) {
                     console.log(data);
                     var html = generateHTML(data);
@@ -281,7 +280,7 @@ int maxPage = pi.getMaxPage();
             if (data.length == 0) {
                 html += "<tr><td colspan='4'>조회된 결과가 없습니다.</td></tr>";
             } else {
-                console.log("차단리스트타면 결과함수를 타고있습니다")
+                
                 $.each(data, function(i, item) {
                     html += "<tr class='tr2'>";
                     html += "<td class='tr2_td1'><img src='${pageContext.request.contextPath}/resources/image/mypage.png' alt='프로필이미지'></td>";
@@ -411,6 +410,7 @@ int maxPage = pi.getMaxPage();
                 data: { friendId: memId, userId: userId },
                 success: function(result) {
                         button.text('차단해제').css({ 'background-color': '#ffffff', 'color': '#007bff' });
+                        
                     }
 
             });
@@ -423,6 +423,7 @@ int maxPage = pi.getMaxPage();
                     data: { friendId: memId, userId: userId },
                     success: function(result) {
                         button.text('차단하기').css({ 'background-color': '#007bff', 'color': '#ffffff' });
+                        
                     }
                 });
             }
@@ -448,13 +449,12 @@ int maxPage = pi.getMaxPage();
                     if (result>0 ) {
                     // 친구 상태인 경우
                     //console.log('친구임');
-                    alert("삭제성공");
                     followRequest();
                     
                     } else {
                         // 친구가 아닌 경우
                         //console.log('친구아님');
-                        alert("삭제실패")
+                        alert("삭제에 실패했습니다.")
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

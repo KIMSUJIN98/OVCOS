@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+<entry key="insertBookMark">
+INSERT
+   INTO BOOKMARK
+   (
+   BK_NO,
+   BK_ID
+   )
+   VALUES
+   (?,
+   ?
+   )
+</entry>
+
+<!-- 찜했는지 조회 -->
+<entry key="checkBookmark">
+    SELECT BK_NO
+    FROM BOOKMARK
+    WHERE BK_NO = ?
+    AND BK_ID  = ?
+    AND BK_STATUS = 'Y'
+</entry>
+
+<!--찜 삭제 -->
+<entry key="deleteBookMark">
+	UPDATE
+	       BOOKMARK
+	   SET BK_STATUS='N'
+	 WHERE BK_NO = ?
+	   AND BK_ID = ?
+</entry>
+
+<!-- 찜추가 전 테이블에 존재하는지 체크 -->
+<entry key="selectCheckinsert">
+    SELECT BK_NO
+    FROM BOOKMARK
+    WHERE BK_NO = ?
+    AND BK_ID  = ?
+</entry>
+
+
+<!-- 찜테이블에 존재할때 insert하면 y로 업뎃  -->
+<entry key="updateInsertBookmark">
+	UPDATE
+	       BOOKMARK
+	   SET BK_STATUS='Y'
+	 WHERE BK_NO = ?
+	   AND BK_ID = ?
+</entry>
+
+
+
+
+
+</properties>

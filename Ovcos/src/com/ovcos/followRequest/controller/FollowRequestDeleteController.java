@@ -33,10 +33,10 @@ public class FollowRequestDeleteController extends HttpServlet {
 		String friendId = request.getParameter("friendId");
 		String userId = request.getParameter("userId");
 		
-		System.out.println("친구요청리스트컨트롤러 프렌드아이디:"+friendId+"로긴아이디:"+userId);
+
 		int result = new FollowRequestService().deleteFollowRequest(friendId,userId);
 		
-		System.out.println("컨트롤러리절트값"+result);
+
 		new Gson().toJson(result,response.getWriter());
 		
 	}

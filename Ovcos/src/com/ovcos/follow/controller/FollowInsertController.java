@@ -32,8 +32,8 @@ public class FollowInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//친구추가 버튼 눌렀을 시 탐 
+	//친구"추가" 버튼 눌렀을 시 탐
+		
 		String friendId = request.getParameter("friendId");
 		String userId = request.getParameter("userId");
 		
