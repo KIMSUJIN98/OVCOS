@@ -90,7 +90,7 @@
                         		</div>
                         	</li>
                             <li class="subMenuList"><a href="<%= contextPath %>/myPage.me">마이페이지</a></li>
-                            <li class="subMenuList"><a href="#">개인정보수정</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/editInfo.me">개인정보수정</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>
                             <li class="subMenuList"><a href="#">로그아웃</a></li>
                         </ul>
