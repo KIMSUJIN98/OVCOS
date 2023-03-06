@@ -362,20 +362,21 @@ agreeCheckbox.addEventListener('change', function() {
                               $nickInput.focus();
                               isNickChecked=false;
                             }
-                          }),
+                          },
                           error: function () {
                             console.log("닉네임 중복체크용 ajax통신 실패");
                           }
-                        }
+                        })
                       });
+                      
            
                    $("#next_btn").on("click", function () {
-  if (isIdChecked && isPwdChecked && isPwdChecked2 &&isNameChecked&& isBirthChecked&&isNickChecked &&isEmailChecked&&) {
-	  
-  } else {
-    alert("아이디 중복검사, 닉네임 중복검사, 이메일 인증이 모두 완료되어야 합니다.");
-  }
-});
+                  if (isIdChecked && isPwdChecked && isPwdChecked2 &&isNameChecked&& isBirthChecked&&isNickChecked &&isEmailChecked&&) {
+                    
+                  } else {
+                    alert("아이디 중복검사, 닉네임 중복검사, 이메일 인증이 모두 완료되어야 합니다.");
+                  }
+                  });
                   </script>
 
               </body>
