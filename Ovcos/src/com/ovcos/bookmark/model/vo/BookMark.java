@@ -9,7 +9,7 @@ public class BookMark {
 	
 	 
 	 public BookMark() {}
-	 
+	 
 
 
 	public BookMark(int bkNo, String bkId, String bkDate, String bkFolloeeNy) {
