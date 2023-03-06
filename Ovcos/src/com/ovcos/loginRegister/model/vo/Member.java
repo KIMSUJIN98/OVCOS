@@ -1,7 +1,5 @@
 package com.ovcos.loginRegister.model.vo;
 
-import java.sql.Date;
-
 public class Member {
 	private String memId;
 	private String memPwd;
@@ -22,39 +20,6 @@ public class Member {
 	
 	public Member() {}
 	
-	
-	
-	
-	
-
-	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, Date memBirth,
-			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn, String memCodeNy, int memRprCum,
-			String memApiType, String memApiToken, String memEml, String marketNy) {
-		super();
-		this.memId = memId;
-		this.memPwd = memPwd;
-		this.memName = memName;
-		this.memNick = memNick;
-		this.memIntro = memIntro;
-		this.memBirth = memBirth;
-		this.memStatus = memStatus;
-		this.memLocInfo = memLocInfo;
-		this.memPublicNy = memPublicNy;
-		this.memGoalDtn = memGoalDtn;
-		this.memCodeNy = memCodeNy;
-		this.memRprCum = memRprCum;
-		this.memApiType = memApiType;
-		this.memApiToken = memApiToken;
-		this.memEml = memEml;
-		this.marketNy = marketNy;
-	}
-
-
-
-
-
-
-
 	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, String memBirth,
 			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn, String memCodeNy, int memRprCum,
 			String memApiType, String memApiToken, String memEml, String marketNy) {
@@ -227,18 +192,6 @@ public class Member {
 		this.marketNy = marketNy;
 	}
 
-
-
-
-
-
-	public String getMarketNy() {
-		return marketNy;
-	}
-
-	public void setMarketNy(String marketNy) {
-		this.marketNy = marketNy;
-	}
 
 	@Override
 	public String toString() {

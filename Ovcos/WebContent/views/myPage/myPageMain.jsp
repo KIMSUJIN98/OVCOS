@@ -27,7 +27,7 @@
         <!-- 배경이미지 및 프로필 관리 영역 -->
         <div class="mp-section1">
             <table id="back-table">
-                <tr height="300" class="back-img">
+                <tr height="300" class="back-img" onclick ="window.open('views/myPage/resizeBackgroundImage.jsp')">
                     <td width="15%"></td>
                     <td width="100px"><img src="<%= contextPath %>/resources/image/mypage.png" alt="프로필이미지"></td>
                     <td id="name">김수진</td>
