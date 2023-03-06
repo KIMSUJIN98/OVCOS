@@ -607,7 +607,8 @@ public class FeedDao {
 							rset.getString("CHANGE_NAME"),
 							rset.getString("MEM_NAME"),
 							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
+							rset.getString("ORIGIN_NAME"),
+							rset.getInt("BOOKMARK_COUNT")
 							));
 			}
 			
@@ -641,26 +642,26 @@ public class FeedDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userId);
-			pstmt.setString(3, userId);
 		
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				
 				list.add(new Feed(rset.getInt("FEED_INDEX"),
-							rset.getString("DATE"),
-							rset.getString("FEED_TITLE"),
-							rset.getString("FEED_CNT"),
-							rset.getInt("FEED_EVAL"),
-							rset.getDouble("DISTANCE"),
-							rset.getDouble("START_LAT"),
-							rset.getDouble("START_LON"),
-							rset.getString("MEM_ID"),
-							rset.getString("CHANGE_NAME"),
-							rset.getString("MEM_NAME"),
-							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
-							));
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getInt("BOOKMARK_COUNT")
+						));
 			}
 			
 		} catch (SQLException e) {
@@ -699,19 +700,20 @@ public class FeedDao {
 			while(rset.next()) {
 				
 				list.add(new Feed(rset.getInt("FEED_INDEX"),
-							rset.getString("DATE"),
-							rset.getString("FEED_TITLE"),
-							rset.getString("FEED_CNT"),
-							rset.getInt("FEED_EVAL"),
-							rset.getDouble("DISTANCE"),
-							rset.getDouble("START_LAT"),
-							rset.getDouble("START_LON"),
-							rset.getString("MEM_ID"),
-							rset.getString("CHANGE_NAME"),
-							rset.getString("MEM_NAME"),
-							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
-							));
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getInt("BOOKMARK_COUNT")
+						));
 			}
 			
 		} catch (SQLException e) {
