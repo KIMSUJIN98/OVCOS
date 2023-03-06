@@ -96,11 +96,11 @@ public class FollowService {
 	 * @param memName
 	 * @return
 	 */
-	public ArrayList<Follow> selectSearchList(String memName){
+	public ArrayList<Follow> selectSearchList(String memName, String userId){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Follow> list = new FollowDao().selectSearchList(conn, memName);
+		ArrayList<Follow> list = new FollowDao().selectSearchList(conn, memName, userId);
 		
 		close(conn);
 		
