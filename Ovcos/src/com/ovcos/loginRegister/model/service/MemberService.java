@@ -50,4 +50,14 @@ public int nickCheck(String checkNick) {
 	close(conn);
 	return count;
 }
+
+public Member checkRegister(String name,String email) {
+	Connection conn = getConnection();
+	
+	Member m = new MemberDao().checkRegister(conn, name, email);
+	
+	close(conn);
+	return m;
+}
+
 }
