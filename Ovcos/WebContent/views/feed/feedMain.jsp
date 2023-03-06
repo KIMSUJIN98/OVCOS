@@ -198,8 +198,7 @@
                                         <td id="feed_profile" colspan="2">
                                             <div>
                                                 <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
-                                                <div id="p_name"><%=f.getMemId() %></div>
-                                                <div id="p_loca"><%=f.getFeedDate()%></div>
+                                                
                                                 <div id="p_name"><%=f.getMemNick() %></div>
                                                 <div id="p_date"><%=f.getFeedDate() %></div>
                                                 <img id="pimg" src="${pageContext.request.contextPath}/resources/image/title_location.png" alt="위치이미지">
