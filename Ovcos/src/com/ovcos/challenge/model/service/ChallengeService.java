@@ -150,5 +150,26 @@ public class ChallengeService {
 		return result;
 	}
 
+	public int insertContestChallenge(ContestChallenge cc, ImageUpload img) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertContestChallenge(conn, cc);
+		int result2 = 1;
+				
+		if(img != null) {
+			result2 = new ChallengeDao().insertContestChallengeImg(conn, img);
+		}
+		
+		if(result * result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result * result2;
+	}
+
 	
 }

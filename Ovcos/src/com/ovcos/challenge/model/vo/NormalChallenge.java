@@ -6,6 +6,7 @@ public class NormalChallenge {
 	
 	private int normalChallengeNo;
 	private String normalChallengeTitle;
+	private String normalChallengeContent;
 	private Date enrollDate;
 	private Date normalChallengeDate;
 	private int normalChallengeMax;
@@ -19,13 +20,15 @@ public class NormalChallenge {
 	private int count;
 	
 	public NormalChallenge() {}
+	
 
-	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, Date enrollDate,
-			Date normalChallengeDate, int normalChallengeMax, String rprStatus, Date rprDate, String delStatus,
-			String rprId, String normalChallengeId, String normalChallengeLocal) {
+	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, String normalChallengeContent,
+			Date enrollDate, Date normalChallengeDate, int normalChallengeMax, String rprStatus, Date rprDate,
+			String delStatus, String rprId, String normalChallengeId, String normalChallengeLocal, int count) {
 		super();
 		this.normalChallengeNo = normalChallengeNo;
 		this.normalChallengeTitle = normalChallengeTitle;
+		this.normalChallengeContent = normalChallengeContent;
 		this.enrollDate = enrollDate;
 		this.normalChallengeDate = normalChallengeDate;
 		this.normalChallengeMax = normalChallengeMax;
@@ -35,8 +38,9 @@ public class NormalChallenge {
 		this.rprId = rprId;
 		this.normalChallengeId = normalChallengeId;
 		this.normalChallengeLocal = normalChallengeLocal;
+		this.count = count;
 	}
-	
+
 
 	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, Date enrollDate,
 			Date normalChallengeDate, int normalChallengeMax, String normalChallengeId, String normalChallengeLocal,
@@ -159,15 +163,29 @@ public class NormalChallenge {
 		this.normalChallengeLocal = normalChallengeLocal;
 	}
 
+	
+
+	public String getNormalChallengeContent() {
+		return normalChallengeContent;
+	}
+
+
+	public void setNormalChallengeContent(String normalChallengeContent) {
+		this.normalChallengeContent = normalChallengeContent;
+	}
+
+
 	@Override
 	public String toString() {
 		return "NormalChallenge [normalChallengeNo=" + normalChallengeNo + ", normalChallengeTitle="
-				+ normalChallengeTitle + ", enrollDate=" + enrollDate + ", normalChallengeDate=" + normalChallengeDate
-				+ ", normalChallengeMax=" + normalChallengeMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate
-				+ ", delStatus=" + delStatus + ", rprId=" + rprId + ", normalChallengeId=" + normalChallengeId
-				+ ", normalChallengeLocal=" + normalChallengeLocal + "]";
+				+ normalChallengeTitle + ", normalChallengeContent=" + normalChallengeContent + ", enrollDate="
+				+ enrollDate + ", normalChallengeDate=" + normalChallengeDate + ", normalChallengeMax="
+				+ normalChallengeMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate + ", delStatus=" + delStatus
+				+ ", rprId=" + rprId + ", normalChallengeId=" + normalChallengeId + ", normalChallengeLocal="
+				+ normalChallengeLocal + ", count=" + count + "]";
 	}
 
+	
 	
 
 	

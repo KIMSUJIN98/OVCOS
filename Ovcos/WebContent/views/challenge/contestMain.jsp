@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 	ArrayList<Contest> list = (ArrayList<Contest>)request.getAttribute("list");
-	
+	Member LoginUser = (Member)request.getAttribute("loginUser");
 %>
     <!DOCTYPE html>
     <html>
@@ -44,10 +44,11 @@
             </header>
 
             <!-- Button to Open the Modal -->
+            <% if(loginUser != null && Integer.parseInt(loginUser.getMemStatus()) == 5) { %>
             <div style="float: left; padding-top: 30px; width: 84%;" align="right">
                 <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCnts">대회추가</button>
             </div>
-
+			<% } %>
             <!-- 대회 추가 Modal -->
             <div class="modal" id="newCnts">
                 <div class="modal-dialog">
@@ -194,9 +195,11 @@
                                     </div>
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>">참가하기</a> <br><br>
+                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>&Date=<%= c.getContestDate() %>">참가하기</a> <br><br>
+                                            <% if(loginUser != null && Integer.parseInt(loginUser.getMemStatus()) == 5) { %>
                                             <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#updateCnts">수정</button>
-                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#deleteCnts" onclick="contestNo(<%= c.getContestNo() %>)">삭제</button>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#deleteCnts" onclick="contestNo(<%= c.getContestNo() %>);">삭제</button>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>

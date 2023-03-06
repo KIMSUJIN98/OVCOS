@@ -182,7 +182,7 @@ public class ChallengeDao {
 			while(rset.next()) {
 				list1.add(new ContestChallenge(rset.getString("CNTS_CHLG_TITLE"),
 											   rset.getDate("ENROLL_DATE"),
-											   rset.getDate("CNTS_CHLG_DATE"),
+											   rset.getString("CNTS_CHLG_DATE"),
 											   rset.getInt("CNTS_CHLG_MAX"),
 											   rset.getString("CNTS_CHLG_ID"),
 											   rset.getString("CNTS_NAME")
@@ -246,7 +246,7 @@ public class ChallengeDao {
 				list.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
 											  rset.getString("CNTS_CHLG_TITLE"),
 											  rset.getDate("ENROLL_DATE"),
-											  rset.getDate("CNTS_CHLG_DATE"),
+											  rset.getString("CNTS_CHLG_DATE"),
 											  rset.getInt("CNTS_CHLG_MAX"),
 											  rset.getString("CNTS_CHLG_ID"),
 											  rset.getString("CNTS_NAME"),
@@ -373,7 +373,7 @@ public class ChallengeDao {
 	public int insertContestImg(Connection conn, ImageUpload img) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertContestImg");
+		String sql = prop.getProperty("insertImg");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -413,6 +413,56 @@ public class ChallengeDao {
 		}
 		
 		return result;
+	}
+
+	public int insertContestChallenge(Connection conn, ContestChallenge cc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertContestChallenge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cc.getContestChallengeTitle());
+			pstmt.setString(2, cc.getContestChallengeContent());
+			pstmt.setString(3, cc.getContestChallengeDate());
+			pstmt.setInt(4, cc.getContestChallengeMax());
+			pstmt.setString(5, cc.getContestChallengeId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertContestChallengeImg(Connection conn, ImageUpload img) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, img.getUplId());
+			pstmt.setInt(2, img.getUplMenu());
+			pstmt.setString(3, img.getOriginName());
+			pstmt.setString(4, img.getChangeName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 	

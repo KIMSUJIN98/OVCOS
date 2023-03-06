@@ -5,8 +5,9 @@ import java.sql.Date;
 public class ContestChallenge {
 	private int contestChallengeNo;
 	private String contestChallengeTitle;
+	private String contestChallengeContent;
 	private Date enrollDate;
-	private Date contestChallengeDate;
+	private String contestChallengeDate;
 	private int contestChallengeMax;
 	private String rprStatus;
 	private Date rprDate;
@@ -19,12 +20,14 @@ public class ContestChallenge {
 	
 	public ContestChallenge() {}
 
-	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, Date enrollDate,
-			Date contestChallengeDate, int contestChallengeMax, String rprStatus, Date rprDate, String delStatus,
-			String rprId, String contestChallengeId, String contestNo) {
+	
+	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String contestChallengeContent,
+			Date enrollDate, String contestChallengeDate, int contestChallengeMax, String rprStatus, Date rprDate,
+			String delStatus, String rprId, String contestChallengeId, String contestNo, int count) {
 		super();
 		this.contestChallengeNo = contestChallengeNo;
 		this.contestChallengeTitle = contestChallengeTitle;
+		this.contestChallengeContent = contestChallengeContent;
 		this.enrollDate = enrollDate;
 		this.contestChallengeDate = contestChallengeDate;
 		this.contestChallengeMax = contestChallengeMax;
@@ -34,9 +37,11 @@ public class ContestChallenge {
 		this.rprId = rprId;
 		this.contestChallengeId = contestChallengeId;
 		this.contestNo = contestNo;
+		this.count = count;
 	}
-	
-	public ContestChallenge(String contestChallengeTitle, Date enrollDate, Date contestChallengeDate,
+
+
+	public ContestChallenge(String contestChallengeTitle, Date enrollDate, String contestChallengeDate,
 			int contestChallengeMax, String contestChallengeId, String contestNo) {
 		super();
 		this.contestChallengeTitle = contestChallengeTitle;
@@ -49,7 +54,7 @@ public class ContestChallenge {
 
 
 	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, Date enrollDate,
-			Date contestChallengeDate, int contestChallengeMax, String contestChallengeId, String contestNo,
+			String contestChallengeDate, int contestChallengeMax, String contestChallengeId, String contestNo,
 			int count) {
 		super();
 		this.contestChallengeNo = contestChallengeNo;
@@ -91,11 +96,11 @@ public class ContestChallenge {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getContestChallengeDate() {
+	public String getContestChallengeDate() {
 		return contestChallengeDate;
 	}
 
-	public void setContestChallengeDate(Date contestChallengeDate) {
+	public void setContestChallengeDate(String contestChallengeDate) {
 		this.contestChallengeDate = contestChallengeDate;
 	}
 
@@ -158,6 +163,16 @@ public class ContestChallenge {
 	
 	
 	
+	public String getContestChallengeContent() {
+		return contestChallengeContent;
+	}
+
+
+	public void setContestChallengeContent(String contestChallengeContent) {
+		this.contestChallengeContent = contestChallengeContent;
+	}
+
+
 	public int getCount() {
 		return count;
 	}
@@ -166,14 +181,18 @@ public class ContestChallenge {
 		this.count = count;
 	}
 
+
 	@Override
 	public String toString() {
 		return "ContestChallenge [contestChallengeNo=" + contestChallengeNo + ", contestChallengeTitle="
-				+ contestChallengeTitle + ", enrollDate=" + enrollDate + ", contestChallengeDate="
-				+ contestChallengeDate + ", contestChallengeMax=" + contestChallengeMax + ", rprStatus=" + rprStatus
-				+ ", rprDate=" + rprDate + ", delStatus=" + delStatus + ", rprId=" + rprId + ", contestChallengeId="
-				+ contestChallengeId + ", contestNo=" + contestNo + ", count=" + count + "]";
+				+ contestChallengeTitle + ", contestChallengeContent=" + contestChallengeContent + ", enrollDate="
+				+ enrollDate + ", contestChallengeDate=" + contestChallengeDate + ", contestChallengeMax="
+				+ contestChallengeMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate + ", delStatus=" + delStatus
+				+ ", rprId=" + rprId + ", contestChallengeId=" + contestChallengeId + ", contestNo=" + contestNo
+				+ ", count=" + count + "]";
 	}
+
+	
 
 
 	

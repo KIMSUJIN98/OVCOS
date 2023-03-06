@@ -18,7 +18,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.Contest;
-import com.ovcos.common.ChallengeFileRenamePolicy;
+import com.ovcos.common.ContestFileRenamePolicy;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.ImageUpload;
 
@@ -50,16 +50,12 @@ public class ContestInsertController extends HttpServlet {
 			
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/");
 			
-			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "utf-8", new ChallengeFileRenamePolicy());
-			
-//			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "utf-8", new ContestFileRenamePolicy());
 			
 			String contestName = multi.getParameter("contestName");
 			String contestDateTime = multi.getParameter("contestDate");
 			String contestUrl = multi.getParameter("contestUrl");
 			String fileName = multi.getFilesystemName("contestImg");
-			
-//			System.out.println(contestUrl);
 			
 			String YYYY = contestDateTime.substring(0, 4);
 			String MM = contestDateTime.substring(5, 7);

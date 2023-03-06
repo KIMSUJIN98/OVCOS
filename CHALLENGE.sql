@@ -183,8 +183,33 @@ DELETE CONTEST;
 UPDATE
        CONTEST
    SET DEL_STATUS = 'Y'
- WHERE CNTS_NO = ?
+ WHERE CNTS_NO = ?;
 
+SELECT * FROM CONTEST_CHALLENGE;
+
+INSERT
+  INTO CONTEST_CHALLENGE
+     (
+       CNTS_CHLG_NO
+     , CNTS_CHLG_TITLE
+     , CNTS_CHLG_CONTENT
+     , ENROLL_DATE
+     , CNTS_CHLG_DATE
+     , CNTS_CHLG_MAX
+     , CNTS_CHLG_ID
+     , CNTS_NO
+     )
+VALUES
+     (
+       SEQ_CHLG_NO.NEXTVAL
+     , ?
+     , ?
+     , SYSDATE
+     , ?
+     , ?
+     , ?
+     , SEQ_CNTS_NO.CURRVAL
+     );
 
 
 COMMIT;

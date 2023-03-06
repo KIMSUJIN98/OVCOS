@@ -1,6 +1,7 @@
 package com.ovcos.challenge.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -33,11 +34,13 @@ public class ContestChallengeListViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String contestName = (String)request.getParameter("contestName");
+		String contestDate = (String)request.getParameter("contestDate");
 		
 		ArrayList<ContestChallenge> list = new ChallengeService().contestChallengeList(contestName);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("contestName", contestName);
+		request.setAttribute("contestDate", contestDate);
 		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
 		
 		
