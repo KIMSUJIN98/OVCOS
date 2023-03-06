@@ -256,11 +256,11 @@
                                                         if(dis<2){
                                                             zom = 14;
                                                         }else if(dis<20){
-                                                            zom = 12;
+                                                            zom = 13;
                                                         }else if(dis<40){
-                                                            zom = 11;
+                                                            zom = 12;
                                                         }else{
-                                                            zom=10;
+                                                            zom=11;
                                                         }
                                                     	n<%=f.getFeedIndex()%>.setZoom(zom);
                                                     },800);
@@ -648,7 +648,54 @@
                 
                 reader.onload = function (event) {
                     var gpx = $.parseXML(event.target.result);
+                    console.log(gpx);
+                    var str = '<bounds maxlat="37.55701757998861" maxlon="127.00031235806117" minlat="37.54436060643561" minlon="126.98387064986434"/>';
+                    // console.log($(gpx).find('bounds'));
+                    var meta = $(gpx).find('metadata');
+                    // console.log(meta[0]);
+                    // console.log(meta[0].innerHTML = meta[0].innerHTML+str);
+                    // console.log(gpx)
+                    // console.log(event.target.result)
+                    // event.target.result = gpx;
+                    // console.log(event.target.result)
+                    var fileInput = document.getElementById("avatar");
+                    var file = fileInput.files[0];
+                    console.log(file);
+
+                    var reader = new FileReader();
+                    reader.addEventListener('load', function() {
+                        // Get the contents of the file as a string
+                        var fileContents = reader.result;
+                        console.log(fileContents);
+
+                        // Modify the file contents as needed
+                        // ...
+                        var str = '<bounds maxlat="37.55701757998861" maxlon="127.00031235806117" minlat="37.54436060643561" minlon="126.98387064986434"/>';
+                        var meta = $(fileContents).find("metadata");
+                        console.log(meta[0]);
+                    
+                        // console.log(meta[0].innerHTML);
+
+                        console.log(fileContents);
+                        // Create a new Blob object with the modified data
+                        var modifiedBlob = new Blob([fileContents]);
+                        // console.log($(fileContents).find("metadata")[0].innerHTML=+str);
+
+                        // Replace the original file with the modified file
+                        console.log(fileContents.search("<metadata>"));
+                        //238
+                        fileContents = fileContents.substring(0,238)+str+fileContents.substring(238);
+                        console.log(fileContents)
+                        fileInput.files[0] = modifiedBlob;
+                        console.log(fileInput.files[0]);
+                        });
+
+                        // Read the contents of the selected file
+                        reader.readAsText(file);
+                    
+                    
                     var trackPoints = $(gpx).find('trkpt');
+                    // console.log(trackPoints);
                     trackPoints.each(function (index, value) {
                         var lat = $(this).attr('lat');
                         var lon = $(this).attr('lon');
