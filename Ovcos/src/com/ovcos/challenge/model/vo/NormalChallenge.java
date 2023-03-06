@@ -3,53 +3,92 @@ package com.ovcos.challenge.model.vo;
 import java.sql.Date;
 
 public class NormalChallenge {
-	private int normalChallNo;
-	private String normalChallTitle;
+	
+	private int normalChallengeNo;
+	private String normalChallengeTitle;
+	private String normalChallengeContent;
 	private Date enrollDate;
-	private Date normalChallDate;
-	private String time;
-	private String normalChallLocal;
-	private int normalChallMax;
+	private Date normalChallengeDate;
+	private int normalChallengeMax;
 	private String rprStatus;
 	private Date rprDate;
 	private String delStatus;
 	private String rprId;
-	private String normalChallId;
+	private String normalChallengeId;
+	private String normalChallengeLocal;
+	
+	private int count;
 	
 	public NormalChallenge() {}
+	
 
-	public NormalChallenge(int normalChallNo, String normalChallTitle, Date enrollDate, Date normalChallDate,
-			String time, String normalChallLocal, int normalChallMax, String rprStatus, Date rprDate, String delStatus,
-			String rprId, String normalChallId) {
+	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, String normalChallengeContent,
+			Date enrollDate, Date normalChallengeDate, int normalChallengeMax, String rprStatus, Date rprDate,
+			String delStatus, String rprId, String normalChallengeId, String normalChallengeLocal, int count) {
 		super();
-		this.normalChallNo = normalChallNo;
-		this.normalChallTitle = normalChallTitle;
+		this.normalChallengeNo = normalChallengeNo;
+		this.normalChallengeTitle = normalChallengeTitle;
+		this.normalChallengeContent = normalChallengeContent;
 		this.enrollDate = enrollDate;
-		this.normalChallDate = normalChallDate;
-		this.time = time;
-		this.normalChallLocal = normalChallLocal;
-		this.normalChallMax = normalChallMax;
+		this.normalChallengeDate = normalChallengeDate;
+		this.normalChallengeMax = normalChallengeMax;
 		this.rprStatus = rprStatus;
 		this.rprDate = rprDate;
 		this.delStatus = delStatus;
 		this.rprId = rprId;
-		this.normalChallId = normalChallId;
+		this.normalChallengeId = normalChallengeId;
+		this.normalChallengeLocal = normalChallengeLocal;
+		this.count = count;
 	}
 
-	public int getNormalChallNo() {
-		return normalChallNo;
+
+	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, Date enrollDate,
+			Date normalChallengeDate, int normalChallengeMax, String normalChallengeId, String normalChallengeLocal,
+			int count) {
+		super();
+		this.normalChallengeNo = normalChallengeNo;
+		this.normalChallengeTitle = normalChallengeTitle;
+		this.enrollDate = enrollDate;
+		this.normalChallengeDate = normalChallengeDate;
+		this.normalChallengeMax = normalChallengeMax;
+		this.normalChallengeId = normalChallengeId;
+		this.normalChallengeLocal = normalChallengeLocal;
+		this.count = count;
 	}
 
-	public void setNormalChallNo(int normalChallNo) {
-		this.normalChallNo = normalChallNo;
+	public NormalChallenge(String normalChallengeTitle, Date enrollDate, Date normalChallengeDate,
+			int normalChallengeMax, String normalChallengeId, String normalChallengeLocal) {
+		super();
+		this.normalChallengeTitle = normalChallengeTitle;
+		this.enrollDate = enrollDate;
+		this.normalChallengeDate = normalChallengeDate;
+		this.normalChallengeMax = normalChallengeMax;
+		this.normalChallengeId = normalChallengeId;
+		this.normalChallengeLocal = normalChallengeLocal;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 
-	public String getNormalChallTitle() {
-		return normalChallTitle;
+	public int getNormalChallengeNo() {
+		return normalChallengeNo;
 	}
 
-	public void setNormalChallTitle(String normalChallTitle) {
-		this.normalChallTitle = normalChallTitle;
+	public void setNormalChallengeNo(int normalChallengeNo) {
+		this.normalChallengeNo = normalChallengeNo;
+	}
+
+	public String getNormalChallengeTitle() {
+		return normalChallengeTitle;
+	}
+
+	public void setNormalChallengeTitle(String normalChallengeTitle) {
+		this.normalChallengeTitle = normalChallengeTitle;
 	}
 
 	public Date getEnrollDate() {
@@ -60,36 +99,20 @@ public class NormalChallenge {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getNormalChallDate() {
-		return normalChallDate;
+	public Date getNormalChallengeDate() {
+		return normalChallengeDate;
 	}
 
-	public void setNormalChallDate(Date normalChallDate) {
-		this.normalChallDate = normalChallDate;
+	public void setNormalChallengeDate(Date normalChallengeDate) {
+		this.normalChallengeDate = normalChallengeDate;
 	}
 
-	public String getTime() {
-		return time;
+	public int getNormalChallengeMax() {
+		return normalChallengeMax;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public String getNormalChallLocal() {
-		return normalChallLocal;
-	}
-
-	public void setNormalChallLocal(String normalChallLocal) {
-		this.normalChallLocal = normalChallLocal;
-	}
-
-	public int getNormalChallMax() {
-		return normalChallMax;
-	}
-
-	public void setNormalChallMax(int normalChallMax) {
-		this.normalChallMax = normalChallMax;
+	public void setNormalChallengeMax(int normalChallengeMax) {
+		this.normalChallengeMax = normalChallengeMax;
 	}
 
 	public String getRprStatus() {
@@ -124,22 +147,46 @@ public class NormalChallenge {
 		this.rprId = rprId;
 	}
 
-	public String getNormalChallId() {
-		return normalChallId;
+	public String getNormalChallengeId() {
+		return normalChallengeId;
 	}
 
-	public void setNormalChallId(String normalChallId) {
-		this.normalChallId = normalChallId;
+	public void setNormalChallengeId(String normalChallengeId) {
+		this.normalChallengeId = normalChallengeId;
 	}
+
+	public String getNormalChallengeLocal() {
+		return normalChallengeLocal;
+	}
+
+	public void setNormalChallengeLocal(String normalChallengeLocal) {
+		this.normalChallengeLocal = normalChallengeLocal;
+	}
+
+	
+
+	public String getNormalChallengeContent() {
+		return normalChallengeContent;
+	}
+
+
+	public void setNormalChallengeContent(String normalChallengeContent) {
+		this.normalChallengeContent = normalChallengeContent;
+	}
+
 
 	@Override
 	public String toString() {
-		return "NormalChallenge [normalChallNo=" + normalChallNo + ", normalChallTitle=" + normalChallTitle
-				+ ", enrollDate=" + enrollDate + ", normalChallDate=" + normalChallDate + ", time=" + time
-				+ ", normalChallLocal=" + normalChallLocal + ", normalChallMax=" + normalChallMax + ", rprStatus="
-				+ rprStatus + ", rprDate=" + rprDate + ", delStatus=" + delStatus + ", rprId=" + rprId
-				+ ", normalChallId=" + normalChallId + "]";
+		return "NormalChallenge [normalChallengeNo=" + normalChallengeNo + ", normalChallengeTitle="
+				+ normalChallengeTitle + ", normalChallengeContent=" + normalChallengeContent + ", enrollDate="
+				+ enrollDate + ", normalChallengeDate=" + normalChallengeDate + ", normalChallengeMax="
+				+ normalChallengeMax + ", rprStatus=" + rprStatus + ", rprDate=" + rprDate + ", delStatus=" + delStatus
+				+ ", rprId=" + rprId + ", normalChallengeId=" + normalChallengeId + ", normalChallengeLocal="
+				+ normalChallengeLocal + ", count=" + count + "]";
 	}
+
+	
+	
 
 	
 	
