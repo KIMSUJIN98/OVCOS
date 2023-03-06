@@ -57,7 +57,6 @@
     width: 94%;
     height: 100%;
     margin: auto;
-      
 }
 #p_img{
     width: 50px;
@@ -66,6 +65,7 @@
     border-radius: 50%;
     float: left;
     margin-right: 15px;
+    margin-bottom: 10px;
 }
 #p_img>img{
     width: 100%;
@@ -79,9 +79,26 @@
     font-weight: bold;
     line-height: 30px;
 }
+#p_date{
+display: inline;
+}
+
+#pimg{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
 #p_loca{
+    display: inline-block;
     font-size: 13px;
-    margin-top: 7px;
+    /* background-color: violet; */
+    
+    margin: 0;
+    padding: 0;
+    }
+#p_loca>img{
+    width: 25px;
+    height: 25px;
 }
 /* 더보기버튼 */
 #plus>div{

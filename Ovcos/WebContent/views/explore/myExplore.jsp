@@ -1,12 +1,30 @@
+<%@page import="com.ovcos.explore.model.vo.Explore"%>
+<%@page import="com.ovcos.common.model.vo.Pageinfo"%>
+<%@page import="com.ovcos.feed.model.vo.Feed"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+	ArrayList<Explore> list = (ArrayList<Explore>)request.getAttribute("list");
+	Pageinfo pi = (Pageinfo)request.getAttribute("pi");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	String status = String.valueOf(request.getAttribute("status"));
+	String search = String.valueOf(request.getAttribute("search"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMy.css">
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
+
 
 </head>
 <body>
@@ -17,15 +35,15 @@
         <div id="course_nav">
             <ul>
                 <li>
-                    <a href="<%=contextPath%>/course?epage=1">
+                    <a href='<%=contextPath%>/course?epage=1'>
                         <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagGray.png" alt="깃발"></span>
-                        <span class="li1text" align="center">코스검색</span>
+                        <span class="li2text" align="center">코스검색</span>
                     </a>
                 </li>
                 <li class="li1">
-                    <a href="course/my">
-                        <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/userWhite.png" alt="유저"></span>
-                        <span class="li2text" align="center">나의코스</span>
+                    <a href="course/my?npage=1">
+                        <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/exUserWhite.png" alt="유저"></span>
+                        <span class="li1text" align="center">나의코스</span>
                     </a>
                 </li>
             </ul>
@@ -34,292 +52,306 @@
         <!--course_left 시작-->
         <div id="course_left">
             <div id="sectiontop">
-                <div id="title">나의코스</div>
+                <div id="title">나의 코스</div>
                 <div id="search">
-                    <input type="text" name="searchcourse" placeholder="제목,코스명 검색">
-                    <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색">
-                    <!--여기에 form태그를 넣어야 할지 고민이다.-->
+                    <form action="<%=contextPath%>/search.ex">
+                        <input type="text" name="searchcourse" placeholder="제목,코스명 검색" autocomplete="off">
+						<input type="hidden" name="search" value="y">
+                        <button type="submit" id="submitimg"></button>
+                        <!-- <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색"> -->
+                    </form>
                 </div>
             </div>
             <div id="tab_manu">
+           	<%if(search.equals("y")){ %>
+            	<div id="seardiv">코스검색 결과</div>
+            <%}else{ %>
                 <ul>
-                    <li class="tabon tabon1">최신순</li>
-                    <li class="tabon1">거리순</li>
+                <!-- 조건문으로 인기기록일 떄 아니면 최신기록일 때  -->
+                <%if(status.equals("n")){ %>
+	                    <li class="tabon1 tabon" onclick="location.href='<%=contextPath%>/course/my?npage=1'">최신순</li>
+	                    <li class="tabon2" onclick="location.href='<%=contextPath%>/course/my?dpage=1'">거리순</li>
+	                <%}else{ %>
+		                <li class="tabon1" onclick="location.href='<%=contextPath%>/course/my?npage=1'">최신순</li>
+	                    <li class="tabon2 tabon" onclick="location.href='<%=contextPath%>/course/my?dpage=1'">거리순</li>
+	                <%} %>    
+                	
                 </ul>
+            <%} %>
+                  
             </div>
             <div id="left_content">
                 <div id="content_list">
-                    <div>
-                        <span class="list_num">1</span>
+                    <!-- case 1  조회 결과가 없다. -->
+                	<%if(list == null){ %>
+				 		<p>조회된 결과가 없습니다.</p>
+				 	<%}else{ %>
+                    <!-- case 2 반복문으로  -->
+                    	<%for(Explore f: list){ %>
+                    <div class="exList" id="f<%=f.getFeedIndex()%>">
+                        <span class="list_num"><%=f.getFeedIndex() %></span>
                         <div class="innertext">
-                            <h5>백두대간_20230212</h5>
+                            <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
                                 <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
+                                    <td class="ct1">전체 거리</td>
+                                    <td><%=f.getDistance()%> km</td>
                                 </tr>
                                 <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
+                                    <td class="ct1">별점</td>
+                                    <td><%=f.getFeedEval() %>/5</td>
                                 </tr>
                                 <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
+                                    <td class="ct1">주소</td>
+                                    <td id="add<%=f.getFeedIndex()%>" data-toggle="tooltip" data-placement="right" title="" ></td>
+                                    <input type="hidden" name="lat" id="lat<%=f.getFeedIndex()%>" value="<%=f.getStartLat()%>">
+                                    <input type="hidden" name="lng" id="lng<%=f.getFeedIndex()%>" value="<%=f.getStartLon()%>">
                                 </tr>
                             </table>
-                            <span>xxxx-xx-xx</span>
+                            <div style="display: flex; width: 100%; justify-content: space-evenly;">
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;"><%=f.getCount() %></span>
+                                </div>
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">
+                                    <span style="display: inline;font-size: 0.8rem;"><%=f.getHit() %></span>
+                                </div>
+                                <div class="date">
+                                    <%=f.getFeedDate()%>
+                                </div>
+                                <div class="detailBtn">
+                                    <span class="btn1 btn btn-sm" onclick="location.href='<%=contextPath%>/detail.fe?fno=<%=f.getFeedIndex()%>'">코스 상세</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <span class="list_num">2</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">3</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">4</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">5</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="list_num">6</span>
-                        <div class="innertext">
-                            <h5>반포대교_20230212</h5>
-                            <table>
-                                <tr>
-                                    <td>전체 거리</td>
-                                    <td>xx.x km</td>
-                                </tr>
-                                <tr>
-                                    <td>전체 시간</td>
-                                    <td>xx:xx:xx</td>
-                                </tr>
-                                <tr>
-                                    <td>평균 속도</td>
-                                    <td>x.x km/h</td>
-                                </tr>
-                            </table>
-                            <span>xxxx-xx-xx</span>
-                        </div>
-                    </div>
+                    
+                    <script>
+                    
+                    	var lat = $("#lat<%=f.getFeedIndex()%>").val();
+                        var lng = $("#lng<%=f.getFeedIndex()%>").val();
+                    
+	                    naver.maps.Service.reverseGeocode({
+	                        location: new naver.maps.LatLng(lat, lng),
+	                    }, function(status, response) {
+	                        if (status !== naver.maps.Service.Status.OK) {
+	                            return alert('Something wrong!');
+	                        }
+	
+	                        var result = response.result, // 검색 결과의 컨테이너
+	                            items = result.items; // 검색 결과의 배열
+	
+	                       
+	
+	                        var item = items[0].address;
+                            var fianl;
+	                        if(item.length >9){
+                               final = item.substring(0,9)+'...';
+                            }
+                            $("#add<%=f.getFeedIndex()%>").attr("title",item);
+	
+	                        $("#add<%=f.getFeedIndex()%>").text(final);
+	                    });
+                        console.log($(".exList"))
+
+                        
+                    </script>
+                    	<%} %>
+                    <%} %>
+                    
                 </div>
+                <!-- 페이지바 시작 -->
+                
                 <div id="list_page">
-                    <ul>
-                        <li class="befpage">&lt;</li>
-                        <li class="on pagenum">1</li>
-                        <li class="pagenum">2</li>
-                        <li class="pagenum">3</li>
-                        <li class="pagenum">4</li>
-                        <li class="pagenum">5</li>
-                        <li class="aftpage">&gt;</li>
-                    </ul>
+                	<%if(status.equals("n")){ %> <!-- 최신순 페이지 -->
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course/my?npage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course/my?npage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course/my?npage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+                    <%}else{ %> <!-- 거리순 페이지 -->
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course/my?dpage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course/my?dpage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course/my?dpage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+	                    <%} %>
                 </div>
+                <!-- 페이지바 끝 -->
             </div>
         </div>
         <!-- course_left 끝-->
         <div id="content">
             <div id="map"> 
+
+
                 <script>
-                    navigator.geolocation.getCurrentPosition(geoSuccess);
-                    function geoSuccess(position) {
-                    // 위도
-                    const lat = position.coords.latitude;
-                    // 경도
-                    const lng = position.coords.longitude;
+
+                    function startDataLayer(xmlDoc) {
+                            map.data.addGpx(xmlDoc);
+                            }
                     
-                    setMap(lat, lng);
+                    var lat = 37.4923615;
+                    var lng = 127.0292881;
+
+                    var map = new naver.maps.Map('map',{
+                        center:new naver.maps.LatLng(lat, lng),
+                        zoom: 10
+                    })
+
+                    var marker = null;
+                    var markers = [];
+
+                    var infowindows = [];
+
+                    var paths = [];
+
+                    // 마커 세팅
+                    <%for(Explore e:list){%>
+                        marker = new naver.maps.Marker({
+                            map:map,
+                            position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
+                            icon: {
+                                content: 
+                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
+                                // size: new naver.maps.Size(38, 58),
+                                anchor: new naver.maps.Point(19, 40),
+                            }
+                        })
+                        markers.push(marker);
+                        paths.push("<%=e.getPath()%>");
+                    <%}%>
+
+                    // window 세팅
+                   <%for(Explore e: list){%>
+                    infowindows.push(new naver.maps.InfoWindow({
+                        content:[
+                        '<div class="iw_inner">',
+                            '   <span><%=e.getFeedTitle()%></span>',
+                            '   <div style="display:flex; padding-left:10px">',
+                            '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
+                            '	    <span><%=e.getDistance()%> km</span>	',
+                            '       <a style="width:40%" href="#">Detail</a>',
+                            '   </div>',
+                            '</div>'		
+                        ].join('')
+                    }))
+                    
+                    <%}%>
+                    
+ 
+                    $(".exList").click(function(e){
+                        $("path").remove();
+                        $(".exList").css("backgroundColor","white");
+                        $(this).css("backgroundColor","#eceaea");
+                        $(".detailBtn").css("display","none");
+                        $(".date").css("display","block");
+
+                        $(this).find(".date").css("display","none");
+                        $(this).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
+                        
+                        // index 뽑기
+                        var index = $(this).children("span").text()%10;
+                        if($(this).children("span").text() == 10){
+                            index = 10;
+                        }
+
+                        e.preventDefault();
+                      
+                        $.ajax({
+                            url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[index-1],
+                            dataType: 'xml',
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 5,   //선 두께
+                            success: startDataLayer
+                            });
+                            if(infowindows[index-1].getMap()){
+                                infowindows[index-1].close();
+                            }else{
+                                infowindows[index-1].open(map,markers[index-1]);
+                            }
+                        
+                        })
+                        
+                        naver.maps.Event.addListener(map, 'click', function(e) {
+                            for(let i = 0; i<infowindows.length; i++){
+                                infowindows[i].close();
+                            }
+                        });
+                   
+
+                    for(let i=0; i<markers.length; i++){
+                        naver.maps.Event.addListener(markers[i], "click", function(e) {
+
+                            $("path").remove();
+                            $.ajax({
+                            url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[i],
+                            dataType: 'xml',
+                            strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                            strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                            strokeWeight: 3,   //선 두께
+                            success: startDataLayer
+                            });
+
+                            console.log("이벤트")
+                            if(infowindows[i].getMap()){
+                                infowindows[i].close();
+                            }else{
+                                infowindows[i].open(map,markers[i]);
+                            }
+
+                            $(".exList").css("backgroundColor","white");
+                            $(".btn1").css("visibility","hidden");
+                            
+                            var num = Number(i+1);
+                            $("#f"+num).css("backgroundColor","#eceaea");
+                            $("#f"+num).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc");
+                            
+                            var docu = document.getElementById("f"+num);
+                            docu.scrollIntoView({ behavior: "smooth" });
+                            
+                        });
                     }
 
-                    function setMap(lat, lng) {
-                    // 위도, 경도 설정
-                    var mapOptions = {
-                        center: new naver.maps.LatLng(lat, lng),
-                        zoom: 12
-                    };
                     
-                    var map = new naver.maps.Map('map', mapOptions);
-                    var marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(lat, lng),
-                    map: map,
-                    clickable: true
-                    });
-                    }
                     
                 </script>
+
+                
             </div>
         </div>
     </div>
     </div>
     </div>
-
-    <script>
-        $(function(){
-            $(".tabon1").click(function(){
-                console.log("성공");
-                $(this).addClass("tabon")
-                //ajax로 left_content와 content를 리로딩 시켜야함
-                $(this).siblings().removeClass("tabon");
-            });
-
-            $("#list_page>ul>li").click(function(){
-                if($(this).text() != "<" && $(this).text() !=">"){
-                    $(this).addClass("on");
-                    $(this).siblings().removeClass("on");
-                }
-            })
-        })
-    </script>
-
-<script>
-                    
-
-    var markers = [];
-
-    navigator.geolocation.getCurrentPosition(geoSuccess);
-    function geoSuccess(position) {
-    // 위도
-    var lat = position.coords.latitude;
-    // 경도
-    var lng = position.coords.longitude;
-    console.log(lat);
-    console.log(lng)
-    }
-
-    map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.4636544, 126.8219904),
-        zoom: 13
-    });
-
-    
-
-    var marker = new naver.maps.Marker({
-        map:map,
-        position: new naver.maps.LatLng(37.4636544, 126.8219904)
-    })
-
-
-    var hyeonjinHouse = new naver.maps.LatLng(36.30260, 127.33838);
-    var jooyeokHouse = new naver.maps.LatLng(36.32611, 127.41263);
-
-
-    // var markers = [];
-    var infowindows = [];
-
-
-    markers.push(new naver.maps.Marker({
-        map: map,
-        position: hyeonjinHouse
-    }));
-
-    infowindows.push(new naver.maps.InfoWindow({
-        content: [
-            '<div class="iw_inner">',
-            '   <h3>현진이네 집</h3>',
-            '</div>'
-        ].join('')
-    }));
-
-
-    markers.push(new naver.maps.Marker({
-        map: map,
-        position: jooyeokHouse
-    }));
-
-    infowindows.push(new naver.maps.InfoWindow({
-        content: [
-            '<div class="iw_inner">',
-            '   <h3>주역이네 집</h3>',
-            '</div>'
-        ].join('')
-    }));
-
-    for(let i=0; i<markers.length; i++){
-        naver.maps.Event.addListener(markers[i], "click", function(e) {
-            console.log("이벤트")
-            if (infowindows[i].getMap()) {
-                infowindows[i].close();
-            } else {
-                infowindows[i].open(map, markers[i]);
-            }
-        });
-    }
-
-    infowindows[0].open(map, markers[0]);
-</script>
-
 
 </body>
 </html>

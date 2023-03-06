@@ -17,7 +17,7 @@
 
 <!-- 내(로그인유저)가 팔로우하고있는 유저 목록 -->
 <entry key="selectList">
-select m.mem_id, mem_name, mem_intro
+select m.mem_id, mem_name, NVL(MEM_INTRO, ' ') as MEM_INTRO
 from member m , follow f
 where m.mem_id = f.flw_id
 and f.mem_Id = ?
@@ -28,7 +28,7 @@ AND FLW_STATUS='Y'
 
 <!-- 나를 팔로우 하고 있는 유저 목록 -->
 <entry key="selectaddMeList">
-SELECT M.MEM_ID, MEM_NAME, MEM_INTRO
+SELECT M.MEM_ID, MEM_NAME, NVL(MEM_INTRO, ' ') as MEM_INTRO
 FROM MEMBER M, FOLLOW F
 WHERE  M.MEM_ID = F.MEM_ID
 AND flw_id = ?
@@ -40,9 +40,11 @@ AND FLW_STATUS='Y'
 <!-- 검색한 유저 네임 -->
 <entry key="selectSearchList">
 
-SELECT MEM_ID,MEM_NAME, MEM_INTRO
+SELECT MEM_ID,MEM_NAME, NVL(MEM_INTRO, ' ') as MEM_INTRO
 FROM MEMBER
 WHERE MEM_NAME LIKE '%' || ? || '%'
+AND MEM_STATUS != 5
+AND MEM_ID != ?
 
 </entry>
 

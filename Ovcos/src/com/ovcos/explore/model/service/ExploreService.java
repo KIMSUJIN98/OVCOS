@@ -20,10 +20,10 @@ public class ExploreService {
 		return result;
 	}
 
-	public ArrayList<Explore> selectList(Pageinfo pi) {
+	public ArrayList<Explore> selectList(Pageinfo pi, String status) {
 		Connection conn = getConnection();
 		
-		ArrayList<Explore> list = new ExploreDao().selectList(conn, pi);
+		ArrayList<Explore> list = new ExploreDao().selectList(conn, pi, status);
 		
 		return list;
 	}
@@ -45,5 +45,31 @@ public class ExploreService {
 		
 		return list;
 	}
+	
+
+	public ArrayList<Explore> selectMyNewList(Pageinfo pi, String status, String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Explore> list = new ExploreDao().selectMyNewList(conn,pi,status,userId);
+		
+		return list;
+	}
+
+	/**
+	 * 내코스에서의 검색시 사용하는 메서드
+	 * @param pi
+	 * @param search
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Explore> selectKeywordList(Pageinfo pi, String search, String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Explore> list = new ExploreDao().selectKeywordList(conn, pi,search,userId);
+		
+		return list;
+	}
+
+	
 
 }

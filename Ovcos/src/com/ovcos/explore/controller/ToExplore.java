@@ -30,6 +30,8 @@ public class ToExplore extends HttpServlet {
 		int pageLimit; // 하단 페이지바 최대개수
 		int boardLimit; // 게시글에 보여줄 최대개수
 		
+		String status; // 최신순/ 인기순
+		
 		//위의 4개를 가지고 아래 3개를 구한다.
 		int maxPage;//가장 마지막 페이지
 		int startPage; // 페이지바 시작 
@@ -37,11 +39,22 @@ public class ToExplore extends HttpServlet {
 		
 		listCount = new ExploreService().selectListCount();
 		
-		currentPage = Integer.parseInt(request.getParameter("epage"));
+		String epage = request.getParameter("epage");
+		String fpage = request.getParameter("fpage");
+		
+		if(epage == null) {
+			currentPage = Integer.parseInt(fpage);
+			status = "f";
+		}else {
+			currentPage = Integer.parseInt(epage);
+			status="e";
+		}
+		
+		
 		
 		pageLimit = 5; //페이지바 최대개수
 		
-		boardLimit = 30; // 보여질 게시글 총개수
+		boardLimit = 50; // 보여질 게시글 총개수
 		
 		//제일 마지막 페이지
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
@@ -58,10 +71,15 @@ public class ToExplore extends HttpServlet {
 		
 		Pageinfo pi = new Pageinfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Explore> list = new ExploreService().selectList(pi);
+		ArrayList<Explore> list = new ArrayList<Explore>();
+		
+		
+		list = new ExploreService().selectList(pi,status);
+		
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("status", status);
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");

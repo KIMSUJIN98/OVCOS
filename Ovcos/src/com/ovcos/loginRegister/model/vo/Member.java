@@ -21,6 +21,38 @@ public class Member {
 	private String marketNy;
 	
 	public Member() {}
+	
+	
+	
+	
+	
+
+	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, Date memBirth,
+			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn, String memCodeNy, int memRprCum,
+			String memApiType, String memApiToken, String memEml, String marketNy) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.memIntro = memIntro;
+		this.memBirth = memBirth;
+		this.memStatus = memStatus;
+		this.memLocInfo = memLocInfo;
+		this.memPublicNy = memPublicNy;
+		this.memGoalDtn = memGoalDtn;
+		this.memCodeNy = memCodeNy;
+		this.memRprCum = memRprCum;
+		this.memApiType = memApiType;
+		this.memApiToken = memApiToken;
+		this.memEml = memEml;
+		this.marketNy = marketNy;
+	}
+
+
+
+
+
 
 	public Member(String memId, String memPwd, String memName, String memNick, String memIntro, String memBirth,
 			String memStatus, String memLocInfo, String memPublicNy, int memGoalDtn, String memCodeNy, int memRprCum,
@@ -182,6 +214,22 @@ public class Member {
 	public void setMemEml(String memEml) {
 		this.memEml = memEml;
 	}
+	
+	
+
+	public String getMarketNy() {
+		return marketNy;
+	}
+
+
+	public void setMarketNy(String marketNy) {
+		this.marketNy = marketNy;
+	}
+
+
+
+
+
 
 	public String getMarketNy() {
 		return marketNy;
@@ -199,6 +247,6 @@ public class Member {
 				+ memCodeNy + ", memRprCum=" + memRprCum + ", memApiType=" + memApiType + ", memApiToken=" + memApiToken
 				+ ", memEml=" + memEml + ", marketNy=" + marketNy + "]";
 	}
-	
-	
+
+
 }
