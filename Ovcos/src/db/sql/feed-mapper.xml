@@ -51,6 +51,54 @@
 		    )
 	</entry>
 	
+
+<entry key="selectAllFeedList">
+	SELECT 
+	       FEED_INDEX
+	     , FEED_DATE
+	     , FEED_TITLE
+	     , FEED_CNT
+	     , FEED_EVAL
+	     , FEED_PATH_NY
+	     , FEED_RPR_DATE
+	     , DISTANCE
+	     , START_LAT
+	     , START_LON
+	     , MEM_NICK
+	 FROM FEED
+	 JOIN MEMBER USING(MEM_ID)
+	WHERE FEED_PUBLIC_TYPE ='전체'
+	  AND FEED_RPR_NY = 'N'
+	  AND FEED_DEL_NY = 'N'
+	ORDER
+	    BY FEED_INDEX DESC
+</entry>
+
+<!-- 전체피드 조회(vo수정후 최종) -->
+<entry key="selectArrayList">
+    SELECT 
+          FEED_INDEX
+        , TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+        , FEED_TITLE
+        , FEED_CNT
+        , FEED_EVAL
+        , DISTANCE
+        , START_LAT
+        , START_LON
+        , MEM_ID
+        , MEM_NAME
+        , MEM_NICK
+        , REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+        , CHANGE_NAME
+     FROM FEED
+     JOIN GPX_FILES USING(FEED_INDEX)
+     JOIN MEMBER USING(MEM_ID)
+	WHERE FEED_PUBLIC_TYPE ='전체'
+	  AND MEM_ID NOT IN (SELECT CUT_ID FROM CUT C WHERE C.MEM_ID = ? AND CUT_STATUS ='Y')
+	AND FEED_RPR_NY ='N'
+	AND FEED_DEL_NY = 'N' 
+	ORDER BY FEED_INDEX DESC
+</entry>
 	
 	<entry key="selectAllFeedList">
 		SELECT 
@@ -66,14 +114,306 @@
 		     , START_LON
 		     , MEM_NICK
 		 FROM FEED
-		 JOIN MEMBER USING(MEM_ID)
+		 JOIN MEMBER USING(ME
+		 M_ID)
 		WHERE FEED_PUBLIC_TYPE ='전체'
 		  AND FEED_RPR_NY = 'N'
 		  AND FEED_DEL_NY = 'N'
 		ORDER
 		    BY FEED_INDEX DESC
 	</entry>
+	<entry key="selectFeedDetail">
+		SELECT 
+				FEED_INDEX
+			  , TO_CHAR(FEED_DATE,'YYYY-MM-DD HH:mm:SS') "FEED_DATE"
+			  , FEED_TITLE
+			  , FEED_CNT
+			  , FEED_EVAL
+			  , DISTANCE
+			  , START_LAT
+			  , START_LON
+		      , MEM_ID
+		      , CHANGE_NAME
+		      , ORIGIN_NAME
+		      , HIT
+		      , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+		   FROM FEED
+		JOIN GPX_FILES USING(FEED_INDEX)
+		LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX) 
+        WHERE FEED_INDEX = ?
+        AND FEED_RPR_NY = 'N'
+        AND FEED_DEL_NY = 'N'
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH:mm:SS'), FEED_TITLE, FEED_CNT, FEED_EVAL, 
+        DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME, ORIGIN_NAME, HIT
+	</entry>
 	
+	<entry key="insertcomments">
+	INSERT
+	    INTO 	FEED_COMMENTS
+	    (
+	      FEED_CMN_NO
+	    , FEED_CMN_ID
+	    , FEED_CMN_CNT
+	    , FEED_CMN_DATE
+	    , FEED_INDEX
+	    )
+	    VALUES
+	    (
+	      SEQ_FEED_CMN_NO.NEXTVAL
+	    , ?
+	    , ?
+	    , SYSDATE
+	    , ?
+
+	    )
+
+</entry>
+
+<entry key="selectdetail2">
+	SELECT		
+		        FEED_CMN_NO
+		      , FEED_CMN_ID
+		      , FEED_CMN_CNT
+		      , to_char(FEED_CMN_DATE,'yyyy-mm-dd hh24:mi:ss') "FEED_CMN_DATE"
+		   FROM FEED_COMMENTS 
+		  WHERE FEED_INDEX = ?
+		  ORDER
+		     BY FEED_CMN_NO DESC
+
+</entry>
+
+
+<entry key="updateCount">
+	UPDATE
+        FEED
+    SET HIT = HIT + 1
+    WHERE FEED_INDEX = ?
+    AND FEED_RPR_NY = 'N'
+
+</entry>
+<entry key="wishListCount">
+
+	SELECT
+      
+	     COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+	FROM FEED
+	JOIN GPX_FILES USING(FEED_INDEX)
+	LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
+  WHERE FEED_PATH_NY = 'Y'
+	AND FEED_RPR_NY ='N'
+	AND FEED_DEL_NY = 'N'
+	AND FEED_INDEX = ?
+	GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
+
+</entry>
+
+<!-- 친구 피드만 조회 -->
+<entry key="selectFriendList">
+    SELECT DISTINCT
+           FEED_INDEX
+         , TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+         , FEED_TITLE
+         , FEED_CNT
+         , FEED_EVAL
+         , DISTANCE
+         , START_LAT
+         , START_LON
+         , M.MEM_ID
+         , MEM_NAME
+         , MEM_NICK
+         , REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+         , CHANGE_NAME
+      FROM FEED FE
+      JOIN FOLLOW FW ON(FE.MEM_ID = FW.FLW_ID )
+      JOIN GPX_FILES G USING(FEED_INDEX)
+      JOIN MEMBER M on( M.MEM_ID=FE.MEM_ID)
+	 WHERE FE.MEM_ID IN (SELECT FLW_ID FROM FOLLOW F WHERE F.MEM_ID = ? AND FLW_STATUS ='Y')
+	   AND FE.MEM_ID NOT IN (SELECT CUT_ID FROM CUT C WHERE C.MEM_ID = ? AND CUT_STATUS ='Y')
+	   AND FEED_PUBLIC_TYPE != '비공개'
+	   AND FEED_RPR_NY ='N'
+	   AND FEED_DEL_NY = 'N' 
+	ORDER 
+		BY FEED_INDEX DESC
+</entry>
+
 	
-	
+<!-- 내 피드만 조회 -->
+<entry key="selectMyList">
+	SELECT 
+           FEED_INDEX
+         , TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+         , FEED_TITLE
+         , FEED_CNT
+         , FEED_EVAL
+         , DISTANCE
+         , START_LAT
+         , START_LON
+         , MEM_ID
+         , MEM_NAME
+         , MEM_NICK
+         , REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+         , CHANGE_NAME
+	  FROM FEED F
+	  JOIN GPX_FILES G USING(FEED_INDEX)
+	  JOIN MEMBER M USING(MEM_ID)
+	 WHERE MEM_ID = ?
+	   AND FEED_RPR_NY ='N'
+	   AND FEED_DEL_NY ='N' 
+	 ORDER 
+	    BY FEED_INDEX DESC
+</entry>
+
+
+<!-- 작성자로 피드 검색-->
+<entry key="selectIdSearchList">
+	SELECT 
+		  FEED_INDEX
+		, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+		, FEED_TITLE
+		, FEED_CNT
+		, FEED_EVAL
+		, DISTANCE
+		, START_LAT
+		, START_LON
+		, MEM_ID
+		, MEM_NAME
+		, MEM_NICK
+		, REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+		, CHANGE_NAME
+	FROM FEED
+	JOIN GPX_FILES USING(FEED_INDEX)
+	JOIN MEMBER USING(MEM_ID)
+	WHERE FEED_PUBLIC_TYPE ='전체'
+	AND FEED_RPR_NY ='N'
+	AND FEED_DEL_NY = 'N' 
+	AND (MEM_ID like ? OR MEM_NAME like ? OR MEM_NICK like ? )
+	ORDER BY FEED_INDEX DESC
+</entry>
+
+
+<!-- 피드제목으로 검색 -->
+<entry key="selectTitleSearchList">
+	SELECT 
+		  FEED_INDEX
+		, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+		, FEED_TITLE
+		, FEED_CNT
+		, FEED_EVAL
+		, DISTANCE
+		, START_LAT
+		, START_LON
+		, MEM_ID
+		, MEM_NAME
+		, MEM_NICK
+		, REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+		, CHANGE_NAME
+	FROM FEED
+	JOIN GPX_FILES USING(FEED_INDEX)
+	JOIN MEMBER USING(MEM_ID)
+	WHERE FEED_PUBLIC_TYPE ='전체'
+	AND FEED_RPR_NY ='N'
+	AND FEED_DEL_NY = 'N' 
+	AND FEED_TITLE LIKE ?
+	ORDER BY FEED_INDEX DESC
+
+</entry>
+
+<!-- 피드 내용으로 검색  -->
+<entry key="selectCntSearchList">
+	SELECT 
+		  FEED_INDEX
+		, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+		, FEED_TITLE
+		, FEED_CNT
+		, FEED_EVAL
+		, DISTANCE
+		, START_LAT
+		, START_LON
+		, MEM_ID
+		, MEM_NAME
+		, MEM_NICK
+		, REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+		, CHANGE_NAME
+	FROM FEED
+	JOIN GPX_FILES USING(FEED_INDEX)
+	JOIN MEMBER USING(MEM_ID)
+	WHERE FEED_PUBLIC_TYPE ='전체'
+	AND FEED_RPR_NY ='N'
+	AND FEED_DEL_NY = 'N' 
+	AND FEED_CNT LIKE ?
+	ORDER BY FEED_INDEX DESC
+</entry>
+
+
+
+<!--전체피드에서 찜 많은순서대로 피드정렬 -->
+<entry key="selectBookmarkSorting">
+SELECT COUNT(b.bk_no) count, FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE",
+       FEED_TITLE, FEED_CNT, FEED_EVAL, DISTANCE, START_LAT, START_LON,
+       FEED_DEL_NY, MEM_ID, MEM_NAME, MEM_NICK,
+       REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') ORIGIN_NAME,
+       CHANGE_NAME
+FROM FEED F
+INNER JOIN BOOKMARK B ON BK_NO = FEED_INDEX
+JOIN MEMBER USING(MEM_ID)
+JOIN GPX_FILES USING(FEED_INDEX)
+WHERE 
+	  FEED_PUBLIC_TYPE = '전체'
+  AND MEM_ID NOT IN (SELECT CUT_ID FROM CUT C WHERE C.MEM_ID = ? AND CUT_STATUS = 'Y')
+  AND FEED_RPR_NY = 'N'
+  AND FEED_DEL_NY = 'N'
+GROUP BY b.bk_no, FEED_INDEX, FEED_TITLE, FEED_DATE, FEED_CNT, FEED_EVAL,
+         FEED_PUBLIC_TYPE, FEED_PATH_NY, FEED_RPR_NY, FEED_RPR_DATE,
+         DISTANCE, START_LAT, START_LON, FEED_DEL_NY, MEM_ID, MEM_NAME,
+         MEM_NICK, ORIGIN_NAME, CHANGE_NAME
+</entry>
+
+<!-- 친구피드에서 찜 많은 순서대로 피드정렬 -->
+<entry key="selectFriendBookmarkSorting">
+SELECT COUNT(b.bk_no) count, FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE",
+       FEED_TITLE, FEED_CNT, FEED_EVAL, DISTANCE, START_LAT, START_LON,
+       FEED_DEL_NY, F.MEM_ID, MEM_NAME, MEM_NICK,
+       REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') ORIGIN_NAME,
+       CHANGE_NAME
+ FROM FEED F
+INNER JOIN BOOKMARK B ON BK_NO = FEED_INDEX
+ JOIN MEMBER M ON(M.MEM_ID=F.MEM_ID)
+ JOIN FOLLOW FW ON(F.MEM_ID = FW.FLW_ID )
+ JOIN GPX_FILES USING(FEED_INDEX)
+WHERE 
+      F.MEM_ID IN (SELECT FLW_ID FROM FOLLOW FW WHERE FW.MEM_ID = ? AND FLW_STATUS ='Y')
+  AND F.MEM_ID NOT IN (SELECT CUT_ID FROM CUT C WHERE C.MEM_ID = ? AND CUT_STATUS ='Y')
+  AND FEED_PUBLIC_TYPE != '비공개'
+  AND F.MEM_ID NOT IN (SELECT CUT_ID FROM CUT C WHERE C.MEM_ID = ? AND CUT_STATUS = 'Y')
+  AND FEED_RPR_NY = 'N'
+  AND FEED_DEL_NY = 'N'
+GROUP BY b.bk_no, FEED_INDEX, FEED_TITLE, FEED_DATE, FEED_CNT, FEED_EVAL,
+         FEED_PUBLIC_TYPE, FEED_PATH_NY, FEED_RPR_NY, FEED_RPR_DATE,
+         DISTANCE, START_LAT, START_LON, FEED_DEL_NY, F.MEM_ID, MEM_NAME,
+         MEM_NICK, ORIGIN_NAME, CHANGE_NAME
+</entry>
+
+
+<!-- 내 피드에서 찜 많은 순서대로 피드정렬 -->
+<entry key="selectMyBookmarkSorting">
+SELECT COUNT(b.bk_no) count, FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE",
+FEED_TITLE, FEED_CNT, FEED_EVAL, DISTANCE, START_LAT, START_LON,
+FEED_DEL_NY, MEM_ID, MEM_NAME, MEM_NICK,
+REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') ORIGIN_NAME,
+CHANGE_NAME
+FROM FEED F
+INNER JOIN BOOKMARK B ON BK_NO = FEED_INDEX
+JOIN MEMBER USING(MEM_ID)
+JOIN GPX_FILES USING(FEED_INDEX)
+WHERE 
+      MEM_ID = ?
+  AND FEED_RPR_NY = 'N'
+  AND FEED_DEL_NY = 'N'
+GROUP BY b.bk_no, FEED_INDEX, FEED_TITLE, FEED_DATE, FEED_CNT, FEED_EVAL,
+         FEED_PUBLIC_TYPE, FEED_PATH_NY, FEED_RPR_NY, FEED_RPR_DATE,
+         DISTANCE, START_LAT, START_LON, FEED_DEL_NY, MEM_ID, MEM_NAME,
+         MEM_NICK, ORIGIN_NAME, CHANGE_NAME
+</entry>
+
+
 </properties>

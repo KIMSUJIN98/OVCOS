@@ -34,9 +34,9 @@ public class SearchListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memName = request.getParameter("memName");
-		//System.out.println("검색한유저"+ memName);
+		String userId = request.getParameter("userId");
 		
-		ArrayList<Follow> list = new FollowService().selectSearchList(memName); 
+		ArrayList<Follow> list = new FollowService().selectSearchList(memName,userId); 
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}

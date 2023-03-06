@@ -16,7 +16,7 @@
 }
 
 body{
-	overflow-X:hidden;
+   overflow-X:hidden;
 }
 #feedWrap{
     width: 1700px;
@@ -93,6 +93,7 @@ body{
     font-size: 20px;
     font-family: 'SUIT-Regular';
     font-weight: bold;
+    
 }
 
 
@@ -107,7 +108,7 @@ body{
     border: 1px solid lightgray;
 }
 #ac_recode *{
-	color: black;
+   color: black;
 }
 #last_ac1{
     margin-top: 10px;
@@ -210,27 +211,40 @@ body{
     display:inline‑block;
     border-bottom: 0;
 }
+
+
+#btn_list div {
+  background-color: white;
+  padding-bottom: 2px;
+  border: 1px solid rgb(235, 235, 235);
+  
+}
+
+#btn_list .selected {
+  background-color: rgb(235, 235, 235);
+}
+
+
+
 #all_feed{
     background-color: rgb(42, 69, 105);
     background-color: rgb(235, 235, 235);
-    padding-bottom: 2px;
+}
 
-}
-#fw_feed{
-    border: 1px solid lightgray;
-}
-#my_feed{
-    border: 1px solid lightgray;
-}
 #btn_list>div>a{
     font-size: 12px;
     color: gray;
     text-decoration: none;
 }
-#feed_select{line-height: 30px;}
+#feed_select{
+    line-height: 30px;
+    margin-left: 150px;
+}
+
+
 #feed_select>*{
-	font-size: 15px;
-	border-radius: 5px;
+   font-size: 15px;
+   border-radius: 5px;
 }
 #content_feed{
     width: 100%;
@@ -243,9 +257,14 @@ body{
 }
 
 /*피드검색*/
+
+#searchForm{
+    width: 50%;
+}
+
 #feed_search{
     /* border: 1px solid red; */
-    width: 50%;
+    width: 100%;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -257,11 +276,12 @@ body{
     /* border: 1px solid green; */
     /* background-color: aquamarine; */
 
-   	font-size: 14px;
+      font-size: 14px;
     margin: 5px;
-	padding: 0;
+   padding: 0;
     width: 20%;
     color: gray;
+
 }
 #f_search_select{
     width: 90%;
@@ -278,10 +298,19 @@ body{
     margin: 5px;
     border: none;
     border-bottom: 2px solid gray;
+    padding: 1px 10px;
 }
+#search_btn>button{
+    border: none;
 
-#search_btn>img{
+}
+#search_btn img{
     width: 70%;
+    cursor: pointer;
+}
+#btns{
+    color: white;
+    background-color: white;
 }
 /*피드 조회 -> feedContext.css로*/
 
@@ -320,4 +349,8 @@ body{
 }
 path{
     stroke: red !important;
+}
+
+img[src*='marker']{
+    display: none !important;
 }

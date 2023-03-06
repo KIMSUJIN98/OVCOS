@@ -60,7 +60,6 @@ input{
 
 input::placeholder{
     color: rgba(255, 255, 255, 0.486);
-
 }
 
 button:hover{
@@ -68,11 +67,11 @@ button:hover{
 }
 
 .login_btn{
-    width: 320px;
+    width: 325px;
     height: 45px;
     margin-top: 10px;
     background-color:#ff7920;
-    /*bckground-color:rgb(67, 115, 176);*/
+    margin-left: 5px;
     color: white;
     font-weight: bold;
     border: none;

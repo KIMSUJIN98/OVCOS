@@ -171,18 +171,19 @@ input:focus {outline: none;}
     cursor: pointer;
 }
 #content_list>div:hover{
-    background-color: #f8f8f8;
+    background-color: #f5f5f5;
 }
 
 .list_num{
     background-image: url("../image/mark.png");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 27px;
-    height: 33px;
+    width: 23px;
+    height: 28px;
     float: left;
     text-align: center;
     margin: 10px;
+    margin-top: 18px;
 }
 .innertext{
     padding-top: 20px;
@@ -190,7 +191,14 @@ input:focus {outline: none;}
 }
 td{
     padding-right: 60px;
+    font-size: 0.8rem;
 }
+
+.ct1{
+    color: grey;
+}
+
+
 #list_page{
     border-top: 1px solid rgb(197, 196, 196);
     width: 370px;
@@ -230,32 +238,84 @@ td{
     justify-content: space-between;
 }
 
+.eximg{
+    width: 13px;
+    display: inline-block;
+}
+
+.date{
+    font-size: 0.7rem;
+    line-height: 27px;
+    padding-left: 30px;
+    margin-bottom: 18px;
+}
+
+.detailBtn{
+    display: none;
+    margin-bottom: 10px;
+}
+
 .btn1{
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 0;
-    margin-bottom: 10px;
-    width: 90px;
-    height: 30px;
-    margin-right: 10px;
-    font-size: 0.8rem;
-    visibility: hidden;
+    width: 87px;
+    height: 10px;
+    font-size: 0.2rem;
+    margin-bottom: 18px;
 }
+
+
 
 path{
     stroke: orangered !important;
 }
 
 .iw_inner{
-    width: 180px;
-    height: 70px;
+    width: 200px;
+    height: 40px;
     text-align: center;
     
 }
 
 .iw_inner>span:first-child{
-    margin-top: 10px;
+    margin: 10px;
     font-weight: bold;
 }
 
+.iw_inner>div{
+    display: flex;
+    justify-content: space-evenly;
+}
 
+.iw_inner a{
+    color: black;
+    border: 1px solid grey;
+    border-radius: 5px;
+
+}
+
+#left_content::-webkit-scrollbar {
+    width: 5px;  /* 스크롤바의 너비 */
+}
+
+#left_content::-webkit-scrollbar-thumb {
+    height: 20px; /* 스크롤바의 길이 */
+    background: gray; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+#seardiv{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: gray;
+    margin-top: 20px;
+    font-weight: 900;
+    font-size: 0.8rem;
+}
+
+img[src*='marker']{
+    display: none !important;
+}

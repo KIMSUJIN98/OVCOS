@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="insertcomments">
+	INSERT
+	    INTO 	FEED_COMMENTS
+	    (
+	      FEED_CMN_NO
+	    , FEED_CMN_ID
+	    , FEED_CMN_CNT
+	    , FEED_CMN_DATE
+	    , FEED_INDEX
+	    )
+	    VALUES
+	    (
+	      SEQ_RNO.NEXTVAL
+	    , ?
+	    , ?
+	    , SYSDATE
+	    , ?
+
+	    )
+
+</entry>
+
+
+
+</properties>

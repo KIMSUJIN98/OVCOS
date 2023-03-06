@@ -11,26 +11,112 @@
     AND FEED_DEL_NY = 'N'
 </entry>
 
-<entry key="selecList">
+<entry key="selecEList">
 	SELECT *
 		FROM (SELECT ROWNUM "RNUM",A.*
 		FROM (SELECT
 		        FEED_INDEX
 		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
 		      , FEED_TITLE
-		      , FEED_CNT
 		      , FEED_EVAL
 		      , DISTANCE
 		      , START_LAT
 		      , START_LON
-		      , MEM_ID
+              , MEM_ID
               , CHANGE_NAME
+              , HIT
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
+        LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
 		WHERE FEED_PATH_NY = 'Y'
 		AND FEED_RPR_NY ='N'
 		AND FEED_DEL_NY = 'N'
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
 		ORDER BY FEED_INDEX DESC) A)
+		WHERE 
+		    RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="selecFList">
+	SELECT *
+		FROM (SELECT ROWNUM "RNUM",A.*
+		FROM (SELECT
+		        FEED_INDEX
+		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
+		      , FEED_TITLE
+		      , FEED_EVAL
+		      , DISTANCE
+		      , START_LAT
+		      , START_LON
+              , MEM_ID
+              , CHANGE_NAME
+              , HIT
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+		FROM FEED
+        JOIN GPX_FILES USING(FEED_INDEX)
+        LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
+		WHERE FEED_PATH_NY = 'Y'
+		AND FEED_RPR_NY ='N'
+		AND FEED_DEL_NY = 'N'
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
+		ORDER BY HIT DESC) A)
+		WHERE 
+		    RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="selecNList">
+	SELECT *
+		FROM (SELECT ROWNUM "RNUM",A.*
+		FROM (SELECT
+		        FEED_INDEX
+		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
+		      , FEED_TITLE
+		      , FEED_EVAL
+		      , DISTANCE
+		      , START_LAT
+		      , START_LON
+              , MEM_ID
+              , CHANGE_NAME
+              , HIT
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+		FROM FEED
+        JOIN GPX_FILES USING(FEED_INDEX)
+        LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
+		WHERE FEED_PATH_NY = 'Y'
+		AND FEED_RPR_NY ='N'
+		AND FEED_DEL_NY = 'N'
+        AND MEM_ID = ?
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
+		ORDER BY FEED_INDEX DESC) A)
+		WHERE 
+		    RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="selecDList">
+	SELECT *
+		FROM (SELECT ROWNUM "RNUM",A.*
+		FROM (SELECT
+		        FEED_INDEX
+		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
+		      , FEED_TITLE
+		      , FEED_EVAL
+		      , DISTANCE
+		      , START_LAT
+		      , START_LON
+              , MEM_ID
+              , CHANGE_NAME
+              , HIT
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+		FROM FEED
+        JOIN GPX_FILES USING(FEED_INDEX)
+        LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
+		WHERE FEED_PATH_NY = 'Y'
+		AND FEED_RPR_NY ='N'
+		AND FEED_DEL_NY = 'N'
+        AND MEM_ID = ?
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
+		ORDER BY DISTANCE DESC) A)
 		WHERE 
 		    RNUM BETWEEN ? AND ?
 </entry>
@@ -47,6 +133,7 @@
          , START_LON
          , MEM_ID
          , CHANGE_NAME
+         , HIT
     FROM FEED
     JOIN GPX_FILES USING(FEED_INDEX)
 		WHERE FEED_PATH_NY = 'Y'
@@ -62,24 +149,56 @@
 		        FEED_INDEX
 		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
 		      , FEED_TITLE
-		      , FEED_CNT
 		      , FEED_EVAL
 		      , DISTANCE
 		      , START_LAT
 		      , START_LON
-		      , MEM_ID
+              , MEM_ID
               , CHANGE_NAME
+              , HIT
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
 		FROM FEED
         JOIN GPX_FILES USING(FEED_INDEX)
+        LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
 		WHERE FEED_PATH_NY = 'Y'
 		AND FEED_RPR_NY ='N'
 		AND FEED_DEL_NY = 'N'
-		AND FEED_TITLE LIKE ?
+        AND FEED_TITLE LIKE ?
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
 		ORDER BY FEED_INDEX DESC) A)
 		WHERE 
 		    RNUM BETWEEN ? AND ?
 	
 </entry>
     
+<entry key="selectKeywordList1">
+	SELECT *
+		FROM (SELECT ROWNUM "RNUM",A.*
+		FROM (SELECT
+		        FEED_INDEX
+		      , TO_CHAR(FEED_DATE,'YYYY-MM-DD') "DATE"
+		      , FEED_TITLE
+		      , FEED_EVAL
+		      , DISTANCE
+		      , START_LAT
+		      , START_LON
+              , MEM_ID
+              , CHANGE_NAME
+              , HIT
+              , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+		FROM FEED
+        JOIN GPX_FILES USING(FEED_INDEX)
+        LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
+		WHERE FEED_PATH_NY = 'Y'
+		AND FEED_RPR_NY ='N'
+		AND FEED_DEL_NY = 'N'
+        AND FEED_TITLE LIKE ?
+        AND MEM_ID = ?
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
+		ORDER BY FEED_INDEX DESC) A)
+		WHERE 
+		    RNUM BETWEEN ? AND ?
+	
+</entry>
     
 </properties>

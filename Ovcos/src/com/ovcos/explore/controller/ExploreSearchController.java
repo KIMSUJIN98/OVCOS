@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.explore.model.service.ExploreService;
 import com.ovcos.explore.model.vo.Explore;
+import com.ovcos.loginRegister.model.vo.Member;
 
 @WebServlet("/search.ex")
 public class ExploreSearchController extends HttpServlet {
@@ -24,7 +25,9 @@ public class ExploreSearchController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String search = request.getParameter("searchcourse");
-		
+			String userId= ((Member)request.getSession().getAttribute("loginUser")).getMemId();
+
+			String search1 = request.getParameter("search");
 		//페이징 처리 진행
 				int listCount;// 총 개시글 수
 				int currentPage; // 현재 페이지
@@ -42,7 +45,7 @@ public class ExploreSearchController extends HttpServlet {
 				
 				pageLimit = 5; //페이지바 최대개수
 				
-				boardLimit = 30; // 보여질 게시글 총개수
+				boardLimit = 50; // 보여질 게시글 총개수
 				
 				//제일 마지막 페이지
 				maxPage = (int)Math.ceil((double)listCount/boardLimit);
@@ -60,15 +63,27 @@ public class ExploreSearchController extends HttpServlet {
 				
 				Pageinfo pi = new Pageinfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 				
-				ArrayList<Explore> list = new ExploreService().selectKeywordList(pi,search);
+				ArrayList<Explore> list = new ArrayList<Explore>();
+				
+				if(search1 != null && search1.equals("y")) {
+					list = new ExploreService().selectKeywordList(pi,search, userId);
+				}else {
+					list = new ExploreService().selectKeywordList(pi,search);
+				}
+				
 				
 				
 				request.setAttribute("pi", pi);
 				request.setAttribute("list", list);
+				request.setAttribute("search", "y");
+				if(search1 != null && search1.equals("y")) {
+					RequestDispatcher view = request.getRequestDispatcher("views/explore/myExplore.jsp");
+					view.forward(request, response);
+				}else {
+					RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");
+					view.forward(request, response);
+				}
 				
-				
-				RequestDispatcher view = request.getRequestDispatcher("views/explore/exploreMain.jsp");
-				view.forward(request, response);
 		
 		
 	}
