@@ -58,6 +58,12 @@ public class Member {
 		this.marketNy = marketNy;
 	}
 
+	public Member(String memName, String memEml) {
+		super();
+		this.memName = memName;
+		this.memEml = memEml;
+	}
+
 	public String getMemId() {
 		return memId;
 	}

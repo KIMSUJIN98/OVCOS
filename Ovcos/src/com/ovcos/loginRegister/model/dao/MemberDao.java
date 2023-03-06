@@ -149,4 +149,37 @@ public class MemberDao {
 		}
 		return count;
 	}
+	
+	public Member checkRegister(Connection conn, String name, String email) {
+		Member m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m=new Member(rset.getString("MEM_ID")
+						   , rset.getString("MEM_EML"));
+				
+			}
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+		
+	}
+	
 }
