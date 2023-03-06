@@ -32,6 +32,7 @@ public class FeedService {
 	}
 	
 	
+	
 	public ArrayList<Feed> selectAllFeedList(){
 		
 		Connection conn = getConnection();
@@ -79,6 +80,56 @@ public class FeedService {
 		close(conn);
 		
 		return list;
+	}
+	
+	
+	/**
+	 * 전체 피드 리스트 조회
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Feed> selectArrayList(String userId){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> allList = new FeedDao().selectArrayList(conn,userId);
+		
+		close(conn);
+		
+		return allList; 
+		
+	}
+	
+	
+	/**
+	 * 친구피드 리스트 조회
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Feed> selectFriendList(String userId){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectFriendList(conn,userId);
+		
+		close(conn);
+		
+		return list; 
+		
+	}
+	
+	
+	/**
+	 * 내 피드 리스트 조회
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Feed> selectMyList(String userId){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectMyList(conn,userId);
+		
+		close(conn);
+		
+		return list;
 		
 	}
 
@@ -102,6 +153,110 @@ public class FeedService {
 	}
 
 
+		
+	
+	/**
+	 * 작성자 아이디로 피드 검색
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<Feed> selectIdSearchList(String search){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectIdSearchList(conn,search);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
 
+	/**
+	 * 피드 제목으로 피드 검색
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<Feed> selectTitleSearchList(String search){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectTitleSearchList(conn,search);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 피드 내용으로 피드 검색
+	 * selectCntSearchList(search)
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<Feed> selectCntSearchList(String search){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectCntSearchList(conn,search);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 전체 피드에서 찜 많은 순으로 정렬 조회
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Feed> selectBookmarkSorting(String userId){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> allList = new FeedDao().selectBookmarkSorting(conn,userId);
+		
+		close(conn);
+		
+		return allList; 
+	}
+	
+	
+	
+	
+	/**
+	 * 친구 피드에서 찜 많은 순으로 정렬 조회 
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Feed> selectFriendBookmarkSorting(String userId){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> allList = new FeedDao().selectFriendBookmarkSorting(conn,userId);
+		
+		close(conn);
+		
+		return allList; 
+	}
+	
+	
+	/**
+	 * 내 피드에서 찜 많은 순 정렬 조회
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<Feed> selectMyBookmarkSorting(String userId){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> allList = new FeedDao().selectMyBookmarkSorting(conn,userId);
+		
+		close(conn);
+		
+		return allList; 
+	}
 	
 }

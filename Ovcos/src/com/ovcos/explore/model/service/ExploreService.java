@@ -45,6 +45,7 @@ public class ExploreService {
 		
 		return list;
 	}
+	
 
 	public ArrayList<Explore> selectMyNewList(Pageinfo pi, String status, String userId) {
 		Connection conn = getConnection();

@@ -6,7 +6,8 @@
 <%
    String message = (String)session.getAttribute("enrollFeed");
    //System.out.print(message);
-   ArrayList<Explore> allList = (ArrayList<Explore>)request.getAttribute("allList");
+   //ArrayList<Explore> allList = (ArrayList<Explore>)request.getAttribute("allList");
+   ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +57,7 @@
 
 
     <div id="feedWrap">
-        
+        <input type = "hidden" name="userId" id="userId" value="<%= loginUser.getMemId() %>"><!--로그인아이디-->
             <div id="ct1">
                 <div id="record">
                     <!-- 운동기록구역입니다 -->
@@ -65,7 +66,7 @@
                             <div id="profile_img">
                                 <img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지">
                             </div>
-                            <a href="#" id="username"><h3><%= loginUser.getMemName() %></h3></a>
+                            <a href="#" id="username"><h3><%= loginUser.getMemName() %>( <%= loginUser.getMemNick() %> )</h3></a>
                             
                         </div>
                         <div id="ac_recode">
@@ -89,51 +90,107 @@
                 </div>
                 <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
             </div>
-
+<!--            <<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+    <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+</div>-->
 
             <div id="ct2">
                 <div id="content_header">
-                    <div id="btn_list">
-                        <div id="all_feed"><a href="#" onclick = "allfeed();" >전체피드</a></div>
-                        <div id="fw_feed"><a href="#">친구피드</a></div>
-                        <div id="my_feed"><a href="#">내피드</a></div>
+                    <div id="btn_list" role="tablist">
+                        <div id="all_feed"><a href="<%= contextPath %>/clickList.feed?num=1&userId=<%=loginUser.getMemId()%>" id="allfeed"  >전체피드</a></div>
+                        <div id="fw_feed" ><a href="<%= contextPath %>/clickList.feed?num=2&userId=<%=loginUser.getMemId()%>" id="friendFeed" >친구피드</a></div>
+                        <div id="my_feed"><a href="<%= contextPath %>/clickList.feed?num=3&userId=<%=loginUser.getMemId()%>"  id="myFeed">내피드</a></div>
                     </div>
-                    <div id="feed_search">
-						<div id="f_select">
-						    <select name="f_search_select" id="f_search_select">
-						    <option value="">작성자</option>
-						    <option value="">제목</option>
-						    <option value="">내용</option>
-						    </select>
-						</div>
-						<div id="f_search">
-						    <input type="search" id="search" name="search" placeholder="검색">
-						</div>
-						<div id="search_btn">
-						    <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색">
-						</div>
-                    </div>
+
+                    <form action="searchList.feed" method="get" id="searchForm">
+                        <div id="feed_search">
+                            <div id="f_select">
+                                <select name="f_search_select" id="f_search_select">
+                                <option value="1" >작성자</option>
+                                <option value="2">제목</option>
+                                <option value="3">내용</option>
+                                </select>
+                            </div>
+                            <div id="f_search">
+                                <input type="search" id="search" name="search" placeholder="검색">
+                            </div>
+                            <div id="search_btn">
+                                <button type="submit" id="btns"><img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색"></button>
+                            </div>
+                        </div>
+                    </form>
+
                     <div id="feed_select">
-                        <select name="" id="fs">
-                            <option value="">최신순</option>
-                            <option value="">오래된순</option>
-                            <option value="">별점순</option>
-                            <option value="">찜순</option>
-                        </select>
+                        <form action=""  method="POST" id="sortForm" >
+                            <select name="sorting" id="fs">
+                                <option value="">조회하기</option>
+                                <option value="latest">최신순</option>
+                                <option value="oldest">오래된순</option>
+                                <option value="rating">별점순</option>
+                                <option value="bookmark">찜순</option>
+                            </select>
+                            
+                        </form>
                     </div>
                 </div>
+                <script> //버튼없이 select 선택하면 바로 값 넘기기 
+                    document.getElementById("fs").addEventListener("change", function() {
+                        document.getElementById("sortForm").submit();
+                    });
 
+
+                    const form = document.getElementById("sortForm");
+                    const select = document.getElementById("fs");
+
+                    select.addEventListener("change", function() {
+                        const value = select.value;
+                        let url = "";
+
+                        switch (value) {
+                            case "latest":
+                                url = "list.feed?num=1&userId=<%=loginUser.getMemId()%>";
+                                break;
+                            case "oldest":
+                                url = "list.feed?num=2&userId=<%=loginUser.getMemId()%>";
+                                break;
+                            case "rating":
+                                url = "list.feed?num=3&userId=<%=loginUser.getMemId()%>";
+                                break;
+                            case "bookmark":
+                                url = "list.feed?num=4&userId=<%=loginUser.getMemId()%>";
+                                break;
+                            default:
+                                break;
+                        }
+
+                        form.action = url;
+                    });
+                </script>
                 <div id="content_feed">
 
 					<div id="fix_div"></div>
                     
                     <div class="feedContent">
                     
-                    <%if(allList == null){ %>
-                        <p>조회결과없음<p>
+                    <%if(allList.size()==0){ %>
+                        <p>조회 된 결과가 없습니다.<p>
                     <%}else{ %>
                     
-                    <% for(Explore f : allList) {%>
+                    <% for(Feed f : allList) {%>
+
+
+                        
                         <div class="feeddiv">
                             <div class="feed_table">
                                 <table border="0px" id="f_table">
@@ -143,6 +200,10 @@
                                                 <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
                                                 <div id="p_name"><%=f.getMemId() %></div>
                                                 <div id="p_loca"><%=f.getFeedDate()%></div>
+                                                <div id="p_name"><%=f.getMemNick() %></div>
+                                                <div id="p_date"><%=f.getFeedDate() %></div>
+                                                <img id="pimg" src="${pageContext.request.contextPath}/resources/image/title_location.png" alt="위치이미지">
+                                                <div id="p_loca"><%=f.getOriginName()%></div>
                                             </div>
                                         </td>
                                         <td id="plus">
@@ -222,6 +283,7 @@
                                                 case 3:out.print("⭐⭐⭐"); break;
                                                 case 4:out.print("⭐⭐⭐⭐"); break;
                                                 case 5:out.print("⭐⭐⭐⭐⭐"); break;
+                                                
                                                 }
                                                 %>
 
@@ -233,11 +295,11 @@
                                         <td id="comment"></td>
                                         <td id="like" align="right">
                                             <div class="right_area">
-                                                <a href="javascript:;" class="icon heart">
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/812/812327.png" alt="찜하기">
+                                                <a href="javascript:;" class="icon heart" >
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/812/812327.png" alt="찜하기" onclick="bookmark(<%= f.getFeedIndex() %>, '#like'+<%= f.getFeedIndex() %>);" id="like<%=f.getFeedIndex()%>" >
                                                 </a>
                                             </div>
-                                            
+                                            <input type="hidden" name="feedIndex" id="feedIndex" value="">
                                         </td>
                                         
                                     </tr>
@@ -247,17 +309,96 @@
                             </div>
                         
                         </div><!-- feeddiv끝 -->
+                        <script>
+
+                            //좋아요체크해서 한거면 빨갛게 아니면 말게..
+                            checklike("<%= loginUser.getMemId() %>","<%= f.getFeedIndex() %>","#like<%= f.getFeedIndex() %>");
+
+                            function checklike(userId, feedIndex,id){
+                               // console.log(userId,feedIndex);
+                                $.ajax({
+                                    url: "check.bk", 
+                                    type: 'POST',
+                                    data: { feedIndex: feedIndex, userId: userId}, 
+                                    success: function(result) {
+                                    if (result.length >0 ) {
+                                        ///좋아요를 누른 상태~~~~~ 하트를 빨간색으로 바꿈
+                                        $(id).attr({
+                                        'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',
+                                        alt:'찜하기 완료'
+                                            });
+                                        
+                                    } else {
+                                        $(id).attr({
+                                            'src': 'https://cdn-icons-png.flaticon.com/512/812/812327.png',
+                                        alt:'찜하기 완료'
+                                            });
+                                    }
+                                    }
+                                });
+                            }
+                        </script>
                             <% } %>
                             <%} %>
-         
+
                     </div>
 
                     
                 </div>
             </div>
+
+
+
             <script>
-                //heart 좋아요 클릭시! 하트 뿅
+
+                //좋아요 인서트
+                function bookmark(feedIndex, id) {
+                    var userId = $('#userId').val(); // 내아이디
+                    var feedIndex = feedIndex;
+
+                    if($(id).attr("src").endsWith("812327.png")){ //좋아요가 흰하트라면
+                        console.log("타나요?");
+                        $.ajax({
+                            url: 'insert.bk', 
+                            method: 'POST',
+                            data: {feedIndex:feedIndex, userId: userId }, // 피드인덱스,내아이디
+                            success: function(result) {
+                                $(id).attr({
+                                'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',//인서트 성공하면 하트를 빨간색으로
+                                alt:'찜하기 완료'
+                                    });
+                            },
+                            error: function(xhr, status, error) {
+                                // 실패하면 콘솔에 오류 메시지 출력
+                                console.error(error);
+                            }
+                            });
+                    }else{
+                        console.log("엔드스위드의 엘스를탓다")
+                        //삭제하는 코드를 적자 
+                        $.ajax({
+                            url: 'delete.bk', 
+                            method: 'POST',
+                            data: {feedIndex:feedIndex, userId: userId }, // 피드인덱스,내아이디
+                            success: function(result) {
+                                console.log("성공적으로 삭제됐다면 이게 나옴!!")
+                                $(id).attr({
+                                'src': 'https://cdn-icons-png.flaticon.com/512/812/812327.png',
+                                alt:'찜하기'
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                // 실패하면 콘솔에 오류 메시지 출력
+                                console.error(error);
+                            }
+                            });
+                    }
+                }
+
+
+                 //heart 좋아요 클릭시! 하트 뿅
                 $(function(){
+
                     var $likeBtn =$('.icon.heart');
                     
                         $likeBtn.click(function(){
@@ -279,6 +420,9 @@
                         }
                     })
                 })
+
+
+
             </script>
             
             <div id="ct3">
@@ -594,6 +738,3 @@
                 reader.readAsText(file);
             };
         </script>
-        
-
-

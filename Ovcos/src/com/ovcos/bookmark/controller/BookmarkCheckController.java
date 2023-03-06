@@ -1,4 +1,4 @@
-package com.ovcos.follow.controller;
+package com.ovcos.bookmark.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.ovcos.bookmark.model.service.BookMarkService;
+import com.ovcos.bookmark.model.vo.BookMark;
 import com.ovcos.follow.model.service.FollowService;
 import com.ovcos.follow.model.vo.Follow;
 
 /**
- * Servlet implementation class SearchListController
+ * Servlet implementation class BookmarkCheckController
  */
-@WebServlet("/searchList.fw")
-public class SearchListController extends HttpServlet {
+@WebServlet("/check.bk")
+public class BookmarkCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchListController() {
+    public BookmarkCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +34,18 @@ public class SearchListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String memName = request.getParameter("memName");
-		String userId = request.getParameter("userId");
-		
-		ArrayList<Follow> list = new FollowService().selectSearchList(memName,userId); 
+	
 		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list,response.getWriter());
+		
+		int feedIndex = Integer.parseInt(request.getParameter("feedIndex"));
+		String userId = request.getParameter("userId");	
+
+		
+		ArrayList<BookMark> check = new BookMarkService().checkBookmark(feedIndex, userId);
+
+		
+		new Gson().toJson(check,response.getWriter());
+		
 	}
 
 	/**

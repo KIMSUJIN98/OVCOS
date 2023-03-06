@@ -3,7 +3,7 @@
 <properties>
 
 <entry key="selectCutList">
-SELECT M.MEM_ID, MEM_NAME, MEM_INTRO
+SELECT M.MEM_ID, MEM_NAME, NVL(MEM_INTRO, ' ') as MEM_INTRO
 FROM MEMBER M, CUT C
 WHERE  M.MEM_ID = C.CUT_ID
 AND C.MEM_ID = ?
