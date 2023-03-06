@@ -53,13 +53,21 @@ public class ExploreDao {
 		return listCount;
 	}
 
-	public ArrayList<Explore> selectList(Connection conn, Pageinfo pi) {
+	public ArrayList<Explore> selectList(Connection conn, Pageinfo pi, String status) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		ArrayList<Explore> list = new ArrayList<Explore>();
 		
-		String sql = prop.getProperty("selecList");
+		String sql = "";
+		
+		if(status.equals("f")) {
+			sql = prop.getProperty("selecFList");
+		}else {
+			sql = prop.getProperty("selecEList");
+			
+		}
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -73,15 +81,17 @@ public class ExploreDao {
 			
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
+								  , rset.getInt("feed_index")
 						   		  , rset.getString("date")
 						   		  , rset.getString("feed_title")
-						   		  , rset.getString("feed_cnt")
 						   		  , rset.getInt("feed_eval")
 						   		  , rset.getDouble("distance")
 						   		  , rset.getDouble("start_lat")
 						   		  , rset.getDouble("start_lon")
 						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+						   		  , rset.getString("change_name")
+						   		  , rset.getInt("hit")
+						   		  , rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {
@@ -117,7 +127,8 @@ public class ExploreDao {
 						   		  , rset.getDouble("start_lat")
 						   		  , rset.getDouble("start_lon")
 						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+						   		  , rset.getString("change_name")
+						   		  , rset.getInt("hit")));
 			}
 			
 		} catch (SQLException e) {
@@ -151,15 +162,116 @@ public class ExploreDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Explore(rset.getInt("rnum")
-						   		  , rset.getString("date")
-						   		  , rset.getString("feed_title")
-						   		  , rset.getString("feed_cnt")
-						   		  , rset.getInt("feed_eval")
-						   		  , rset.getDouble("distance")
-						   		  , rset.getDouble("start_lat")
-						   		  , rset.getDouble("start_lon")
-						   		  , rset.getString("mem_id")
-						   		  , rset.getString("change_name")));
+						  , rset.getInt("feed_index")
+				   		  , rset.getString("date")
+				   		  , rset.getString("feed_title")
+				   		  , rset.getInt("feed_eval")
+				   		  , rset.getDouble("distance")
+				   		  , rset.getDouble("start_lat")
+				   		  , rset.getDouble("start_lon")
+				   		  , rset.getString("mem_id")
+				   		  , rset.getString("change_name")
+				   		  , rset.getInt("hit")
+				   		  , rset.getInt("count")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Explore> selectMyNewList(Connection conn, Pageinfo pi, String status, String userId) {
+		ArrayList<Explore> list = new ArrayList<Explore>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "";
+		
+		if(status.equals("n")) {
+			sql = prop.getProperty("selecNList");
+		}else {
+			sql = prop.getProperty("selecDList");
+			
+		}
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit()-1;
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Explore(rset.getInt("rnum")
+						  , rset.getInt("feed_index")
+				   		  , rset.getString("date")
+				   		  , rset.getString("feed_title")
+				   		  , rset.getInt("feed_eval")
+				   		  , rset.getDouble("distance")
+				   		  , rset.getDouble("start_lat")
+				   		  , rset.getDouble("start_lon")
+				   		  , rset.getString("mem_id")
+				   		  , rset.getString("change_name")
+				   		  , rset.getInt("hit")
+				   		  , rset.getInt("count")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return list;
+	}
+
+	public ArrayList<Explore> selectKeywordList(Connection conn, Pageinfo pi, String search, String userId) {
+		ArrayList<Explore> list = new ArrayList<Explore>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectKeywordList1");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit()-1;
+			
+			
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Explore(rset.getInt("rnum")
+						  , rset.getInt("feed_index")
+				   		  , rset.getString("date")
+				   		  , rset.getString("feed_title")
+				   		  , rset.getInt("feed_eval")
+				   		  , rset.getDouble("distance")
+				   		  , rset.getDouble("start_lat")
+				   		  , rset.getDouble("start_lon")
+				   		  , rset.getString("mem_id")
+				   		  , rset.getString("change_name")
+				   		  , rset.getInt("hit")
+				   		  , rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {

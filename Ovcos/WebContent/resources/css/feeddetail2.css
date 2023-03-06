@@ -35,3 +35,70 @@
 #fontth{
     padding-right: 9px;
 }
+#feeds{
+    font-size: 1.3rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 15px;
+}
+#feeds1{
+    width: 410px;
+    height: 150px;
+}
+#reply-area{
+    padding-left: 15px;
+    position: absolute;
+    bottom: 15px;
+    position: fixed;
+}
+#eye{
+    width: 17px; 
+    margin-left: 15px;
+    padding-top: 5px;
+}
+
+
+#love{
+    width: 13px; 
+    margin-left: 150px; 
+    padding-top: 5px;
+    /* padding-left: 170px; */
+}
+#download1{
+    width: 13px; 
+    /* margin-left: 150px;  */
+    padding-top: 5px;
+    /* padding-left: 170px; */
+}
+#feedt{
+   text-align: center;
+   font-weight: 400;
+   padding-bottom: 10px;
+   padding-top: 10px;
+}
+/* #com {
+    width: 250px;
+    height: 140px;
+    overflow: auto;
+  } */
+  #com::-webkit-scrollbar {
+    width: 10px;
+  }
+  #com::-webkit-scrollbar-thumb {
+    background-color: #3273ff;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  #com::-webkit-scrollbar-track {
+    background-color: rgb(122, 171, 255);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+
+path{
+    stroke: red !important;
+}
+img[src*='marker']{
+    display: none !important;
+}

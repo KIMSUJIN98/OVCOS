@@ -24,7 +24,6 @@ public class Feed {
 	private String originName;//파일원래이름
 	private int count; //찜개수 
 
-
 	
 	public Feed() {}
 
@@ -164,6 +163,11 @@ public class Feed {
 		this.startLon = startLon;
 		MemId = memId;
 	}
+	
+	
+	
+	
+	
 
 
 
@@ -172,6 +176,10 @@ public class Feed {
 
 
 
+
+
+
+	
 
 
 

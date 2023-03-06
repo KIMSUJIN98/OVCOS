@@ -12,6 +12,9 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	String status = String.valueOf(request.getAttribute("status"));
+	String search = String.valueOf(request.getAttribute("search"));
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
+<script src="${pageContext.request.contextPath}/resources/js/cluster.js"></script>
+
 
 
 </head>
@@ -31,13 +36,13 @@
         <div id="course_nav">
             <ul>
                 <li class="li1">
-                    <a onclick="location.href='<%=contextPath%>/course?epage=1'">
+                    <a href='<%=contextPath%>/course?epage=1'>
                         <span class="nav1"><img src="${pageContext.request.contextPath}/resources/image/flagWhite.png" alt="깃발"></span>
                         <span class="li1text" align="center">코스검색</span>
                     </a>
                 </li>
                 <li>
-                    <a href="course/my">
+                    <a href="course/my?npage=1">
                         <span class="nav1"> <img src="${pageContext.request.contextPath}/resources/image/exploreuser.png" alt="유저"></span>
                         <span class="li2text" align="center">나의코스</span>
                     </a>
@@ -52,18 +57,27 @@
                 <div id="search">
                     <form action="search.ex">
                         <input type="text" name="searchcourse" placeholder="제목,코스명 검색" autocomplete="off">
-
                         <button type="submit" id="submitimg"></button>
                         <!-- <img src="${pageContext.request.contextPath}/resources/image/search.png" alt="검색"> -->
                     </form>
-                    <!--여기에 form태그를 넣어야 할지 고민이다.-->
                 </div>
             </div>
             <div id="tab_manu">
+            <%if(search.equals("y")){ %>
+            	<div id="seardiv">코스검색 결과</div>
+            <%}else{ %>
                 <ul>
-                    <li class="tabon1 tabon">최신기록</li>
-                    <li class="tabon2">인기기록</li>
+                <!-- 조건문으로 인기기록일 떄 아니면 최신기록일 때  -->
+                <%if(status.equals("e")){ %>
+	                    <li class="tabon1 tabon" onclick="location.href='<%=contextPath%>/course?epage=1'">최신기록</li>
+	                    <li class="tabon2" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
+	                <%}else{ %>
+		                <li class="tabon1" onclick="location.href='<%=contextPath%>/course?epage=1'">최신기록</li>
+	                    <li class="tabon2 tabon" onclick="location.href='<%=contextPath%>/course?fpage=1'">인기기록</li>
+	                <%} %>    
                 </ul>
+            <%} %>
+                  
             </div>
             <div id="left_content">
                 <div id="content_list">
@@ -73,55 +87,125 @@
 				 	<%}else{ %>
                     <!-- case 2 반복문으로  -->
                     	<%for(Explore f: list){ %>
-                    <div class="exList">
-                        <span class="list_num"><%=f.getFeedIndex() %></span>
+                    <div class="exList" id="f<%=f.getRowNum()%>">
+                        <span class="list_num"><%=f.getRowNum() %></span>
                         <div class="innertext">
-                            <h5><%=f.getFeedTitle() %></h5>
+                            <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
                                 <tr>
-                                    <td>전체 거리</td>
+                                    <td class="ct1">전체 거리</td>
                                     <td><%=f.getDistance()%> km</td>
                                 </tr>
                                 <tr>
-                                    <td>등록유저</td>
-                                    <td><%=f.getMemId() %></td>
-                                </tr>
-                                <tr>
-                                    <td>별점</td>
+                                    <td class="ct1">별점</td>
                                     <td><%=f.getFeedEval() %>/5</td>
                                 </tr>
+                                <tr>
+                                    <td class="ct1">주소</td>
+                                    <td id="add<%=f.getFeedIndex()%>" data-toggle="tooltip" data-placement="right" title="" ></td>
+                                    <input type="hidden" name="lat" id="lat<%=f.getFeedIndex()%>" value="<%=f.getStartLat()%>">
+                                    <input type="hidden" name="lng" id="lng<%=f.getFeedIndex()%>" value="<%=f.getStartLon()%>">
+                                </tr>
                             </table>
-                            <div id="bottom">
-                                <span><%=f.getFeedDate() %></span>
-                                <span class="btn1 btn btn-sm" onclick="location.href='#'">코스 상세</span>
+                            <div style="display: flex; width: 100%; justify-content: space-around;">
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/love.png" class="eximg" alt=""><span style="display: inline; font-size: 0.8rem;"><%=f.getCount() %></span>
+                                </div>
+                                <div>
+                                    <img src="<%=contextPath%>/resources/image/eye.png" class="eximg" alt="">&nbsp;
+                                    <span style="display: inline;font-size: 0.8rem;"><%=f.getHit() %></span>
+                                </div>
+                                <div class="date">
+                                    <%=f.getFeedDate()%>
+                                </div>
+                                <div class="detailBtn">
+                                    <span id="bttn" class="btn1 btn btn-sm" onclick="location.href='<%=contextPath%>/detail.fe?fno=<%=f.getFeedIndex()%>'">코스 상세</span>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
+                    
+                    <script>
+                    	var lat = $("#lat<%=f.getFeedIndex()%>").val();
+                        var lng = $("#lng<%=f.getFeedIndex()%>").val();
+                    
+	                    naver.maps.Service.reverseGeocode({
+	                        location: new naver.maps.LatLng(lat, lng),
+	                    }, function(status, response) {
+	                        if (status !== naver.maps.Service.Status.OK) {
+	                            return alert('Something wrong!');
+	                        }
+	
+	                        var result = response.result, // 검색 결과의 컨테이너
+	                            items = result.items; // 검색 결과의 배열
+	
+	                       
+	
+	                        var item = items[0].address;
+                            var fianl;
+	                        if(item.length >9){
+                               final = item.substring(0,9)+'...';
+                            }
+                            $("#add<%=f.getFeedIndex()%>").attr("title",item);
+	
+	                        $("#add<%=f.getFeedIndex()%>").text(final);
+	                    });
+                        
+
+                        
+                    </script>
                     	<%} %>
                     <%} %>
                     
                 </div>
+                <!-- 페이지바 시작 -->
+                
                 <div id="list_page">
-                    <ul>
-                    	<%if(currentPage != 1){ %>
-                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage-1%>'">&lt;</li>
-                        <%} else{%>
-                        	<li class="befpage">&lt;</li>
-                        <%} %>
-                        <%for(int i = startPage; i<=endPage; i++){ %>
-                        	<%if(i== currentPage){ %>
-                        		<li class="pagenum on"><%=i%></li>
-                        	<%}else{ %>
-                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?epage=<%=i%>'"><%=i%></li>
-                        	<%} %>
-                        <%} %>
-                        <%if(currentPage != maxPage){ %>
-                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage+1%>'">&gt;</li>
-                        <%} else{%>
-                        	<li class="aftpage">&gt;</li>
-                        <%} %>
-                    </ul>
+                	<%if(status.equals("e")){ %>
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?epage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?epage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+	                 <%}else{ %>
+                    
+	                    <ul>
+	                    	<%if(currentPage != 1){ %>
+	                        	<li class="befpage" onclick="location.href='<%=contextPath%>/course?fpage=<%=currentPage-1%>'">&lt;</li>
+	                        <%} else{%>
+	                        	<li class="befpage">&lt;</li>
+	                        <%} %>
+	                        <%for(int i = startPage; i<=endPage; i++){ %>
+	                        	<%if(i== currentPage){ %>
+	                        		<li class="pagenum on"><%=i%></li>
+	                        	<%}else{ %>
+	                        		<li class="pagenum" onclick="location.href='<%=contextPath%>/course?fpage=<%=i%>'"><%=i%></li>
+	                        	<%} %>
+	                        <%} %>
+	                        <%if(currentPage != maxPage){ %>
+	                        	<li class="aftpage" onclick="location.href='<%=contextPath%>/course?fpage=<%=currentPage+1%>'">&gt;</li>
+	                        <%} else{%>
+	                        	<li class="aftpage">&gt;</li>
+	                        <%} %>
+	                    </ul>
+                    <%} %>
                 </div>
+                <!-- 페이지바 끝 -->
             </div>
         </div>
         <!-- course_left 끝-->
@@ -140,7 +224,7 @@
 
                     var map = new naver.maps.Map('map',{
                         center:new naver.maps.LatLng(lat, lng),
-                        zoom: 10
+                        zoom: 8
                     })
 
                     var marker = null;
@@ -157,8 +241,8 @@
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
                             icon: {
                                 content: 
-                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
-                                // size: new naver.maps.Size(38, 58),
+                                "<span class='list_num'><%=e.getRowNum()%></span>",
+                                size: new naver.maps.Size(38, 58),
                                 anchor: new naver.maps.Point(19, 40),
                             }
                         })
@@ -168,35 +252,46 @@
 
                     // window 세팅
                    <%for(Explore e: list){%>
+                   
                     infowindows.push(new naver.maps.InfoWindow({
                         content:[
                             '<div class="iw_inner">',
                             '   <span><%=e.getFeedTitle()%></span>',
-                            '	<span><%=e.getDistance()%> km</span>	',
+                            '   <div style="display:flex; padding-left:10px">',
+                            '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
+                            '	    <span><%=e.getDistance()%> km</span>	',
+                            '       <a style="width:40%;" href="detail.fe?fno=<%=e.getFeedIndex()%>">Detail</a>',
+                            '   </div>',
                             '</div>'	
-                        ].join('')
+                        ].join(''),
+                        
                     }))
                     
                     <%}%>
                     
  
                     $(".exList").click(function(e){
+                        
+                        var lat = $(this).find("input").eq(0).val();
+                        var lon = $(this).find("input").eq(1).val()
+                        
                         $("path").remove();
                         $(".exList").css("backgroundColor","white");
-                        $(this).css("backgroundColor","#f8f8f8");
-                        $(".btn1").css("visibility","hidden");
+                        $(this).css("backgroundColor","#eceaea");
+                        $(".detailBtn").css("display","none");
+                        $(".date").css("display","block");
 
-                        $(this).find("span").eq(2).css("visibility","visible").css("borderColor","#ccc")
+                        $(this).find(".date").css("display","none");
+                        $(this).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
 
-                        
                         // index 뽑기
-                        var index = $(this).children("span").text()%10;
-                        if($(this).children("span").text() == 10){
-                            index = 10;
+                        var index = $(this).children("span").text()% 50;
+                        console.log(index);
+
+                        if(index == 0){
+                            index = 49;
                         }
 
-                        e.preventDefault();
-                      
                         $.ajax({
                             url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[index-1],
                             dataType: 'xml',
@@ -211,19 +306,30 @@
                                 infowindows[index-1].open(map,markers[index-1]);
                             }
                         
-                        })
+                        var l = document.getElementsByTagName("map");
+                        console.log($("img[src*='marker']"));
                         
-                        naver.maps.Event.addListener(map, 'click', function(e) {
-                            for(let i = 0; i<infowindows.length; i++){
-                                infowindows[i].close();
-                            }
-                        });
+                        
+                        
+
+                        // console.log($("map").parent());
+                    //    $("map").parent().remove();
+                    })
+                        
+                      
+                        
+                    naver.maps.Event.addListener(map, 'click', function(e) {
+                        for(let i = 0; i<infowindows.length; i++){
+                            infowindows[i].close();
+                        }
+                    });
                    
 
                     for(let i=0; i<markers.length; i++){
                         naver.maps.Event.addListener(markers[i], "click", function(e) {
 
                             $("path").remove();
+                            $(".date").css("display","block");
                             $.ajax({
                             url: '<%=contextPath%>/resources/gpx_upfiles/'+paths[i],
                             dataType: 'xml',
@@ -233,17 +339,69 @@
                             success: startDataLayer
                             });
 
+                            
+
                             console.log("이벤트")
                             if(infowindows[i].getMap()){
                                 infowindows[i].close();
                             }else{
                                 infowindows[i].open(map,markers[i]);
                             }
+
+                            $(".exList").css("backgroundColor","white");
+                            $(".detailBtn").css("display","none");
+
                             
+                            var num = Number(i+1);
+                            $("#f"+num).css("backgroundColor","#eceaea");
+                            $("#f"+num).find(".date").css("display","none");
+                            $("#f"+num).find(".detailBtn").css("display","block").css("border","1px solid #ccc").css("border-radius","10px");
+                            
+                            var docu = document.getElementById("f"+num);
+                            docu.scrollIntoView({ behavior: "smooth" });
                             
                         });
                     }
 
+                var htmlMarker1 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker2 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker3 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-3.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker4 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-4.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker5 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-5.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        };
+
+	    var markerClustering = new MarkerClustering({
+	        minClusterSize: 2,
+	        maxZoom: 10,
+	        map: map,
+	        markers: markers,
+	        disableClickZoom: false,
+	        gridSize: 120,
+	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+	        indexGenerator: [10, 20, 200, 500, 1000],
+	        stylingFunction: function(clusterMarker, count) {
+	            $(clusterMarker.getElement()).find('div:first-child').text(count);
+	        }
+	    });
                     
                     
                 </script>
@@ -254,27 +412,6 @@
     </div>
     </div>
     </div>
-
-    
-    <script>
-        $(function(){
-
-            $(".tabon1").click(function(){
-                $(this).addClass("tabon")
-                //ajax로 left_content와 content를 리로딩 시켜야함
-                $(".tabon2").removeClass("tabon");
-                location.href="course?epage=1";
-            });
-            
-            $(".tabon2").click(function(){
-            	$(this).addClass("tabon");
-            	$(".tab")
-            })
-            
-            
-
-        })
-    </script>
 
 </body>
 </html>

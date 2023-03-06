@@ -100,6 +100,113 @@
 	ORDER BY FEED_INDEX DESC
 </entry>
 	
+	<entry key="selectAllFeedList">
+		SELECT 
+		       FEED_INDEX
+		     , FEED_DATE
+		     , FEED_TITLE
+		     , FEED_CNT
+		     , FEED_EVAL
+		     , FEED_PATH_NY
+		     , FEED_RPR_DATE
+		     , DISTANCE
+		     , START_LAT
+		     , START_LON
+		     , MEM_NICK
+		 FROM FEED
+		 JOIN MEMBER USING(ME
+		 M_ID)
+		WHERE FEED_PUBLIC_TYPE ='전체'
+		  AND FEED_RPR_NY = 'N'
+		  AND FEED_DEL_NY = 'N'
+		ORDER
+		    BY FEED_INDEX DESC
+	</entry>
+	<entry key="selectFeedDetail">
+		SELECT 
+				FEED_INDEX
+			  , TO_CHAR(FEED_DATE,'YYYY-MM-DD HH:mm:SS') "FEED_DATE"
+			  , FEED_TITLE
+			  , FEED_CNT
+			  , FEED_EVAL
+			  , DISTANCE
+			  , START_LAT
+			  , START_LON
+		      , MEM_ID
+		      , CHANGE_NAME
+		      , ORIGIN_NAME
+		      , HIT
+		      , COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+		   FROM FEED
+		JOIN GPX_FILES USING(FEED_INDEX)
+		LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX) 
+        WHERE FEED_INDEX = ?
+        AND FEED_RPR_NY = 'N'
+        AND FEED_DEL_NY = 'N'
+        GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD HH:mm:SS'), FEED_TITLE, FEED_CNT, FEED_EVAL, 
+        DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME, ORIGIN_NAME, HIT
+	</entry>
+	
+	<entry key="insertcomments">
+	INSERT
+	    INTO 	FEED_COMMENTS
+	    (
+	      FEED_CMN_NO
+	    , FEED_CMN_ID
+	    , FEED_CMN_CNT
+	    , FEED_CMN_DATE
+	    , FEED_INDEX
+	    )
+	    VALUES
+	    (
+	      SEQ_FEED_CMN_NO.NEXTVAL
+	    , ?
+	    , ?
+	    , SYSDATE
+	    , ?
+
+	    )
+
+</entry>
+
+<entry key="selectdetail2">
+	SELECT		
+		        FEED_CMN_NO
+		      , FEED_CMN_ID
+		      , FEED_CMN_CNT
+		      , to_char(FEED_CMN_DATE,'yyyy-mm-dd hh24:mi:ss') "FEED_CMN_DATE"
+		   FROM FEED_COMMENTS 
+		  WHERE FEED_INDEX = ?
+		  ORDER
+		     BY FEED_CMN_NO DESC
+
+</entry>
+
+
+<entry key="updateCount">
+	UPDATE
+        FEED
+    SET HIT = HIT + 1
+    WHERE FEED_INDEX = ?
+    AND FEED_RPR_NY = 'N'
+
+</entry>
+<entry key="wishListCount">
+
+	SELECT
+      
+	     COUNT(CASE WHEN BK_STATUS = 'Y' THEN 1 ELSE NULL END) "COUNT"
+	FROM FEED
+	JOIN GPX_FILES USING(FEED_INDEX)
+	LEFT JOIN BOOKMARK ON(BK_NO = FEED_INDEX)
+  WHERE FEED_PATH_NY = 'Y'
+	AND FEED_RPR_NY ='N'
+	AND FEED_DEL_NY = 'N'
+	AND FEED_INDEX = ?
+	GROUP BY FEED_INDEX, TO_CHAR(FEED_DATE,'YYYY-MM-DD'), FEED_TITLE, FEED_EVAL, DISTANCE, START_LAT, START_LON, MEM_ID, CHANGE_NAME,HIT
+
+</entry>
+
 <!-- 친구 피드만 조회 -->
 <entry key="selectFriendList">
     SELECT DISTINCT

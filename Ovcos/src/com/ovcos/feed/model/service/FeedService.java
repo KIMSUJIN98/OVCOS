@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import com.ovcos.feed.model.dao.FeedDao;
 import com.ovcos.feed.model.vo.Feed;
+import com.ovcos.feed.model.vo.Feeddetails;
+import com.ovcos.feed.model.vo.detail2comments;
+import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
 public class FeedService {
@@ -39,6 +42,44 @@ public class FeedService {
 		close(conn);
 		
 		return allList; 
+	}
+
+
+	public Feeddetails selectFeedDetail(int feedNo) {
+		Connection conn = getConnection();
+		
+		Feeddetails f = new FeedDao().selectFeedDetail(conn, feedNo); 
+		close(conn);
+
+		
+		return f;
+	}
+
+
+
+
+	public int insertcomments(int feedin, String cmnid, String cmncnt) {
+		Connection conn = getConnection();
+		int result =  new FeedDao().insertcomments(conn, feedin, cmnid, cmncnt);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+	public ArrayList<detail2comments> selectdetail2(int feedin) {
+
+		Connection conn = getConnection();
+		ArrayList<detail2comments> list = new FeedDao().selectdetail2(conn, feedin);
+		
+		close(conn);
+		
+		return list;
 	}
 	
 	
@@ -89,7 +130,29 @@ public class FeedService {
 		close(conn);
 		
 		return list;
+		
 	}
+
+
+	
+
+
+	public int updateCount(int feedNo) {
+	Connection conn = getConnection();
+	int result = new FeedDao().updateCount(conn, feedNo);
+		
+	if(result > 0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+		close(conn);
+	
+		return result;
+		
+	}
+
+
 		
 	
 	/**

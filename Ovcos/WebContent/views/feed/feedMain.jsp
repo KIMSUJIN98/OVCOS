@@ -21,11 +21,6 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 
-<script src="../../resources/js/summernote-lite.js"></script>
-<script src="../../resources/js/lang/summernote-ko-KR.js"></script>
-
-<link rel="stylesheet" href="../../resources/css/summernote-lite.css">
-
 <style>
     path{
     stroke: red !important;
@@ -48,6 +43,12 @@
         </div>
     <%}%>
     <%session.removeAttribute("enrollFeed"); %>
+    
+    <% if(alertMsg != null) { %>
+		alert("<%= alertMsg %>");
+	<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+    
 
     <script>
         
@@ -197,6 +198,8 @@
                                         <td id="feed_profile" colspan="2">
                                             <div>
                                                 <div id="p_img"><img src="${pageContext.request.contextPath}/resources/image/mypage.png" alt="프로필이미지"></div>
+                                                <div id="p_name"><%=f.getMemId() %></div>
+                                                <div id="p_loca"><%=f.getFeedDate()%></div>
                                                 <div id="p_name"><%=f.getMemNick() %></div>
                                                 <div id="p_date"><%=f.getFeedDate() %></div>
                                                 <img id="pimg" src="${pageContext.request.contextPath}/resources/image/title_location.png" alt="위치이미지">
@@ -212,13 +215,13 @@
                                     <tr>
                                         <td colspan="3" id="td2_1">
                                             <div id="f_title">
-                                            <a href=""><%=f.getFeedTitle() %></a>
+                                            <a href="<%= contextPath %>/detail.fe?fno=<%=f.getFeedIndex() %>"><%=f.getFeedTitle() %></a>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" id="f_content">
-                                            <p><%=f.getFeedCnt() %> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur sit maiores laudantium, ipsum expedita repellendus minima? Eligendi a sapiente suscipit asperiores illum, reprehenderit unde magnam ipsam harum amet ipsum quod!</p>
+                                            <p><%=f.getFeedCnt() %></p>
                                         </td>
                                     </tr>
                                     
@@ -230,27 +233,39 @@
                                                 <div id="n<%=f.getFeedIndex()%>" style="width: 700px; height: 340px;"></div>
                                             </div>
                                             <script>
-                                                
-                                            
+                                                    function startDataLayer(xmlDoc) {
+                                                    n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
+                                                    }
                                                     var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
-                                                        center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
-                                                        zoom: 12
+                                                    center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
+                                                    zoom: 15
                                                     })
                                                     
-                                                    
-                                            $.ajax({
-                                                url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
-                                                dataType: 'xml',
-                                                strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                                strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                                strokeWeight: 3,   //선 두께
-                                                success: startDataLayer
-                                                });
-                                                    
-                                                    function startDataLayer(xmlDoc) {
-                                                        n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
-                                                        }
+                                                    $.ajax({
+                                                        url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
+                                                        dataType: 'xml',
+                                                        strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                                                        strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                                                        strokeWeight: 3,   //선 두께
+                                                        success: startDataLayer
+                                                        });
 
+                                                    setTimeout(function(){
+                                                        
+                                                        var dis = <%=f.getDistance()%>;
+                                                        var zom=9;
+                                                        if(dis<2){
+                                                            zom = 14;
+                                                        }else if(dis<20){
+                                                            zom = 12;
+                                                        }else if(dis<40){
+                                                            zom = 11;
+                                                        }else{
+                                                            zom=10;
+                                                        }
+                                                    	n<%=f.getFeedIndex()%>.setZoom(zom);
+                                                    },800);
+                                                    
                                             </script>
                                             
                                         </td>
@@ -443,7 +458,7 @@
                 <!-- Modal body -->
                 <div class="modal-body"
                     style="padding-left: 0px; padding-right: 0px;">
-                    <form action="<%=contextPath %>/enroll.feed"
+                    <form action="<%=contextPath %>/enroll.feed"0000
                         method="post" id="enrollfrm"
                         enctype="multipart/form-data">
                         <input type="hidden" name="userId"
@@ -455,8 +470,6 @@
                         <input type="hidden" name="distance" id="distance"
                             value="">
                         <table id="text1">
-        
-        
                             <div id="exmap"
                                 style="width:799px;height:500px; margin: auto;">
                                 <div id="map"
@@ -504,7 +517,7 @@
                             <tr>
                                 <th>제목</th>
                                 <td><input type="text" name="title"
-                                        size="62" placeholder="제목입력해주세요">
+                                        size="62" placeholder="제목입력해주세요" value="">
                                 </td>
                             </tr>
                         </table>
@@ -539,15 +552,14 @@
                             <option value="Y">등록</option>
                             <option value="N">미등록</option>
                         </select>
-                        <!-- <input type="checkbox" name="trackNy" id="trackNy" value="" > -->
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div id="dist1">총길이 :<span id="dist"></span></div>
                     <button type="reset" class="btn btn-primary"
                         id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary"
-                        id="insert">작성</button>
+                    <input type="submit" class="btn btn-primary"
+                        id="insert" onclick="return fileSubmit()"></input>
                 </div>
                 </form>
             </div>
@@ -557,19 +569,29 @@
         
         <!-- 피드 상세 -->
         <script>
-            $(document).ready(function () {
-                //여기 아래 부분
-                $('#summernote').summernote({
-                    height: 300,                 // 에디터 높이
-                    minHeight: null,             // 최소 높이
-                    maxHeight: null,             // 최대 높이
-                    focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-                    lang: "ko-KR",					// 한글 설정
-                    placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-                });
-            });
+            
+            
+            
+            function fileSubmit(){
+               var title = $("input[name='title']");
+               var file = document.getElementById('avatar');
+               var content = $("textarea");
+
+               if(file.files.length <1){
+                alert("Gpx 파일을 선택해주세요");
+                return false;
+               }else{
+                    if(String(title.val()).length <1){
+                        var len = file.files[0].name;
+                        var s = String(len).lastIndexOf("g");
+                        title.val(String(len).substring(0,s-1));
+                        content.val(String(len).substring(0,s-1));
+                }
+                return true;
+               }
+            }
+
             $("#insert").click(function () {
-                console.log($("#avater"));
                 var last = $("#dist").text().lastIndexOf("k");
                 $("#distance").val($("#dist").text().substring(0, last));
                 $("#startLat").val(startLat);
@@ -611,6 +633,7 @@
             var R = 6371; // Radius of the earth in km
             var gpxFileInput = document.getElementById('avatar');
             gpxFileInput.addEventListener('change', handleFileSelect, false);
+
             function handleFileSelect(event) {
                 array = [];
                 lats = [];
@@ -667,9 +690,22 @@
                     // 화면에 경로 표시하기
                     $("#dist").text(sum.toFixed(2) + 'km');
                     // 지도 표시
+                    var zom;
+                    var dist = sum;
+                    if(sum<2){
+                        zom = 15;
+                    }else if(sum<10){
+                        zom = 13;
+                    }else if(sum<50){
+                        zom = 12;
+                    }else if(sum<90){
+                        zom = 11;
+                    }else{
+                        zom = 10;
+                    }
                     map = new naver.maps.Map('map', {
                         center: new naver.maps.LatLng(startLat, startLon),
-                        zoom: 11
+                        zoom: zom
                     });
                     // 지도에 선 그리기
                     polyline = new naver.maps.Polyline({
@@ -684,7 +720,7 @@
                         position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
                         map: map,
                         icon: {
-                            content: '<img src=/Ovcos/resources/image/endlocation.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            content: '<img src=/Ovcos/resources/image/endlocation4.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
                             size: new naver.maps.Size(45, 45),
                             anchor: new naver.maps.Point(26, 40)
                         }
@@ -693,7 +729,7 @@
                         position: new naver.maps.LatLng(startLat, startLon),
                         map: map,
                         icon: {
-                            content: '<img src=/Ovcos/resources/image/location.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                        	 content: '<img src=/Ovcos/resources/image/location2.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
                             size: new naver.maps.Size(45, 45),
                             anchor: new naver.maps.Point(26, 40)
                         }

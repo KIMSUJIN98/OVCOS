@@ -16,7 +16,7 @@
 }
 
 body{
-	overflow-X:hidden;
+   overflow-X:hidden;
 }
 #feedWrap{
     width: 1700px;
@@ -108,7 +108,7 @@ body{
     border: 1px solid lightgray;
 }
 #ac_recode *{
-	color: black;
+   color: black;
 }
 #last_ac1{
     margin-top: 10px;
@@ -243,8 +243,8 @@ body{
 
 
 #feed_select>*{
-	font-size: 15px;
-	border-radius: 5px;
+   font-size: 15px;
+   border-radius: 5px;
 }
 #content_feed{
     width: 100%;
@@ -276,9 +276,9 @@ body{
     /* border: 1px solid green; */
     /* background-color: aquamarine; */
 
-   	font-size: 14px;
+      font-size: 14px;
     margin: 5px;
-	padding: 0;
+   padding: 0;
     width: 20%;
     color: gray;
 
@@ -349,4 +349,8 @@ body{
 }
 path{
     stroke: red !important;
+}
+
+img[src*='marker']{
+    display: none !important;
 }
