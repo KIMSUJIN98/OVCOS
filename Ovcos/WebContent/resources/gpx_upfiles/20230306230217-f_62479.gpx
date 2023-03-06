@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" creator="bikeroute.xyz">
+	<metadata>
+		<desc>bikeroute.xyz</desc>
+		<bounds maxlat="37.51901354932652" maxlon="126.99841200648346" minlat="37.5101622170566" minlon="126.99421287171378"/>
+	</metadata>
+
+
+	<wpt lat="37.51901354932652" lon="126.99423549092232">
+		<name>START</name>
+		<sym>Flag, Green</sym>
+		<extensions>
+			<gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			</gpxx:WaypointExtension>
+		</extensions>
+		<ele>0</ele>
+	</wpt>
+
+	<wpt lat="37.5101622170566" lon="126.99841200648346">
+		<name>END</name>
+		<sym>Flag, Green</sym>
+		<extensions>
+			<gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			</gpxx:WaypointExtension>
+		</extensions>
+		<ele>0</ele>
+	</wpt>
+
+
+
+	<trk>
+		<extensions>
+			<gpxx:TrackExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayColor>Green</gpxx:DisplayColor>
+			</gpxx:TrackExtension>
+		</extensions>
+		<trkseg>
+			<trkpt lat="37.51901354932652" lon="126.99423549092232">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.51898832167779" lon="126.99424454232475">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.51898832167779" lon="126.99424454232475">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.51895588401423" lon="126.99421287171378">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.51895588401423" lon="126.99421287171378">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.518851370726274" lon="126.99427622590167">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.516898037419985" lon="126.99522201747132">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="37.5101622170566" lon="126.99841200648346">
+				<ele>0</ele>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>
