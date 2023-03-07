@@ -155,12 +155,13 @@ public class ChallengeService {
 		
 		int result1 = new ChallengeDao().insertContestChallenge(conn, cc);
 		int result2 = 1;
+		int result3 = new ChallengeDao().insertEntryList(conn, cc);
 				
 		if(img != null) {
 			result2 = new ChallengeDao().insertContestChallengeImg(conn, cc, img);
 		}
 		
-		if(result1 * result2 > 0) {
+		if(result1 * result2 * result3 > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -168,7 +169,7 @@ public class ChallengeService {
 		
 		close(conn);
 		
-		return result1 * result2;
+		return result1 * result2 * result3;
 	}
 
 	public Contest selectContest(int contestNo) {
