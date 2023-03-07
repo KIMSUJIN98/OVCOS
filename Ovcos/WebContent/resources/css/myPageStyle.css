@@ -56,6 +56,11 @@ div{
 	padding-left: 25px;
 }
 
+#nick{
+	color: rgb(67, 115, 176);
+	font-size: 20px;
+}
+
 /* 사용자 자기소개 */
 #introduce{
 	font-family: 'SUIT-Regular';
@@ -75,7 +80,7 @@ div{
 }
 
 #display_list{
-	height: 70%;
+	height: 90%; /*70*/
 }
 
 #display_list>div{
@@ -84,21 +89,29 @@ div{
 }
 
 .sec2-blank{
-	height: 15%;
+	height: 5%; /*15*/
 }
 
 .sec2-blank2{
-	width: 20%;
+	width: 15%; /*20*/
 }
 
 #list_content{
-	width: 60%;
+	width: 70%; /*60*/
 	border: 1px solid black;
 }
 
 #list_content h1{
 	font-family: 'SUIT-Regular';
 	color: rgb(67, 115, 176);
+}
+
+#list_content span{
+	font-family: 'SUIT-Regular';
+	color: gray;
+	font-weight: 500;
+	font-size: 20px;
+	padding-left: 25px;
 }
 
 
@@ -111,7 +124,7 @@ div{
 }
 
 #activity_list{
-	height: 70%;
+	height: 90%; /*70*/
 }
 
 #activity_list>div{
@@ -120,9 +133,23 @@ div{
 }
 
 #activity_content{
-	width: 60%;
+	width: 70%; /*60*/
 	border: 1px solid black;
 }
+
+.filter-btn{
+	margin-left: 5px;
+}
+
+#searchBox{
+	margin-right: 270px;
+}
+
+
+
+
+
+
 
 
 

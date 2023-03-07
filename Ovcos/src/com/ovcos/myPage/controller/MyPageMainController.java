@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ovcos.myPage.model.service.MyPageService;
+import com.ovcos.myPage.model.vo.MyPage;
 
 /**
  * Servlet implementation class MyPageMainController
@@ -28,6 +32,17 @@ public class MyPageMainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		String userId = request.getParameter("userId");
+		
+		MyPage mp = new MyPageService().totalDistance(userId);
+		double monthDistance = mp.getDistance();
+		
+		HttpSession session = request.getSession();
+		if(monthDistance != 0) {
+			session.setAttribute("monthDistance", monthDistance);
+		}else {
+			session.setAttribute("alertMsg", "이번달은 러닝 기록이 없습니다.");
+		}
 		
 		request.getRequestDispatcher("views/myPage/myPageMain.jsp").forward(request, response);
 	}
