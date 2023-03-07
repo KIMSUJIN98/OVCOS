@@ -116,7 +116,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="file" name="contestImg">
+                                                    <input type="file" name="challengeImg">
                                                     <br>
                                                     <span>이미지 파일을 업로드 해주세요.</span>
                                                 </td>
@@ -140,11 +140,10 @@
                 </div>
                 <% int count = 0; %>
                 <% for(ContestChallenge cc : list) { %>
-                    <% count++; %>
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- image -->
-                            <% if(cc.getChangeName() != null) { %>
+                            <% if(cc.getChangeName()!= null) { %>
                                 <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
                             <% }else { %>
                                 <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
@@ -160,6 +159,7 @@
                                     참가인원 : <%= cc.getCount() %> / <%= cc.getContestChallengeMax() %>
                                 </div>
                             </div>
+                            <% count++; %>
                             <!-- actions -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
@@ -168,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!-- The Modal -->
                         <div class="modal" id="detailContestChallenge<%= count %>">
                             <div class="modal-dialog">
@@ -188,10 +188,10 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                	<% if(cc.getChangeName() == null) { %>
-                                                	<img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
-                                                	<% }else { %>
-                                                	<img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="defaultImg.png"/>
+                                                	<% if(cc.getChangeName() != null) { %>
+                                                        <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
+                                                    <% }else { %>
+                                                        <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
                                                 	<% } %>
                                                 </td>
                                             </tr>
@@ -220,6 +220,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        <br><br><br>
                                         <button type="submit" class="btn btn-lg btn-primary">참가하기</button>
 
                                     </div>
@@ -309,11 +310,14 @@
         }
 
         function checkPwd(){
-            const userPwd = document.getElementById("userPwd").value;
+            const userPwd = document.getElementById("userPwd").value();
+            console.log(<%= loginUser.getMemPwd() %>);
+            console.log(userPwd);
+
             if(userPwd != <%= loginUser.getMemPwd() %>) {
             	alert("비밀번호가 일치하지 않습니다.");
             	return false;
-            } 
+            }
         }
 
         function castNo(num){

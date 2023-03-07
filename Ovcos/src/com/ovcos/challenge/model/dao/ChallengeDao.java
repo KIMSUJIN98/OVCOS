@@ -418,7 +418,7 @@ public class ChallengeDao {
 	}
 
 	public int insertContestChallenge(Connection conn, ContestChallenge cc) {
-		int result = 0;
+		int result1 = 0;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertContestChallenge");
@@ -433,7 +433,7 @@ public class ChallengeDao {
 			pstmt.setString(5, cc.getContestChallengeId());
 			pstmt.setInt(6, Integer.parseInt(cc.getContestNo()));
 			
-			result = pstmt.executeUpdate();
+			result1 = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -441,23 +441,24 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 		
-		return result;
+		return result1;
 	}
 
-	public int insertContestChallengeImg(Connection conn, ImageUpload img) {
-		int result = 0;
+	public int insertContestChallengeImg(Connection conn, ContestChallenge cc, ImageUpload img) {
+		int result2 = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertImg");
+		String sql = prop.getProperty("insertContestChallengeImg");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, img.getUplId());
 			pstmt.setInt(2, img.getUplMenu());
+//			pstmt.setInt(3, cc.getContestChallengeNo());
 			pstmt.setString(3, img.getOriginName());
 			pstmt.setString(4, img.getChangeName());
 			
-			result = pstmt.executeUpdate();
+			result2 = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -465,7 +466,7 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 		
-		return result;
+		return result2;
 		
 	}
 

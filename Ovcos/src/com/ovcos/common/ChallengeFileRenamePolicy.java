@@ -24,7 +24,7 @@ public class ChallengeFileRenamePolicy implements FileRenamePolicy {
 		
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		String changeName = currentTime + "-challenge" + ranNum + ext;
+		String changeName = currentTime + "-challenge_" + ranNum + ext;
 		
 		return new File(originFile.getParent(), changeName);
 	}

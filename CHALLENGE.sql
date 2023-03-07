@@ -153,7 +153,7 @@ VALUES
      , ?
      , DEFAULT
      , DEFAULT
-     );     
+     );   
 
 
 SELECT 
