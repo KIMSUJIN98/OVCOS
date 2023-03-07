@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
 
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script>
@@ -424,9 +424,16 @@
 
 
             </script>
-            
             <div id="ct3">
-                <div id="dust">미세먼지api 구역</div>
+                <div id="dust">
+                    <div id="date"></div>
+                    
+                    <div id="pm10"></div>
+                    <div id="pm25"></div>
+                    
+                </div>
+                <!-- 미세먼지 관련 js -->
+                <script src="<%=contextPath %>/resources/js/dust.js"></script>
                 <div id="weather">날씨 api 구역</div>
                 <div id="footer">
                     <!-- 푸터구역 -->
