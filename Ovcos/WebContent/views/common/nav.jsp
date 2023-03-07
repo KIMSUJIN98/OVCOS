@@ -20,7 +20,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- jQuery library -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script> -->
 <!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
@@ -58,10 +58,10 @@
 
                         <li id="feed"><a href="<%= contextPath %>/list.feed">피드</a></li>
                         <li id="explore"><a href="<%= contextPath %>/course?epage=1">탐색</a></li>
-                        <li id="challenge"><a href="<%= contextPath %>/views/challenge/challengeMain.jsp">챌린지</a>
+                        <li id="challenge"><a href="<%= contextPath %>/main.ch">챌린지</a>
 	                        <ul>
 	                        	<li><a href="<%= contextPath %>/cntsMain.ch">대회</a></li>
-	                        	<li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
+	                        	<li><a href="<%= contextPath %>/ncList.ch?local=0">일반</a></li>
 	                        </ul>
                         </li>
                     </ul>
@@ -89,8 +89,8 @@
                         			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a>
                         		</div>
                         	</li>
-                            <li class="subMenuList"><a href="#">마이페이지</a></li>
-                            <li class="subMenuList"><a href="#">개인정보수정</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/myPage.me">마이페이지</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/editInfo.me">개인정보수정</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>
                             <li class="subMenuList"><a href="#">로그아웃</a></li>
                         </ul>
