@@ -227,9 +227,11 @@
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-sm btn-danger mr-auto ml-0">신고</button>
+                                        <% if(loginUser != null && loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
                                         <button type="button" class="btn btn-sm btn-secondary">수정</button>
                                         <!-- <button type="button" class="btn btn-sm btn-secondary">삭제</button> -->
                                         <button type="button" class="btn btn-sm btn-dark mt-auto" data-toggle="modal" data-target="#delete" onclick="castNo(<%= cc.getContestChallengeNo() %>);">삭제</button>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
