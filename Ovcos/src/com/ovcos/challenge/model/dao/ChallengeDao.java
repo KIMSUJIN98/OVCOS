@@ -181,7 +181,7 @@ public class ChallengeDao {
 			
 			while(rset.next()) {
 				list1.add(new ContestChallenge(rset.getString("CNTS_CHLG_TITLE"),
-											   rset.getDate("ENROLL_DATE"),
+											   rset.getString("ENROLL_DATE"),
 											   rset.getString("CNTS_CHLG_DATE"),
 											   rset.getInt("CNTS_CHLG_MAX"),
 											   rset.getString("CNTS_CHLG_ID"),
@@ -229,7 +229,7 @@ public class ChallengeDao {
 		return list2;
 	}
 
-	public ArrayList<ContestChallenge> contestChallengeList(Connection conn, String contestName) {
+	public ArrayList<ContestChallenge> contestChallengeList(Connection conn, int contestNo) {
 		ArrayList<ContestChallenge> list = new ArrayList<ContestChallenge>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -238,18 +238,20 @@ public class ChallengeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, contestName);
+			pstmt.setInt(1, contestNo);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
 											  rset.getString("CNTS_CHLG_TITLE"),
-											  rset.getDate("ENROLL_DATE"),
+											  rset.getString("CNTS_CHLG_CONTENT"),
+											  rset.getString("ENROLL_DATE"),
 											  rset.getString("CNTS_CHLG_DATE"),
 											  rset.getInt("CNTS_CHLG_MAX"),
 											  rset.getString("CNTS_CHLG_ID"),
 											  rset.getString("CNTS_NAME"),
+											  rset.getString("CHANGE_NAME"),
 											  rset.getInt("COUNT")
 											  ));
 			}
@@ -416,20 +418,22 @@ public class ChallengeDao {
 	}
 
 	public int insertContestChallenge(Connection conn, ContestChallenge cc) {
-		int result = 0;
+		int result1 = 0;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertContestChallenge");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, cc.getContestChallengeTitle());
 			pstmt.setString(2, cc.getContestChallengeContent());
 			pstmt.setString(3, cc.getContestChallengeDate());
 			pstmt.setInt(4, cc.getContestChallengeMax());
 			pstmt.setString(5, cc.getContestChallengeId());
+			pstmt.setInt(6, Integer.parseInt(cc.getContestNo()));
 			
-			result = pstmt.executeUpdate();
+			result1 = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -437,13 +441,13 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 		
-		return result;
+		return result1;
 	}
 
-	public int insertContestChallengeImg(Connection conn, ImageUpload img) {
-		int result = 0;
+	public int insertContestChallengeImg(Connection conn, ContestChallenge cc, ImageUpload img) {
+		int result2 = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertImg");
+		String sql = prop.getProperty("insertContestChallengeImg");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -453,7 +457,7 @@ public class ChallengeDao {
 			pstmt.setString(3, img.getOriginName());
 			pstmt.setString(4, img.getChangeName());
 			
-			result = pstmt.executeUpdate();
+			result2 = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -461,7 +465,83 @@ public class ChallengeDao {
 			close(pstmt);
 		}
 		
+		return result2;
+		
+	}
+
+	public Contest selectContest(Connection conn, int contestNo) {
+		Contest c = new Contest();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectContest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, contestNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Contest(rset.getInt("CNTS_NO"),
+						rset.getString("CNTS_NAME"),
+						rset.getString("CNTS_DATE"),
+						rset.getString("CNTS_URL"),
+						rset.getString("CHANGE_NAME")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+	}
+
+	public int deleteContestChallenge(Connection conn, int contestChallengeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteContestChallenge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, contestChallengeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
+	
+	}
+
+	public int insertEntryList(Connection conn, ContestChallenge cc) {
+		int result3 = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cc.getContestChallengeId());
+			
+			result3 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result3;		
 		
 	}
 
