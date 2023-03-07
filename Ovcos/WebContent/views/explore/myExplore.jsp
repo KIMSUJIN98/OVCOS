@@ -88,8 +88,8 @@
 				 	<%}else{ %>
                     <!-- case 2 반복문으로  -->
                     	<%for(Explore f: list){ %>
-                    <div class="exList" id="f<%=f.getFeedIndex()%>">
-                        <span class="list_num"><%=f.getFeedIndex() %></span>
+                    <div class="exList" id="f<%=f.getRowNum()%>">
+                        <span class="list_num"><%=f.getRowNum() %></span>
                         <div class="innertext">
                             <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
@@ -241,7 +241,7 @@
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
                             icon: {
                                 content: 
-                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
+                                "<span class='list_num'><%=e.getRowNum()%></span>",
                                 // size: new naver.maps.Size(38, 58),
                                 anchor: new naver.maps.Point(19, 40),
                             }
@@ -259,7 +259,7 @@
                             '   <div style="display:flex; padding-left:10px">',
                             '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
                             '	    <span><%=e.getDistance()%> km</span>	',
-                            '       <a style="width:40%" href="#">Detail</a>',
+                            '       <a style="width:40%;" href="<%=contextPath%>/detail.fe?fno=<%=e.getFeedIndex()%>">Detail</a>',
                             '   </div>',
                             '</div>'		
                         ].join('')
