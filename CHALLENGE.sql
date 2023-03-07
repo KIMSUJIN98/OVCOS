@@ -260,9 +260,17 @@ UPDATE
 
 
 
-
-
-
+INSERT
+  INTO ENTRY_LIST
+     (
+       CHLG_NO_INLIST
+     , CHLG_ENTRY_ID
+     )
+VALUES
+     (
+       SEQ_CHLG_NO.CURRVAL
+     , ?
+     );
 
 
 

@@ -280,11 +280,26 @@
 		     , DEFAULT
 		     )
 	</entry>
+	
 	<entry key="deleteContestChallenge">
 		UPDATE
 	       CONTEST_CHALLENGE
 	   SET DEL_STATUS = 'Y'
 	 WHERE CNTS_CHLG_NO = ?
+	</entry>
+	
+	<entry key="insertEntryList">
+		INSERT
+		  INTO ENTRY_LIST
+		     (
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		     )
+		VALUES
+		     (
+		       SEQ_CHLG_NO.CURRVAL
+		     , ?
+		     )
 	</entry>
 	
 </properties>

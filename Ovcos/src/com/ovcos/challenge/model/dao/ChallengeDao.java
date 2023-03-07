@@ -454,7 +454,6 @@ public class ChallengeDao {
 			
 			pstmt.setString(1, img.getUplId());
 			pstmt.setInt(2, img.getUplMenu());
-//			pstmt.setInt(3, cc.getContestChallengeNo());
 			pstmt.setString(3, img.getOriginName());
 			pstmt.setString(4, img.getChangeName());
 			
@@ -522,6 +521,28 @@ public class ChallengeDao {
 		
 		return result;
 	
+	}
+
+	public int insertEntryList(Connection conn, ContestChallenge cc) {
+		int result3 = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cc.getContestChallengeId());
+			
+			result3 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result3;		
+		
 	}
 
 	
