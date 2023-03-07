@@ -128,6 +128,21 @@ div{
 	color: black;
 }
 
+#inList_content_right{
+	width: 30%;
+	height: 90%;
+	/* border: 1px solid black; */
+	padding-left: 30px;
+}
+
+#list_content>div{
+	float: left;
+}
+
+#userGoal{
+	width: 100px;
+}
+
 /* ---------------- 그래프 css ------------------ */
 
 ul, li {

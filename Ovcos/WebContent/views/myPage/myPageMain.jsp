@@ -65,12 +65,7 @@
                         <!-- 테두리 안에 들어가 있는 내용 -->
                         <h1>나의 운동로그</h1>
                         
-                        <!-- 버튼 눌러서 모달로 목표 변경 -->
-                        <button type="button" id="btnSetGoal">목표설정</button>
                         
-                        <input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>" style="padding-left: 10px" readonly>
-                        <br>
-                        <span>이번달 <%= loginUser.getMemNick() %>님의 목표기록은 <%= loginUser.getMemGoalDtn() %>km입니다. 현재까지 달성한 총 러닝기록은 <%= monthDistance %>km로, 목표치를 몇km 초과 달성했습니다! 목표치까지 몇km 남았습니다! </span>
                     	
                     	<div id="inList_content">
                     	<!-- 하루에 운동기록피드를 많이 올리는 경우 100km를 넘을 수 있음 => 이때 막대 그래프는 100%로 설정하고, 아래 텍스트로 km를 알려주도록 한다. 그래프로 표시할 수 있는 하루 최대 km를 넘겼습니다! alertMsg-->
@@ -153,6 +148,17 @@
 							</div>
                     	
                     	</div>
+                    	
+                    	<div id="inList_content_right">
+                    		<!-- 버튼 눌러서 모달로 목표 변경 -->
+                        	<button type="button" id="btnSetGoal">목표설정</button>
+                        	<input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>" style="padding-left: 10px" readonly>
+                        	<br><br>
+                        	
+                    		<span>이번달 <%= loginUser.getMemNick() %>님의 목표기록은 <%= loginUser.getMemGoalDtn() %>km입니다. 현재까지 달성한 총 러닝기록은 <%= monthDistance %>km로, 목표치를 몇km 초과 달성했습니다! 목표치까지 몇km 남았습니다! </span>
+                    	</div>
+                    	
+                    	
                     </div>
                     <div class="sec2-blank2">
                         <!-- 우측 여백 -->
