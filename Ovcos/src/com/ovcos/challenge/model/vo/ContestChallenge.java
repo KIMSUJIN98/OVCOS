@@ -6,7 +6,7 @@ public class ContestChallenge {
 	private int contestChallengeNo;
 	private String contestChallengeTitle;
 	private String contestChallengeContent;
-	private Date enrollDate;
+	private String enrollDate;
 	private String contestChallengeDate;
 	private int contestChallengeMax;
 	private String rprStatus;
@@ -24,7 +24,7 @@ public class ContestChallenge {
 
 	
 	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String contestChallengeContent,
-			Date enrollDate, String contestChallengeDate, int contestChallengeMax, String rprStatus, Date rprDate,
+			String enrollDate, String contestChallengeDate, int contestChallengeMax, String rprStatus, Date rprDate,
 			String delStatus, String rprId, String contestChallengeId, String contestNo, int count) {
 		super();
 		this.contestChallengeNo = contestChallengeNo;
@@ -43,7 +43,7 @@ public class ContestChallenge {
 	}
 
 
-	public ContestChallenge(String contestChallengeTitle, Date enrollDate, String contestChallengeDate,
+	public ContestChallenge(String contestChallengeTitle, String enrollDate, String contestChallengeDate,
 			int contestChallengeMax, String contestChallengeId, String contestNo) {
 		super();
 		this.contestChallengeTitle = contestChallengeTitle;
@@ -55,7 +55,7 @@ public class ContestChallenge {
 	}
 
 
-	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, Date enrollDate,
+	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String enrollDate,
 			String contestChallengeDate, int contestChallengeMax, String contestChallengeId, String contestNo,
 			int count) {
 		super();
@@ -70,7 +70,7 @@ public class ContestChallenge {
 	}
 
 	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String contestChallengeContent,
-			Date enrollDate, String contestChallengeDate, int contestChallengeMax, String contestChallengeId,
+			String enrollDate, String contestChallengeDate, int contestChallengeMax, String contestChallengeId,
 			String contestNo, String changeName, int count) {
 		super();
 		this.contestChallengeNo = contestChallengeNo;
@@ -107,11 +107,11 @@ public class ContestChallenge {
 		this.contestChallengeTitle = contestChallengeTitle;
 	}
 
-	public Date getEnrollDate() {
+	public String getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(Date enrollDate) {
+	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 

@@ -181,7 +181,7 @@ public class ChallengeDao {
 			
 			while(rset.next()) {
 				list1.add(new ContestChallenge(rset.getString("CNTS_CHLG_TITLE"),
-											   rset.getDate("ENROLL_DATE"),
+											   rset.getString("ENROLL_DATE"),
 											   rset.getString("CNTS_CHLG_DATE"),
 											   rset.getInt("CNTS_CHLG_MAX"),
 											   rset.getString("CNTS_CHLG_ID"),
@@ -246,7 +246,7 @@ public class ChallengeDao {
 				list.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
 											  rset.getString("CNTS_CHLG_TITLE"),
 											  rset.getString("CNTS_CHLG_CONTENT"),
-											  rset.getDate("ENROLL_DATE"),
+											  rset.getString("ENROLL_DATE"),
 											  rset.getString("CNTS_CHLG_DATE"),
 											  rset.getInt("CNTS_CHLG_MAX"),
 											  rset.getString("CNTS_CHLG_ID"),
@@ -501,41 +501,25 @@ public class ChallengeDao {
 		return c;
 	}
 
-	public ArrayList<ContestChallenge> selectContestChallenge(Connection conn, int contestChallengeNo, int contestNo) {
-		ArrayList<ContestChallenge> list1 = new ArrayList<ContestChallenge>();
+	public int deleteContestChallenge(Connection conn, int contestChallengeNo) {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectContestChallenge");
+		String sql = prop.getProperty("deleteContestChallenge");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, contestNo);
-			pstmt.setInt(2, contestChallengeNo);
 			
-			rset = pstmt.executeQuery();
+			pstmt.setInt(1, contestChallengeNo);
 			
-			while(rset.next()) {
-				list1.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
-											  rset.getString("CNTS_CHLG_TITLE"),
-											  rset.getString("CNTS_CHLG_CONTENT"),
-											  rset.getDate("ENROLL_DATE"),
-											  rset.getString("CNTS_CHLG_DATE"),
-											  rset.getInt("CNTS_CHLG_MAX"),
-											  rset.getString("CNTS_CHLG_ID"),
-											  rset.getString("CNTS_NAME"),
-											  rset.getString("CHANGE_NAME"),
-											  rset.getInt("COUNT")
-											  ));
-			}
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
 		
-		return list1;
+		return result;
 	
 	}
 

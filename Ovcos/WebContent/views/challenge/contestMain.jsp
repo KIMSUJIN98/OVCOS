@@ -90,8 +90,8 @@
                             </div>
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">등록</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                <button type="submit" class="btn btn-sm btn-primary">등록</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">닫기</button>
                             </div>
                         </form>
                     </div>
@@ -99,7 +99,7 @@
             </div>
 
             <!-- 대회 수정 Modal -->
-            <div class="modal" id="updateCnts">
+            <div class="modal" id="update">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Modal Header -->
@@ -148,7 +148,7 @@
             </div>
 
             <!-- 대회 삭제 Modal -->
-            <div class="modal" id="deleteCnts">
+            <div class="modal" id="delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Modal Header -->
@@ -167,8 +167,8 @@
                             </div>
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-danger">삭제</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">닫기</button>
                             </div>
                         </form>
                     </div>
@@ -201,8 +201,8 @@
                                         <div class="text-center">
                                             <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestNo=<%= c.getContestNo() %>">참가하기</a> <br><br>
                                             <% if(loginUser != null && Integer.parseInt(loginUser.getMemStatus()) == 5) { %>
-                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#updateCnts">수정</button>
-                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#deleteCnts" onclick="contestNo(<%= c.getContestNo() %>);">삭제</button>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#update">수정</button>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#delete" onclick="contestNo(<%= c.getContestNo() %>);">삭제</button>
                                             <% } %>
                                         </div>
                                     </div>

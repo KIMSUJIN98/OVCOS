@@ -40,7 +40,6 @@ public class ContestChallengeListViewController extends HttpServlet {
 		
 		Contest c = new ChallengeService().selectContest(contestNo);
 		
-		
 		request.setAttribute("list", list);
 		request.setAttribute("c", c);
 		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);

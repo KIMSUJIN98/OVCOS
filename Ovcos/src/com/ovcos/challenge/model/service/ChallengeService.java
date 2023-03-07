@@ -181,14 +181,20 @@ public class ChallengeService {
 		return c;
 	}
 
-	public ArrayList<ContestChallenge> selectContestChallenge(int contestChallengeNo, int contestNo) {
+	public int deleteContestChallenge(int contestChallengeNo) {
 		Connection conn = getConnection();
+		int result = new ChallengeDao().deleteContestChallenge(conn, contestChallengeNo);
 		
-		ArrayList<ContestChallenge> list1 = new ChallengeDao().selectContestChallenge(conn, contestChallengeNo, contestNo);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		
-		return list1;
+		return result;
+		
 	}
 
 	
