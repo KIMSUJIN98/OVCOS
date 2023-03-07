@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OVCOS - 마이페이지</title>
 <link rel="stylesheet" href="<%= contextPath %>/resources/css/myPageStyle.css">
 
 <!-- 페이징 연결자료 -->
@@ -65,6 +65,88 @@
                         <input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>" style="padding-left: 10px" readonly>
                         <br>
                         <span>이번달 <%= loginUser.getMemNick() %>님의 목표기록은 <%= loginUser.getMemGoalDtn() %>km입니다. 현재까지 달성한 총 러닝기록은 <%= monthDistance %>km로, 목표치를 몇km 초과 달성했습니다! 목표치까지 몇km 남았습니다! </span>
+                    	
+                    	<div id="inList_content">
+                    	<!-- 하루에 운동기록피드를 많이 올리는 경우 100km를 넘을 수 있음 => 이때 막대 그래프는 100%로 설정하고, 아래 텍스트로 km를 알려주도록 한다. 그래프로 표시할 수 있는 하루 최대 km를 넘겼습니다! alertMsg-->
+                    		<h4 align="center">이번주 운동기록</h4>
+                    		<br>
+                    		<div class="vertical_chart_box">
+								 <div class="chart_box">
+								 	<ul class="axis_y">
+								    	<li class="item">0<span class="blind">km</span></li>
+								     	<li class="item">20<span class="blind">km</span></li>
+								     	<li class="item">40<span class="blind">km</span></li>
+								     	<li class="item">60<span class="blind">km</span></li>
+								     	<li class="item">80<span class="blind">km</span></li>
+								     	<li class="item">100<span class="blind">km</span></li>
+								 	</ul>
+								   	<ul class="axis_x">
+								     	<li class="item">
+								       		<div class="text_box">
+								         		<strong class="day">01(수)</strong>
+								         		<span class="time">87km</span>
+								       		</div>
+								       		<button type="button" class="graph">
+								         		<span class="time data1" style="height:87%;"><span class="blind">data 타입 1</span></span>
+								       		</button>
+								     	</li>
+								     	<li class="item">
+								       		<div class="text_box">
+								         		<strong class="day">02(목)</strong>
+								         		<span class="time">50km</span>
+								       		</div>
+								       		<button type="button" class="graph">
+								         		<span class="time data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
+								       		</button>
+								     	</li>
+								     	<li class="item">
+								       		<div class="text_box">
+								         		<strong class="day">03(금)</strong>
+								         		<span class="time">100km</span>
+								       		</div>
+								       		<button type="button" class="graph">
+								         		<span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
+								       		</button>
+								     	</li>
+								     	<li class="item">
+								       		<div class="text_box">
+								         		<strong class="day">04(토)</strong>
+								         		<span class="time">100km</span>
+								       		</div>
+								       		<button type="button" class="graph">
+								         		<span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
+								       		</button>
+								     	</li>
+								     	<li class="item">
+								       		<div class="text_box">
+								         		<strong class="day">05(일)</strong>
+								         		<span class="time">40km</span>
+								       		</div>
+								       		<button type="button" class="graph">
+								         		<span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
+								       		</button>
+								     	</li>
+								     	<li class="item">
+								       		<div class="text_box">
+								         		<strong class="day sat">06(월)</strong>
+								         		<span class="time">20km</span>
+								       		</div>
+								       		<button type="button" class="graph">
+								         		<span class="time data1" style="height:20%;"><span class="blind">data 타입 1</span></span>
+								        	</button>
+								      	</li>
+								      	<li class="item">
+								        	<div class="text_box">
+								          		<strong class="day sun">TODAY</strong>
+								          		<span class="time">0km</span>
+								        	</div>
+								        	<button type="button" class="graph"></button>
+								      	</li>
+								    </ul>
+								</div>                                                 
+							</div>
+                    	
+                    	</div>
                     </div>
                     <div class="sec2-blank2">
                         <!-- 우측 여백 -->
