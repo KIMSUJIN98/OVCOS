@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/nav.jsp" %>
-<% double monthDistance = (double)session.getAttribute("monthDistance"); %>
+<% double monthDistance; 
+   if(session.getAttribute("monthDistance") == null){
+	   monthDistance = 0; 
+   }else{
+	   monthDistance = (double)session.getAttribute("monthDistance");
+   }
+%>
 <!DOCTYPE html>
 <html>
 <head>
