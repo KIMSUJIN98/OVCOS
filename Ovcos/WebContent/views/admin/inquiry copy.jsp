@@ -41,7 +41,6 @@
                         <h2>기타</h2>
                         <li><a href="#">탈퇴사유</a></li>
                         <li><a href="#">문의내역</a></li>
-                        <li><a href="#">공지사항</a></li>
                     </ul>
                 </div>
             </div>
