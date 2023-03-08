@@ -79,7 +79,9 @@
                         <!-- <div id="feedEnrollBtn" class="btn" data-toggle="modal" data-target="#myModal">
                             <img src="<%= contextPath %>/resources/image/plus1.png" alt="">
                         </div> -->
-                        <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+                        
+	                    <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+                        
                     </li>
                     
                     <li id="li2" class="menu">
