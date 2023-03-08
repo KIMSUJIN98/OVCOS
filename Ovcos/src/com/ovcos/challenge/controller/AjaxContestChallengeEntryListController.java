@@ -39,8 +39,6 @@ public class AjaxContestChallengeEntryListController extends HttpServlet {
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(eList, response.getWriter());
-		request.setAttribute("eList", eList);
-		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
 	}
 
 	/**
