@@ -819,7 +819,7 @@
                 </div>
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
-                <div id="dust" style="display: flex; background-color: rgb(67, 115, 176);">
+                <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
                     <div style="font-weight: 600; color: white;">현재 위치</div>
                     <div style="color: white;"> 
@@ -835,8 +835,8 @@
                         </div>
                         
                     </div>
-                    <div >
-                        <div style="font-weight: 600; padding-left: 15px; color: white;">초미세먼지
+                    <div>
+                        <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
                                 <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 5px;" >
                                 <div style="padding-left: 10px; color: white;">나쁨</div>
@@ -846,12 +846,183 @@
                     </div>
                     
                 </div>
-                <div id="weather">
-                <!-- Weather widget by https://meteodays.com -->
-				<a id="ms-informer-link-0aaa8b335b7df33a2e315fad7e6411c6" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
-				<script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/0aaa8b335b7df33a2e315fad7e6411c6"></script>
-				<!-- End -->
+                <div id="weather" >
+               
+                <table cellspacing="0" style="background-color: rgb(67, 115, 176); border-radius: 15px; width: 100%; height: 450px;">
+                    <thead class="header" style="">
+                        <tr>
+                            <td colspan="3">
+                                <div style="font-weight: 900; padding-left: 15px; padding-top: 15px; border-bottom: 2px solid white;">
+                                지역 위치
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fact" style="display: none; ">
+                            
+                            <td class="time" style="width: 150px;">
+                                <span class="date">3월 8일</span>
+                                <div class="hours" style="width: 70px;">오전 9:33</div>
+                            </td>
+                            <th class="weather-icon-container "  data-icon-id="overcast" data-wi-icon-id="cloud" data-title="중요한 구름" data-icon-size="36">
+                           
+                               
+                            </th>
+                            <td class="weather" style="width: 150px; padding-left: 15px;">
+                                <div class="temperature" title="기온" style="">13°</div>
+                                <div class="wind" title="바람" style="display: none;">
+                                    남동 3.6 km/h                            </div>
+                            </td>
+                        </tr>
+                            <tr class="days day_1">
+                                <td class="time" style="width: 150px; padding-left: 15px;">
+                                    <span class="weekday">수</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 8일</div>
+                                </td>
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_rain" data-wi-icon-id="rain" data-title="대체로 흐리고 비가 내림" data-icon-size="36">
+                                    <!-- 이미지 들어가는 부분 -->
+                                    <img style="width: 20px; " src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;" >
+                                    <div class="temperature" title="기온" style="">
+                                        7~16°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        43% </div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남 23 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_2" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">목</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 9일</div>
+                                </td>
+
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_rain" data-wi-icon-id="rain" data-title="대체로 흐리고 비가 내림" data-icon-size="36">
+                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        7~13°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        56%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남서 14 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_3" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">금</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 10일</div>
+                                </td>
+                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clear" data-wi-icon-id="day-sunny" data-title="화창하고 구름 한 점 없는 하늘" data-icon-size="36">
+                                <!-- 이미지 들어가는 부분 -->
+                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        5~20°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        0%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    동 15 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_4" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">토</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 11일</div>
+                                </td>
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds" data-wi-icon-id="day-cloudy" data-title="부분적으로 흐림" data-icon-size="36">
+                                <!-- 이미지 들어가는 부분 -->
+                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        9~20°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        5%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남서 20 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_5" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">일</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 12일</div>
+                                </td>
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="rain_light" data-wi-icon-id="day-showers" data-title="흐리고 약간의 비가 내림" data-icon-size="36">
+                                <!-- 이미지 들어가는 부분 -->
+                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px ; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        4~9°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        66%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    북 13 km/h</div>
+                                </td>
+                            </tr>
+
+                                <tr class="days day_6" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">월</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 13일</div>
+                                </td>
+                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_light" data-wi-icon-id="day-sunny-overcast" data-title="화창하고 구름이 적음" data-icon-size="36">
+                                    <!-- 이미지 들어가는 부분 -->
+                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        0~8°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        25%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    북서 15 km/h</div>
+                                </td>
+                            </tr>
+
+                                <tr class="days day_7" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">화</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 14일</div>
+                                </td>
+                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_light" data-wi-icon-id="day-sunny-overcast" data-title="화창하고 구름이 적음" data-icon-size="36">
+                                    <!-- 이미지 들어가는 부분 -->
+                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        1~11°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        1%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남 19 km/h</div>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+
 				</div>
+             
+                
+                
+
                 <div id="footer">
                     <!-- 푸터구역 -->
                     <div id="f1">
