@@ -87,8 +87,9 @@ public class FollowDao {
 			
 			while(rset.next()) {
 				
-				list.add(new Follow(rset.getString("mem_id"),
-									rset.getString("mem_name"),
+				list.add(new Follow(rset.getString("mem_id"),//로그인아이디
+									rset.getString("flw_id"),//팔로한아이디
+									rset.getString("mem_name"), //팔로한유저이름
 									rset.getString("mem_intro")
 						));
 			}
@@ -134,7 +135,8 @@ public class FollowDao {
 			while(rset.next()) {
 				
 				list.add(new Follow(rset.getString("mem_id"),
-						rset.getString("mem_name"),
+						rset.getString("flw_id"),
+						rset.getString("mem_name"), 
 						rset.getString("mem_intro")
 						));
 			}
@@ -180,9 +182,9 @@ public class FollowDao {
 			while(rset.next()) {
 				
 				list.add(new Follow(rset.getString("mem_id"),
-						rset.getString("mem_name"),
-						rset.getString("mem_intro")
-						));
+									rset.getString("mem_name"),
+									rset.getString("mem_intro")
+									));
 			}
 			
 		} catch (SQLException e) {
@@ -224,7 +226,8 @@ public class FollowDao {
 				
 				while(rset.next()) {
 					
-					list.add(new Follow(rset.getString("mem_id"),
+					list.add(new Follow(
+							rset.getString("MEM_ID"),
 							rset.getString("mem_name"),
 							rset.getString("mem_intro")
 							));
@@ -268,7 +271,7 @@ public class FollowDao {
 			
 			while(rset.next()) {
 				
-				list.add(new Follow(rset.getString("BK_NO")
+				list.add(new Follow(rset.getString("mem_id")
 						));
 			}
 		
@@ -314,8 +317,7 @@ public class FollowDao {
 			
 			while(rset.next()) {
 				
-				list.add(new Follow(rset.getString("MEM_ID")
-								
+				list.add(new Follow(rset.getString("mem_id")
 						));
 			}
 			

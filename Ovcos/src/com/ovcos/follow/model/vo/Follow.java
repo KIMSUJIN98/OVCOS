@@ -5,21 +5,21 @@ import java.sql.Date;
 public class Follow {
 
 	
-	 private String memId;
-	 private String flwId;
-	 private Date flwDate;
-	 private String memName;
-	 private String memIntro;
-	 private String memNick;
+	 private String memId;// 로그인아이디
+	 private String flwId; // 로그인유저가 팔로우한 아이디 
+	 private Date flwDate; // 팔로우한 날짜
+	 private String memName;  //내가 친추건 회원 네임
+	 private String memIntro; // 친추건 회원 자기소개 
+	 private String memNick; //친추건 회원 닉네임 
 	 
 	 
 	 public Follow() {}
 
 	 
 
-	public Follow(String memId) {
+	public Follow(String flwId) {
 		super();
-		this.memId = memId;
+		this.flwId = flwId;
 	}
 
 
@@ -35,9 +35,9 @@ public class Follow {
 
 
 	
-	public Follow(String memId, String memName, String memIntro) {
+	public Follow(String flwId, String memName, String memIntro) {
 		super();
-		this.memId = memId;
+		this.flwId = flwId;
 		this.memName = memName;
 		this.memIntro = memIntro;
 	}
@@ -51,6 +51,17 @@ public class Follow {
 
 	
 
+
+
+
+	public Follow(String memId, String flwId, String memName, String memIntro) {
+		super();
+		this.memId = memId;
+		this.flwId = flwId;
+		this.memName = memName;
+		this.memIntro = memIntro;
+
+	}
 
 
 
