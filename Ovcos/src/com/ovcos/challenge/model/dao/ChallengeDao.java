@@ -180,12 +180,15 @@ public class ChallengeDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list1.add(new ContestChallenge(rset.getString("CNTS_CHLG_TITLE"),
+				list1.add(new ContestChallenge(rset.getInt("CNTS_CHLG_NO"),
+											   rset.getString("CNTS_CHLG_TITLE"),
+											   rset.getString("CNTS_CHLG_CONTENT"),
 											   rset.getString("ENROLL_DATE"),
 											   rset.getString("CNTS_CHLG_DATE"),
 											   rset.getInt("CNTS_CHLG_MAX"),
 											   rset.getString("CNTS_CHLG_ID"),
-											   rset.getString("CNTS_NAME")
+											   rset.getString("CNTS_NAME"),
+											   rset.getString("CHANGE_NAME")
 											   ));
 			}
 		} catch (SQLException e) {
