@@ -73,18 +73,23 @@
     height: 50px;
     align-items: center;
     font-weight: 700;
-    padding: 0 9px 0 10px;
+    /* padding: 0 9px 0 10px; */
 }
 
 #allAgree > input {
 	padding-right : 9px;
 	margin-right :9px;
 }
+
+
 td{
 	padding: 15px 9px 0 10px;
 	font-size : 0.9rem;
 }
 
+.check_all{
+	padding: 5px 9px 0 10px;	
+}
 .ness{
 	color : #ff7920;
 	font-weight : 1000;
@@ -104,7 +109,7 @@ td{
 
 .next_btn{
 	display : inline-block;
-    width: 320px;
+    width: 400px;
     height: 45px;
     margin-top: 5px;
     background-color: #ff7920;
@@ -113,8 +118,8 @@ td{
     border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 70px;
-    margin-left : 90px; 
+    margin-top:20px;
+    margin-bottom : 20px;
     line-height : 33px;
     
     align:center;

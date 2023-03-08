@@ -69,6 +69,50 @@ public class MemberDao {
 		
 	}
 	
+	public Member selectMember(Connection conn, String userId) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Member m = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(
+								  rset.getString(1)
+								, rset.getString(2)
+								, rset.getString(3)
+								, rset.getString(4)
+								, rset.getString(5)
+								, rset.getString(6)
+								, rset.getString(7)
+								, rset.getString(8)
+								, rset.getString(9)
+								, rset.getInt(10)
+								, rset.getString(11)
+								, rset.getInt(12)
+								, rset.getString(13)
+								, rset.getString(14)
+								, rset.getString(15)
+								, rset.getString(16)
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+		
+	}
+	
 	public int insertMember(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -166,8 +210,9 @@ public class MemberDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
-				m=new Member(rset.getString("MEM_ID")
-						   , rset.getString("MEM_EML"));
+				m= new Member(
+						rset.getString("MEM_ID"));
+						
 				
 			}
 					
@@ -180,6 +225,63 @@ public class MemberDao {
 		}
 		return m;
 		
+	}
+	public Member pwdRegister(Connection conn, String id, String email) {
+		Member m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql= prop.getProperty("findPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member (
+					rset.getString("MEM_ID"),
+					rset.getString("MEM_PWD"));
+				}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+		
+	}
+	
+	public int updatePwd(Connection conn,String updatePwd, String id) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		System.out.println(updatePwd); 
+		System.out.println(id);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

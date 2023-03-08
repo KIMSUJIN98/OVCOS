@@ -53,12 +53,12 @@ div{box-sizing: border-box; }
 
 #title{
     font-size: 1.3rem;
-    font-weight: 530;
+    font-weight: 700;
 }
 
 .popup_body{
 	position : relative;
-	padding : 0px 55px 40px;
+	padding : 30px 55px 40px;
 	max-height : 710px;
 	overflow-y : auto;
 	overflow-x : hidden;
@@ -75,7 +75,6 @@ div{box-sizing: border-box; }
     /* border: 1px solid blue; */
     width: 50%;
     text-align: center;
-
     padding: 10px;
 }
 
@@ -115,7 +114,7 @@ select{
 
 table{
     border-collapse: separate;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
 }
 #info{
 	padding: 15px;
@@ -132,7 +131,7 @@ td button{
     overflow: visible;
     margin-left: -82px;
     border-radius: 3px;
-    padding : 3px 5px;
+    padding : 2px 5px;
     font-weight : 580;
     border: none;
     background-color:#ff7920;
@@ -156,7 +155,7 @@ td button{
     border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 70px;
+    margin-bottom : 30px;
     margin-top: 20px;
 }
 
@@ -186,6 +185,3 @@ td button{
     border-bottom: 3px solid #ff7920 ;
     /* margin: 0px 30px; */
 }
-.modal {
-    z-index: 1050;
-  }

@@ -16,6 +16,10 @@ import com.ovcos.feed.model.vo.detail2comments;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
+/**
+ * @author soyoung
+ *
+ */
 public class FeedDao {
 	
 	Properties prop = new Properties();
@@ -104,7 +108,7 @@ public class FeedDao {
 							rset.getString("FEED_CNT"),
 							rset.getInt("FEED_EVAL"),
 							rset.getString("FEED_PATH_NY"),
-							rset.getDate("FEED_RPR_DATE"),
+							rset.getString("FEED_RPR_DATE"),
 							rset.getInt("DISTANCE"),
 							rset.getInt("START_LAT"),
 							rset.getInt("START_LON"),
@@ -187,19 +191,21 @@ public class FeedDao {
 			while(rset.next()) {
 				
 				list.add(new Feed(rset.getInt("FEED_INDEX"),
-							rset.getString("DATE"),
-							rset.getString("FEED_TITLE"),
-							rset.getString("FEED_CNT"),
-							rset.getInt("FEED_EVAL"),
-							rset.getDouble("DISTANCE"),
-							rset.getDouble("START_LAT"),
-							rset.getDouble("START_LON"),
-							rset.getString("MEM_ID"),
-							rset.getString("CHANGE_NAME"),
-							rset.getString("MEM_NAME"),
-							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
-							));
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME")
+						));
 			}
 			
 		} catch (SQLException e) {
@@ -293,19 +299,21 @@ public class FeedDao {
 			while(rset.next()) {
 				
 				list.add(new Feed(rset.getInt("FEED_INDEX"),
-							rset.getString("DATE"),
-							rset.getString("FEED_TITLE"),
-							rset.getString("FEED_CNT"),
-							rset.getInt("FEED_EVAL"),
-							rset.getDouble("DISTANCE"),
-							rset.getDouble("START_LAT"),
-							rset.getDouble("START_LON"),
-							rset.getString("MEM_ID"),
-							rset.getString("CHANGE_NAME"),
-							rset.getString("MEM_NAME"),
-							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
-							));
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME")
+						));
 			}
 			
 		} catch (SQLException e) {
@@ -399,6 +407,8 @@ public class FeedDao {
 								rset.getString("FEED_TITLE"),
 								rset.getString("FEED_CNT"),
 								rset.getInt("FEED_EVAL"),
+								rset.getString("FEED_PUBLIC_TYPE"),
+								rset.getString("FEED_PATH_NY"),
 								rset.getDouble("DISTANCE"),
 								rset.getDouble("START_LAT"),
 								rset.getDouble("START_LON"),
@@ -727,4 +737,117 @@ public class FeedDao {
 		return list;
 	}
 
+	
+	
+	/**
+	 * 피드 삭제
+	 * @param conn
+	 * @param feedIndex
+	 * @return
+	 */
+	public int deleteFeed(Connection conn, int feedIndex) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("deleteFeed");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, feedIndex);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	
+	public int updateRpr(Connection conn, int feedIndex, String rprId) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateRpr");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rprId);
+			pstmt.setInt(2, feedIndex);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	
+	
+	public Feed selectFeed(Connection conn,int feedIndex) {
+		
+		
+		Feed f  = new Feed();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFeed");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, feedIndex);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+			
+				f = new Feed( 		
+						
+						rset.getInt("FEED_INDEX"),
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME")
+						
+						);
+				
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return f;
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 }

@@ -82,6 +82,8 @@
         , FEED_TITLE
         , FEED_CNT
         , FEED_EVAL
+        , FEED_PUBLIC_TYPE
+		, FEED_PATH_NY
         , DISTANCE
         , START_LAT
         , START_LON
@@ -215,6 +217,8 @@
          , FEED_TITLE
          , FEED_CNT
          , FEED_EVAL
+         , FEED_PUBLIC_TYPE
+         , FEED_PATH_NY
          , DISTANCE
          , START_LAT
          , START_LON
@@ -245,6 +249,8 @@
          , FEED_TITLE
          , FEED_CNT
          , FEED_EVAL
+         , FEED_PUBLIC_TYPE
+         , FEED_PATH_NY
          , DISTANCE
          , START_LAT
          , START_LON
@@ -483,4 +489,75 @@ ORDER BY
 </entry>
 
 
+<!-- 피드 삭제 -->
+<entry key="deleteFeed">
+UPDATE FEED
+SET FEED_DEL_NY = 'Y'
+WHERE FEED_INDEX = ?
+</entry>
+
+
+
+<entry key="updateRpr">
+UPDATE FEED
+SET FEED_RPR_NY = 'Y',
+    FEED_RPR_DATE = SYSDATE,
+    FEED_RPR_ID = ?
+WHERE FEED_INDEX = ?
+
+
+</entry>
+
+
+<entry key="selectFeed">
+    SELECT 
+          FEED_INDEX
+        , TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+        , FEED_TITLE
+        , FEED_CNT
+        , FEED_EVAL
+        , FEED_PUBLIC_TYPE
+		, FEED_PATH_NY
+        , DISTANCE
+        , START_LAT
+        , START_LON
+        , MEM_ID
+        , MEM_NAME
+        , MEM_NICK
+        , REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+        , CHANGE_NAME
+     FROM FEED
+     JOIN GPX_FILES USING(FEED_INDEX)
+     JOIN MEMBER USING(MEM_ID)
+	WHERE FEED_INDEX = ? 
+	</entry>
 </properties>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
