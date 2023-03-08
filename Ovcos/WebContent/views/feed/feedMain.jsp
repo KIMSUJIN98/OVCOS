@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
-<title>Insert title here</title>
 <title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 
@@ -1026,15 +1025,13 @@
         </div>
         <div id="footer">
             <!-- 푸터구역 -->
-            <div id="f1" style="" align="center">
-                <a href="#">약관&nbsp;</a> 
+            <div id="f1" align="center">
+                <a href="#"><br>이용약관&nbsp;</a> 
                 <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
                 <a href="#">&nbsp;고객센터&nbsp;</a>
                 <p style="margin-bottom: 0px;"> 
-                © 2023 KH OVCOS
+                	<br>© 2023 KH OVCOS<br>
                 </p>
-            </div>
-            <div>
             </div>
         </div>
 <!-- The Modal -->

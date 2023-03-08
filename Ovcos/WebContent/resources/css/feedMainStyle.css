@@ -276,9 +276,9 @@ body{
     /* border: 1px solid green; */
     /* background-color: aquamarine; */
 
-      font-size: 14px;
+    font-size: 14px;
     margin: 5px;
-   padding: 0;
+    padding: 0;
     width: 20%;
     color: gray;
 
@@ -344,7 +344,20 @@ body{
     height: 20%;
     /* margin: auto; */
     /* margin-top: 40px; */
-    background-color: blanchedalmond;
+    background-color: gray; /* blanchedalmond; */
+}
+#footer a{
+	color: white;
+	font-size: 15px;
+	font-weight: 500;
+}
+#footer a:hover{
+	color: black;
+}
+#footer p{
+	color: white;
+	font-size: 12px;
+	font-weight: 400;
 }
 
 /*피드 성공실패 alert 부분*/
