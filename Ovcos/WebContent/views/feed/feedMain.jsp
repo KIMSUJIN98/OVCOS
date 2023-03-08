@@ -1,6 +1,7 @@
-<%@page import="com.ovcos.explore.model.vo.Explore"%>
-<%@page import="com.ovcos.feed.model.vo.Feed"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.explore.model.vo.Explore"%>
+<%@ page import="com.ovcos.feed.model.vo.Feed"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -19,7 +20,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
-<title>Insert title here</title>
+<title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -31,7 +32,6 @@
 </head>
 <body>
 <!-- feed관련 페이지 작성 -->
-<%@ include file="../common/nav.jsp" %>
    <%if(message != null && message.equals("success")){ %>
       <div class="alert alert-primary alert-dismissable" id="succ">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
@@ -276,11 +276,11 @@
                                                         if(dis<2){
                                                             zom = 14;
                                                         }else if(dis<20){
-                                                            zom = 12;
+                                                            zom = 13;
                                                         }else if(dis<40){
-                                                            zom = 11;
+                                                            zom = 12;
                                                         }else{
-                                                            zom=10;
+                                                            zom=11;
                                                         }
                                                     	n<%=f.getFeedIndex()%>.setZoom(zom);
                                                     },800);
@@ -950,16 +950,22 @@
         </div>
        
         
-        <!-- 피드 상세 -->
+         <!-- 피드 상세 -->
         <script>
             
             
+            // function startDataLayer(xmlDoc) {
+            // map.data.addGpx(xmlDoc);
+            // }
+            // map = new naver.maps.Map('map', {
+            //     center: new naver.maps.LatLng(37.4923615, 127.0292881),
+            //     zoom: 12
+            //     });
             
             function fileSubmit(){
                var title = $("input[name='title']");
                var file = document.getElementById('avatar');
                var content = $("textarea");
-
                if(file.files.length <1){
                 alert("Gpx 파일을 선택해주세요");
                 return false;
@@ -973,7 +979,6 @@
                 return true;
                }
             }
-
             $("#insert").click(function () {
                 var last = $("#dist").text().lastIndexOf("k");
                 $("#distance").val($("#dist").text().substring(0, last));
@@ -999,7 +1004,6 @@
             })
             var polyline = null;
             var marker = null;
-            var map = null;
             var array = [];
             var lats = [];
             var lons = [];
@@ -1016,7 +1020,8 @@
             var R = 6371; // Radius of the earth in km
             var gpxFileInput = document.getElementById('avatar');
             gpxFileInput.addEventListener('change', handleFileSelect, false);
-
+            
+            
             function handleFileSelect(event) {
                 array = [];
                 lats = [];
@@ -1026,99 +1031,141 @@
                 $("#map").remove();
                 var map = "<div id='map' style='width:100%;height:100%;''></div>"
                 $("#exmap").append(map);
+                var map = new naver.maps.Map('map', {
+                            center: new naver.maps.LatLng(37.4923615, 127.0292881),
+                            zoom: 12
+                            }); 
+                
+                
                 
                 var file = event.target.files[0];
-                var reader = new FileReader();
+                var formData = new FormData();
+                formData.append("file", file);
+                setTimeout(function(){
+                    $.ajax({
+                        url:"enroll.ajax",
+                        type:'post',
+                        processData:false,
+                        contentType:false,
+                        enctype:'multipart/form-data',
+                        data:formData,
+                        success:function(result){
+                            console.log(result)
+    
+                            $.ajax({
+                                url: '<%=contextPath%>/resources/gpx_upfiles/'+result,
+                                dataType: 'xml',
+                                strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                                strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                                strokeWeight: 5,   //선 두께
+                                success: function(result){
+                                    map.data.addGpx(result);
+                                }
+                            });
+                            
+                        },
+                        error:function(){
+    
+                        }
+                        
+                    })
+                },30
+                )
                 
-                reader.onload = function (event) {
-                    var gpx = $.parseXML(event.target.result);
-                    var trackPoints = $(gpx).find('trkpt');
-                    trackPoints.each(function (index, value) {
-                        var lat = $(this).attr('lat');
-                        var lon = $(this).attr('lon');
-                        total += lat+","+lon+"|";
+                // var reader = new FileReader();
+                
+                // reader.onload = function (event) {
+                //     var gpx = $.parseXML(event.target.result);
+                //     console.log(gpx);
+                    
+                //     var trackPoints = $(gpx).find('trkpt');
+                //     // console.log(trackPoints);
+                //     trackPoints.each(function (index, value) {
+                //         var lat = $(this).attr('lat');
+                //         var lon = $(this).attr('lon');
+                //         total += lat+","+lon+"|";
                         
                         
-                        array.push(new naver.maps.LatLng(lat, lon));
-                        lats.push(lat);
-                        lons.push(lon);
-                        if (index == 0) {
-                            startLat = lat;
-                            startLon = lon;
-                        }
-                    });
+                //         array.push(new naver.maps.LatLng(lat, lon));
+                //         lats.push(lat);
+                //         lons.push(lon);
+                //         if (index == 0) {
+                //             startLat = lat;
+                //             startLon = lon;
+                //         }
+                //     });
                     
                     
-                    for (let i = 1; i < lats.length; i++) {
-                        if (lats[i - 1] == lats[i]) {
-                            dist = 0
-                        } else {
-                            var theta = lons[i - 1] - lons[i];
-                            // console.log(theta)
-                            var dist = Math.sin(deg2rad(lats[i - 1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i - 1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
-                            dist = Math.acos(dist);
-                            dist = rad2deg(dist);
-                            dist = dist * 60 * 1.1515;
-                            dist = dist * 1.609344;
-                            if (dist === NaN) {
-                                dist = 0;
-                            }
-                            sum += dist;
-                        }
-                    }
-                    // hidden에 초기 위도와 경도 대입하기
-                    $("#startLat").val(startLat);
-                    $("#startLon").val(startLon);
-                    $("#distance").val(sum.toFixed(1));
-                    // 화면에 경로 표시하기
-                    $("#dist").text(sum.toFixed(2) + 'km');
-                    // 지도 표시
-                    var zom;
-                    var dist = sum;
-                    if(sum<2){
-                        zom = 15;
-                    }else if(sum<10){
-                        zom = 13;
-                    }else if(sum<50){
-                        zom = 12;
-                    }else if(sum<90){
-                        zom = 11;
-                    }else{
-                        zom = 10;
-                    }
-                    map = new naver.maps.Map('map', {
-                        center: new naver.maps.LatLng(startLat, startLon),
-                        zoom: zom
-                    });
-                    // 지도에 선 그리기
-                    polyline = new naver.maps.Polyline({
-                        path: array,      //선 위치 변수배열
-                        strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                        strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                        strokeWeight: 3,   //선 두께
-                        map: map           //오버레이할 지도
-                    });
-                    //지도에 마커 표시하기
-                    marker = new naver.maps.Marker({
-                        position: new naver.mapsavatar.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
-                        map: map,
-                        icon: {
-                            content: '<img src=/Ovcos/resources/image/endlocation4.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                            size: new naver.maps.Size(45, 45),
-                            anchor: new naver.maps.Point(26, 40)
-                        }
-                    });
-                    marker = new naver.maps.Marker({
-                        position: new naver.maps.LatLng(startLat, startLon),
-                        map: map,
-                        icon: {
-                        	 content: '<img src=/Ovcos/resources/image/location2.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                            size: new naver.maps.Size(45, 45),
-                            anchor: new naver.maps.Point(26, 40)
-                        }
-                    });
-                };
-                reader.readAsText(file);
+                //     for (let i = 1; i < lats.length; i++) {
+                //         if (lats[i - 1] == lats[i]) {
+                //             dist = 0
+                //         } else {
+                //             var theta = lons[i - 1] - lons[i];
+                //             // console.log(theta)
+                //             var dist = Math.sin(deg2rad(lats[i - 1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i - 1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
+                //             dist = Math.acos(dist);
+                //             dist = rad2deg(dist);
+                //             dist = dist * 60 * 1.1515;
+                //             dist = dist * 1.609344;
+                //             if (dist === NaN) {
+                //                 dist = 0;
+                //             }
+                //             sum += dist;
+                //         }
+                //     }
+                //     // hidden에 초기 위도와 경도 대입하기
+                //     $("#startLat").val(startLat);
+                //     $("#startLon").val(startLon);
+                //     $("#distance").val(sum.toFixed(1));
+                //     // 화면에 경로 표시하기
+                //     $("#dist").text(sum.toFixed(2) + 'km');
+                //     // 지도 표시
+                //     var zom;
+                //     var dist = sum;
+                //     if(sum<2){
+                //         zom = 15;
+                //     }else if(sum<10){
+                //         zom = 13;
+                //     }else if(sum<50){
+                //         zom = 12;
+                //     }else if(sum<90){
+                //         zom = 11;
+                //     }else{
+                //         zom = 10;
+                //     }
+                //     map = new naver.maps.Map('map', {
+                //         center: new naver.maps.LatLng(startLat, startLon),
+                //         zoom: zom
+                //     });
+                //     // 지도에 선 그리기
+                //     polyline = new naver.maps.Polyline({
+                //         path: array,      //선 위치 변수배열
+                //         strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                //         strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                //         strokeWeight: 3,   //선 두께
+                //         map: map           //오버레이할 지도
+                //     });
+                //     //지도에 마커 표시하기
+                //     marker = new naver.maps.Marker({
+                //         position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
+                //         map: map,
+                //         icon: {
+                //             content: '<img src=/Ovcos/resources/image/endlocation5.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                //             size: new naver.maps.Size(45, 45),
+                //             anchor: new naver.maps.Point(26, 40)
+                //         }
+                //     });
+                //     marker = new naver.maps.Marker({
+                //         position: new naver.maps.LatLng(startLat, startLon),
+                //         map: map,
+                //         icon: {
+                //         	 content: '<img src=/Ovcos/resources/image/location3.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                //             size: new naver.maps.Size(45, 45),
+                //             anchor: new naver.maps.Point(26, 40)
+                //         }
+                //     });
+                // };
+                // reader.readAsText(file);
             };
         </script>
 

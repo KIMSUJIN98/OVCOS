@@ -1,31 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="selectContest">
+	<!-- 대회리스트 -->
+	<entry key="selectContestList">
 		SELECT 
-		       CNTS_NAME
+		       CNTS_NO
+		     , CNTS_NAME
 		     , CNTS_DATE
 		     , CNTS_URL
-		  FROM CONTEST
+		     , CHANGE_NAME
+		  FROM CONTEST C
+		  JOIN UPLOAD ON (CNTS_NO = UPL_NO)
+		 WHERE 
+		       C.DEL_STATUS = 'N'
+		 ORDER
+		    BY CNTS_DATE
 	</entry>
 	
+	<entry key="selectContest">
+		SELECT 
+		       CNTS_NO
+		     , CNTS_NAME
+		     , CNTS_DATE
+		     , CNTS_URL
+		     , CHANGE_NAME
+		  FROM CONTEST 
+		  JOIN UPLOAD ON (CNTS_NO = UPL_NO)
+		 WHERE 
+		       CNTS_NO = ?
+	</entry>
+	
+	<!-- 챌린지 메인 카운트 -->
 	<entry key="contestProgressCount">
 		SELECT 
 		       COUNT(*) COUNT
 		  FROM ENTRY_LIST
-		  JOIN CHALLENGE ON (CHLG_NO = CHLG_NO_INLIST)
+		  JOIN CONTEST_CHALLENGE ON (CNTS_CHLG_NO = CHLG_NO_INLIST)
 		 WHERE CHLG_ENTRY_ID = ?
-		   AND CHLG_DATE > SYSDATE
+		   AND CNTS_CHLG_DATE > SYSDATE
 	</entry>
 	
 	<entry key="contestCompleteCount">
 		SELECT 
 		       COUNT(*) COUNT
 		  FROM ENTRY_LIST
-		  JOIN CHALLENGE ON (CHLG_NO = CHLG_NO_INLIST)
+		  JOIN CONTEST_CHALLENGE ON (CNTS_CHLG_NO = CHLG_NO_INLIST)
 		 WHERE CHLG_ENTRY_ID = ?
-		   AND CHLG_DATE &lt; SYSDATE
+		   AND CNTS_CHLG_DATE &lt; SYSDATE
+	</entry>
+	
+	<entry key="normalProgressCount">
+		SELECT 
+		       COUNT(*) COUNT
+		  FROM NENTRY_LIST
+		  JOIN NORMAL_CHALLENGE ON (NOR_CHLG_NO = NCHLG_NO_INLIST)
+		 WHERE NCHLG_ENTRY_ID = ?
+		   AND NOR_CHLG_DATE > SYSDATE
+	</entry>
+	
+	<entry key="normalCompleteCount">
+		SELECT 
+		       COUNT(*) COUNT
+		  FROM NENTRY_LIST
+		  JOIN NORMAL_CHALLENGE ON (NOR_CHLG_NO = NCHLG_NO_INLIST)
+		 WHERE NCHLG_ENTRY_ID = ?
+		   AND NOR_CHLG_DATE &lt; SYSDATE
+	</entry>
+	
+	<!-- 챌린지 메인 리스트 -->
+	<entry key="mainContestList">
+		SELECT 
+		       CNTS_CHLG_TITLE
+		     , ENROLL_DATE
+		     , CNTS_CHLG_DATE
+		     , CNTS_CHLG_MAX
+		     , CNTS_CHLG_ID
+		     , CNTS_NAME
+		  FROM CONTEST_CHALLENGE C
+		  JOIN CONTEST USING (CNTS_NO)
+		  JOIN ENTRY_LIST ON (CHLG_NO_INLIST = CNTS_NO)
+		 WHERE
+		       CHLG_ENTRY_ID = ?
+		   AND C.DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+	</entry>
+	
+	<entry key="mainNormalList">
+		SELECT 
+		       NOR_CHLG_TITLE
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+		  FROM NORMAL_CHALLENGE
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+		  JOIN NENTRY_LIST ON (NCHLG_NO_INLIST = NOR_CHLG_NO)
+		 WHERE
+		       NCHLG_ENTRY_ID = ?
+		   AND DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
 	</entry>
 
-
+	<!-- 대회 챌린지 리스트 -->
+	<entry key="contestChallengeList">
+		SELECT 
+		       CNTS_CHLG_NO
+		     , CNTS_CHLG_TITLE
+		     , CNTS_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , CNTS_CHLG_DATE
+		     , CNTS_CHLG_MAX
+		     , CNTS_CHLG_ID
+		     , CNTS_NAME
+		     , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(CHLG_ENTRY_ID)
+		          FROM ENTRY_LIST 
+		         WHERE CHLG_NO_INLIST = CNTS_CHLG_NO) COUNT
+		  FROM CONTEST_CHALLENGE C
+		  JOIN CONTEST USING (CNTS_NO)
+		  LEFT JOIN UPLOAD ON (CNTS_CHLG_NO = UPL_NO)
+		 WHERE
+		       C.DEL_STATUS = 'N'
+		   AND C.RPR_STATUS = 'N'
+		   AND CNTS_NO = ?
+		 ORDER
+		    BY 1 DESC
+	</entry>
+	
+	<!-- 일반 챌린지 리스트 -->
+	<entry key="selectLocalList">
+		SELECT
+		       LOCAL_NO
+		     , LOCAL_NAME
+		  FROM LOCAL
+	</entry>
+	
+	<entry key="normalChallengeList">
+		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+	</entry>
+	
+	<entry key="normalChallengeListLocal">
+		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND RPR_STATUS = 'N'
+		   AND LOCAL_NO = ?
+	</entry>
+	
+	<!-- 대회 추가 -->
+	<entry key="insertContest">
+		INSERT
+		  INTO CONTEST
+		     (
+		       CNTS_NO
+		     , CNTS_NAME
+		     , CNTS_DATE
+		     , CNTS_URL
+		     , DEL_STATUS
+		     )
+		VALUES
+		     (
+		       SEQ_CNTS_NO.NEXTVAL
+		     , ?
+		     , TO_DATE(?,'YYYYMMDDHH24MI')
+		     , ?
+		     , DEFAULT
+		     )
+	</entry>
+	
+	<entry key="insertImg">
+		INSERT
+		  INTO UPLOAD
+		     (
+		       UPL_ID
+		     , UPL_MENU
+		     , UPL_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , VER_STATUS
+		     , DEL_STATUS
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     , SEQ_CNTS_NO.CURRVAL
+		     , ?
+		     , ?
+		     , DEFAULT
+		     , DEFAULT
+		     )
+	</entry>
+	
+	
+	<entry key="deleteContest">
+		UPDATE
+		       CONTEST
+		   SET DEL_STATUS = 'Y'
+		 WHERE CNTS_NO = ?
+	</entry>
+	
+	<entry key="insertContestChallenge">
+		INSERT
+		  INTO CONTEST_CHALLENGE
+		     (
+		       CNTS_CHLG_NO
+		     , CNTS_CHLG_TITLE
+		     , CNTS_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , CNTS_CHLG_DATE
+		     , CNTS_CHLG_MAX
+		     , CNTS_CHLG_ID
+		     , CNTS_NO
+		     )
+		VALUES
+		     (
+		       SEQ_CHLG_NO.NEXTVAL
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , TO_DATE(?,'YYYYMMDDHH24MI')
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key="insertContestChallengeImg">
+		INSERT
+		  INTO UPLOAD
+		     (
+		       UPL_ID
+		     , UPL_MENU
+		     , UPL_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , VER_STATUS
+		     , DEL_STATUS
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     , SEQ_CHLG_NO.CURRVAL
+		     , ?
+		     , ?
+		     , DEFAULT
+		     , DEFAULT
+		     )
+	</entry>
+	
+	<entry key="deleteContestChallenge">
+		UPDATE
+	       CONTEST_CHALLENGE
+	   SET DEL_STATUS = 'Y'
+	 WHERE CNTS_CHLG_NO = ?
+	</entry>
+	
+	<entry key="insertEntryList">
+		INSERT
+		  INTO ENTRY_LIST
+		     (
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		     )
+		VALUES
+		     (
+		       SEQ_CHLG_NO.CURRVAL
+		     , ?
+		     )
+	</entry>
+	
 </properties>

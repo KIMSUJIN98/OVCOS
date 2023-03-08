@@ -1,4 +1,4 @@
-<%@page import="com.ovcos.loginRegister.model.vo.Member"%>
+<%@ page import="com.ovcos.loginRegister.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -11,7 +11,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- <title>OVCOS</title> -->
+
+<!-- Favicon-->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"/>
+<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16"/>
+
 <link rel="stylesheet" href="<%= contextPath %>/resources/css/navStyle.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +25,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- jQuery library -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script> -->
 <!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
@@ -58,10 +63,10 @@
 
                         <li id="feed"><a href="<%= contextPath %>/list.feed">피드</a></li>
                         <li id="explore"><a href="<%= contextPath %>/course?epage=1">탐색</a></li>
-                        <li id="challenge"><a href="<%= contextPath %>/views/challenge/challengeMain.jsp">챌린지</a>
+                        <li id="challenge"><a href="<%= contextPath %>/main.ch">챌린지</a>
 	                        <ul>
 	                        	<li><a href="<%= contextPath %>/cntsMain.ch">대회</a></li>
-	                        	<li><a href="<%= contextPath %>/views/challenge/normalList.jsp">일반</a></li>
+	                        	<li><a href="<%= contextPath %>/ncList.ch?local=0">일반</a></li>
 	                        </ul>
                         </li>
                     </ul>
@@ -89,8 +94,8 @@
                         			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a>
                         		</div>
                         	</li>
-                            <li class="subMenuList"><a href="#">마이페이지</a></li>
-                            <li class="subMenuList"><a href="#">개인정보수정</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/myPage.me?userId=<%=loginUser.getMemId()%>">마이페이지</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/editInfo.me?userId=<%=loginUser.getMemId()%>">개인정보수정</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/logout.me">로그아웃</a></li>
                         </ul>

@@ -1,6 +1,7 @@
-<%@page import="com.ovcos.common.model.vo.Pageinfo"%>
-<%@page import="com.ovcos.follow.model.vo.Follow"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.common.model.vo.Pageinfo"%>
+<%@ page import="com.ovcos.follow.model.vo.Follow"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -16,7 +17,7 @@ int maxPage = pi.getMaxPage();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OVCOS - 친구목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/followList.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -28,7 +29,6 @@ int maxPage = pi.getMaxPage();
 </style>
 </head>
 <body>
-    <%@ include file="../common/nav.jsp" %>
     <input type = "hidden" name="userId" id="userId" value="<%= loginUser.getMemId() %>">
 
 

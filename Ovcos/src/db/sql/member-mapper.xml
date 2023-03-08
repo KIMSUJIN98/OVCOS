@@ -21,15 +21,13 @@
 		FROM MEMBER
 		WHERE MEM_ID = ?
 		AND MEM_PWD = ?
-	
 	</entry>
 	
 	<entry key="deleteNotice">
-	
-	UPDATE
-            NOTICE
-        SET STATUS = 'N'
-    WHERE NOTICE_NO =?
+		UPDATE
+	            NOTICE
+	        SET STATUS = 'N'
+	    WHERE NOTICE_NO =?
     </entry>
     
     <entry key="insertMember">

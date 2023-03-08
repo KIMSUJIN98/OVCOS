@@ -1,9 +1,372 @@
-.mp-wrap{
-    border: 1px solid red;
+div{
+	/* border: 1px solid red; */
 }
 
 .mp-wrap{
 	width: 100%;
     height: 100%;
 }
+
+.mp-section1, #back-table{
+	width: 100%;
+	height: 350px;
+}
+
+.mp-section2{
+	width: 100%;
+	height: 600px;
+}
+
+.mp-section3{
+	width: 100%;
+	height: 800px;
+	margin-top: 100px;
+	/* border: 5px solid blue; */
+}
+
+
+/* -------------------------------------------- */
+
+/* 배경이미지 */
+.back-img{
+	width: 100%;
+	height: 100%;
+	background-image: url("../upload/hd-wallpaper-g12c2685ac_1920.jpg");
+	background-repeat: no-repeat;
+	/* background-size : cover; */
+	opacity: 0.75;
+	background-position: 0px -500px;
+}
+
+/* 사용자 프로필사진 */
+#back-table img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin-top: 100px;
+}
+
+/* 사용자 이름 */
+#name{
+	font-family: 'SUIT-Regular';
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight: 600;
+	font-size: 25px;
+	padding-top: 250px;
+	padding-left: 25px;
+}
+
+#nick{
+	color: rgb(67, 115, 176);
+	font-size: 20px;
+}
+
+/* 사용자 자기소개 */
+#introduce{
+	font-family: 'SUIT-Regular';
+	color: gray;
+	font-weight: 500;
+	font-size: 20px;
+	padding-left: 25px;
+}
+
+
+/* -------------------------------------------- */
+
+#myHealth{
+	width: 100%;
+	height: 100%;
+	/* text-align: center; */
+}
+
+#display_list{
+	height: 90%; /*70*/
+}
+
+#display_list>div{
+	height: 100%;
+	float: left;
+}
+
+.sec2-blank{
+	height: 5%; /*15*/
+}
+
+.sec2-blank2{
+	width: 20%; /*20*/
+}
+
+#list_content{
+	width: 60%; /*60*/
+	/* border: 1px solid black; */
+	padding: 15px;
+}
+
+#list_content h1{
+	font-family: 'SUIT-Regular';
+	color: rgb(67, 115, 176);
+}
+
+#list_content span{
+	font-family: 'SUIT-Regular';
+	color: gray;
+	font-weight: 500;
+	font-size: 20px;
+	padding-left: 25px;
+}
+
+#inList_content{
+	width: 70%;
+	height: 90%;
+	border: 1px solid black;
+	padding: 10px;
+}
+
+#inList_content>h4{
+	font-family: 'SUIT-Regular';
+	color: black;
+}
+
+#inList_content_right{
+	width: 30%;
+	height: 90%;
+	/* border: 1px solid black; */
+	padding-left: 30px;
+}
+
+#list_content>div{
+	float: left;
+}
+
+#userGoal{
+	width: 100px;
+}
+
+/* ---------------- 그래프 css ------------------ */
+
+ul, li {
+  list-style: none;
+}
+
+.blind {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.vertical_chart_box {
+  position: relative;
+}
+.vertical_chart_box .chart_box {
+  position: relative;
+  /* margin-bottom: 45px; */
+  padding-left: 40px; /*20*/
+  box-sizing: border-box;
+  height: 300px; /*200px;*/
+}
+.vertical_chart_box .axis_y {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 40px;/*20*/
+  height: 100%;
+  font-size: 12px;
+  color: #4a4a4a;
+}
+.vertical_chart_box .axis_y:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: #d3d3d3;
+}
+.vertical_chart_box .axis_x {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  border-bottom: 1px solid #d3d3d3;
+}
+.vertical_chart_box .axis_x .item {
+  flex: 1;
+  position: relative;
+}
+.vertical_chart_box .axis_x .item .text_box {
+  position: absolute;
+  bottom: -60px; /*-43px*/
+  left: 50%;
+  text-align: center;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+.vertical_chart_box .axis_x .item .text_box .day {
+  display: block;
+  font-size: 15px; /*12px*/
+  line-height: 19px; /*19px*/
+  color: #4a4a4a;
+}
+.vertical_chart_box .axis_x .item .text_box .day.sat {
+  color: #3475ed;
+}
+.vertical_chart_box .axis_x .item .text_box .day.sun {
+  color: #eb474a;
+}
+.vertical_chart_box .axis_x .item .text_box .time {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #999;
+}
+.time{ /*전체 추가함*/
+	padding-left: 0px !important;
+	font-size: 15px !important;
+}
+.vertical_chart_box .axis_x .graph {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  width: 35px;
+  height: 100%;
+  background: #e8e8e8;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+}
+.vertical_chart_box .axis_x .graph .time {
+  display: block;
+  position: relative;
+  margin-bottom: -4px;
+  padding-top: 4px;
+  box-sizing: content-box;
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+}
+.vertical_chart_box .axis_x .graph .time.data1 {
+  /* background: #e73ea9; */
+  background: rgb(67, 115, 176);
+  z-index: 3;
+}
+
+.vertical_chart_box .axis_x button.graph {
+  border: 0;
+}
+
+/* -------------------------------------------- */
+
+#myActivity{
+	width: 100%;
+	height: 100%;
+	/* text-align: center; */
+}
+
+#activity_list{
+	height: 90%; /*70*/
+}
+
+#activity_list>div{
+	height: 100%;
+	float: left;
+}
+
+#activity_content{
+	width: 60%; /*60*/
+	/* border: 1px solid black; */
+}
+
+.filter-btn{
+	margin-left: 5px;
+}
+
+#searchBox{
+	margin-right: 270px;
+}
+
+
+/* ---------------------------------------------- */
+
+.mp-section4{
+	width: 100%;
+	height: 200px;
+	background-color: gray;
+	
+}
+
+
+
+
+
+
+
+
+/* 조회 텍스트 */
+.container h1{
+	font-family: 'SUIT-Regular';
+	color: rgb(67, 115, 176);
+}
+
+
+
+
+
+
+
+
+#sec1-top{
+	width: 100%;
+	height: 300px;
+}
+
+#sec1-bottom{
+	width: 100%;
+	height: 50px;
+}
+
+/* 프로필사진 */
+.mp-section1 img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	/* margin-left: 300px;
+	margin-top: 250px; */
+	position: absolute;
+}
+
+
+
+#sec1-tr1{
+	width: 100%;
+	height: 250px;
+}
+
+#sec1-tr2{
+	width: 100%;
+	height: 50px;
+}
+
+
 

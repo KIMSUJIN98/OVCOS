@@ -1,12 +1,19 @@
+<%@ include file="../common/nav.jsp" %>
+<%@page import="com.ovcos.challenge.model.vo.NormalChallenge"%>
+<%@page import="com.ovcos.challenge.model.vo.Local"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Local> list1 = (ArrayList<Local>)request.getAttribute("list1");
+	ArrayList<NormalChallenge> list2 = (ArrayList<NormalChallenge>)request.getAttribute("list2");
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>챌린지</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+<title>OVCOS - 일반챌린지 목록</title>
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
@@ -26,7 +33,6 @@
 </head>
 
 <body>
-    <%@ include file="../common/nav.jsp" %>
     <!-- Header-->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
@@ -41,24 +47,11 @@
     </header>
     
     <div style="float: left; padding-top: 30px; width: 84%;" align="right">
-    <select name="location" id="selectLocation" onchange="selectBox();">
-        <option name="selectLocation" value="서울">서울</option>
-        <option name="selectLocation" value="부산">부산</option>
-        <option name="selectLocation" value="인천">인천</option>
-        <option name="selectLocation" value="대구">대구</option>
-        <option name="selectLocation" value="광주">광주</option>
-        <option name="selectLocation" value="대전">대전</option>
-        <option name="selectLocation" value="울산">울산</option>
-        <option name="selectLocation" value="세종">세종</option>
-        <option name="selectLocation" value="경기">경기</option>
-        <option name="selectLocation" value="강원">강원</option>
-        <option name="selectLocation" value="충북">충북</option>
-        <option name="selectLocation" value="충남">충남</option>
-        <option name="selectLocation" value="전북">전북</option>
-        <option name="selectLocation" value="전남">전남</option>
-        <option name="selectLocation" value="경북">경북</option>
-        <option name="selectLocation" value="경남">경남</option>
-        <option name="selectLocation" value="제주">제주</option>
+    <select name="local" id="selectLocal" onchange="selectBox();">
+        <option value="0">전체</option>
+    <% for(Local l : list1) { %>
+        <option value="<%= l.getLocalNo() %>"><%= l.getLocalName() %></option>
+    <% } %>
     </select>
     </div>
     <!-- Section-->
@@ -77,11 +70,13 @@
                                 생성해보세요!
                             </div>
                             <br><br>
-                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeNormal">새로운 모험</button></div>
+                            <!-- Button to Open the Modal -->
+                            <div class="text-center">
+                                <button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#newCallengeNormal">새로운 모험</button>
+                            </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <!-- Button to Open the Modal -->
                                         
                             <!-- The Modal -->
                             <div class="modal" id="newCallengeNormal">
@@ -96,7 +91,7 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body" align="center">
-                                            <form action="test.do" method="post" id="updatechallenge-form">
+                                            <form action="" method="post" id="updatechallenge-form">
                                                 <table class="newUpload">
                                                     <tr>
                                                         <td>
@@ -110,24 +105,10 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <select name="location" id="selectLocation">
-                                                                <option name="selectLocation" value="서울">서울</option>
-                                                                <option name="selectLocation" value="부산">부산</option>
-                                                                <option name="selectLocation" value="인천">인천</option>
-                                                                <option name="selectLocation" value="대구">대구</option>
-                                                                <option name="selectLocation" value="광주">광주</option>
-                                                                <option name="selectLocation" value="대전">대전</option>
-                                                                <option name="selectLocation" value="울산">울산</option>
-                                                                <option name="selectLocation" value="세종">세종</option>
-                                                                <option name="selectLocation" value="경기">경기</option>
-                                                                <option name="selectLocation" value="강원">강원</option>
-                                                                <option name="selectLocation" value="충북">충북</option>
-                                                                <option name="selectLocation" value="충남">충남</option>
-                                                                <option name="selectLocation" value="전북">전북</option>
-                                                                <option name="selectLocation" value="전남">전남</option>
-                                                                <option name="selectLocation" value="경북">경북</option>
-                                                                <option name="selectLocation" value="경남">경남</option>
-                                                                <option name="selectLocation" value="제주">제주</option>
+                                                            <select name="insertLocal" id="selectLocation">
+                                                            <% for(Local l : list1) { %>
+                                                                <option value="<%= l.getLocalNo() %>"><%= l.getLocalName() %></option>
+                                                            <% } %>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -160,168 +141,53 @@
                     </div>
                 </div>
 
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><button type="button" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#cntsDetail">참가하기</button></div>
-                        </div>
-                            <!-- The Modal -->
-                            <div class="modal" id="cntsDetail">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">챌린지 상세보기</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Modal body..
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
-                                    </div>
+                <% for(NormalChallenge n : list2) { %>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div> -->
+                            <!-- image -->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                                alt="..." />
+                            <!-- details -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- name -->
+                                    <h5 class="fw-bolder"><%= n.getNormalChallengeTitle() %></h5>
+                                    <!-- summary -->
+                                    <%= n.getNormalChallengeLocal() %><br>
+                                    <%= n.getNormalChallengeDate() %><br>
+                                    <%= n.getCount() %>
                                 </div>
                             </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">참여중</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
+                            <!-- actions -->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a>
+                                </div>
                             </div>
                         </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
                     </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
+                <% } %>
+                
+                <!-- The Modal -->
+                <div class="modal" id="cntsDetail">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">챌린지 상세보기</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">참여중</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                Modal body..
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">참여중</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">챌린지</h5>
-                                <!-- Product price-->
-                                상세설명
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
                         </div>
                     </div>
                 </div>
@@ -341,10 +207,35 @@
 
     <script>
         var selectBox = function(){
-            var selectLocation = document.getElementById("selectLocation");
-            var value = (selectLocation.options[selectLocation.selectedIndex].value);
-            // console.log(value);
+            var selectLocal = document.getElementById("selectLocal");
+            var local = (selectLocal.options[selectLocal.selectedIndex].value);
+            console.log(local);
+            location.href='<%= contextPath %>/ncList.ch?local=' + local;
         }
+        document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
+        // $('#selectLocal option[value=' + value + ']').prop('selected', true);
+
+
+
+        // $(function(){
+        //     $("#selectLocal").val("${param.sb_cate}").attr("selected","selected");
+        // });
+
+        // function selectBox(){
+        //     $.ajax({
+        //         url:"ncList.ch",
+        //         data:{
+        //             local:$("#selectLocal option:selected").val()
+        //         },
+        //         type:"get",
+        //         success:function(e){
+        //             console.log(e);
+        //             location.href='<%= contextPath %>/ncList.ch?local=' + local;
+        //         },
+        //         // contentType: "application/json; charset=utf-8",
+        //         // dataType: "json"
+        //     })
+        // }
     </script>
 
 </body>
