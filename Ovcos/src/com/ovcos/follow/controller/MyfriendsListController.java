@@ -39,6 +39,7 @@ public class MyfriendsListController extends HttpServlet {
 
 		ArrayList<Follow> list = new FollowService().selectMyfriendList(userId);
 		
+		System.out.println(list);
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}

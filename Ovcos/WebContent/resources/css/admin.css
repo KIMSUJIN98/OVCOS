@@ -8,6 +8,7 @@
     background-color: coral;
     width: 300px;
     height: 1000px;
+    float: left;
 }
 div, form, input{
     /* border: 1px solid black; */
