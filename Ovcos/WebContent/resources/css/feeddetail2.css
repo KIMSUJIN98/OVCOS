@@ -104,9 +104,11 @@
     box-shadow: inset 0px 0px 5px white;
   }
 
-path{
-    stroke: red !important;
+  path{
+    stroke: orangered !important;
+    stroke-width: 7px !important;
 }
+
 img[src*='marker']{
     display: none !important;
 }

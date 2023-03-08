@@ -811,41 +811,70 @@
 
             </script>
             <div id="ct3">
-                <div id="dust">
+                <!-- <div id="dust">
                     <div id="date"></div>
                     
                     <div id="pm10"></div>
                     <div id="pm25"></div>
                     
-                </div>
+                </div> -->
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
                 <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
-                    <div style="font-weight: 600; color: white;">현재 위치</div>
+                    <div style="font-weight: 600; color: white; padding-right: 15px;" align="center">현재 위치</div>
+                    <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre"></div>
                     <div style="color: white;"> 
-                        날짜
+                        <div id="year" style="color: white; padding-right: 5px;" align="center"></div>
+                        <div id="hour" style="color: white; padding-right: 5px;" align="center"></div>
                     </div>
                 </div>   
                     <div >
                         <div style="font-weight: 600; padding-left: 15px; color: white;">미세먼지
                             <div style="display: flex;">
-                                <img src="${pageContext.request.contextPath}/resources/image/Emo1.png" style="width: 40px; padding-top: 5px;" >
-                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo1.png" style="width: 40px; padding-top: 10px;" id="mi" >
+                                <div style="padding-left: 10px; padding-top: 18px; color: white;" id="status1">
+                                    
+                                </div>
+                                
                             </div>
+                            <div style="font-size: 0.9rem; color: white;">
+                                <span id="miVal" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                            </div>
+                            
                         </div>
                         
                     </div>
                     <div>
                         <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
-                                <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 5px;" >
-                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 10px;" id="mi2" >
+                                <div style="padding-left: 10px; padding-top: 10px; color: white;" id="status2">나쁨</div>
                             </div>
                         </div>
-                        
+                        <div style="font-size: 0.9rem; color: white; padding-left: 50px;">
+                            <span id="miVal2" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                        </div>
                     </div>
-                    
+                    <script>
+                        var date = new Date();
+
+                        var format1 = date.getFullYear()+"-"+
+                                    ((date.getMonth()+1) <9? "0"+(date.getMonth()): (date.getMonth()))+"-"+
+                                    (date.getDate() <10? "0"+(date.getDate()): (date.getDate()));
+                        var format2 = (date.getHours()<10 ? "0"+
+                        (date.getHours()): (date.getHours()))+":"+
+                        (date.getMinutes() <10? "0"+
+                        (date.getMinutes()):date.getMinutes());
+
+
+                        console.log(format1);
+                        console.log(format2);
+
+                        $("#year").html(format1);
+                        $("#hour").html(format2);
+
+                    </script>
                 </div>
                 <div id="weather" >
                
