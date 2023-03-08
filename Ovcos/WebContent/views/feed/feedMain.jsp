@@ -434,7 +434,13 @@
                 </div>
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
-                <div id="weather">날씨 api 구역</div>
+                <div id="dust">미세먼지api 구역</div>
+                <div id="weather">
+                <!-- Weather widget by https://meteodays.com -->
+				<a id="ms-informer-link-0aaa8b335b7df33a2e315fad7e6411c6" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
+				<script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/0aaa8b335b7df33a2e315fad7e6411c6"></script>
+				<!-- End -->
+				</div>
                 <div id="footer">
                     <!-- 푸터구역 -->
                     <div id="f1">
