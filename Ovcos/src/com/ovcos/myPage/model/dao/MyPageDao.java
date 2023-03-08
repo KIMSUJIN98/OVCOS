@@ -5,6 +5,7 @@ import static com.ovcos.common.JDBCTemplate.close;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,7 +72,34 @@ public class MyPageDao {
 	}
 	
 	/**
-	 * 일자별 달린거리를 담은 리스트를 반환하는 메소드
+	 * 오늘 날짜를 String으로 반환해주는 메소드
+	 * @param conn
+	 * @return
+	 */
+	public String selectToday(Connection conn) {
+		String today = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectToday");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				today = rset.getString("RUNDATE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return today;
+	}
+	
+	/**
+	 * 오늘 날짜를 기준으로 일주일간의 일자별 달린거리를 담은 리스트를 반환하는 메소드
 	 * @param conn
 	 * @param userId
 	 */
@@ -88,7 +116,11 @@ public class MyPageDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new MyPage(rset.getString("MEM_ID"), rset.getDouble("DISTANCE"), rset.getString("RUNDATE")));
+				MyPage mp = new MyPage();
+				mp.setUserId(rset.getString("MEM_ID"));
+				mp.setDistance(rset.getDouble("DISTANCE"));
+				mp.setRunDate(rset.getString("RUNDATE"));
+				list.add(mp);
 			}
 			
 		} catch (SQLException e) {
@@ -97,8 +129,35 @@ public class MyPageDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+		System.out.println(list);
 		return list;
+	}
+	
+	/**
+	 * 목표 재설정을 위한 메소드
+	 * @param conn
+	 * @param userGoal
+	 * @param userId
+	 * @return
+	 */
+	public int updateSetGoal(Connection conn, int userGoal, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateSetGoal");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userGoal);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

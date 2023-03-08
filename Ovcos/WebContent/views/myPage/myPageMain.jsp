@@ -29,6 +29,7 @@
 %>
 <%
 	ArrayList<MyPage> list = (ArrayList<MyPage>)session.getAttribute("dayList");
+	String today = (String)session.getAttribute("today");
 %>
 <!DOCTYPE html>
 <html>
@@ -108,69 +109,46 @@
 								     	<li class="item">50<span class="blind">km</span></li>
 								 	</ul>
 								   	<ul class="axis_x">
-								     	<li class="item">
-								       		<div class="text_box">
-								         		<strong class="day">01(수)</strong>
-								         		<span class="time">20km</span>
-								       		</div>
-								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
-								       		</button>
-								     	</li>
-								     	<li class="item">
-								       		<div class="text_box">
-								         		<strong class="day">02(목)</strong>
-								         		<span class="time">50km</span>
-								       		</div>
-								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
-								       		</button>
-								     	</li>
-								     	<li class="item">
-								       		<div class="text_box">
-								         		<strong class="day">03(금)</strong>
-								         		<span class="time">30km</span>
-								       		</div>
-								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:60%;"><span class="blind">data 타입 1</span></span>
-								       		</button>
-								     	</li>
-								     	<li class="item">
-								       		<div class="text_box">
-								         		<strong class="day">04(토)</strong>
-								         		<span class="time">25km</span>
-								       		</div>
-								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
-								       		</button>
-								     	</li>
-								     	<li class="item">
-								       		<div class="text_box">
-								         		<strong class="day">05(일)</strong>
-								         		<span class="time">40km</span>
-								       		</div>
-								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:80%;"><span class="blind">data 타입 1</span></span>
-								       		</button>
-								     	</li>
-								     	<li class="item">
-								       		<div class="text_box">
-								         		<strong class="day sat">06(월)</strong>
-								         		<span class="time">20km</span>
-								       		</div>
-								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
-								        	</button>
-								      	</li>
+									   	<% for(int i=6; i>0; i--){ %>
+									   		<% if((Integer.parseInt(today.substring(6))-i)>0){%>
+									   		<% double a = 0; %>
+										     	<li class="item">
+										       		<div class="text_box">
+										         		<strong class="day"><%= Integer.parseInt(today.substring(6))-i%>일</strong>
+										         		<span class="time" style="height: 15px;">
+										         		<%for(int j=0; j<list.size(); j++){ %>
+										         			<%if(Integer.parseInt(list.get(j).getRunDate().substring(6))==(Integer.parseInt(today.substring(6))-i)){ %>
+										         				<%=list.get(j).getDistance() %>km
+										         				<% a = list.get(j).getDistance(); %>
+										         			<%} %>
+										         		<%} %>
+										         		</span>
+										       		</div>
+										       		<button type="button" class="graph">
+										         		<span class="time data1" style="height:<%=a*2%>%;"><span class="blind">data 타입 1</span></span>
+										       		</button>
+										     	</li>
+									     	<% } %>
+									     <% } %>
+								     	
 								      	<li class="item">
 								        	<div class="text_box">
 								          		<strong class="day sun">TODAY</strong>
-								          		<span class="time">0km</span>
+								          		<span class="time" style="height: 15px;">
+								          		<% double a = 0; %>
+								         		<%for(int j=0; j<list.size(); j++){ %>
+								         			<%if(Integer.parseInt(list.get(j).getRunDate().substring(6))==(Integer.parseInt(today.substring(6)))){ %>
+								         				<%=list.get(j).getDistance() %>km
+								         				<% a = list.get(j).getDistance(); %>
+								         			<%} %>
+								         		<%} %>
+								         		</span>
 								        	</div>
 								        	<button type="button" class="graph">
-								        		<span class="time data1" style="height:0%;"><span class="blind">data 타입 1</span></span>
+								        		<span class="time data1" style="height:<%=a*2%>%;"><span class="blind">data 타입 1</span></span>
 								        	</button>
 								      	</li>
+								      	
 								    </ul>
 								</div>                                                 
 							</div>
@@ -202,12 +180,15 @@
 							        <h4 class="modal-title" id="myGoalLabel">목표설정</h4>
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							      </div>
-							      <div class="modal-body">
-							        목표 km를 입력하세요 : <input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>">
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-primary" data-dismiss="modal">저장하기</button>
-							      </div>
+							      <form action="<%= contextPath %>/goalSet.me" method="post">
+							      	  <input type="hidden" id="goal-userId" name="goal-userId" value="<%= loginUser.getMemId()%>">
+								      <div class="modal-body">
+								      	목표 km를 입력하세요 : <input type="number" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn()%>">
+								      </div>
+								      <div class="modal-footer">
+								        <button type="submit" class="btn btn-primary" data-dismiss="modal">저장하기</button>
+								      </div>
+							      </form>
 							    </div>
 							  </div></div>
                     	</div>
