@@ -61,11 +61,12 @@ public class FeedListController extends HttpServlet {
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
 		String select = request.getParameter("sorting");
 		
+		
 		ArrayList<Feed>  allList = new FeedService().selectArrayList(userId);
 		response.setContentType("application/json; charset=utf-8");
 		
 		
-		if(select ==null) {
+		if(select == null) {
 			request.setAttribute("allList", allList);
 			request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
 			

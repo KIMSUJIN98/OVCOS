@@ -19,11 +19,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Create.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
 
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
+<title>Insert title here</title>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script>
+
+
 <style>
     path{
     stroke: red !important;
@@ -802,15 +809,220 @@
 
 
             </script>
-            
             <div id="ct3">
-                <div id="dust">미세먼지api 구역</div>
-                <div id="weather">날씨 api 구역
-                <!-- Weather widget by https://meteodays.com -->
-<a id="ms-informer-link-9a81278de12cf4fb09446b795ed41b20" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/moskva"></a>
-<script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/9a81278de12cf4fb09446b795ed41b20"></script>
-<!-- End -->
+                <div id="dust">
+                    <div id="date"></div>
+                    
+                    <div id="pm10"></div>
+                    <div id="pm25"></div>
+                    
                 </div>
+                <!-- 미세먼지 관련 js -->
+                <script src="<%=contextPath %>/resources/js/dust.js"></script>
+                <div id="dust">
+                 <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
+                    <div style="font-weight: 600; color: white;">현재 위치</div>
+                    <div style="color: white;"> 
+                        날짜
+                    </div>
+                </div>   
+                    <div >
+                        <div style="font-weight: 600; padding-left: 15px; color: white;">미세먼지
+                            <div style="display: flex;">
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo1.png" style="width: 40px; padding-top: 5px;" >
+                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
+                            <div style="display: flex;">
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 5px;" >
+                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div id="weather" >
+               
+                <table cellspacing="0" style="background-color: rgb(67, 115, 176); border-radius: 15px; width: 100%; height: 450px;">
+                    <thead class="header" style="">
+                        <tr>
+                            <td colspan="3">
+                                <div style="font-weight: 900; padding-left: 15px; padding-top: 15px; border-bottom: 2px solid white;">
+                                지역 위치
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fact" style="display: none; ">
+                            
+                            <td class="time" style="width: 150px;">
+                                <span class="date">3월 8일</span>
+                                <div class="hours" style="width: 70px;">오전 9:33</div>
+                            </td>
+                            <th class="weather-icon-container "  data-icon-id="overcast" data-wi-icon-id="cloud" data-title="중요한 구름" data-icon-size="36">
+                           
+                               
+                            </th>
+                            <td class="weather" style="width: 150px; padding-left: 15px;">
+                                <div class="temperature" title="기온" style="">13°</div>
+                                <div class="wind" title="바람" style="display: none;">
+                                    남동 3.6 km/h                            </div>
+                            </td>
+                        </tr>
+                            <tr class="days day_1">
+                                <td class="time" style="width: 150px; padding-left: 15px;">
+                                    <span class="weekday">수</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 8일</div>
+                                </td>
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_rain" data-wi-icon-id="rain" data-title="대체로 흐리고 비가 내림" data-icon-size="36">
+                                    <!-- 이미지 들어가는 부분 -->
+                                    <img style="width: 20px; " src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;" >
+                                    <div class="temperature" title="기온" style="">
+                                        7~16°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        43% </div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남 23 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_2" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">목</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 9일</div>
+                                </td>
+
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_rain" data-wi-icon-id="rain" data-title="대체로 흐리고 비가 내림" data-icon-size="36">
+                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        7~13°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        56%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남서 14 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_3" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">금</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 10일</div>
+                                </td>
+                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clear" data-wi-icon-id="day-sunny" data-title="화창하고 구름 한 점 없는 하늘" data-icon-size="36">
+                                <!-- 이미지 들어가는 부분 -->
+                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        5~20°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        0%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    동 15 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_4" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">토</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 11일</div>
+                                </td>
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds" data-wi-icon-id="day-cloudy" data-title="부분적으로 흐림" data-icon-size="36">
+                                <!-- 이미지 들어가는 부분 -->
+                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        9~20°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        5%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남서 20 km/h</div>
+                                </td>
+                            </tr>
+
+                            <tr class="days day_5" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">일</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 12일</div>
+                                </td>
+                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="rain_light" data-wi-icon-id="day-showers" data-title="흐리고 약간의 비가 내림" data-icon-size="36">
+                                <!-- 이미지 들어가는 부분 -->
+                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px ; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        4~9°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        66%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    북 13 km/h</div>
+                                </td>
+                            </tr>
+
+                                <tr class="days day_6" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">월</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 13일</div>
+                                </td>
+                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_light" data-wi-icon-id="day-sunny-overcast" data-title="화창하고 구름이 적음" data-icon-size="36">
+                                    <!-- 이미지 들어가는 부분 -->
+                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        0~8°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        25%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    북서 15 km/h</div>
+                                </td>
+                            </tr>
+
+                                <tr class="days day_7" style="width: 150px;">
+                                <td class="time" style="padding-left: 15px;">
+                                    <span class="weekday">화</span>
+                                    <br>
+                                    <div class="date" style="width: 70px;">3월 14일</div>
+                                </td>
+                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_light" data-wi-icon-id="day-sunny-overcast" data-title="화창하고 구름이 적음" data-icon-size="36">
+                                    <!-- 이미지 들어가는 부분 -->
+                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
+                                </th>
+                                <td class="weather" style="width: 150px; padding-right: 15px;">
+                                    <div class="temperature" title="기온" style="">
+                                        1~11°</div>
+                                    <div class="precip" title="강수 확률" style="">
+                                        1%</div>
+                                    <div class="wind" title="바람" style="display: none;">
+                                    남 19 km/h</div>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+
+				</div>
+             
+                
+                
+
                 <div id="footer">
                     <!-- 푸터구역 -->
                     <div id="f1">
@@ -941,8 +1153,8 @@
                     <div id="dist1">총길이 :<span id="dist"></span></div>
                     <button type="reset" class="btn btn-primary"
                         id="reset">초기화</button>
-                    <input type="submit" class="btn btn-primary"
-                        id="insert" onclick="return fileSubmit()"></input>
+                    <button type="submit" class="btn btn-primary"
+                        id="insert" onclick="return fileSubmit()">제출</button>
                 </div>
                 </form>
             </div>
@@ -975,6 +1187,22 @@
                         var s = String(len).lastIndexOf("g");
                         title.val(String(len).substring(0,s-1));
                         content.val(String(len).substring(0,s-1));
+                        
+                        // map capture
+                        setTimeout(function(){
+                            var input = document.getElementById('map');
+                            html2canvas(input,{ allowTaint: true, useCORS: true }).then((canvas) => {
+                                var dataURL = canvas.toDataURL('image/jpg');
+                                var img = new Image();
+                                img.src = dataURL;
+                                var link = document.createElement('a');
+                                link.download = String(len).substring(0,s-1)+'.jpg';
+                                link.href = dataURL;
+                                link.click();
+                            });
+
+                        },1000)
+
                 }
                 return true;
                }
@@ -1071,101 +1299,100 @@
                     })
                 },30
                 )
+
+                var reader = new FileReader();
                 
-                // var reader = new FileReader();
-                
-                // reader.onload = function (event) {
-                //     var gpx = $.parseXML(event.target.result);
-                //     console.log(gpx);
+                reader.onload = function (event) {
+                    var gpx = $.parseXML(event.target.result);
+                    console.log(gpx);
                     
-                //     var trackPoints = $(gpx).find('trkpt');
-                //     // console.log(trackPoints);
-                //     trackPoints.each(function (index, value) {
-                //         var lat = $(this).attr('lat');
-                //         var lon = $(this).attr('lon');
-                //         total += lat+","+lon+"|";
+                    var trackPoints = $(gpx).find('trkpt');
+                    // console.log(trackPoints);
+                    trackPoints.each(function (index, value) {
+                        var lat = $(this).attr('lat');
+                        var lon = $(this).attr('lon');
                         
                         
-                //         array.push(new naver.maps.LatLng(lat, lon));
-                //         lats.push(lat);
-                //         lons.push(lon);
-                //         if (index == 0) {
-                //             startLat = lat;
-                //             startLon = lon;
-                //         }
-                //     });
+                        array.push(new naver.maps.LatLng(lat, lon));
+                        lats.push(lat);
+                        lons.push(lon);
+                        if (index == 0) {
+                            startLat = lat;
+                            startLon = lon;
+                        }
+                    });
                     
                     
-                //     for (let i = 1; i < lats.length; i++) {
-                //         if (lats[i - 1] == lats[i]) {
-                //             dist = 0
-                //         } else {
-                //             var theta = lons[i - 1] - lons[i];
-                //             // console.log(theta)
-                //             var dist = Math.sin(deg2rad(lats[i - 1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i - 1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
-                //             dist = Math.acos(dist);
-                //             dist = rad2deg(dist);
-                //             dist = dist * 60 * 1.1515;
-                //             dist = dist * 1.609344;
-                //             if (dist === NaN) {
-                //                 dist = 0;
-                //             }
-                //             sum += dist;
-                //         }
-                //     }
-                //     // hidden에 초기 위도와 경도 대입하기
-                //     $("#startLat").val(startLat);
-                //     $("#startLon").val(startLon);
-                //     $("#distance").val(sum.toFixed(1));
-                //     // 화면에 경로 표시하기
-                //     $("#dist").text(sum.toFixed(2) + 'km');
-                //     // 지도 표시
-                //     var zom;
-                //     var dist = sum;
-                //     if(sum<2){
-                //         zom = 15;
-                //     }else if(sum<10){
-                //         zom = 13;
-                //     }else if(sum<50){
-                //         zom = 12;
-                //     }else if(sum<90){
-                //         zom = 11;
-                //     }else{
-                //         zom = 10;
-                //     }
-                //     map = new naver.maps.Map('map', {
-                //         center: new naver.maps.LatLng(startLat, startLon),
-                //         zoom: zom
-                //     });
-                //     // 지도에 선 그리기
-                //     polyline = new naver.maps.Polyline({
-                //         path: array,      //선 위치 변수배열
-                //         strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                //         strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                //         strokeWeight: 3,   //선 두께
-                //         map: map           //오버레이할 지도
-                //     });
-                //     //지도에 마커 표시하기
-                //     marker = new naver.maps.Marker({
-                //         position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
-                //         map: map,
-                //         icon: {
-                //             content: '<img src=/Ovcos/resources/image/endlocation5.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                //             size: new naver.maps.Size(45, 45),
-                //             anchor: new naver.maps.Point(26, 40)
-                //         }
-                //     });
-                //     marker = new naver.maps.Marker({
-                //         position: new naver.maps.LatLng(startLat, startLon),
-                //         map: map,
-                //         icon: {
-                //         	 content: '<img src=/Ovcos/resources/image/location3.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                //             size: new naver.maps.Size(45, 45),
-                //             anchor: new naver.maps.Point(26, 40)
-                //         }
-                //     });
-                // };
-                // reader.readAsText(file);
+                    for (let i = 1; i < lats.length; i++) {
+                        if (lats[i - 1] == lats[i]) {
+                            dist = 0
+                        } else {
+                            var theta = lons[i - 1] - lons[i];
+                            // console.log(theta)
+                            var dist = Math.sin(deg2rad(lats[i - 1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i - 1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
+                            dist = Math.acos(dist);
+                            dist = rad2deg(dist);
+                            dist = dist * 60 * 1.1515;
+                            dist = dist * 1.609344;
+                            if (dist === NaN) {
+                                dist = 0;
+                            }
+                            sum += dist;
+                        }
+                    }
+                    // hidden에 초기 위도와 경도 대입하기
+                    $("#startLat").val(startLat);
+                    $("#startLon").val(startLon);
+                    $("#distance").val(sum.toFixed(1));
+                    // 화면에 경로 표시하기
+                    $("#dist").text(sum.toFixed(2) + 'km');
+                    // 지도 표시
+                    // var zom;
+                    // var dist = sum;
+                    // if(sum<2){
+                    //     zom = 15;
+                    // }else if(sum<10){
+                    //     zom = 13;
+                    // }else if(sum<50){
+                    //     zom = 12;
+                    // }else if(sum<90){
+                    //     zom = 11;
+                    // }else{
+                    //     zom = 10;
+                    // }
+                    // map = new naver.maps.Map('map', {
+                    //     center: new naver.maps.LatLng(startLat, startLon),
+                    //     zoom: zom
+                    // });
+                    // // 지도에 선 그리기
+                    // polyline = new naver.maps.Polyline({
+                    //     path: array,      //선 위치 변수배열
+                    //     strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
+                    //     strokeOpacity: 0.8, //선 투명도 0 ~ 1
+                    //     strokeWeight: 3,   //선 두께
+                    //     map: map           //오버레이할 지도
+                    // });
+                    //지도에 마커 표시하기
+                    marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
+                        map: map,
+                        icon: {
+                            content: '<img src=/Ovcos/resources/image/endlocation5.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            size: new naver.maps.Size(45, 45),
+                            anchor: new naver.maps.Point(26, 40)
+                        }
+                    });
+                    marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(startLat, startLon),
+                        map: map,
+                        icon: {
+                        	 content: '<img src=/Ovcos/resources/image/location3.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            size: new naver.maps.Size(45, 45),
+                            anchor: new naver.maps.Point(26, 40)
+                        }
+                    });
+                };
+                reader.readAsText(file);
             };
         </script>
 
