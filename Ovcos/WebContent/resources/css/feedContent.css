@@ -256,3 +256,6 @@ color:red
     40%{transform:scale(1.2);}
     100%{transform:scale(1);}
 }
+#ct3 * {
+    border: 0px;
+}
