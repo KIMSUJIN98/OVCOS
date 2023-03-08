@@ -63,12 +63,13 @@ public class FeedListController extends HttpServlet {
 //		String num = request.getParameter("num");// 내친구피드, 내피드 선택하면 값 담김 
 		String select = request.getParameter("sorting");
 		
+		
 		ArrayList<Feed>  allList = new FeedService().selectArrayList(userId);
 		response.setContentType("application/json; charset=utf-8");
 		
 		System.out.println("select값 (last,old..) : " +select );
 		
-		if(select ==null) {
+		if(select == null) {
 			request.setAttribute("allList", allList);
 			request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
 			
