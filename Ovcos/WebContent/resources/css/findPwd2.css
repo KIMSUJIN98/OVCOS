@@ -117,14 +117,14 @@ select{
 
 table{
     border-collapse: separate;
-    padding-bottom: 70px;
+    padding-bottom: 50px;
 }
 #info{
 	padding: 15px;
 	width : 400px;
     background-color: #f2f3f5;
     border-radius: 8px;
-    margin-top : 40px;
+    margin-top : 30px;
     font-size : 0.9rem;
     font-weight : 530;
 }
@@ -138,15 +138,32 @@ table{
     width: 180px;
     height: 45px;
     margin-top: 5px;
-    background-color:white;
-    color: black;
+    background-color: #ff7920 ;
+    color: white;
     font-weight: bold;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 70px;
-    margin : 0px 0px 50px 45px;
+    margin-bottom : 50px;
+    margin : 70px 0px 30px 45px;
 }
-
+#changeBtn{
+    position: relative;
+    width: 400px;
+    height: 45px;
+    margin-top: 5px;
+    background-color: #ff7920 ;
+    color: white;
+    font-weight: bold;
+	text-align : center;
+    border-radius: 8px;
+    margin-bottom : 50px;
+    margin : 70px 0px 50px 45px;
+    border:none;
+}
+p{
+	text-align :center;
+	font-size:1.1rem;
+}
 #x-box{
 	position : relative;
 	margin-left : 450px;

@@ -46,97 +46,11 @@
       
       </div>
       <div>
-      <% String pwd = (String) request.getAttribute("pwd"); %>
-      <% String id = (String) request.getAttribute("id"); %>
-<%--       <% String id = (String) request.getAttribute("id"); %> --%>
-	<% if (pwd != null) { %>
-	<div>안전한 비밀번호로 변경해주세요.</div>
-	 <form id="updatePwd" action="<%=contextPath %>/updatePwd.me" method="post"
-                        onsubmit="return validate();">
-                        <input type="hidden" name="id" value ="<%=id %>">
-      <table>
-      	<tr>
-      		<td>새 비밀번호</td>
-      		<td><input type="password" id="memPwd" name="memPwd" required
-                                placeholder="6자 이상 영문 대소문자,숫자,특수문자 조합"></td>
-      	</tr>
-      	<tr>
-                            <td></td>
-                            <td colspan="2" id="checkPwd"></td>
-                          </tr>
-                          <tr>
-                            <td>새 비밀번호 확인</td>
-                            <td><input type="password" id="memPwd2" required placeholder="다시 한 번 입력하세요."></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td colspan="2" id="checkPwd2"></td>
-                          </tr>
-      </table>
-      <button type="submit" class="next_btn">비밀번호 변경</button>
- 	  <button type="submit" class="next_btn">처음으로</button>
-      </form>
-      <% } else { %>
-	<div>
-		<p><%= request.getAttribute("errorMessage") %></p></div>
+<div>
+		<p>비밀번호 변경이 완료되었습니다.</p></div>
 		<div>
-  <button type="submit" class="next_btn">로그인</button>
-  <button type="submit" class="next_btn">처음으로</button>
-	<% } %>
-	</div>
-<script>
-$("#memPwd").on("blur", function () {
-    if ($(this).val().trim().length == 0) {
-      $(this).val("");
-      $("#checkPwd").text("비밀번호를 입력해주세요.");
-      /* $("#memPwd").val("");
-      $("#memPwd").focus(); */
-      
-      return;
-    }
-    
-   
-    const regExp = /^[a-z\d!@#$%^&*]{6,15}$/i;
-
-    if (regExp.test($(this).val())) {
-      $("#checkPwd").text("사용 가능한 비밀번호입니다.");
-    } else {
-      $("#checkPwd").text("사용 불가능한 비밀번호입니다.");
-      $("#memPwd").val("");
-      $("#memPwd").focus();
-    }
-
-  })
-
-  $("#memPwd2").on("blur", function () {
-    if ($("#memPwd2").val().trim().length == 0) {
-      $(this).val("");
-      $("#checkPwd2").text("비밀번호를 입력해주세요.");
-     /*  $("#memPwd2").focus(); */
-      return;
-    }
-
-    if ($(this).val().trim().length == 0) {
-      $("#checkPwd2").text("");
-      return;
-    }
-    if ($("#memPwd").val() == $(this).val()) {
-      $("#checkPwd2").text("비밀번호가 일치합니다.")
-    } else {
-      $("#checkPwd2").text("비밀번호가 일치하지 않습니다.")
-      $("#memPwd2").val("");
-      $("#memPwd2").focus();
-    }
-  })
-
-</script>
-      
-      
-
- 
-      
-    
-   
+  <button type="submit" class="next_btn" onclick="location.href='<%=contextPath%>/views/loginRegister/login.jsp'">로그인</button>
+	
         </div>
     </div>
     </body>

@@ -74,15 +74,14 @@
                             <td colspan="2" id="checkPwd2"></td>
                           </tr>
       </table>
-      <button type="submit" class="next_btn">비밀번호 변경</button>
- 	  <button type="submit" class="next_btn">처음으로</button>
+      <button type="submit" class="next_btn" id="changeBtn" onclick="location.href='<%=contextPath%>/views/loginRegister/findPwd3.jsp'">비밀번호 변경</button>
       </form>
       <% } else { %>
 	<div>
 		<p><%= request.getAttribute("errorMessage") %></p></div>
 		<div>
-  <button type="submit" class="next_btn">로그인</button>
-  <button type="submit" class="next_btn">처음으로</button>
+  <button type="submit" class="next_btn" onclick="location.href='<%=contextPath%>/views/loginRegister/signin_agree.jsp'">회원가입</button>
+  <button type="submit" class="next_btn" onclick="location.href='<%=contextPath%>/views/loginRegister/login.jsp'">처음으로</button>
 	<% } %>
 	</div>
 <script>
@@ -109,7 +108,7 @@ $("#memPwd").on("blur", function () {
 
   })
 
-  $("#memPwd2").on("blur", function () {
+  $("#memPwd2").on("keyup", function () {
     if ($("#memPwd2").val().trim().length == 0) {
       $(this).val("");
       $("#checkPwd2").text("비밀번호를 입력해주세요.");
@@ -125,7 +124,6 @@ $("#memPwd").on("blur", function () {
       $("#checkPwd2").text("비밀번호가 일치합니다.")
     } else {
       $("#checkPwd2").text("비밀번호가 일치하지 않습니다.")
-      $("#memPwd2").val("");
       $("#memPwd2").focus();
     }
   })

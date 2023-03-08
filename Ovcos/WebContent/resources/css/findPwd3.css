@@ -148,19 +148,18 @@ td button{
 }
 
 .next_btn{
-    position: relative;
-    width: 180px;
+ position: relative;
+    width: 400px;
     height: 45px;
     margin-top: 5px;
-    background-color:white;
-    color: black;
+    background-color:#ff7920;
+    color: white;
     font-weight: bold;
-    border: 1px solid black;
+    border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 70px;
+    margin-bottom : 30px;
     margin-top: 20px;
-    align:center;
 	
 }
 
@@ -211,4 +210,9 @@ td button{
     align-items: center;
     font-size: 1.5rem;
     font-weight:700;
+}
+
+p{
+	text-align :center;
+	font-size:1.1rem;
 }

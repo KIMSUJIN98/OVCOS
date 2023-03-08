@@ -145,18 +145,18 @@ td button{
 }
 
 .next_btn{
-    position: relative;
+   position: relative;
     width: 400px;
     height: 45px;
     margin-top: 5px;
-    background-color:#ff7920;
+    background-color: #ff7920 ;
     color: white;
+     border:none;
     font-weight: bold;
-    border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 30px;
-    margin-top: 20px;
+    margin-bottom : 50px;
+    margin : 20px 0px 50px 0px;
 }
 
 #x-box{

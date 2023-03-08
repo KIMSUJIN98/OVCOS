@@ -152,14 +152,16 @@ td button{
     width: 180px;
     height: 45px;
     margin-top: 5px;
-    background-color:white;
-    color: black;
+    background-color: #ff7920 ;
+    color: white;
+     border:none;
     font-weight: bold;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 70px;
-    margin : 50px 0px 50px 45px;
+    margin-bottom : 50px;
+    margin : 70px 0px 50px 45px;
 }
+
 
 #x-box{
 	position : relative;
