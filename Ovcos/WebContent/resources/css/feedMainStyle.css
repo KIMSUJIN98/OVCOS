@@ -321,7 +321,7 @@ body{
 }
 #dust{
     width: 150%;
-    height: 100px;
+    height: 140px;
     margin: auto;
     margin-top: 100px;
     display: flex;
@@ -331,6 +331,7 @@ body{
     padding-bottom: 15px;
     border-radius: 10px;
     padding-right: 15px;
+    visibility: hidden;
 }
 #weather{
     width: 150%;

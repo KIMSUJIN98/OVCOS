@@ -1,18 +1,30 @@
+<%@ include file="../common/nav.jsp" %>
 <%@page import="com.ovcos.loginRegister.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedEnrollForm.css">
-</head>
-<%
-	String contextPath = request.getContextPath();
-	Member loginUser = (Member)session.getAttribute("loginUser");
-%>
-<body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script> -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedEnrollForm.css">
+    <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navStyle.css"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script> -->
+    <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+    <!-- <script src="dom-to-image.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js" integrity="sha512-7tWCgq9tTYS/QkGVyKrtLpqAoMV9XIUxoou+sPUypsaZx56cYR/qio84fPK9EvJJtKvJEwt7vkn6je5UVzGevw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+    
+    </head>
+    <body>
+        
+        
+    <!--         
+        <div id="map" style="width: 600px; height: 600px;"></div> -->
         <div id="feedex">
             <div id="top">
                 <div id="title">피드 등록</div>
@@ -20,18 +32,19 @@
             <div id="mapContent">
                 <div id="map"></div>
             </div>
-            <form action="/enroll.feed" id="enrollfrm" method="post" enctype="multipart/form-data">
+            <form action="<%=contextPath%>/enroll.feed" id="enrollfrm" method="post" enctype="multipart/form-data">
                 <div id="content">
-                    <input type="hidden" name="userId" value="">
+                    <input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
                     <input type="hidden" name="startLon" id="startLon" value="">
                     <input type="hidden" name="startLat" id="startLat" value="">
                     <input type="hidden" name="distance" id="distance" value="">
-
+                    <input type="hidden" name="imgPath" id="imgPath" value="">
+    
                         <div style="display: flex; line-height: 30px;">
                             <label for="avatar" style="float: left;"><b>파일첨부 : &nbsp;</b></label>
-                            <input type="file" name="avatar" id="avatar" accept=".gpx" style="margin-top: 8px;">
+                            <input type="file" name="avatar" id="avatar" accept=".gpx" style="margin-top: 5px;">
                             <div style="display: flex; float: right;" >
-                                <b style="padding-top: 5px; padding-right: 5px; margin-left: 160px; float: left;">별점</b>
+                                <b style="padding-top: 5px; padding-right: 5px; margin-left: 130px; float: left;">별점</b>
                                 <div class="star-rating" style="display: flex;">
                                     <input type="radio" id="5-stars"
                                         name="rating" value="5" />
@@ -60,19 +73,19 @@
                 
                     <table id="title2">
                         <tr>
-                            <th>제목</th>
+                            <th style="box-sizing: content-box;">제목</th>
                             <td>
-                                <input type="text" name="title" size="78" placeholder="제목입력해주세요" value="">
-
+                                <input type="text" name="title" size="76" placeholder="제목입력해주세요" value=""
+                                style="height: 40px;">
                             </td>
-
+    
                         </tr>
                     </table>
                     <table id="text">
                         <tr>
-                            <th style="padding-bottom: 220px;">내용</th>
+                            <th style="padding-bottom: 310px;">내용</th>
                             <td>
-                                <textarea name="content"  cols="80" rows="13" style="resize: none;"></textarea>
+                                <textarea name="content"  cols="79" rows="13" style="resize: none;"></textarea>
                             </td>
                         </tr>
                     </table>
@@ -99,18 +112,20 @@
                     <div class="ff" style="display: flex; justify-content: space-between;">
                         <div id="dist1">총길이 :<span id="dist"></span></div>
                         <div>
-                        <button type="reset" class="btn btn-primary"
+                        <input type="button"  class="btn btn-link" value="뒤로가기" onclick="history.back();" />
+                        <button type="reset" class="btn btn-danger"
                             id="reset">초기화</button>
-                        <button type="submit" class="btn btn-primary"
+                        <button type="submit" class="btn btn-primary" style="margin-right: 20px;"
                             id="insert" onclick="return fileSubmit()">제출</button>
-                        <button type="button" id="sc" onclick="capture();">스샷</button>
-                        <button type="button" onclick="save();">저장</button>
                     </div>
                     </div>
+                </form>
                 </div>
+    
+        
 
-            </form>
-        </div>
-
-</body>
-</html>
+        <script src="${pageContext.request.contextPath}/resources/js/feedEnrollForm.js"></script>
+    
+        
+    </body>
+    </html>
