@@ -21,7 +21,6 @@
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
 <title>Insert title here</title>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 
@@ -29,6 +28,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="<%=contextPath%>/resources/js/dom-to-image.js"></script>
 
 
 <style>
@@ -62,7 +64,6 @@
     <script>
         
     </script>
-
 
 
     <div id="feedWrap">
@@ -1051,7 +1052,7 @@
                 <!-- Modal body -->
                 <div class="modal-body"
                     style="padding-left: 0px; padding-right: 0px;">
-                    <form action="<%=contextPath %>/enroll.feed"0000
+                    <form action="<%=contextPath %>/enroll.feed"
                         method="post" id="enrollfrm"
                         enctype="multipart/form-data">
                         <input type="hidden" name="userId"
@@ -1153,6 +1154,7 @@
                         id="reset">초기화</button>
                     <button type="submit" class="btn btn-primary"
                         id="insert" onclick="return fileSubmit()">제출</button>
+                    <button type="button" id="sc">스샷</button>
                 </div>
                 </form>
             </div>
@@ -1171,6 +1173,37 @@
             //     center: new naver.maps.LatLng(37.4923615, 127.0292881),
             //     zoom: 12
             //     });
+
+
+            $("#sc").click(function(){
+                // var input = document.querySelector("#map");
+                //             html2canvas(input,{ allowTaint: true, useCORS: true }).then((canvas) => {
+                //             var map = document.querySelector("#map");
+                //             domtoimage.toPng(map).then(function(dataUrl){
+                //             var img = new Image();
+                //             img.src = dataUrl;
+                //             var link = document.createElement('a');
+                //             var str = 'asdffdas'
+                //             link.download ='naver-map.png';
+                //             link.href = dataUrl;
+                //             link.click();
+                //         })
+                //         .catch(function(error){
+                //             console.log("oops, something went wrong!",error);
+                //             return false;
+                //         })
+                    
+                //             });
+                var map = document.querySelector("#map");
+                domtoimage.toPng(map).then(function(dataUrl){
+                    var img = new Image();
+                    img.src = dataUrl;
+                    document.body.appendChild(img);
+                })
+                .catch(function(error){
+                    console.log("oops, something went wrong!",error);
+                })
+            })
             
             function fileSubmit(){
                var title = $("input[name='title']");
@@ -1187,24 +1220,18 @@
                         content.val(String(len).substring(0,s-1));
                         
                         // map capture
-                        setTimeout(function(){
-                            var input = document.getElementById('map');
-                            html2canvas(input,{ allowTaint: true, useCORS: true }).then((canvas) => {
-                                var dataURL = canvas.toDataURL('image/jpg');
-                                var img = new Image();
-                                img.src = dataURL;
-                                var link = document.createElement('a');
-                                link.download = String(len).substring(0,s-1)+'.jpg';
-                                link.href = dataURL;
-                                link.click();
-                            });
-
-                        },1000)
-
-                }
+                        
+                    
+                    }// end if
+                } 
                 return true;
                }
-            }
+
+            
+
+
+            
+
             $("#insert").click(function () {
                 var last = $("#dist").text().lastIndexOf("k");
                 $("#distance").val($("#dist").text().substring(0, last));
