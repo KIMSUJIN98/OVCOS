@@ -80,7 +80,7 @@
                             <img src="<%= contextPath %>/resources/image/plus1.png" alt="">
                         </div> -->
                         
-	                    <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+	                    <button type="button" id="feedEnrollBtn" onclick="location.href='<%=contextPath%>/to.feed'" >피드등록</button>
                         
                     </li>
                     

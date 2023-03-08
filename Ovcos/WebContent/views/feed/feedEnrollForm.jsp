@@ -1,18 +1,29 @@
 <%@page import="com.ovcos.loginRegister.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedEnrollForm.css">
-</head>
-<%
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script> -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedEnrollForm.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script> -->
+    <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+    <!-- <script src="dom-to-image.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js" integrity="sha512-7tWCgq9tTYS/QkGVyKrtLpqAoMV9XIUxoou+sPUypsaZx56cYR/qio84fPK9EvJJtKvJEwt7vkn6je5UVzGevw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
-%>
-<body>
+    
+    %>
+    
+    </head>
+    <body>
+    <!--         
+        <div id="map" style="width: 600px; height: 600px;"></div> -->
         <div id="feedex">
             <div id="top">
                 <div id="title">피드 등록</div>
@@ -20,13 +31,14 @@
             <div id="mapContent">
                 <div id="map"></div>
             </div>
-            <form action="/enroll.feed" id="enrollfrm" method="post" enctype="multipart/form-data">
+            <form action="<%=contextPath%>/enroll.feed" id="enrollfrm" method="post" enctype="multipart/form-data">
                 <div id="content">
-                    <input type="hidden" name="userId" value="">
+                    <input type="hidden" name="userId" value="<%= loginUser.getMemId()%>">
                     <input type="hidden" name="startLon" id="startLon" value="">
                     <input type="hidden" name="startLat" id="startLat" value="">
                     <input type="hidden" name="distance" id="distance" value="">
-
+                    <input type="hidden" name="imgPath" id="imgPath" value="">
+    
                         <div style="display: flex; line-height: 30px;">
                             <label for="avatar" style="float: left;"><b>파일첨부 : &nbsp;</b></label>
                             <input type="file" name="avatar" id="avatar" accept=".gpx" style="margin-top: 8px;">
@@ -60,17 +72,17 @@
                 
                     <table id="title2">
                         <tr>
-                            <th>제목</th>
+                            <th style="box-sizing: content-box;">제목</th>
                             <td>
-                                <input type="text" name="title" size="78" placeholder="제목입력해주세요" value="">
-
+                                <input type="text" name="title" size="78" placeholder="제목입력해주세요" value=""
+                                style="height: 40px;">
                             </td>
-
+    
                         </tr>
                     </table>
                     <table id="text">
                         <tr>
-                            <th style="padding-bottom: 220px;">내용</th>
+                            <th style="padding-bottom: 190px;">내용</th>
                             <td>
                                 <textarea name="content"  cols="80" rows="13" style="resize: none;"></textarea>
                             </td>
@@ -103,14 +115,15 @@
                             id="reset">초기화</button>
                         <button type="submit" class="btn btn-primary"
                             id="insert" onclick="return fileSubmit()">제출</button>
-                        <button type="button" id="sc" onclick="capture();">스샷</button>
-                        <button type="button" onclick="save();">저장</button>
                     </div>
                     </div>
                 </div>
-
+    
             </form>
         </div>
 
-</body>
-</html>
+        <script src="${pageContext.request.contextPath}/resources/js/feedEnrollForm.js"></script>
+    
+        
+    </body>
+    </html>
