@@ -15,9 +15,9 @@
 
 
 
-<!-- 내(로그인유저)가 팔로우하고있는 유저 목록 -->
+<!-- 내(로그인유저)가 팔로우하고있는 유저 목록 수정완-->
 <entry key="selectList">
-select m.mem_id, mem_name, NVL(MEM_INTRO, ' ') as MEM_INTRO
+select f.mem_id, f.flw_id, mem_name, NVL(MEM_INTRO, ' ') as MEM_INTRO
 from member m , follow f
 where m.mem_id = f.flw_id
 and f.mem_Id = ?

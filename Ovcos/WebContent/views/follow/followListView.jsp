@@ -1,6 +1,7 @@
-<%@page import="com.ovcos.common.model.vo.Pageinfo"%>
-<%@page import="com.ovcos.follow.model.vo.Follow"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.common.model.vo.Pageinfo"%>
+<%@ page import="com.ovcos.follow.model.vo.Follow"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -16,7 +17,7 @@ int maxPage = pi.getMaxPage();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OVCOS - 친구목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/followList.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -28,7 +29,6 @@ int maxPage = pi.getMaxPage();
 </style>
 </head>
 <body>
-    <%@ include file="../common/nav.jsp" %>
     <input type = "hidden" name="userId" id="userId" value="<%= loginUser.getMemId() %>">
 
 
@@ -199,7 +199,7 @@ int maxPage = pi.getMaxPage();
                 type: "POST",
                 data: { userId: $("#userId").val() }, //로그인유저아이디
                 success: function(data) {
-                    var html = generateHTML(data);
+                    var html = generateHTML3(data);
                     
                     $(".tablecontent").html(html);
                     $("#fix_div").text("차단한 유저 목록");
@@ -263,12 +263,12 @@ int maxPage = pi.getMaxPage();
                     html += "<tr class='tr2'>";
                     html += "<td class='tr2_td1'><img src='${pageContext.request.contextPath}/resources/image/mypage.png' alt='프로필이미지'></td>";
                     html += "<td><div><b>" + item.memName + "</b></div><div>" + item.memIntro + "</div></td>";
-                    html += "<td class='tdbt'><button type='button' class='btn btn-primary btn-sm friend-button' id='btn" + item.memId + "'>친구끊기</button></td>";
-                    html += "<td class='tdbt'><button type='button' class='btn btn-primary btn-sm block-button' id='block" + item.memId + "'>차단하기</button></td>";
+                    html += "<td class='tdbt'><button type='button' class='btn btn-primary btn-sm friend-button' id='btn" + item.flwId + "'>친구끊기</button></td>";
+                    html += "<td class='tdbt'><button type='button' class='btn btn-primary btn-sm block-button' id='block" + item.flwId + "'>차단하기</button></td>";
                     html += "</tr>";
-
-                    checkfrd(item.memId, "#btn" + item.memId);
-                    checkblock(item.memId, "#block" + item.memId);
+                        console.log(item.flwId);
+                    checkfrd(item.flwId, "#btn" + item.flwId);
+                    checkblock(item.flwId, "#block" + item.flwId);
                 });
             }
             return html;
@@ -297,7 +297,26 @@ int maxPage = pi.getMaxPage();
             return html;
         }
 
-
+        //차단목록
+        function generateHTML3(data) {
+            var html = "";
+            if (data.length == 0) {
+                html += "<tr><td colspan='4'>조회된 결과가 없습니다.</td></tr>";
+            } else {
+                $.each(data, function(i, item) {
+                    html += "<tr class='tr2'>";
+                    html += "<td class='tr2_td1'><img src='${pageContext.request.contextPath}/resources/image/mypage.png' alt='프로필이미지'></td>";
+                    html += "<td><div><b>" + item.memName + "</b></div><div>" + item.memIntro + "</div></td>";
+                    html += "<td class='tdbt'><button type='button' class='btn btn-primary btn-sm friend-button' id='btn" + item.memId + "'>친구끊기</button></td>";
+                    html += "<td class='tdbt'><button type='button' class='btn btn-primary btn-sm block-button' id='block" + item.memId + "'>차단하기</button></td>";
+                    html += "</tr>";
+                        console.log(item.flwId);
+                    checkfrd(item.memId, "#btn" + item.memId);
+                    checkblock(item.memId, "#block" + item.memId);
+                });
+            }
+            return html;
+        }
 
         //친구상태면 버튼 친구끊기, 아니면 친구추가로 바꾸기 
         function checkfrd(memId, buttonSelector){
@@ -310,12 +329,12 @@ int maxPage = pi.getMaxPage();
                 if (result.length >0 ) {
                     // 친구 상태인 경우
                     //console.log('친구임');
-                    $(buttonSelector).text('친구 끊기').css({'background-color': '#ffffff', 'color': '#007bff'});;
+                    $(buttonSelector).text('친구끊기').css({'background-color': '#ffffff', 'color': '#007bff'});;
                     
                 } else {
                     // 친구가 아닌 경우
                     //console.log('친구아님');
-                    $(buttonSelector).text('친구 추가');
+                    $(buttonSelector).text('친구추가');
                 }
                 }
             });
@@ -346,7 +365,7 @@ int maxPage = pi.getMaxPage();
             var memId = button.attr('id').substr(3); //차단대상아이디
             var userId = $('#userId').val(); // 내아이디
 
-            if (button.text() === '친구 추가') {
+            if (button.text() === '친구추가') {
 
                 // 친구 추가 INSERT 
                 $.ajax({
@@ -355,7 +374,7 @@ int maxPage = pi.getMaxPage();
                     data: { friendId: memId, userId: userId },
                     success: function(result) {
                         console.log("친추완료되어따~~~~~~~~~")
-                        button.text('친구 끊기').css({ 'background-color': '#ffffff', 'color': '#007bff' });
+                        button.text('친구끊기').css({ 'background-color': '#ffffff', 'color': '#007bff' });
                     }
                 });
 
@@ -380,7 +399,7 @@ int maxPage = pi.getMaxPage();
                     type: 'POST',
                     data: { friendId: memId, userId: userId },
                     success: function(result) {
-                        button.text('친구 추가').css({ 'background-color': '#007bff', 'color': '#ffffff' });
+                        button.text('친구추가').css({ 'background-color': '#007bff', 'color': '#ffffff' });
                     }
                 });
             }

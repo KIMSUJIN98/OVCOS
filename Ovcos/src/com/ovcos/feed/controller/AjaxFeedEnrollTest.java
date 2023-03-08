@@ -29,7 +29,7 @@ public class AjaxFeedEnrollTest extends HttpServlet {
 			int maxSize = 10*1024*1024;
 			
 			// 전달된 파일을 저장시킬 폴더의 경로
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/gpx_upfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/temp_gpx_upfiles/");
 			// 전달된 파일명 수정
 			
 			MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"utf-8", new GpxFileRenamePolicy2());

@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
   <% String contextPath=request.getContextPath(); %>
-    <%! public int getRandom(){
-    	int random=0;
-    	random=(int)Math.floor((Math.random()*(99999-10000+1)))+10000; 
-    	return random; 
-    	}%>
+    <%! public int getRandom(){ int random=0; random=(int)Math.floor((Math.random()*(99999-10000+1)))+10000; return
+      random; }%>
 
 
       <%String selectResult=(String)request.getAttribute("select"); %>
@@ -16,6 +13,13 @@
           <meta charset="UTF-8">
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+          <!-- Favicon-->
+          <link rel="shortcut icon" type="image/x-icon"
+            href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+          <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png"
+            sizes="16x16" />
+
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
             integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -25,7 +29,7 @@
           <link rel="stylesheet" href="resources/css/insertInfoStyle.css?abc">
           <script src="https://kit.fontawesome.com/66bc1e54e8.js" crossorigin="anonymous"></script>
 
-          <title>OVCOS</title>
+          <title>OVCOS - 회원가입</title>
         </head>
 
         <body>
@@ -73,16 +77,16 @@
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkId"></td>
+                            <td colspan="2" id="checkId" class="result"></td>
                           </tr>
                           <tr>
                             <td>비밀번호</td>
                             <td><input type="password" id="memPwd" name="memPwd" required
-                                placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
+                                placeholder="6자 이상 영문 대소문자,숫자,특수문자 조합"></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkPwd"></td>
+                            <td colspan="2" id="checkPwd" class="result"></td>
                           </tr>
                           <tr>
                             <td style="width: 90px;">비밀번호 확인</td>
@@ -90,16 +94,12 @@
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkPwd2"></td>
+                            <td colspan="2" id="checkPwd2" class="result"></td>
                           </tr>
                           <tr>
                             <td>이름</td>
                             <td><input type="text" id="memName" name="memName" required placeholder="이름(실명)을 입력하세요."
                                 id="memName"></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td colspan="2" id="checkName"></td>
                           </tr>
                           <tr>
                             <td>생년월일</td>
@@ -108,42 +108,45 @@
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkBirth"></td>
+                            <td colspan="2" id="checkBirth" class="result"></td>
                           </tr>
                           <tr>
                             <td>닉네임</td>
-                            <td><input type="text" id="memNick" name="memNick" placeholder="닉네임 입력"><button
+                            <td><input type="text" id="memNick" name="memNick" placeholder="닉네임 입력" required><button
                                 type="button" id="checkNickBtn">중복확인</button></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkNick"></td>
+                            <td colspan="2" id="checkNick" class="result"></td>
                           </tr>
                           <tr>
                             <td>이메일</td>
-                            <td><input type="email" id="memEml" name="memEml" placeholder="이메일을 입력해주세요.">
-                              <button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
-                              <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%= getRandom() %>">
+                            <td><input type="email" id="memEml" name="memEml" placeholder="이메일을 입력해주세요." required></td>
+                            <td><button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
+                              <input type="hidden" readonly="readonly" name="code_check" id="code_check"
+                                value="<%= getRandom() %>">
                             </td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkEml"></td>
+                            <td colspan="2" id="checkEml" class="result"></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><input type="text" id="code" name="code" placeholder="인증번호">
-                              <button type="button" onclick="checkCode()" id="checkBtn">인증확인</button>
+                            <td><input type="text" id="code" name="code" placeholder="인증번호" required></td>
+                            <td><button type="button" onclick="checkCode()" id="checkBtn">인증확인</button>
                             </td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td colspan="2" id="checkCode">
+                            <td colspan="2" id="checkCode" class="result">
                               <input type="hidden" readonly="readonly" name="code" id="code"
-                                value="<%=request.getAttribute("code") %>">
+                                value="<%=request.getAttribute(" code") %>">
                             </td>
                           </tr>
                         </table>
+
+
                         <button type="submit" class="next_btn">회원가입</button>
                       </form>
                     </div>
@@ -152,6 +155,7 @@
               </div>
             </div>
             <script>
+
               function checkCode() {
                 var v1 = document.getElementById('code_check').value;
                 var v2 = document.getElementById('code').value;
@@ -160,6 +164,7 @@
                 if (v1 != v2) {
                   document.getElementById('checkCode').style.color = "red";
                   document.getElementById('checkCode').innerHTML = "잘못된 인증번호입니다. 다시 인증해주세요.";
+
                   makeNull();
                 } else {
                   document.getElementById('checkCode').innerHTML = "인증되었습니다.";
@@ -174,47 +179,56 @@
               }
 
               function makeNull() {
+                document.getElementById('code').value = '';
                 var hi = document.getElementById("hi");
                 hi.type = "hidden";
               }
             </script>
             <script>
-             
+
               function callServlet() {
-                var code = document.getElementById('code_check').value;
-                var email = document.getElementById('memEml').value;
+                var email = document.getElementById('memEml');
+                if (email.value.trim() === "") {
+                  document.getElementById('checkEml').innerHTML = "이메일 주소를 입력해주세요."
+                } else {
+                  document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
+                  var code = document.getElementById('code_check').value;
+                  var email = document.getElementById('memEml').value;
 
-                var data = {
-                  'code': code,
-                  'email': email
-                };
+                  var data = {
+                    'code': code,
+                    'email': email
+                  };
 
-                console.log(data);
+                  console.log(data);
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '<%=contextPath %>/send.ma1', true);
-                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                  var xhr = new XMLHttpRequest();
+                  xhr.open('POST', '<%=contextPath %>/send.ma1', true);
+                  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-                xhr.onreadystatechange = function () {
-                  if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                      //  console.log(xhr.responseText);
-                    } else {
-                      console.error('There was a problem with the request.');
+                  xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                      if (xhr.status === 200) {
+                        //  console.log(xhr.responseText);
+                      } else {
+                        console.error('There was a problem with the request.');
+                      }
                     }
-                  }
-                };
+                  };
 
-                xhr.send(JSON.stringify(data));
-                console.log("안녕");
+                  xhr.send(JSON.stringify(data));
+                  console.log("안녕");
+                }
               }
+
+
 
               $(function validate() {
                 $("#checkIdBtn").on("click", function () {
                   const $idInput = $("#memId");
 
                   if ($idInput.val().trim().length === 0) {
-                    $("#checkId").text("아이디를 입력해주세요.");
+                    $("#checkId").text("아이디를 입력해주세요.").css("color", "black");
                     $idInput.val("");
                     $idInput.focus();
                     return;
@@ -223,7 +237,7 @@
                   const regExp = /^[a-z\d]{4,20}$/;
 
                   if (!regExp.test($idInput.val())) {
-                    $("#checkId").text("올바른 형식의 아이디가 아닙니다.");
+                    $("#checkId").text("올바른 형식의 아이디가 아닙니다.").css("color", "red");
                     $idInput.val("");
                     $idInput.focus();
                     return;
@@ -237,7 +251,7 @@
                       console.log(result);
 
                       if (result === "NNNNY") {
-                        $("#checkId").text("사용 가능한 아이디입니다.");
+                        $("#checkId").text("사용 가능한 아이디입니다.").css("color", "black");
                       } else {
                         $("#checkId").text("이미 존재하거나 탈퇴한 회원의 아이디입니다.").css("color", "red");
                         $idInput.val("");
@@ -253,17 +267,20 @@
                 $("#memPwd").on("blur", function () {
                   if ($(this).val().trim().length == 0) {
                     $(this).val("");
-                    $("#checkPwd").text("비밀번호를 입력해주세요.");
-                    $("#memPwd").val("");
-                    $("#memPwd").focus();
+                    $("#checkPwd").text("비밀번호를 입력해주세요.").css("color", "red");;
+                    /* $("#memPwd").val("");
+                    $("#memPwd").focus(); */
+
+                    return;
                   }
 
-                  const regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
+
+                  const regExp = /^[a-z\d!@#$%^&*]{6,15}$/i;
 
                   if (regExp.test($(this).val())) {
-                    $("#checkPwd").text("사용 가능한 비밀번호입니다.");
+                    $("#checkPwd").text("사용 가능한 비밀번호입니다.").css("color", "black");;
                   } else {
-                    $("#checkPwd").text("사용 불가능한 비밀번호입니다.");
+                    $("#checkPwd").text("사용 불가능한 비밀번호입니다.").css("color", "red");;
                     $("#memPwd").val("");
                     $("#memPwd").focus();
                   }
@@ -271,10 +288,11 @@
                 })
 
                 $("#memPwd2").on("blur", function () {
-                  if ($("#memPwd").val().trim().lenth == 0) {
+                  if ($("#memPwd2").val().trim().length == 0) {
                     $(this).val("");
-                    $("#checkPwd2").text("비밀번호를 입력해주세요.");
-                    $("#memPwd2").focus();
+                    $("#checkPwd2").text("비밀번호를 입력해주세요.").css("color", "red");
+                    /*  $("#memPwd2").focus(); */
+                    return;
                   }
 
                   if ($(this).val().trim().length == 0) {
@@ -282,9 +300,9 @@
                     return;
                   }
                   if ($("#memPwd").val() == $(this).val()) {
-                    $("#checkPwd2").text("비밀번호가 일치합니다.")
+                    $("#checkPwd2").text("비밀번호가 일치합니다.").css("color", "black");
                   } else {
-                    $("#checkPwd2").text("비밀번호가 일치하지 않습니다.")
+                    $("#checkPwd2").text("비밀번호가 일치하지 않습니다.").css("color", "red");
                     $("#memPwd2").val("");
                     $("#memPwd2").focus();
                   }
@@ -298,10 +316,11 @@
                   const regExp = /^[0-9]{8}$/;
 
                   if (!regExp.test($("#memBirth").val())) {
-                    $("#checkBirth").text("숫자로 8자리를 입력해주세요.")
+                    $("#checkBirth").text("숫자로 8자리를 입력해주세요.").css("color", "red");
                     $("#memBirth").val("");
+                    $("#memBirth").focus();
                   } else {
-                    $("#checkBirth").text("올바른 형식입니다.")
+                    $("#checkBirth").text("올바른 형식입니다.").css("color", "black");
                   }
                 });
 
@@ -309,7 +328,7 @@
                   const $nickInput = $("#memNick");
 
                   if ($nickInput.val().trim().length === 0) {
-                    $("#checkNick").text("닉네임을 입력해주세요.");
+                    $("#checkNick").text("닉네임을 입력해주세요.").css("color", "red");
                     $nickInput.val("");
                     $nickInput.focus();
                     return;
@@ -323,7 +342,7 @@
 
 
                       if (result == "NNNNY") {
-                        $("#checkNick").text("사용 가능한 닉네임입니다.");
+                        $("#checkNick").text("사용 가능한 닉네임입니다.").css("color", "black");
                       } else {
                         $("#checkNick").text("이미 존재하거나 탈퇴한 회원의 닉네임입니다.").css("color", "red");
                         $nickInput.val("");

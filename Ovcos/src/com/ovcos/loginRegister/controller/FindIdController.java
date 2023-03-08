@@ -39,13 +39,17 @@ public class FindIdController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
        String email= request.getParameter("memEml") + request.getParameter("email-provider");
-       String name = request.getParameter("name");
+       String name = request.getParameter("memName");
        
        Member isRegistered = new MemberService().checkRegister(name, email);
        
        System.out.println("여기?");
+       
+       System.out.println(isRegistered);
        if(isRegistered == null) {
-    	   request.setAttribute("errorMessage", "회원가입에 실패했습니다. 다시 시도해주세요.");
+    	   request.setAttribute("errorMessage", "조회된 회원정보가 없습니다. 다시 시도해주세요.");
+    	   RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findId2.jsp");
+           dispatcher.forward(request, response);
     	   System.out.println("여기?");
        } else {
     	   String id = isRegistered.getMemId();
@@ -53,8 +57,8 @@ public class FindIdController extends HttpServlet {
            System.out.println(id);
        }
        System.out.println("여기?");
-       
-       RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findId.jsp");
+       //System.out.println(id);
+       RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findId2.jsp");
        dispatcher.forward(request, response);
 	
 	

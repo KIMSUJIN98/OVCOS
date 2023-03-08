@@ -1,7 +1,8 @@
-<%@page import="com.ovcos.explore.model.vo.Explore"%>
-<%@page import="com.ovcos.common.model.vo.Pageinfo"%>
-<%@page import="com.ovcos.feed.model.vo.Feed"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.explore.model.vo.Explore"%>
+<%@ page import="com.ovcos.common.model.vo.Pageinfo"%>
+<%@ page import="com.ovcos.feed.model.vo.Feed"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -21,14 +22,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OVCOS - 나의코스</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
+<script src="${pageContext.request.contextPath}/resources/js/cluster.js"></script>
 
 
 </head>
 <body>
-<%@ include file="../common/nav.jsp" %>
 
     <div id="course">
         <!-- course_nav 시작-->
@@ -88,8 +89,8 @@
 				 	<%}else{ %>
                     <!-- case 2 반복문으로  -->
                     	<%for(Explore f: list){ %>
-                    <div class="exList" id="f<%=f.getFeedIndex()%>">
-                        <span class="list_num"><%=f.getFeedIndex() %></span>
+                    <div class="exList" id="f<%=f.getRowNum()%>">
+                        <span class="list_num"><%=f.getRowNum() %></span>
                         <div class="innertext">
                             <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
@@ -241,7 +242,7 @@
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
                             icon: {
                                 content: 
-                                "<span class='list_num'><%=e.getFeedIndex()%></span>",
+                                "<span class='list_num'><%=e.getRowNum()%></span>",
                                 // size: new naver.maps.Size(38, 58),
                                 anchor: new naver.maps.Point(19, 40),
                             }
@@ -259,7 +260,7 @@
                             '   <div style="display:flex; padding-left:10px">',
                             '   <img src="<%=contextPath%>/resources/image/route.png" style="width:30px">',
                             '	    <span><%=e.getDistance()%> km</span>	',
-                            '       <a style="width:40%" href="#">Detail</a>',
+                            '       <a style="width:40%;" href="<%=contextPath%>/detail.fe?fno=<%=e.getFeedIndex()%>">Detail</a>',
                             '   </div>',
                             '</div>'		
                         ].join('')
@@ -341,6 +342,45 @@
                             
                         });
                     }
+                    var htmlMarker1 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker2 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker3 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-3.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker4 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-4.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        },
+	        htmlMarker5 = {
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-5.png);background-size:contain;"></div>',
+	            size: N.Size(40, 40),
+	            anchor: N.Point(20, 20)
+	        };
+
+	    var markerClustering = new MarkerClustering({
+	        minClusterSize: 2,
+	        maxZoom: 10,
+	        map: map,
+	        markers: markers,
+	        disableClickZoom: false,
+	        gridSize: 120,
+	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+	        indexGenerator: [10, 20, 200, 500, 1000],
+	        stylingFunction: function(clusterMarker, count) {
+	            $(clusterMarker.getElement()).find('div:first-child').text(count);
+	        }
+	    });
 
                     
                     

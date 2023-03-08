@@ -1,4 +1,4 @@
-<%@page import="com.ovcos.loginRegister.model.vo.Member"%>
+<%@ page import="com.ovcos.loginRegister.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -14,8 +14,8 @@
 <!-- <title>OVCOS</title> -->
 
 <!-- Favicon-->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
-<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16" />
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"/>
+<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16"/>
 
 <link rel="stylesheet" href="<%= contextPath %>/resources/css/navStyle.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +79,9 @@
                         <!-- <div id="feedEnrollBtn" class="btn" data-toggle="modal" data-target="#myModal">
                             <img src="<%= contextPath %>/resources/image/plus1.png" alt="">
                         </div> -->
-                        <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+                        
+	                    <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+                        
                     </li>
                     
                     <li id="li2" class="menu">
@@ -97,7 +99,7 @@
                             <li class="subMenuList"><a href="<%= contextPath %>/myPage.me?userId=<%=loginUser.getMemId()%>">마이페이지</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/editInfo.me?userId=<%=loginUser.getMemId()%>">개인정보수정</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>
-                            <li class="subMenuList"><a href="#">로그아웃</a></li>
+                            <li class="subMenuList"><a href="<%= contextPath %>/logout.me">로그아웃</a></li>
                         </ul>
                     </li>
                 </ul>

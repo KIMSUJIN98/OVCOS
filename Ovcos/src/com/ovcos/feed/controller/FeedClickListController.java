@@ -45,15 +45,6 @@ public class FeedClickListController extends HttpServlet {
 		
 		String sorting = request.getParameter("sorting");// 최신순/오래된순/별점순/찜순 정렬 선택한값이 들어있음
 		//피드select box의 form 태그로 값을 받아옴
-		
-		
-		
-		
-		System.out.println("클릭한탭: " +num);
-		System.out.println("정렬종류: "+sorting);
-		
-		
-		
 
 		
 		ArrayList<Feed>  allList = null;
@@ -63,7 +54,6 @@ public class FeedClickListController extends HttpServlet {
 		
 		case "1": // 전체 피드 탭을 클릭했을 시 
 			
-			System.out.println("1번탐 전체피드를 선택했다는뜻");
 			
 			allList = new FeedService().selectArrayList(userId);//전체피드 조회 데이터			
 			response.setContentType("application/json; charset=utf-8");
@@ -126,7 +116,7 @@ public class FeedClickListController extends HttpServlet {
 		case "2": //친구피드 탭을 클릭했을 시 
 			
 			allList = new FeedService().selectFriendList(userId); // 친구피드 조회 데이터 
-			System.out.println("2번탐 내친구 피드를 선택했다는뜻");
+			
 			response.setContentType("application/json; charset=utf-8");
 			
 			if(sorting==null) {
@@ -134,7 +124,6 @@ public class FeedClickListController extends HttpServlet {
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
 			}
 			else if(sorting.equals("oldest")) { //친구피드탭에서 오래된순으로 정렬
-				
 				
 				Collections.sort(allList, new Comparator<Feed>() {
 		            @Override
@@ -146,8 +135,6 @@ public class FeedClickListController extends HttpServlet {
 		        });
 				request.setAttribute("allList", allList);
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-				
-			
 			
 			}else if(sorting.equals("rating")) { //친구피드탭에서 별점순으로 정렬
 				
@@ -182,13 +169,11 @@ public class FeedClickListController extends HttpServlet {
 		case "3":  // 내피드 탭 클릭시 
 			
 			allList = new FeedService().selectMyList(userId);
-			System.out.println("3번탐 내 피드를 선택했다는뜻");
 			response.setContentType("application/json; charset=utf-8");
 			
 			if(sorting==null) {
 				request.setAttribute("allList", allList);
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-				
 				
 			}else if(sorting.equals("oldest")) {
 				
@@ -204,8 +189,6 @@ public class FeedClickListController extends HttpServlet {
 				request.setAttribute("allList", allList);
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
 				
-			
-			
 			}else if(sorting.equals("rating")) {
 				
 				//별점높은순
@@ -219,21 +202,16 @@ public class FeedClickListController extends HttpServlet {
 		        });
 				request.setAttribute("allList", allList);
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-				
-				
 			}else if(sorting.equals("bookmark")) { //친구피드 탭에서 찜순정렬 선택시 
-				
 				//찜 개수 높은 순 정렬
 				allList = new FeedService().selectMyBookmarkSorting(userId);
 				response.setContentType("application/json; charset=utf-8");
 				request.setAttribute("allList", allList);
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-			
 			}else {
 				
 				request.setAttribute("allList", allList);
 				request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-				
 				
 			}
 			break;
@@ -250,19 +228,6 @@ public class FeedClickListController extends HttpServlet {
 		
 		//밖으로 빼니까 두번 클릭했을 때 포워딩한거 또 포워딩한다고 에러남 
 		
-
-		//response.setContentType("application/json; charset=utf-8");
-
-		
-		
-		//new Gson().toJson(allList,response.getWriter());
-
-		//request.setAttribute("allList", allList);
-		//request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-		
-		//response.sendRedirect(request.getContextPath() + "/feedMain.jsp");
-		//response.sendRedirect("/Ovcos/list.feed");
-		//request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response); 되는거
 		
 		
 	}

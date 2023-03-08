@@ -116,6 +116,14 @@ div{
 	padding-left: 25px;
 }
 
+#list_content b{
+	font-family: 'SUIT-Regular';
+	color: rgb(67, 115, 176);
+	font-weight: 500;
+	font-size: 30px;
+	padding-left: 25px;
+}
+
 #inList_content{
 	width: 70%;
 	height: 90%;
