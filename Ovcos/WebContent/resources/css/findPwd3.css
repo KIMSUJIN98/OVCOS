@@ -31,15 +31,17 @@ div{box-sizing: border-box; }
 }
 
 .popup_top {
-	position : relative;
+position : relative;
 	text-align: center;
 	align-items: center;
 	justify-content : center;
 	min-height : 56px;
 	padding : 20px 0 0 0;
 	font-size : 1.2rem;
-	width: 500px;
+	width: 250px;
     height: 100px;
+    margin-left:125px;
+   border-bottom: 3px solid #ff7920 ;
 }
 
 
@@ -55,15 +57,16 @@ div{box-sizing: border-box; }
 
 #title{
     font-size: 1.3rem;
-    font-weight: 530;
+    font-weight: 700;
 }
 
 .popup_body{
 	position : relative;
-	padding : 0px 55px 40px;
+	padding : 30px 55px 40px;
 	max-height : 710px;
 	overflow-y : auto;
 	overflow-x : hidden;
+	width:500px;
 }
 
 #navi{
@@ -148,19 +151,18 @@ td button{
 }
 
 .next_btn{
- position: relative;
+    position: relative;
     width: 400px;
     height: 45px;
     margin-top: 5px;
-    background-color:#ff7920;
+    background-color: #ff7920 ;
     color: white;
+     border:none;
     font-weight: bold;
-    border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 30px;
-    margin-top: 20px;
-	
+    margin-bottom : 50px;
+    margin : 80px 0px 50px 55px;
 }
 
 #x-box{

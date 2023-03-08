@@ -7,11 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Favicon-->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
-	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16" />
-    
+    <link rel="shortcut icon" type="image/x-icon"
+      href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png"
+      sizes="16x16" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -122,9 +124,9 @@
                     인증번호는 이메일로 전송되며, 이메일 미인증 시 가입이 불가능합니다. <br>
                     전체 동의는 필수 및 선택정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다.
                     선택항목에 대한 동의를 거부하는 경우에도 서비스 이용이 가능합니다. <br>
-                    
+
                     '화살표 버튼'을 누르면 관련 내용을 확인할 수 있습니다.
-                    
+
                   </div>
                   <button type="submit" class="next_btn">다음</button>
                 </form>
@@ -143,25 +145,25 @@
     </div>
 
     <script>
-    $(".checkbox_group").on("click", "#check_all", function () {
-    	  var checked = $(this).is(":checked");
+      $(".checkbox_group").on("click", "#check_all", function () {
+        var checked = $(this).is(":checked");
 
-    	  if (checked) {
-    	    $(this).parents(".checkbox_group").find('input').prop("checked", true);
-    	  } else {
-    	    $(this).parents(".checkbox_group").find('input').prop("checked", false);
-    	  }
-    	});
+        if (checked) {
+          $(this).parents(".checkbox_group").find('input').prop("checked", true);
+        } else {
+          $(this).parents(".checkbox_group").find('input').prop("checked", false);
+        }
+      });
 
-    
-    
-    $(".checkbox_group").on('click', 'input:not(#check_all)', function () {
-    	  var group = $(this).parents(".checkbox_group");
-    	  var all_checked = group.find('input:not(#check_all)').length == group.find('input:not(#check_all):checked').length;
-    	  group.find("#check_all").prop("checked", all_checked);
-    	}); 
-    	
-    	
+
+
+      $(".checkbox_group").on('click', 'input:not(#check_all)', function () {
+        var group = $(this).parents(".checkbox_group");
+        var all_checked = group.find('input:not(#check_all)').length == group.find('input:not(#check_all):checked').length;
+        group.find("#check_all").prop("checked", all_checked);
+      });
+
+
 
     </script>
     <!-- Modal -->
@@ -881,5 +883,6 @@
     </script>
 
 
-</body>
+  </body>
+
   </html>

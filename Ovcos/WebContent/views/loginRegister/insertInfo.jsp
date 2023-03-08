@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
   <% String contextPath=request.getContextPath(); %>
-    <%! public int getRandom(){
-    	int random=0;
-    	random=(int)Math.floor((Math.random()*(99999-10000+1)))+10000; 
-    	return random; 
-    	}%>
+    <%! public int getRandom(){ int random=0; random=(int)Math.floor((Math.random()*(99999-10000+1)))+10000; return
+      random; }%>
 
 
       <%String selectResult=(String)request.getAttribute("select"); %>
@@ -16,11 +13,13 @@
           <meta charset="UTF-8">
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          
+
           <!-- Favicon-->
-		  <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
-		  <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16" />
-          
+          <link rel="shortcut icon" type="image/x-icon"
+            href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+          <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png"
+            sizes="16x16" />
+
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
             integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -123,8 +122,9 @@
                           <tr>
                             <td>이메일</td>
                             <td><input type="email" id="memEml" name="memEml" placeholder="이메일을 입력해주세요." required></td>
-                              <td><button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
-                              <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%= getRandom() %>">
+                            <td><button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
+                              <input type="hidden" readonly="readonly" name="code_check" id="code_check"
+                                value="<%= getRandom() %>">
                             </td>
                           </tr>
                           <tr>
@@ -141,12 +141,12 @@
                             <td></td>
                             <td colspan="2" id="checkCode" class="result">
                               <input type="hidden" readonly="readonly" name="code" id="code"
-                                value="<%=request.getAttribute("code") %>">
+                                value="<%=request.getAttribute(" code") %>">
                             </td>
                           </tr>
                         </table>
-                        
-     
+
+
                         <button type="submit" class="next_btn">회원가입</button>
                       </form>
                     </div>
@@ -155,7 +155,7 @@
               </div>
             </div>
             <script>
-      
+
               function checkCode() {
                 var v1 = document.getElementById('code_check').value;
                 var v2 = document.getElementById('code').value;
@@ -164,7 +164,7 @@
                 if (v1 != v2) {
                   document.getElementById('checkCode').style.color = "red";
                   document.getElementById('checkCode').innerHTML = "잘못된 인증번호입니다. 다시 인증해주세요.";
-                  
+
                   makeNull();
                 } else {
                   document.getElementById('checkCode').innerHTML = "인증되었습니다.";
@@ -179,47 +179,50 @@
               }
 
               function makeNull() {
-            	  document.getElementById('code').value = '';
+                document.getElementById('code').value = '';
                 var hi = document.getElementById("hi");
                 hi.type = "hidden";
               }
             </script>
             <script>
-             
+
               function callServlet() {
-            	  var email = document.getElementById('memEml');
-              if ( email.value.trim() === "") {
-            	  document.getElementById('checkEml').innerHTML = "이메일 주소를 입력해주세요."
-                }else {
-            	  document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
-                var code = document.getElementById('code_check').value;
-                var email = document.getElementById('memEml').value;
+                var email = document.getElementById('memEml');
+                if (email.value.trim() === "") {
+                  document.getElementById('checkEml').innerHTML = "이메일 주소를 입력해주세요."
+                } else {
+                  document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
+                  var code = document.getElementById('code_check').value;
+                  var email = document.getElementById('memEml').value;
 
-                var data = {
-                  'code': code,
-                  'email': email
-                };
+                  var data = {
+                    'code': code,
+                    'email': email
+                  };
 
-                console.log(data);
+                  console.log(data);
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '<%=contextPath %>/send.ma1', true);
-                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                  var xhr = new XMLHttpRequest();
+                  xhr.open('POST', '<%=contextPath %>/send.ma1', true);
+                  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-                xhr.onreadystatechange = function () {
-                  if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                      //  console.log(xhr.responseText);
-                    } else {
-                      console.error('There was a problem with the request.');
+                  xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                      if (xhr.status === 200) {
+                        //  console.log(xhr.responseText);
+                      } else {
+                        console.error('There was a problem with the request.');
+                      }
                     }
-                  }
-                };
+                  };
 
-                xhr.send(JSON.stringify(data));
-                console.log("안녕");
+                  xhr.send(JSON.stringify(data));
+                  console.log("안녕");
+                }
               }
-              }
+
+
+
               $(function validate() {
                 $("#checkIdBtn").on("click", function () {
                   const $idInput = $("#memId");
@@ -267,11 +270,11 @@
                     $("#checkPwd").text("비밀번호를 입력해주세요.").css("color", "red");;
                     /* $("#memPwd").val("");
                     $("#memPwd").focus(); */
-                    
+
                     return;
                   }
-                  
-                 
+
+
                   const regExp = /^[a-z\d!@#$%^&*]{6,15}$/i;
 
                   if (regExp.test($(this).val())) {
@@ -288,7 +291,7 @@
                   if ($("#memPwd2").val().trim().length == 0) {
                     $(this).val("");
                     $("#checkPwd2").text("비밀번호를 입력해주세요.").css("color", "red");
-                   /*  $("#memPwd2").focus(); */
+                    /*  $("#memPwd2").focus(); */
                     return;
                   }
 

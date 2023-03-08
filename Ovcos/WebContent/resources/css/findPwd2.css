@@ -36,10 +36,12 @@ div{box-sizing: border-box; }
 	align-items: center;
 	justify-content : center;
 	min-height : 56px;
-	padding : 10px 0 0 0;
+	padding : 20px 0 0 0;
 	font-size : 1.2rem;
-	width: 500px;
+	width: 250px;
     height: 100px;
+    margin-left:125px;
+   border-bottom: 3px solid #ff7920 ;
 }
 
 
@@ -55,15 +57,16 @@ div{box-sizing: border-box; }
 
 #title{
     font-size: 1.3rem;
-    font-weight: 530;
+    font-weight: 700;
 }
 
 .popup_body{
 	position : relative;
-	padding : 0px 55px 40px;
+	padding : 30px 55px 40px;
 	max-height : 710px;
 	overflow-y : auto;
 	overflow-x : hidden;
+	width:500px;
 }
 
 #navi{
@@ -145,6 +148,7 @@ table{
     border-radius: 8px;
     margin-bottom : 50px;
     margin : 70px 0px 30px 45px;
+     border:none;
 }
 #changeBtn{
     position: relative;
@@ -157,7 +161,7 @@ table{
 	text-align : center;
     border-radius: 8px;
     margin-bottom : 50px;
-    margin : 70px 0px 50px 45px;
+    margin : 80px 0px 50px 45px;
     border:none;
 }
 p{

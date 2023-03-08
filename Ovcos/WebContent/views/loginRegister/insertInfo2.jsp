@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
   <% String contextPath=request.getContextPath(); %>
-    <%! public int getRandom(){
-    	int random=0;
-    	random=(int)Math.floor((Math.random()*(99999-10000+1)))+10000; 
-    	return random; 
-    	}%>
+    <%! public int getRandom(){ int random=0; random=(int)Math.floor((Math.random()*(99999-10000+1)))+10000; return
+      random; }%>
 
 
       <%String selectResult=(String)request.getAttribute("select"); %>
@@ -115,13 +112,14 @@
                           <tr>
                             <td>이메일</td>
                             <td><input type="email" id="memEml" name="memEml" placeholder="이메일을 입력해주세요." required></td>
-                              <td><button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
-                              <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%= getRandom() %>">
+                            <td><button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
+                              <input type="hidden" readonly="readonly" name="code_check" id="code_check"
+                                value="<%= getRandom() %>">
                             </td>
                           </tr>
                           <tr>
-                          <td></td>
-                          <td colspan="2" id="sendEml" class="result"></td>
+                            <td></td>
+                            <td colspan="2" id="sendEml" class="result"></td>
                           </tr>
                           <tr>
                             <td></td>
@@ -137,7 +135,7 @@
                             <td></td>
                             <td colspan="2" id="checkCode" class="result">
                               <input type="hidden" readonly="readonly" name="code" id="code"
-                                value="<%=request.getAttribute("code") %>">
+                                value="<%=request.getAttribute(" code") %>">
                             </td>
                           </tr>
                         </table>
@@ -149,14 +147,14 @@
               </div>
             </div>
             <script>
-            /* function validateForm(){
-            	let isValid = true;
-            	
-            	const email = document.getElementById("memEml").value;
-            	if(!isValidEmail(email)){
-            		isValid = f
-            	}
-            } */
+              /* function validateForm(){
+                let isValid = true;
+              	
+                const email = document.getElementById("memEml").value;
+                if(!isValidEmail(email)){
+                  isValid = f
+                }
+              } */
               function checkCode() {
                 var v1 = document.getElementById('code_check').value;
                 var v2 = document.getElementById('code').value;
@@ -165,7 +163,7 @@
                 if (v1 != v2) {
                   document.getElementById('checkCode').style.color = "red";
                   document.getElementById('checkCode').innerHTML = "잘못된 인증번호입니다. 다시 인증해주세요.";
-                  
+
                   makeNull();
                 } else {
                   document.getElementById('checkCode').innerHTML = "인증되었습니다.";
@@ -180,13 +178,13 @@
               }
 
               function makeNull() {
-            	  document.getElementById('code').value = '';
+                document.getElementById('code').value = '';
                 var hi = document.getElementById("hi");
                 hi.type = "hidden";
               }
             </script>
             <script>
-             
+
               function callServlet() {
                 var code = document.getElementById('code_check').value;
                 var email = document.getElementById('memEml').value;
@@ -263,11 +261,11 @@
                     $("#checkPwd").text("비밀번호를 입력해주세요.").css("color", "red");;
                     /* $("#memPwd").val("");
                     $("#memPwd").focus(); */
-                    
+
                     return;
                   }
-                  
-                 
+
+
                   const regExp = /^[a-z\d!@#$%^&*]{6,15}$/i;
 
                   if (regExp.test($(this).val())) {
@@ -284,7 +282,7 @@
                   if ($("#memPwd2").val().trim().length == 0) {
                     $(this).val("");
                     $("#checkPwd2").text("비밀번호를 입력해주세요.").css("color", "red");
-                   /*  $("#memPwd2").focus(); */
+                    /*  $("#memPwd2").focus(); */
                     return;
                   }
 

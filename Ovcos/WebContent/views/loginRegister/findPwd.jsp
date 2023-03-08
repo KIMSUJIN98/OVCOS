@@ -6,28 +6,30 @@
       <html lang="en">
 
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Favicon-->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
-	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16" />
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-      crossorigin="anonymous"></script>
-      <script src="https://kit.fontawesome.com/66bc1e54e8.js" crossorigin="anonymous"></script>
-   
-    <link rel="stylesheet" href="../../resources/css/findPwd.css?abc">
-    <title>OVCOS - 비밀번호재설정</title>
-  </head>
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Favicon-->
+        <link rel="shortcut icon" type="image/x-icon"
+          href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png"
+          sizes="16x16" />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+          crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/66bc1e54e8.js" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="../../resources/css/findPwd.css?abc">
-        <title>OVCOS</title>
+        <title>OVCOS - 비밀번호재설정</title>
+      </head>
+      <link rel="stylesheet" href="../../resources/css/findPwd.css?abc">
+      <title>OVCOS</title>
       </head>
 
       <body>
@@ -82,25 +84,26 @@
                     </td>
                   </tr>
                   <tr>
-                            <td></td>
-                            <td id="checkEml" class="result"></td>
-                          </tr>
+                    <td></td>
+                    <td id="checkEml" class="result"></td>
+                  </tr>
                   <tr>
                     <td></td>
                     <td>
-                      <input type="text" id="code" name="code" placeholder="인증번호"></td>
-                     <td> <button type="button" onclick="checkCode()" id="checkBtn">인증확인</button>
+                      <input type="text" id="code" name="code" placeholder="인증번호">
+                    </td>
+                    <td> <button type="button" onclick="checkCode()" id="checkBtn">인증확인</button>
                     </td>
                   </tr>
                   <tr>
                     <td></td>
                     <td id="checkCode">
                       <input type="hidden" readonly="readonly" name="code_check" id="code_check"
-                        value="<%=request.getAttribute("code")%>">
+                        value="<%=request.getAttribute(" code")%>">
                     </td>
                   </tr>
                 </table>
-                
+
                 <div id="info">
                   <b>이메일 본인인증을 해주세요.</b> <br>
                   인증번호는 이메일로 전송됩니다. <br>
@@ -116,43 +119,43 @@
         <script>
 
           function callServlet() {
-        	  var email = document.getElementById('memEml');
-              if ( email.value.trim() === "") {
-            	  document.getElementById('checkEml').innerHTML = "이메일 주소를 입력해주세요."
-                }else {
-            	   document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
+            var email = document.getElementById('memEml');
+            if (email.value.trim() === "") {
+              document.getElementById('checkEml').innerHTML = "이메일 주소를 입력해주세요."
+            } else {
+              document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
 
-            const emailSelect = document.querySelector('#email-select');
-            const emailInput = document.getElementById('memEml');
-            const email = emailInput.value + emailSelect.value;
-            const code = document.getElementById('codeCheck').value;
-            const id = document.getElementById('memId').value;
+              const emailSelect = document.querySelector('#email-select');
+              const emailInput = document.getElementById('memEml');
+              const email = emailInput.value + emailSelect.value;
+              const code = document.getElementById('codeCheck').value;
+              const id = document.getElementById('memId').value;
 
-            const data = {
-              'code': code,
-              'email': email,
-              'id': id
-            };
+              const data = {
+                'code': code,
+                'email': email,
+                'id': id
+              };
 
-            console.log(data);
+              console.log(data);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '<%=contextPath %>/send.ma1', true);
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', '<%=contextPath %>/send.ma1', true);
+              xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                  //  console.log(xhr.responseText);
-                } else {
-                  console.error('There was a problem with the request.');
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  if (xhr.status === 200) {
+                    //  console.log(xhr.responseText);
+                  } else {
+                    console.error('There was a problem with the request.');
+                  }
                 }
-              }
-            };
+              };
 
-            xhr.send(JSON.stringify(data));
-            console.log("안녕");
-          }
+              xhr.send(JSON.stringify(data));
+              console.log("안녕");
+            }
           }
 
 
@@ -179,7 +182,7 @@
           }
 
           function makeNull() {
-        	  document.getElementById('code').value = '';
+            document.getElementById('code').value = '';
             var hi = document.getElementById("hi");
             hi.type = "hidden";
           }

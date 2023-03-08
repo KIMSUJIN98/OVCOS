@@ -53,12 +53,12 @@ div{box-sizing: border-box; }
 
 #title{
     font-size: 1.3rem;
-    font-weight: 530;
+    font-weight: 700;
 }
 
 .popup_body{
 	position : relative;
-	padding : 0px 55px 40px;
+	padding : 30px 55px 40px;
 	max-height : 710px;
 	overflow-y : auto;
 	overflow-x : hidden;
