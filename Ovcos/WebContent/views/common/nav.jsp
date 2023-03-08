@@ -75,6 +75,11 @@
             
             <div id="lastGroup">
                 <ul>
+                	<li id="checkAdmin">
+                		<% if(loginUser.getMemId().equals("admin")){ %>
+                        	관리자계정 접속중
+                        <% } %>
+                	</li>
                     <li id="li1">
                         <!-- <div id="feedEnrollBtn" class="btn" data-toggle="modal" data-target="#myModal">
                             <img src="<%= contextPath %>/resources/image/plus1.png" alt="">

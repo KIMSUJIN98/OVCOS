@@ -15,7 +15,7 @@
         }
         h1{
             line-height: 100px;
-            padding-left: 50px; 
+            padding-left: 20px;
             border-bottom: 1px solid black;
         }
 
@@ -26,11 +26,7 @@
         <%@ include file ="adminNav.jsp"%>
         
         <div id="header">
-        <h1>피드 관리</h1>
-        </div>
-
-        <div id="table1">
-
+        <h1>챌린지 관리</h1>
         </div>
 
     </body>
