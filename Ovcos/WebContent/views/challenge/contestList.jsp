@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.challenge.model.vo.EntryList"%>
 <%@ include file="../common/nav.jsp" %>
 <%@page import="com.ovcos.challenge.model.vo.Contest"%>
 <%@page import="com.ovcos.challenge.model.vo.ContestChallenge"%>
@@ -8,6 +9,11 @@
 	ArrayList<ContestChallenge> list = (ArrayList<ContestChallenge>)request.getAttribute("list");
 	Contest c = (Contest)request.getAttribute("c");
     Member LoginUser = (Member)request.getAttribute("loginUser");
+    
+    ArrayList<EntryList> eList = null;
+    if((ArrayList<EntryList>)request.getAttribute("eList") != null){
+    	eList = (ArrayList<EntryList>)request.getAttribute("eList");	
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -137,6 +143,7 @@
                     </div>
                 </div>
                 <% int count = 0; %>
+
                 <% for(ContestChallenge cc : list) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -162,7 +169,7 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <!-- <a class="btn btn-outline-dark mt-auto" href="#">참가하기</a> -->
-                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge<%= count %>">상세보기</button>
+                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge<%= count %>" onclick="selectEntryList(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">상세보기</button>
                                 </div>
                             </div>
                         </div>
@@ -198,9 +205,9 @@
                                                     <%= cc.getContestChallengeContent() %>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="count-area">
                                                 <td>
-                                                	참가인원 : <%= cc.getCount() %> / <%= cc.getContestChallengeMax() %>
+                                                	<!--  -->
                                                 </td>
                                             </tr>
                                             <tr>
@@ -219,16 +226,17 @@
                                             </tr>
                                         </table>
                                         <br><br><br>
-                                        <button type="submit" class="btn btn-lg btn-primary">참가하기</button>
-
+                                        <% if(loginUser != null && !loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
+                                            <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">
+                                            <!-- <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="castId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);"> -->
+                                        <% } %>
                                     </div>
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-sm btn-danger mr-auto ml-0">신고</button>
                                         <% if(loginUser != null && loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
-                                        <button type="button" class="btn btn-sm btn-secondary">수정</button>
-                                        <!-- <button type="button" class="btn btn-sm btn-secondary">삭제</button> -->
-                                        <button type="button" class="btn btn-sm btn-dark mt-auto" data-toggle="modal" data-target="#delete" onclick="castNo(<%= cc.getContestChallengeNo() %>);">삭제</button>
+                                            <button type="button" class="btn btn-sm btn-secondary">수정</button>
+                                            <button type="button" class="btn btn-sm btn-dark mt-auto" data-toggle="modal" data-target="#delete" onclick="castNo(<%= cc.getContestChallengeNo() %>);">삭제</button>
                                         <% } %>
                                     </div>
                                 </div>
@@ -321,40 +329,113 @@
         }
 
         function castNo(num){
-                    $("#delNo").val(num);
-                    // console.log(num);
-                }
-
-
-        // var count = 2;
-        // window.onscroll = function () {
-        //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        //         var toAdd = document.createElement("div");
-        //         toAdd.classList.add("col")
-        //         toAdd.classList.add("mb-5")
-        //         toAdd.innerHTML = 
-        //                 `
-        //                 <div class="card h-100">
-        //                     <!-- Product image-->
-        //                     <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-        //                     <!-- Product details-->
-        //                     <div class="card-body p-4">
-        //                         <div class="text-center">
-        //                             <!-- Product name-->
-        //                             <h5 class="fw-bolder">챌린지</h5>
-        //                             <!-- Product price-->
-        //                             상세설명
-        //                         </div>
-        //                     </div>
-        //                     <!-- Product actions-->
-        //                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-        //                         <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a></div>
-        //                     </div>
-        //                 </div>
-        //                 `
-        //         document.getElementById('scroll').appendChild(toAdd);
-        //     }
+            $("#delNo").val(num);
+            // console.log(num);
+        }
+        
+        // function castId(num, max){
+        //     $.ajax({
+        //         url:"checkEntryId.ch",
+        //         data:{
+        //             contestChallengeNo:num
+        //         },
+        //         type:"post",
+        //         success:function(result){
+        //             console.log(result)
+        //             if(result > 0){
+        //                 console.log("참가중");
+        //                 $("#enter").val("참가중");
+        //                 document.getElementById('enter').className = 'btn btn-lg btn-primary';
+        //                 insertEntryList(num, max);
+        //             }else{
+        //                 console.log("미참가");
+        //                 $("#enter").val("참가하기");
+        //                 document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
+        //                 deleteEntryList(num, max);
+        //             }
+        //         },
+        //         error:function(){
+        //             console.log("실패!");
+        //         }
+        //     })
         // }
+
+        function enterControll(num, max){
+            if($("#enter").val() === '참가하기') {
+                $("#enter").val("참가중");
+                document.getElementById('enter').className = 'btn btn-lg btn-primary';
+                insertEntryList(num, max);
+            }else {
+                $("#enter").val("참가하기");
+                document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
+                deleteEntryList(num, max);
+            }
+        }
+
+        // ajax 엔트리 리스트 참가
+        function insertEntryList(num, max){
+            $.ajax({
+                url:"entryInsert.ch",
+                data:{
+                    contestChallengeNo:num
+                },
+                type:"post",
+                success:function(result){
+                    console.log(result)
+                    if(result > 0){
+                        console.log("성공!")
+                        selectEntryList(num, max);
+                    }
+                },
+                error:function(){
+                    console.log("실패!");
+                }
+            })
+        }
+
+        // ajax 엔트리 리스트 참가취소
+        function deleteEntryList(num, max){
+            $.ajax({
+                url:"entryDelete.ch",
+                data:{
+                    contestChallengeNo:num
+                },
+                type:"post",
+                success:function(result){
+                    console.log(result)
+                    if(result > 0){
+                        console.log("성공!")
+                        selectEntryList(num, max);
+                    }
+                },
+                error:function(){
+                    console.log("실패!");
+                }
+            })
+        }
+
+        // ajax 엔트리 리스트 조회
+        function selectEntryList(num, max){
+            $.ajax({
+                url:"entryList.ch",
+                data:{
+                    contestChallengeNo:num
+                },
+                success:function(result){
+                    console.log(result);
+                    let value = "";
+                    for(let i = 0; i < result.length; i++){
+                        value += "<span>" + result[i].memNick + "</span><br>"
+                    }
+                    value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
+                    $("#count-area>td").html(value);
+                },
+                error:function(){
+                    console.log("실패!");
+                }
+            })
+        }
+
     </script>
 
 

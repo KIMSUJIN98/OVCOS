@@ -1,7 +1,6 @@
 package com.ovcos.challenge.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.Contest;
-import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.EntryList;
 
 /**
- * Servlet implementation class ContestChallengeListViewController
+ * Servlet implementation class AjaxContestChallengeEntryListController
  */
-@WebServlet("/ccList.ch")
-public class ContestChallengeListViewController extends HttpServlet {
+@WebServlet("/entryList.ch")
+public class AjaxContestChallengeEntryListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestChallengeListViewController() {
+    public AjaxContestChallengeEntryListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +33,14 @@ public class ContestChallengeListViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int contestNo = Integer.parseInt(request.getParameter("contestNo"));
+		int contestChallengeNo = Integer.parseInt(request.getParameter("contestChallengeNo"));
 		
-		ArrayList<ContestChallenge> list = new ChallengeService().contestChallengeList(contestNo);
+		ArrayList<EntryList> eList = new ChallengeService().selectEntryList(contestChallengeNo);
 		
-		Contest c = new ChallengeService().selectContest(contestNo);
-		
-		request.setAttribute("list", list);
-		request.setAttribute("c", c);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(eList, response.getWriter());
+		request.setAttribute("eList", eList);
 		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
-		
-		
 	}
 
 	/**
