@@ -1030,6 +1030,11 @@
                 <a href="#">약관&nbsp;</a> 
                 <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
                 <a href="#">&nbsp;고객센터&nbsp;</a>
+                <div style="font-weight: 500;">
+                    
+                    
+                </div>
+
                 <p style="margin-bottom: 0px;"> 
                 © 2023 KH OVCOS
                 </p>

@@ -10,6 +10,7 @@
     margin: auto;
     border: 1px solid black;
     border-radius: 10px;
+    margin-top: 30px;
 }
 
 
@@ -18,7 +19,7 @@
     padding: 16px;
     font-weight: bolder;
     font-size: 1.5rem;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
 }
 
 #mapContent{
@@ -28,12 +29,13 @@
 #map{
     height: 100%;
     width: 100%;
-    border: 1px solid black;
+    border-top: 1px solid black;
 }
 
 #content{
     height: 80px;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 18px;
 }
 .star-rating {
@@ -46,6 +48,7 @@
     text-align:center;
     width:5em;
   }
+
   
   .star-rating input {
     display:none;
@@ -80,6 +83,14 @@
     margin-left: 30px;
     font-weight: bold;
   }
+
+  path{
+    stroke: red !important;
+}
+
+img[src*='marker']{
+    display: none !important;
+}
 
   
 
