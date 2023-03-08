@@ -42,6 +42,8 @@ public class Member {
 		this.marketNy = marketNy;
 	}
 
+
+
 	
 	public Member(String memId, String memPwd, String memName, String memNick, String memBirth, String memEml,
 			String marketNy) {
@@ -55,11 +57,19 @@ public class Member {
 		this.marketNy = marketNy;
 	}
 
-	public Member(String memName, String memEml) {
+	public Member(String memId) {
 		super();
-		this.memName = memName;
-		this.memEml = memEml;
+		this.memId = memId;
 	}
+	
+	
+	 public Member(String memId, String memPwd) {
+		 super(); 
+		 this.memId = memId;
+		 this.memPwd = memPwd; 
+	 }
+	 
+
 
 	public String getMemId() {
 		return memId;

@@ -106,10 +106,10 @@ td button{
         color: white;
     
 }
-/* 
+
  #authBtn, #checkBtn{
         margin-left: -84px;
- } */
+ }
 
 #name{
 	background-color : white;
@@ -118,7 +118,7 @@ td button{
 
 
 .next_btn{
-    width: 320px;
+    width: 400px;
     height: 45px;
     margin-top: 10px;
     background-color:#ff7920;
@@ -127,8 +127,7 @@ td button{
     border: none;
 	text-align : center;
     border-radius: 8px;
-    margin-bottom : 50px;
-    margin-left : 80px;
+    margin-bottom : 20px;
 }
 
 #x-box{
@@ -141,4 +140,8 @@ td button{
 	position : inline-block;
 	padding:5px;
 	cursor : pointer;
+}
+
+.result{
+	font-size:0.8rem;
 }
