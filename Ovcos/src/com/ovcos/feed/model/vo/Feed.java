@@ -12,7 +12,7 @@ public class Feed {
 	private String feedPublicType;//피드공개여부
 	private String feedPathNy;// 경로등록여부
 	private String feedRprNy;//	피드신고여부
-	private Date feedRprDate; // 신고시간
+	private String feedRprDate; // 신고시간
 	private double distance; // 거리
 	private double startLat; // 시작 위도
 	private double startLon;// 시작 경도
@@ -31,7 +31,60 @@ public class Feed {
 	
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
-			String feedPathNy, String feedRprNy, Date feedRprDate, double distance, double startLat, double startLon,
+			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
+			String feedDelNy, String memId, String path, String memName, String memNick, String originName, int count) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.feedPublicType = feedPublicType;
+		this.feedPathNy = feedPathNy;
+		this.feedRprNy = feedRprNy;
+		this.feedRprDate = feedRprDate;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		this.feedDelNy = feedDelNy;
+		MemId = memId;
+		this.path = path;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.originName = originName;
+		this.count = count;
+	}
+
+
+	
+
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
+			String feedPathNy, double distance, double startLat, double startLon, String memId, String path,
+			String memName, String memNick, String originName) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.feedPublicType = feedPublicType;
+		this.feedPathNy = feedPathNy;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		MemId = memId;
+		this.path = path;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.originName = originName;
+	}
+
+
+
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
+			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
 			String feedDelNy, String memId, String path, String memName, String memNick, String originName) {
 		super();
 		this.feedIndex = feedIndex;
@@ -80,7 +133,7 @@ public class Feed {
 
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
-			String feedPathNy, String feedRprNy, Date feedRprDate, double distance, double startLat, double startLon,
+			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
 			String feedDelNy, String memId, String path) {
 		super();
 		this.feedIndex = feedIndex;
@@ -105,7 +158,7 @@ public class Feed {
 
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
-			String feedPathNy, String feedRprNy, Date feedRprDate, double distance, double startLat, double startLon,
+			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
 			String feedDelNy, String memId) {
 		super();
 		this.feedIndex = feedIndex;
@@ -149,7 +202,7 @@ public class Feed {
 
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPathNy,
-			Date feedRprDate, double distance, double startLat, double startLon, String memId) {
+			String feedRprDate, double distance, double startLat, double startLon, String memId) {
 		super();
 		this.feedIndex = feedIndex;
 		this.feedDate = feedDate;
@@ -318,14 +371,14 @@ public class Feed {
 
 
 
-	public Date getFeedRprDate() {
+	public String getFeedRprDate() {
 		return feedRprDate;
 	}
 
 
 
 
-	public void setFeedRprDate(Date feedRprDate) {
+	public void setFeedRprDate(String feedRprDate) {
 		this.feedRprDate = feedRprDate;
 	}
 

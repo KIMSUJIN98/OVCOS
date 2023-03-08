@@ -2,11 +2,11 @@ package com.ovcos.cut.model.vo;
 
 public class Cut {
 	
-	 private String memId;
-	 private String cutId;
+	 private String memId; //로그인유저아이디
+	 private String cutId; // 차단한아이디
 	 private String cutStatus;
-	 private String memName;
-	 private String memIntro;
+	 private String memName; //차단한 유저네임
+	 private String memIntro;//
 	 private String memNick;
 	 
 	 

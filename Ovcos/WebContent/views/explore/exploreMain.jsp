@@ -224,7 +224,7 @@
 
                     var map = new naver.maps.Map('map',{
                         center:new naver.maps.LatLng(lat, lng),
-                        zoom: 8
+                        zoom: 10
                     })
 
                     var marker = null;

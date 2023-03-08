@@ -1,4 +1,4 @@
-package com.ovcos.myPage.controller;
+package com.ovcos.feed.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.ovcos.feed.model.service.FeedService;
+
 /**
- * Servlet implementation class EditPersonalInfoController
+ * Servlet implementation class FeedRprController
  */
-@WebServlet("/editInfo.me")
-public class EditPersonalInfoController extends HttpServlet {
+@WebServlet("/rpr.feed")
+public class FeedRprController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditPersonalInfoController() {
+    public FeedRprController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +30,15 @@ public class EditPersonalInfoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
+
+		int feedIndex = Integer.parseInt(request.getParameter("feedIndex"));
+		String rprId = request.getParameter("userId");
 		
-		request.getRequestDispatcher("views/myPage/editPersonalInfo.jsp").forward(request, response);
+		System.out.println(feedIndex+rprId);
+		//업데이트처리
+		int result = new FeedService().updateRpr(feedIndex,rprId);
+		System.out.println("신고용리절트"+result);
+		new Gson().toJson(result,response.getWriter());
 	}
 
 	/**

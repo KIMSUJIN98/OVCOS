@@ -3,6 +3,8 @@ package com.ovcos.loginRegister.model.service;
 import static com.ovcos.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.ovcos.loginRegister.model.dao.MemberDao;
 import com.ovcos.loginRegister.model.vo.Member;
@@ -16,7 +18,7 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
-	
+
 public int insertMember(Member m) {
 		
 		Connection conn = getConnection();
@@ -56,8 +58,41 @@ public Member checkRegister(String name,String email) {
 	
 	Member m = new MemberDao().checkRegister(conn, name, email);
 	
+	System.out.println(name);
+	System.out.println(email);
 	close(conn);
 	return m;
+}
+
+public Member pwdRegister(String id, String email) {
+	Connection conn = getConnection();
+	
+	Member m = new MemberDao().pwdRegister(conn, id, email);
+	
+	System.out.println(id);
+	System.out.println(email);
+	
+	close(conn);
+	return m;
+}
+public Member updatePwd(String updatePwd, String id) {
+	Connection conn = getConnection();
+	
+	int result = new MemberDao().updatePwd(conn, updatePwd, id);
+	Member updateMem = null; 
+	
+	System.out.println(updatePwd); 
+	System.out.println(id);
+	
+	if(result>0) {
+		commit(conn);
+		updateMem = new MemberDao().selectMember(conn, id);
+	} else {
+		rollback(conn);
+		
+	}
+	close(conn);
+	return updateMem;
 }
 
 }
