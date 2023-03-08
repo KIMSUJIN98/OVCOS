@@ -9,11 +9,6 @@
 	ArrayList<ContestChallenge> list = (ArrayList<ContestChallenge>)request.getAttribute("list");
 	Contest c = (Contest)request.getAttribute("c");
     Member LoginUser = (Member)request.getAttribute("loginUser");
-    
-    ArrayList<EntryList> eList = null;
-    if((ArrayList<EntryList>)request.getAttribute("eList") != null){
-    	eList = (ArrayList<EntryList>)request.getAttribute("eList");	
-    }
 %>
 <!DOCTYPE html>
 <html>
@@ -148,7 +143,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- image -->
-                            <% if(cc.getChangeName()!= null) { %>
+                            <% if(cc.getChangeName() != null) { %>
                                 <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
                             <% }else { %>
                                 <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
@@ -161,7 +156,11 @@
                                     <!-- summary -->
                                     <%= c.getContestName() %><br>
                                     <%= cc.getContestChallengeDate() %><br>
-                                    참가인원 : <%= cc.getCount() %> / <%= cc.getContestChallengeMax() %>
+                                    <span id="hiddenTarget<%= cc.getContestChallengeNo() %>">
+                                        참가인원 : <%= cc.getCount() %> / <%= cc.getContestChallengeMax() %>
+                                    </span>
+                                    <span class="count-area2" id="area<%= cc.getContestChallengeNo() %>">
+                                    </span>
                                 </div>
                             </div>
                             <% count++; %>
@@ -169,7 +168,7 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <!-- <a class="btn btn-outline-dark mt-auto" href="#">참가하기</a> -->
-                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge<%= count %>" onclick="selectEntryList(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">상세보기</button>
+                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge<%= count %>" onclick="checkEntryId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">상세보기</button>
                                 </div>
                             </div>
                         </div>
@@ -228,13 +227,13 @@
                                         <br><br><br>
                                         <% if(loginUser != null && !loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
                                             <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">
-                                            <!-- <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="castId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);"> -->
+                                            <!-- <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkEntryId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);"> -->
                                         <% } %>
                                     </div>
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-sm btn-danger mr-auto ml-0">신고</button>
-                                        <% if(loginUser != null && loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
+                                        <% if(loginUser != null && loginUser.getMemId().equals(cc.getContestChallengeId()) || Integer.parseInt(loginUser.getMemStatus()) == 5) { %>
                                             <button type="button" class="btn btn-sm btn-secondary">수정</button>
                                             <button type="button" class="btn btn-sm btn-dark mt-auto" data-toggle="modal" data-target="#delete" onclick="castNo(<%= cc.getContestChallengeNo() %>);">삭제</button>
                                         <% } %>
@@ -333,42 +332,48 @@
             // console.log(num);
         }
         
-        // function castId(num, max){
-        //     $.ajax({
-        //         url:"checkEntryId.ch",
-        //         data:{
-        //             contestChallengeNo:num
-        //         },
-        //         type:"post",
-        //         success:function(result){
-        //             console.log(result)
-        //             if(result > 0){
-        //                 console.log("참가중");
-        //                 $("#enter").val("참가중");
-        //                 document.getElementById('enter').className = 'btn btn-lg btn-primary';
-        //                 insertEntryList(num, max);
-        //             }else{
-        //                 console.log("미참가");
-        //                 $("#enter").val("참가하기");
-        //                 document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
-        //                 deleteEntryList(num, max);
-        //             }
-        //         },
-        //         error:function(){
-        //             console.log("실패!");
-        //         }
-        //     })
-        // }
+        // ajax 상세보기 버튼 참가여부 확인
+        function checkEntryId(num, max){
+            $.ajax({
+                url:"checkEntryId.ch",
+                data:{
+                    contestChallengeNo:num
+                },
+                type:"post",
+                success:function(result){
+                    console.log(result)
+                    if(result > 0){
+                        console.log("참가중");
+                        $("#enter").val("참가중");
+                        document.getElementById('enter').className = 'btn btn-lg btn-primary';
+                        // insertEntryList(num, max);
+                        selectEntryList(num, max)
+                    }else{
+                        console.log("미참가");
+                        $("#enter").val("참가하기");
+                        document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
+                        deleteEntryList(num, max);
+                        selectEntryList(num, max)
+                    }
+                },
+                error:function(){
+                    console.log("실패!");
+                }
+            })
+        }
 
+        // 엔트리 버튼 컨트롤
         function enterControll(num, max){
             if($("#enter").val() === '참가하기') {
                 $("#enter").val("참가중");
                 document.getElementById('enter').className = 'btn btn-lg btn-primary';
                 insertEntryList(num, max);
-            }else {
+            }else if($("#enter").val() === '참가중') {
                 $("#enter").val("참가하기");
                 document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
                 deleteEntryList(num, max);
+            }else {
+
             }
         }
 
@@ -424,11 +429,18 @@
                 success:function(result){
                     console.log(result);
                     let value = "";
+                    let value2 = "";
                     for(let i = 0; i < result.length; i++){
-                        value += "<span>" + result[i].memNick + "</span><br>"
+                        value += "<span>" + result[i].memNick + "</span><br>";
                     }
+
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
                     $("#count-area>td").html(value);
+                    
+                    $("#hiddenTarget" + num).remove();
+                    
+                    value2 += "참가인원 : " + result.length + " / " + max;
+                    $("#area" + num).html(value2);
                 },
                 error:function(){
                     console.log("실패!");

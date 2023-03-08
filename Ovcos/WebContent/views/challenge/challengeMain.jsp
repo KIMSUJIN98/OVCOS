@@ -70,8 +70,11 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                alt="..." />
+                            <% if(c.getChangeName() != null) { %>
+                                <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..."/>
+                            <% }else { %>
+                                <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                            <% } %>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
