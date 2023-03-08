@@ -37,6 +37,7 @@ public class NormalChallengeListViewController extends HttpServlet {
 //		HttpSession session = request.getSession();
 		
 		ArrayList<Local> list1 = new ChallengeService().selectLocalList();
+		System.out.println(list1);
 		
 		int local = Integer.parseInt(request.getParameter("local"));
 		

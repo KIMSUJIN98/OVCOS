@@ -37,7 +37,8 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">일반</h1>
+                <h1 class="display-4 fw-bolder">일반</h1><br>
+                <h3 id="local-tag"></h3>
                 <p class="lead fw-normal text-white-50 mb-0">
                 	혼자 운동하는게 쉽지 않지? <br>
                 	같이 즐기자GO! 
@@ -212,7 +213,10 @@
             var local = (selectLocal.options[selectLocal.selectedIndex].value);
             console.log(local);
             location.href='<%= contextPath %>/ncList.ch?local=' + local;
+            $("#local-tag").val("#selectLocal");
         }
+
+
         // document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
         // $('#selectLocal option[value=' + value + ']').prop('selected', true);
 

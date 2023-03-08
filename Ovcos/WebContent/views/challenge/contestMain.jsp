@@ -47,7 +47,7 @@
     </div>
     <% } %>
     <!-- 대회 추가 Modal -->
-    <div class="modal" id="newCnts">
+    <div class="modal fade" id="newCnts">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -96,7 +96,7 @@
     </div>
 
     <!-- 대회 수정 Modal -->
-    <div class="modal" id="update">
+    <div class="modal fade" id="update">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -145,7 +145,7 @@
     </div>
 
     <!-- 대회 삭제 Modal -->
-    <div class="modal" id="delete">
+    <div class="modal fade" id="delete">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
