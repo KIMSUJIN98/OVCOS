@@ -23,6 +23,28 @@
 		AND MEM_PWD = ?
 	</entry>
 	
+		<entry key="selectMember">
+		SELECT  MEM_ID
+		      , MEM_PWD
+		      , MEM_NAME
+		      , MEM_NICK
+		      , MEM_INTRO
+		      , MEM_BIRTH
+		      , MEM_STATUS
+		      , MEM_LOC_INFO
+		      , MEM_PUBLIC_NY
+		      , MEM_GOAL_DTN
+		      , MEM_CODE_NY
+		      , MEM_RPR_CUM
+		      , MEM_API_TYPE
+		      , MEM_API_TOKEN
+		      , MEM_EML
+		      , MARKET_NY
+		FROM MEMBER
+		WHERE MEM_ID = ?
+	
+	</entry>
+	
 	<entry key="deleteNotice">
 		UPDATE
 	            NOTICE
@@ -85,5 +107,18 @@ SELECT
       FROM MEMBER 
      WHERE MEM_NAME=? 
        AND MEM_EML=?
+    </entry>
+    <entry key="findPwd">
+    SELECT 
+    	   MEM_ID	
+    	 , MEM_PWD 
+      FROM MEMBER 
+     WHERE MEM_ID=? 
+       AND MEM_EML=?
+    </entry>
+    <entry key="updatePwd">
+    UPDATE MEMBER
+       SET MEM_PWD=? 
+     WHERE MEM_ID=? 
     </entry>
 </properties>
