@@ -374,17 +374,17 @@
 	            anchor: N.Point(20, 20)
 	        },
 	        htmlMarker3 = {
-	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-3.png);background-size:contain;"></div>',
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
 	            size: N.Size(40, 40),
 	            anchor: N.Point(20, 20)
 	        },
 	        htmlMarker4 = {
-	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-4.png);background-size:contain;"></div>',
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
 	            size: N.Size(40, 40),
 	            anchor: N.Point(20, 20)
 	        },
 	        htmlMarker5 = {
-	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/example/images/cluster-marker-5.png);background-size:contain;"></div>',
+	            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:15px;color:white;text-align:center;font-weight:bold;background-color:rgba(67, 114, 176, 0.651);border-radius:50%;"></div>',
 	            size: N.Size(40, 40),
 	            anchor: N.Point(20, 20)
 	        };
@@ -397,7 +397,7 @@
 	        disableClickZoom: false,
 	        gridSize: 120,
 	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-	        indexGenerator: [10, 20, 200, 500, 1000],
+	        indexGenerator: [10, 20, 30, 40, 50],
 	        stylingFunction: function(clusterMarker, count) {
 	            $(clusterMarker.getElement()).find('div:first-child').text(count);
 	        }
