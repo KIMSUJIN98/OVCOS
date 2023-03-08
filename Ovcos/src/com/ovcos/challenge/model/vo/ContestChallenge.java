@@ -53,6 +53,23 @@ public class ContestChallenge {
 		this.contestChallengeId = contestChallengeId;
 		this.contestNo = contestNo;
 	}
+	
+	
+
+	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String contestChallengeContent,
+			String enrollDate, String contestChallengeDate, int contestChallengeMax, String contestChallengeId,
+			String contestNo, String changeName) {
+		super();
+		this.contestChallengeNo = contestChallengeNo;
+		this.contestChallengeTitle = contestChallengeTitle;
+		this.contestChallengeContent = contestChallengeContent;
+		this.enrollDate = enrollDate;
+		this.contestChallengeDate = contestChallengeDate;
+		this.contestChallengeMax = contestChallengeMax;
+		this.contestChallengeId = contestChallengeId;
+		this.contestNo = contestNo;
+		this.changeName = changeName;
+	}
 
 
 	public ContestChallenge(int contestChallengeNo, String contestChallengeTitle, String enrollDate,

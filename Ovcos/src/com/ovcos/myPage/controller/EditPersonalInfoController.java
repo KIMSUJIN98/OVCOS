@@ -1,31 +1,23 @@
-package com.ovcos.challenge.controller;
+package com.ovcos.myPage.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.Contest;
-import com.ovcos.challenge.model.vo.ContestChallenge;
-import com.ovcos.challenge.model.vo.EntryList;
-
 /**
- * Servlet implementation class ContestChallengeListViewController
+ * Servlet implementation class EditInfoController
  */
-@WebServlet("/ccList.ch")
-public class ContestChallengeListViewController extends HttpServlet {
+@WebServlet("/editInfo.me")
+public class EditPersonalInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestChallengeListViewController() {
+    public EditPersonalInfoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +27,10 @@ public class ContestChallengeListViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int contestNo = Integer.parseInt(request.getParameter("contestNo"));
+		request.setCharacterEncoding("utf-8");
+		String userId = request.getParameter("userId");
 		
-		ArrayList<ContestChallenge> list = new ChallengeService().contestChallengeList(contestNo);
-		
-		Contest c = new ChallengeService().selectContest(contestNo);
-		
-		request.setAttribute("list", list);
-		request.setAttribute("c", c);
-		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("views/myPage/editPersonalInfo.jsp").forward(request, response);
 	}
 
 	/**
