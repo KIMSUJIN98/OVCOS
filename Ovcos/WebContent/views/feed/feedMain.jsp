@@ -1019,25 +1019,23 @@
                 </table>
 
 				</div>
-             
-                
                 
 
-                <div id="footer">
-                    <!-- 푸터구역 -->
-                    <div id="f1">
-                        <a href="#">약관&nbsp;</a> 
-                        <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
-                        <a href="#">&nbsp;고객센터&nbsp;</a>
-                    </div>
-                    <div>
-                        <p> 
-                        © 2023 KH OVCOS
-                        </p>
-                    </div>
-                </div>
             </div>
-    </div>
+        </div>
+        <div id="footer">
+            <!-- 푸터구역 -->
+            <div id="f1" style="" align="center">
+                <a href="#">약관&nbsp;</a> 
+                <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
+                <a href="#">&nbsp;고객센터&nbsp;</a>
+                <p style="margin-bottom: 0px;"> 
+                © 2023 KH OVCOS
+                </p>
+            </div>
+            <div>
+            </div>
+        </div>
 <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">

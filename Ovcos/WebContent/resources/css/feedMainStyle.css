@@ -337,12 +337,14 @@ body{
     height: 450px;
     margin: auto;
     margin-top: 40px;
+  
 }
 #footer{
-    width: 90%;
-    height: 200px;
-    margin: auto;
-    margin-top: 40px;
+    width: 100%;
+    height: 20%;
+    /* margin: auto; */
+    /* margin-top: 40px; */
+    background-color: blanchedalmond;
 }
 
 /*피드 성공실패 alert 부분*/
@@ -362,6 +364,4 @@ img[src*='marker']{
     display: none !important;
 }
 
-#feedEnrollBtn{
-	visibility: visible;
-}
+
