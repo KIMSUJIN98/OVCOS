@@ -364,3 +364,6 @@ img[src*='marker']{
     display: none !important;
 }
 
+#feedEnrollBtn{
+	visibility: visible;
+}

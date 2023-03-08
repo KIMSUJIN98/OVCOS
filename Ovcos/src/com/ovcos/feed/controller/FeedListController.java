@@ -39,7 +39,7 @@ public class FeedListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		
-		//로그인하고나서 바로 나오는 화면 (전체피드 조회리스트만을 반환하고있음) 
+		//로그인하고나서 바로연결되는서블릿 (전체피드 조회리스트만을 반환하고있음) 
 //
 //		HttpSession session = request.getSession();
 //		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
@@ -59,15 +59,12 @@ public class FeedListController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-//
-//		String num = request.getParameter("num");// 내친구피드, 내피드 선택하면 값 담김 
 		String select = request.getParameter("sorting");
 		
 		
 		ArrayList<Feed>  allList = new FeedService().selectArrayList(userId);
 		response.setContentType("application/json; charset=utf-8");
 		
-		System.out.println("select값 (last,old..) : " +select );
 		
 		if(select == null) {
 			request.setAttribute("allList", allList);
@@ -105,9 +102,7 @@ public class FeedListController extends HttpServlet {
 		}else if(select.equals("bookmark")) { //전체피드 탭에서 찜순정렬 선택시 
 			
 			//찜 개수 높은 순 정렬
-
 			allList = new FeedService().selectBookmarkSorting(userId);
-			
 			request.setAttribute("allList", allList);
 			request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
 		
@@ -115,8 +110,6 @@ public class FeedListController extends HttpServlet {
 			
 			request.setAttribute("allList", allList);
 			request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
-			
-			
 		}
 		
 		
