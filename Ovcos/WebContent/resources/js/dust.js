@@ -52,7 +52,7 @@ function select1(sido){
                 str1 = "<img src='/Ovcos/resources/image/greenEmo.png'style='width:25px'> 초미세("+pm25+") 보통"
                 pm25text.style.color = "green";
             }else if(pm25 <=75){
-                str1 = "<img src='/Ovcos/resources/image/OrangeEmo.png'> 초미세("+pm25+") 나쁨"
+                str1 = "<img src='/Ovcos/resources/image/OrangeEmo.png'style='width:25px'> 초미세("+pm25+") 나쁨"
                 pm25text.style.color = "blue";
             }else{
                 str1 = "<img src='/Ovcos/resources/image/redEmo.png'> 초미세("+pm25+") 매우나쁨"

@@ -436,7 +436,33 @@
                 </div>
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
-                <div id="dust">미세먼지api 구역</div>
+                <div id="dust" style="display: flex; background-color: rgb(67, 115, 176);">
+                 <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
+                    <div style="font-weight: 600; color: white;">현재 위치</div>
+                    <div style="color: white;"> 
+                        날짜
+                    </div>
+                </div>   
+                    <div >
+                        <div style="font-weight: 600; padding-left: 15px; color: white;">미세먼지
+                            <div style="display: flex;">
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo1.png" style="width: 40px; padding-top: 5px;" >
+                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div >
+                        <div style="font-weight: 600; padding-left: 15px; color: white;">초미세먼지
+                            <div style="display: flex;">
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 5px;" >
+                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
                 <div id="weather">
                 <!-- Weather widget by https://meteodays.com -->
 				<a id="ms-informer-link-0aaa8b335b7df33a2e315fad7e6411c6" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
