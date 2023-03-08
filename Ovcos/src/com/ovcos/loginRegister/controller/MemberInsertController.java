@@ -135,11 +135,17 @@ public class MemberInsertController extends HttpServlet {
 	
 		  int result = new MemberService().insertMember(m);
 		  
+		  HttpSession session = request.getSession();
 		  if(result>0) {
-				HttpSession session = request.getSession();
-			  response.sendRedirect(request.getContextPath());
+			  String message = "회원가입에 성공했습니다.";
+			  request.setAttribute("alertMsg", message);
+			  RequestDispatcher rd = request.getRequestDispatcher("views/loginRegister/login.jsp");
+			  rd.forward(request, response);
 			} else {
-			  response.sendRedirect(request.getContextPath());
+				 String message = "회원가입에 실패했습니다. 다시 시도해주세요.";
+				  request.setAttribute("alertMsg", message);
+				  RequestDispatcher rd = request.getRequestDispatcher("views/loginRegister/login.jsp");
+				  rd.forward(request, response);
 				 }
 	}
 

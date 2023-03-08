@@ -1,6 +1,5 @@
 package com.ovcos.loginRegister.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,24 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.ovcos.loginRegister.model.service.MemberService;
 import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class FindIdController
+ * Servlet implementation class FindPwdController
  */
-@WebServlet("/findId.me")
-public class FindIdController extends HttpServlet {
+@WebServlet("/findPwd.me")
+public class FindPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdController() {
+    public FindPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,30 +34,27 @@ public class FindIdController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         
+       String id = request.getParameter("memId");
        String email= request.getParameter("memEml") + request.getParameter("email-provider");
-       String name = request.getParameter("memName");
        
-       Member isRegistered = new MemberService().checkRegister(name, email);
+       Member isRegistered = new MemberService().pwdRegister(id, email);
        
        System.out.println("여기?");
        
        System.out.println(isRegistered);
        if(isRegistered == null) {
     	   request.setAttribute("errorMessage", "조회된 회원정보가 없습니다. 다시 시도해주세요.");
-    	   RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findId2.jsp");
-           dispatcher.forward(request, response);
+    	   RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findPwd2.jsp");
+    	   dispatcher.forward(request, response);
     	   System.out.println("여기?");
        } else {
-    	   String id = isRegistered.getMemId();
-           request.setAttribute("id", id);
-           System.out.println(id);
+    	   String pwd = isRegistered.getMemPwd();
+    	   request.setAttribute("id", id);
+    	   request.setAttribute("pwd", pwd);
+    	      RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findPwd2.jsp");
+    	      dispatcher.forward(request, response);
        }
        System.out.println("여기?");
-       //System.out.println(id);
-       RequestDispatcher dispatcher = request.getRequestDispatcher("views/loginRegister/findId2.jsp");
-       dispatcher.forward(request, response);
-	
-	
 	}
 
 	/**

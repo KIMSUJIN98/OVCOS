@@ -46,10 +46,7 @@
                 <div class="signin_box">
                   <div class="popup_top">
 
-                    <div id="x-box"><i class="fa-solid fa-x"
-                        onclick="location.href='/Ovcos/views/loginRegister/login.jsp'"></i></div>
-
-                    <br><span id="title">OVCOS 회원가입</span> <br>
+                    <div id="x-box"></div>
 
                   </div>
 
@@ -123,6 +120,10 @@
                             </td>
                           </tr>
                           <tr>
+                          <td></td>
+                          <td colspan="2" id="sendEml" class="result"></td>
+                          </tr>
+                          <tr>
                             <td></td>
                             <td colspan="2" id="checkEml" class="result"></td>
                           </tr>
@@ -140,9 +141,7 @@
                             </td>
                           </tr>
                         </table>
-                        
-     
-                        <button type="submit" class="next_btn">회원가입</button>
+                        <button type="submit" class="next_btn" onclick="validateForm()">회원가입</button>
                       </form>
                     </div>
                   </div>
@@ -150,7 +149,14 @@
               </div>
             </div>
             <script>
-      
+            /* function validateForm(){
+            	let isValid = true;
+            	
+            	const email = document.getElementById("memEml").value;
+            	if(!isValidEmail(email)){
+            		isValid = f
+            	}
+            } */
               function checkCode() {
                 var v1 = document.getElementById('code_check').value;
                 var v2 = document.getElementById('code').value;
@@ -182,11 +188,6 @@
             <script>
              
               function callServlet() {
-            	  var email = document.getElementById('memEml');
-              if ( email.value.trim() === "") {
-            	  document.getElementById('checkEml').innerHTML = "이메일 주소를 입력해주세요."
-                }else {
-            	  document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
                 var code = document.getElementById('code_check').value;
                 var email = document.getElementById('memEml').value;
 
@@ -214,7 +215,7 @@
                 xhr.send(JSON.stringify(data));
                 console.log("안녕");
               }
-              }
+
               $(function validate() {
                 $("#checkIdBtn").on("click", function () {
                   const $idInput = $("#memId");
