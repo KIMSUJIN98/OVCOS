@@ -272,32 +272,31 @@ VALUES
      , ?
      );
 
+SELECT
+       CHLG_NO_INLIST
+     , MEM_NICK
+     , CHLG_ENTRY_ID
+  FROM ENTRY_LIST
+  JOIN MEMBER ON (CHLG_ENTRY_ID = MEM_ID)
+ WHERE CHLG_NO_INLIST = 78;
+
+
+DELETE
+  FROM ENTRY_LIST
+ WHERE CHLG_ENTRY_ID = 'Qdfca12'
+   AND CHLG_NO_INLIST = 78;
+
+SELECT
+       CHLG_NO_INLIST
+     , CHLG_ENTRY_ID
+  FROM ENTRY_LIST
+ WHERE CHLG_NO_INLIST = ?
+   AND CHLG_ENTRY_ID = ?;
 
 
 
 
-
-
-
-
-
-
-
-
-rollback;
-
-
-
-
-
-
-
-
-
-
-
-
-
+ROLLBACK;
 
 
 COMMIT;

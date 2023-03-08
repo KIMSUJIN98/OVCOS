@@ -288,7 +288,7 @@
 	 WHERE CNTS_CHLG_NO = ?
 	</entry>
 	
-	<entry key="insertEntryList">
+	<entry key="insertEntryListSelf">
 		INSERT
 		  INTO ENTRY_LIST
 		     (
@@ -300,6 +300,47 @@
 		       SEQ_CHLG_NO.CURRVAL
 		     , ?
 		     )
+	</entry>
+	
+	<entry key="insertEntryList">
+		INSERT
+		  INTO ENTRY_LIST
+		     (
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     )
+	</entry>
+	
+	
+	<entry key="selectEntryList">
+		SELECT
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		     , MEM_NICK
+		  FROM ENTRY_LIST
+		  JOIN MEMBER ON (CHLG_ENTRY_ID = MEM_ID)
+		 WHERE CHLG_NO_INLIST = ?
+	</entry>
+	
+	<entry key="deleteEntryList">
+		DELETE
+		  FROM ENTRY_LIST
+		 WHERE CHLG_NO_INLIST = ?
+		   AND CHLG_ENTRY_ID = ?
+	</entry>
+	
+	<entry key="checkEntryId">
+		SELECT
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		  FROM ENTRY_LIST
+		 WHERE CHLG_NO_INLIST = ?
+		   AND CHLG_ENTRY_ID = ?
 	</entry>
 	
 </properties>

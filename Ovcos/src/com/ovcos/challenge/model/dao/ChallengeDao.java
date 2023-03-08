@@ -523,10 +523,10 @@ public class ChallengeDao {
 	
 	}
 
-	public int insertEntryList(Connection conn, ContestChallenge cc) {
+	public int insertEntryListSelf(Connection conn, ContestChallenge cc) {
 		int result3 = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertEntryList");
+		String sql = prop.getProperty("insertEntryListSelf");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -544,6 +544,112 @@ public class ChallengeDao {
 		return result3;		
 		
 	}
+
+	public int insertEntryList(Connection conn, EntryList el) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, el.getContestChallNo());
+			pstmt.setString(2, el.getContestEntryId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<EntryList> selectEntryList(Connection conn, int contestChallengeNo) {
+		ArrayList<EntryList> list = new ArrayList<EntryList>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, contestChallengeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new EntryList(rset.getInt("CHLG_NO_INLIST"),
+								   	   rset.getString("CHLG_ENTRY_ID"),
+								   	   rset.getString("MEM_NICK")
+								   ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+
+	public int deleteEntryList(Connection conn, EntryList el) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, el.getContestChallNo());
+			pstmt.setString(2, el.getContestEntryId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<EntryList> checkEntryId(Connection conn, EntryList el) {
+		ArrayList<EntryList> list = new ArrayList<EntryList>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkEntryId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, el.getContestChallNo());
+			pstmt.setString(2, el.getContestEntryId());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new EntryList(rset.getInt("CHLG_NO_INLIST"),
+								   	   rset.getString("CHLG_ENTRY_ID")
+								   ));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
 
 	
 }
