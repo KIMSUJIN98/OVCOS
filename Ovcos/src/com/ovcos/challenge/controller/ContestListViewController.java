@@ -38,9 +38,17 @@ public class ContestListViewController extends HttpServlet {
 		ArrayList<Contest> list = new ChallengeService().selectContestList();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
+//		int contestNo = 0;
+//		for(Contest c : list) {
+//			contestNo = c.getContestNo();
+//		}
+		
 		request.setAttribute("list", list);
 		request.setAttribute("loginUser", loginUser);
 		request.getRequestDispatcher("views/challenge/contestMain.jsp").forward(request, response);
+		
+//		request.setAttribute("contestNo", contestNo);
+//		request.getRequestDispatcher("views/challenge/ccList.jsp").forward(request, response);
 		
 		
 	}

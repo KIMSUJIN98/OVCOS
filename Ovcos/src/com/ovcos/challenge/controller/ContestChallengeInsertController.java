@@ -39,10 +39,8 @@ public class ContestChallengeInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		String contestName = request.getParameter("contestName");
-		String contestDate = request.getParameter("contestDate");
 		
-		System.out.println(ServletFileUpload.isMultipartContent(request));
+//		System.out.println(ServletFileUpload.isMultipartContent(request));
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10 * 1024 * 1024;
@@ -55,10 +53,10 @@ public class ContestChallengeInsertController extends HttpServlet {
 			String contestChallengeTitle = multi.getParameter("challengeName");
 			String challengeDate = multi.getParameter("challengeDate");
 			String challengeTime = multi.getParameter("challengeTime");
-			String contestNo = multi.getParameter("contest");
 			int contestChallengeMax = Integer.parseInt(multi.getParameter("challengeMax"));
 			String contestChallengeContent = multi.getParameter("challengeContent");
 			String fileName = multi.getFilesystemName("challengeImg");
+			String contestNo = multi.getParameter("contestNo");
 			
 			String YYYY = challengeDate.substring(0, 4);
 			String MM = challengeDate.substring(5, 7);
@@ -73,7 +71,7 @@ public class ContestChallengeInsertController extends HttpServlet {
 			
 			String contestChallengeDate = YYYY + MM + DD + challengeTime1[0] + challengeTime1[1];
 			
-//			System.out.println(challengeDate);
+//			System.out.println(contestChallengeDate);
 			
 			ContestChallenge cc = new ContestChallenge();
 			cc.setContestChallengeId(contestChallengeId);
@@ -96,9 +94,10 @@ public class ContestChallengeInsertController extends HttpServlet {
 			
 			int result = new ChallengeService().insertContestChallenge(cc, img);
 			
+			response.sendRedirect(request.getContextPath() + "/ccList.ch?contestNo=" + contestNo);
 			
-			response.sendRedirect(request.getContextPath() + "/ccList.ch?contestName=" + contestName + "&contestDate=" + contestDate);
 		}
+		
 		
 	}
 

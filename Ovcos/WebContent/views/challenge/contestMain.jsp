@@ -1,3 +1,4 @@
+<%@ include file="../common/nav.jsp" %>
 <%@page import="com.ovcos.upload.model.vo.ImageUpload"%>
 <%@page import="com.ovcos.challenge.model.vo.ContestChallenge"%>
 <%@page import="com.ovcos.challenge.model.vo.Contest"%>
@@ -12,9 +13,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>대회목록</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+        <title>OVCOS - 대회목록</title>
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -29,7 +28,6 @@
     </head>
 
     <body>
-        <%@ include file="../common/nav.jsp" %>
             <!-- Header-->
             <header class="bg-dark py-5">
                 <div class="container px-4 px-lg-5 my-5">
@@ -90,8 +88,8 @@
                             </div>
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">등록</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                <button type="submit" class="btn btn-sm btn-primary">등록</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">닫기</button>
                             </div>
                         </form>
                     </div>
@@ -99,7 +97,7 @@
             </div>
 
             <!-- 대회 수정 Modal -->
-            <div class="modal" id="updateCnts">
+            <div class="modal" id="update">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Modal Header -->
@@ -148,7 +146,7 @@
             </div>
 
             <!-- 대회 삭제 Modal -->
-            <div class="modal" id="deleteCnts">
+            <div class="modal" id="delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Modal Header -->
@@ -167,8 +165,8 @@
                             </div>
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-danger">삭제</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">닫기</button>
                             </div>
                         </form>
                     </div>
@@ -184,21 +182,25 @@
                         <% for(Contest c : list) { %>
                             <div class="col mb-5">
                                 <div class="card h-100">
+                                    <!-- image -->
                                     <a href="<%= c.getContestUrl() %>" target="_blank">
-                                        <img class="card-img-top" height="200px" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
+                                        <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= c.getChangeName() %>" alt="..." />
                                     </a>
+                                    <!-- details -->
                                     <div class="card-body p-4">
                                         <div class="text-center">
+                                            <!-- name -->
                                             <h5 class="fw-bolder"><%= c.getContestName() %></h5>
+                                            <!-- summary -->
                                             <%= c.getContestDate() %>
                                         </div>
                                     </div>
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestName=<%= c.getContestName() %>&Date=<%= c.getContestDate() %>">참가하기</a> <br><br>
+                                            <a class="btn btn-outline-dark mt-auto" href="ccList.ch?contestNo=<%= c.getContestNo() %>">참가하기</a> <br><br>
                                             <% if(loginUser != null && Integer.parseInt(loginUser.getMemStatus()) == 5) { %>
-                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#updateCnts">수정</button>
-                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#deleteCnts" onclick="contestNo(<%= c.getContestNo() %>);">삭제</button>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#update">수정</button>
+                                            <button type="button" class="btn btn-sm btn-outline-dark mt-auto" data-toggle="modal" data-target="#delete" onclick="contestNo(<%= c.getContestNo() %>);">삭제</button>
                                             <% } %>
                                         </div>
                                     </div>

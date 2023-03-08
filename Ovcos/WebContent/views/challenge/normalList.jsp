@@ -1,3 +1,4 @@
+<%@ include file="../common/nav.jsp" %>
 <%@page import="com.ovcos.challenge.model.vo.NormalChallenge"%>
 <%@page import="com.ovcos.challenge.model.vo.Local"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,9 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>챌린지</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+<title>OVCOS - 일반챌린지 목록</title>
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
@@ -34,7 +33,6 @@
 </head>
 
 <body>
-    <%@ include file="../common/nav.jsp" %>
     <!-- Header-->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
@@ -147,21 +145,21 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div> -->
-                            <!-- Product image-->
+                            <!-- image -->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                                 alt="..." />
-                            <!-- Product details-->
+                            <!-- details -->
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <!-- Product name-->
+                                    <!-- name -->
                                     <h5 class="fw-bolder"><%= n.getNormalChallengeTitle() %></h5>
-                                    <!-- Product price-->
+                                    <!-- summary -->
                                     <%= n.getNormalChallengeLocal() %><br>
                                     <%= n.getNormalChallengeDate() %><br>
                                     <%= n.getCount() %>
                                 </div>
                             </div>
-                            <!-- Product actions-->
+                            <!-- actions -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">참가하기</a>
                                 </div>

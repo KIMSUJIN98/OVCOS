@@ -1,3 +1,4 @@
+<%@ include file="../common/nav.jsp" %>
 <%@page import="com.ovcos.challenge.model.vo.NormalChallenge"%>
 <%@page import="com.ovcos.challenge.model.vo.ContestChallenge"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,9 +20,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>대회목록</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+    <title>OVCOS - 나의챌린지</title>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -36,7 +35,7 @@
 </head>
 
 <body>
-    <%@ include file="../common/nav.jsp" %>
+    
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">

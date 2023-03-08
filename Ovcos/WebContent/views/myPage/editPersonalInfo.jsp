@@ -17,9 +17,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="resources/css/insertInfoStyle.css?abc">
+  <!--<link rel="stylesheet" href="resources/css/insertInfoStyle.css">-->
   <script src="https://kit.fontawesome.com/66bc1e54e8.js"></script>
-  <title>OVCOS</title>
+  
+  <title>OVCOS - 개인정보수정</title>
+  <link rel="stylesheet" href="<%= contextPath %>/resources/css/editInfo.css">
 </head>
 
 <body>
@@ -28,100 +30,105 @@
         $("#lastgroup").remove();
       })
     </script>
+    
+    <div id="agree">
+	    <div id="edit-wrap">
+	    	<div id="content-area">
+	    		<form id="enroll-form" action="<%=contextPath %>/?????" method="post" onsubmit="return validate();">
+	       			<input type="hidden" name="selectResult" value="<%=selectResult%>">
+	     			<table id="insertInfo">
+	       				<tr>
+	       					<td colspan="2"><h2>OVCOS 개인정보수정</h2></td>
+	       				</tr>
+	       				<tr>
+	       					<td colspan="2"><img id="profileImg" src="<%= contextPath %>/resources/image/mypage.png" alt="프로필이미지"></td>
+	       				</tr>
+	       				<tr>
+	       					<td colspan="2">첨부파일버튼넣을공간</td>
+	       				</tr>
+	       				<tr>
+	         				<td>아이디</td>
+	         				<td style="width: 330px;">
+	         					<input type="text" id="memId" name="memId" maxlength="20" value="<%= loginUser.getMemId()%>" readonly><!-- 아이디값 받아오기 -->
+	         				</td>
+	       				</tr>
+	       				<tr>
+	         				<td>비밀번호</td>
+	         				<td><input type="password" id="memPwd" name="memPwd" value="<%= loginUser.getMemPwd()%>" required placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
+	       				</tr>
+		                <tr>
+		                    <td></td>
+		                    <td colspan="2" id="checkPwd"></td>
+		                </tr>
+		                <tr>
+		                    <td style="width: 100px;">비밀번호 확인</td>
+		                    <td><input type="password" id="memPwd2" value="<%= loginUser.getMemPwd()%>" required placeholder="다시 한 번 입력하세요."></td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td colspan="2" id="checkPwd2"></td>
+		                </tr>
+		                <tr>
+		                    <td>이름</td>
+		                    <td><input type="text" id="memName" name="memName" value="<%= loginUser.getMemName()%>" required placeholder="이름(실명)을 입력하세요."></td> <!-- 이름값 받아오기 -->
+		                </tr>
+		                <tr>
+		                    <td>생년월일</td>
+		                    <td><input type="text" id="memBirth" name="memBirth" value="<%= loginUser.getMemBirth()%>" placeholder="YYYY-MM-DD 숫자만 입력해주세요."></td> <!-- 생년월일값 받아오기 -->
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td colspan="2" id="checkBirth"></td>
+		                </tr>
+		                <tr>
+		                    <td>닉네임</td>
+		                    <td>
+		                    	<input type="text" id="memNick" name="memNick" value="<%= loginUser.getMemNick()%>" placeholder="닉네임 입력"> <!-- 닉네임값 받아오기 -->
+		                    	<button type="button" id="checkNickBtn">중복확인</button>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td colspan="2" id="checkNick"></td>
+		                </tr>
+		                <tr>
+		                    <td>이메일</td>
+		                    <td>
+		                    	<input type="email" id="memEml" name="memEml" value="<%= loginUser.getMemEml()%>" placeholder="이메일을 입력해주세요."> <!-- 이메일값 받아오기 -->
+		                      	<button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
+		                      	<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%= getRandom() %>">
+		                  	</td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td colspan="2" id="checkEml"></td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td>
+		                    	<input type="text" id="code" name="code" placeholder="인증번호">
+		                      	<button type="button" onclick="checkCode()" id="checkBtn">인증확인</button>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td colspan="2" id="checkCode">
+		                    	<input type="hidden" readonly="readonly" name="code" id="code" value="<%=request.getAttribute("code") %>">
+		                    </td>
+		                </tr>
+					</table>
+	            			
+	            	<button type="submit" class="next_btn">저장하기</button>
+	            	<button type="button" class="next_btn">취소하기</button>
+	            	
+				</form>
+	    	</div>
+	    </div>
+    </div>
+    
+    
 
-    <div id="wrap">
-		<div class="popup_area">
-        	<div class="signin_box" align="center">
-          
-          		<div class="popup_top">
-					<div id="x-box"><i class="fa-solid fa-x" onclick="location.href='<%=contextPath %>/myPage.me'"></i></div>
-            		<br><span id="title">OVCOS 개인정보수정</span> <br>
- 			    </div>
-
-          		<div class="popup_body">
-					<div id="agree">
-              			<form id="enroll-form" action="<%=contextPath %>/?????" method="post" onsubmit="return validate();">
-                			<table id="insertInfo">
-                  			<input type="hidden" name="selectResult" value="<%=selectResult%>">
-                  				<tr>
-                    				<td>아이디</td>
-                    				<td style="width: 330px;">
-                    					<input type="text" id="memId" name="memId" maxlength="20" value="user01" readonly><!-- 아이디값 받아오기 -->
-                    				</td>
-                  				</tr>
-                  				<tr>
-                    				<td>비밀번호</td>
-                    				<td><input type="password" id="memPwd" name="memPwd" required placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
-                  				</tr>
-				                <tr>
-				                    <td></td>
-				                    <td colspan="2" id="checkPwd"></td>
-				                </tr>
-				                <tr>
-				                    <td style="width: 100px;">비밀번호 확인</td>
-				                    <td><input type="password" id="memPwd2" required placeholder="다시 한 번 입력하세요."></td>
-				                </tr>
-				                <tr>
-				                    <td></td>
-				                    <td colspan="2" id="checkPwd2"></td>
-				                </tr>
-				                <tr>
-				                    <td>이름</td>
-				                    <td><input type="text" id="memName" name="memName" value="감동란" required placeholder="이름(실명)을 입력하세요."></td> <!-- 이름값 받아오기 -->
-				                </tr>
-				                <tr>
-				                    <td>생년월일</td>
-				                    <td><input type="text" id="memBirth" name="memBirth" value="19910205" placeholder="YYYY-MM-DD 숫자만 입력해주세요."></td> <!-- 생년월일값 받아오기 -->
-				                </tr>
-				                <tr>
-				                    <td></td>
-				                    <td colspan="2" id="checkBirth"></td>
-				                </tr>
-				                <tr>
-				                    <td>닉네임</td>
-				                    <td>
-				                    	<input type="text" id="memNick" name="memNick" value="지금건들면줏됨" placeholder="닉네임 입력"> <!-- 닉네임값 받아오기 -->
-				                    	<button type="button" id="checkNickBtn">중복확인</button>
-				                    </td>
-				                </tr>
-				                <tr>
-				                    <td></td>
-				                    <td colspan="2" id="checkNick"></td>
-				                </tr>
-				                <tr>
-				                    <td>이메일</td>
-				                    <td>
-				                    	<input type="email" id="memEml" name="memEml" value="ksj1018@naver.com" placeholder="이메일을 입력해주세요."> <!-- 이메일값 받아오기 -->
-				                      	<button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
-				                      	<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%= getRandom() %>">
-				                  	</td>
-				                </tr>
-				                <tr>
-				                    <td></td>
-				                    <td colspan="2" id="checkEml"></td>
-				                </tr>
-				                <tr>
-				                    <td></td>
-				                    <td>
-				                    	<input type="text" id="code" name="code" placeholder="인증번호">
-				                      	<button type="button" onclick="checkCode()" id="checkBtn">인증확인</button>
-				                    </td>
-				                </tr>
-				                <tr>
-				                    <td></td>
-				                    <td colspan="2" id="checkCode">
-				                    	<input type="hidden" readonly="readonly" name="code" id="code" value="<%=request.getAttribute("code") %>">
-				                    </td>
-				                </tr>
-							</table>
-                			
-                			<button type="submit" class="next_btn">회원가입</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+   
 	
     <script>
 	    function checkCode() {

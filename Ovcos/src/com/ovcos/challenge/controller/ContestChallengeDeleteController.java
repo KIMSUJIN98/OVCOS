@@ -1,30 +1,26 @@
 package com.ovcos.challenge.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.Contest;
-import com.ovcos.challenge.model.vo.ContestChallenge;
 
 /**
- * Servlet implementation class ContestChallengeListViewController
+ * Servlet implementation class ContestChallengeDeleteController
  */
-@WebServlet("/ccList.ch")
-public class ContestChallengeListViewController extends HttpServlet {
+@WebServlet("/deleteContestChallenge.ch")
+public class ContestChallengeDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestChallengeListViewController() {
+    public ContestChallengeDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +29,19 @@ public class ContestChallengeListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
+		int contestChallengeNo = Integer.parseInt(request.getParameter("contestChallengeNo"));
 		int contestNo = Integer.parseInt(request.getParameter("contestNo"));
 		
-		ArrayList<ContestChallenge> list = new ChallengeService().contestChallengeList(contestNo);
+		HttpSession session = request.getSession();
 		
-		Contest c = new ChallengeService().selectContest(contestNo);
-		
-		request.setAttribute("list", list);
-		request.setAttribute("c", c);
-		request.getRequestDispatcher("views/challenge/contestList.jsp").forward(request, response);
+		int result = new ChallengeService().deleteContestChallenge(contestChallengeNo);
 		
 		
+		response.sendRedirect(request.getContextPath() + "/ccList.ch?contestNo=" + contestNo);
+		
+	
 	}
 
 	/**

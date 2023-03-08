@@ -87,10 +87,10 @@ public class ChallengeService {
 		return list2;
 	}
 
-	public ArrayList<ContestChallenge> contestChallengeList(String contestName) {
+	public ArrayList<ContestChallenge> contestChallengeList(int contestNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<ContestChallenge> list = new ChallengeDao().contestChallengeList(conn, contestName);
+		ArrayList<ContestChallenge> list = new ChallengeDao().contestChallengeList(conn, contestNo);
 		
 		close(conn);
 		
@@ -153,14 +153,15 @@ public class ChallengeService {
 	public int insertContestChallenge(ContestChallenge cc, ImageUpload img) {
 		Connection conn = getConnection();
 		
-		int result = new ChallengeDao().insertContestChallenge(conn, cc);
+		int result1 = new ChallengeDao().insertContestChallenge(conn, cc);
 		int result2 = 1;
+		int result3 = new ChallengeDao().insertEntryList(conn, cc);
 				
 		if(img != null) {
-			result2 = new ChallengeDao().insertContestChallengeImg(conn, img);
+			result2 = new ChallengeDao().insertContestChallengeImg(conn, cc, img);
 		}
 		
-		if(result * result2 > 0) {
+		if(result1 * result2 * result3 > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -168,7 +169,33 @@ public class ChallengeService {
 		
 		close(conn);
 		
-		return result * result2;
+		return result1 * result2 * result3;
+	}
+
+	public Contest selectContest(int contestNo) {
+		Connection conn = getConnection();
+	
+		Contest c = new ChallengeDao().selectContest(conn, contestNo);
+		
+		close(conn);
+		
+		return c;
+	}
+
+	public int deleteContestChallenge(int contestChallengeNo) {
+		Connection conn = getConnection();
+		int result = new ChallengeDao().deleteContestChallenge(conn, contestChallengeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
 	}
 
 	
