@@ -7,7 +7,12 @@ String contextPath = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<!-- Favicon-->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16" />
+
+<title>OVCOS - 로그인</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/loginStyle.css">
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
