@@ -185,7 +185,7 @@ body{
 
 /* 마이페이지서브메뉴 */
 #subMenu{
-    width: 300px;
+    width: 150px; /* 알림메세지 div 적용시 300 */
     height: auto;
     margin: 0;
     padding: 0;
