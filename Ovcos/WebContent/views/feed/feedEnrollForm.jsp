@@ -9,6 +9,7 @@
     <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script> -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedEnrollForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navStyle.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script> -->
     <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
     <!-- <script src="dom-to-image.js"></script> -->
@@ -22,6 +23,64 @@
     
     </head>
     <body>
+        <div id="wrap">
+            <div id="wrapnav">
+                
+                <div id="firstGroup">
+                    <div id="logo">
+                        <a href="/Ovcos/list.feed"><img src="/Ovcos/resources/image/logo.png" alt="ovcos 로고" id="logoimg"></a>
+                        
+                    </div>
+                    <div id="menu">
+                        <ul>
+    
+                            <li id="feed"><a href="/Ovcos/list.feed">피드</a></li>
+                            <li id="explore"><a href="/Ovcos/course?epage=1">탐색</a></li>
+                            <li id="challenge"><a href="/Ovcos/main.ch">챌린지</a>
+                                <ul>
+                                    <li><a href="/Ovcos/cntsMain.ch">대회</a></li>
+                                    <li><a href="/Ovcos/ncList.ch?local=0">일반</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="lastGroup">
+                    <ul>
+                        <li id="li1">
+                            <!-- <div id="feedEnrollBtn" class="btn" data-toggle="modal" data-target="#myModal">
+                                <img src="/Ovcos/resources/image/plus1.png" alt="">
+                            </div> -->
+                            
+                            <button type="button" id="feedEnrollBtn" onclick="location.href='/Ovcos/to.feed'">피드등록</button>
+                            
+                        </li>
+                        
+                        <li id="li2" class="menu">
+                            <div id="myPage"><img src="/Ovcos/resources/image/mypage.png" alt="프로필이미지"></div>
+                            <ul id="subMenu" class="hide">
+                                <li>
+                                    <div id="alert">message<hr>
+                                        <a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                                        <a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                                        <a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                                        <a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
+                                        <a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a>
+                                    </div>
+                                </li>
+                                <li class="subMenuList"><a href="/Ovcos/myPage.me?userId=user01">마이페이지</a></li>
+                                <li class="subMenuList"><a href="/Ovcos/editInfo.me?userId=user01">개인정보수정</a></li>
+                                <li class="subMenuList"><a href="/Ovcos/list.fw?cpage=1&amp;userId=user01">친구목록</a></li>
+                                <li class="subMenuList"><a href="/Ovcos/logout.me">로그아웃</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        
     <!--         
         <div id="map" style="width: 600px; height: 600px;"></div> -->
         <div id="feedex">
