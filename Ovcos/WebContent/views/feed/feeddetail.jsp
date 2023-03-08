@@ -148,10 +148,7 @@
                 <div id="comment">
                     <div id="com" style=" overflow: auto; padding-left: 10px;" >
                         <table>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio quia sed adipisci harum beatae dolorem, dicta repellendus earum fugit corrupti. Dicta amet commodi placeat voluptas, nesciunt necessitatibus iure ullam ab!
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio quia sed adipisci harum beatae dolorem, dicta repellendus earum fugit corrupti. Dicta amet commodi placeat voluptas, nesciunt necessitatibus iure ullam ab!
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio quia sed adipisci harum beatae dolorem, dicta repellendus earum fugit corrupti. Dicta amet commodi placeat voluptas, nesciunt necessitatibus iure ullam ab!
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio quia sed adipisci harum beatae dolorem, dicta repellendus earum fugit corrupti. Dicta amet commodi placeat voluptas, nesciunt necessitatibus iure ullam ab!
+                        
                         </table>
                     </div>
                 </div>
@@ -232,8 +229,8 @@
                                 value += "<tr>"
 
                                     + "<td style= 'border-bottom: 3px solid rgb(67, 115, 176); font-weight:600'>" + result[i].feed_cmn_id + "</td>"
-                                    + "<td>" + result[i].feed_cmn_cnt + "</td>"
-                                    + "<td style='font-size:0.8rem'>" + timeForToday(result[i].feed_cmn_date) + "</td>"
+                                    + "<td style='padding-left: 80px;'>" + result[i].feed_cmn_cnt + "</td>"
+                                    + "<td style='font-size:0.8rem; padding-left: 100px; padding-right:0px; ' > " + timeForToday(result[i].feed_cmn_date) + "</td>"
                                     + "</tr>";
                                 console.log(result[i].feed_cmn_date)
 
