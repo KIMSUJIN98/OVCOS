@@ -10,7 +10,12 @@
 <link rel="stylesheet" href="resources/css/start.css">
 <script src="resources/js/jquery-3.6.3.min.js"></script>
 </head>
-<body>
+ <script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
   
     <script>
     
@@ -34,5 +39,8 @@
       <div style="background-color: black; width: 100vw; height: 100vh;">
         
       </div>
+      
+
+
 </body>
 </html>

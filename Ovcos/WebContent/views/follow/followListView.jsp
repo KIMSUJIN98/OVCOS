@@ -21,6 +21,7 @@ int maxPage = pi.getMaxPage();
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/followList.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
@@ -163,7 +164,7 @@ int maxPage = pi.getMaxPage();
                 type: "POST",
                 data: { userId: $("#userId").val() }, //로그인유저아이디
                 success: function(data) {
-                    
+                    console.log(data);
                     var html = generateHTML(data);
                     $(".tablecontent").html(html);
                     $("#fix_div").text("나의 친구 목록");
