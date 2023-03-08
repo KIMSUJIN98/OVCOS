@@ -244,7 +244,7 @@ public class FeedService {
 	
 	
 	/**
-	 * 내 피드에서 찜 많은 순 정렬 조회
+	 * 내 피드에서 찜 많은 순 정렬 조회.. 노가다 오지쥬?
 	 * @param userId
 	 * @return
 	 */
@@ -258,5 +258,67 @@ public class FeedService {
 		
 		return allList; 
 	}
+	
+	
+	
+
+	/**
+	 * 피드 삭제 
+	 * @param feedIndex
+	 * @return
+	 */
+	public int deleteFeed(int feedIndex){
+		
+		Connection conn = getConnection();
+		int result =  new FeedDao().deleteFeed(conn, feedIndex);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+	/**
+	 * 신고상태로 업데이트
+	 * @param feedIndex
+	 * @param rprId
+	 * @return
+	 */
+	public int updateRpr(int feedIndex, String rprId){
+		
+		Connection conn = getConnection();
+		int result =  new FeedDao().updateRpr(conn, feedIndex, rprId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	public Feed selectFeed(int feedIndex) {
+		
+		Connection conn = getConnection();
+		
+		Feed f = new FeedDao().selectFeed(conn, feedIndex);
+		
+		close(conn);
+		
+		return f;
+		
+		
+		
+		
+	}
+	
+	
 	
 }

@@ -1,0 +1,220 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+	font-family: 'SUIT-Regular';
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: black;
+}
+div{box-sizing: border-box; }
+#wrap{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.7);
+    position: relative;
+}
+
+.popup_area{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    box-shadow: 1px 2px 4px rgb(0 0 0 / 25%);
+    border-radius : 8px;
+}
+
+.popup_top {
+position : relative;
+	text-align: center;
+	align-items: center;
+	justify-content : center;
+	min-height : 56px;
+	padding : 20px 0 0 0;
+	font-size : 1.2rem;
+	width: 250px;
+    height: 100px;
+    margin-left:125px;
+   border-bottom: 3px solid #ff7920 ;
+}
+
+
+.popup_area span{
+    display: block;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+
+#title{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.popup_body{
+	position : relative;
+	padding : 30px 55px 40px;
+	max-height : 710px;
+	overflow-y : auto;
+	overflow-x : hidden;
+	width:500px;
+}
+
+#navi{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#navi>li{
+    float: left;
+    /* border: 1px solid blue; */
+    width: 50%;
+    text-align: center;
+
+    padding: 10px;
+}
+
+#navi a{
+    text-decoration: none;
+    
+    font-weight: 700;
+
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    line-height: 35px;
+}
+td{
+	padding: 10px 9px 0 10px;
+	font-size : 0.9rem;
+}
+input, select{
+    width: 300px;
+    height: 40px;
+    background-color: #f2f2f2;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 20px;
+    
+    border:none;
+    
+    overflow: visible;
+}
+
+select{
+	background-color : white;
+	border : 1px solid lightgray;
+    width: 230px;
+}
+
+table{
+    border-collapse: separate;
+    padding-bottom: 150px;
+}
+#info{
+	padding: 15px;
+	width : 400px;
+    background-color: #f2f3f5;
+    border-radius: 8px;
+    margin-top : 40px;
+    font-size : 0.9rem;
+    font-weight : 530;
+}
+
+td button{
+    text-transform: none;
+    overflow: visible;
+    margin-left: -82px;
+    border-radius: 3px;
+    padding : 3px 5px;
+    font-weight : 580;
+    border: none;
+    background-color:#ff7920;
+    color: white;
+    height: 40px;
+
+}
+
+#mark{
+    margin-left: -80px;
+}
+
+.next_btn{
+    position: relative;
+    width: 400px;
+    height: 45px;
+    margin-top: 5px;
+    background-color: #ff7920 ;
+    color: white;
+     border:none;
+    font-weight: bold;
+	text-align : center;
+    border-radius: 8px;
+    margin-bottom : 50px;
+    margin : 80px 0px 50px 55px;
+}
+
+#x-box{
+	position : relative;
+	margin-left : 450px;
+	z-index:999;
+}
+
+.fa-x{
+	position : inline-block;
+	padding:5px;
+	cursor : pointer;
+}
+ 
+#findId{
+	color:#ff7920;
+	border-bottom: 3px solid #ff7920 ;
+}
+
+#findPwd{
+	color: rgb(102, 101, 101);
+}
+
+#findPwd:hover{
+	color:#ff7920;
+    border-bottom: 3px solid #ff7920 ;
+    /* margin: 0px 30px; */
+}
+.modal {
+    z-index: 1050;
+  }
+  
+  #yourId{
+    display: block;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+#id{
+	  display: block;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight:700;
+}
+
+p{
+	text-align :center;
+	font-size:1.1rem;
+}

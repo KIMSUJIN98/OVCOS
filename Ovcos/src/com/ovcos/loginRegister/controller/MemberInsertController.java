@@ -61,56 +61,7 @@ public class MemberInsertController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String marketAgree = (String) session.getAttribute("marketAgree");
-		
-		/*
-		 * Properties props = System.getProperties(); props.put("mail.stmp.user",
-		 * "khofcos@gmail.com"); props.put("mail.stmp.host", "stmp.gmail.com");
-		 * props.put("mail.stmp.port", "465"); props.put("mail.stmp.starttls.enable",
-		 * "true"); props.put("mail.smtp.auth", "true");
-		 * props.put("mail.stmp.socketFactory.port", "465");
-		 * props.put("mail.stmp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		 * props.put("mail.smtp.socketFactory.fallback", "false");
-		 * 
-		 * Authenticator auth = new MyAuthentication();
-		 * 
-		 * Session session1 = Session.getDefaultInstance(props, auth); MimeMessage msg =
-		 * new MimeMessage(session1);
-		 * 
-		 * msg.setSentDate(new java.util.Date()); InternetAddress from = new
-		 * InternetAddress("khofcos@gmail.com");
-		 * 
-		 * msg.setFrom(from); String email=request.getParameter("receiver");
-		 * InternetAddress to = new InternetAddress(email);
-		 * msg.setRecipient(Message.RecipientType.TO, to);
-		 * 
-		 * msg.setSubject("비밀번호 인증번호", "UTF-8");
-		 * 
-		 * String code = request.getParameter("code_check");
-		 * request.setAttribute("code", code); msg.setText(code, "UTF-8");
-		 * 
-		 * msg.setHeader("content-Type", "text/html");
-		 * 
-		 * javax.mail.Transport.send(msg); System.out.println("보냄!");
-		 * 
-		 * RequestDispatcher rd = request.getRequestDispatcher("인증번호확인페이지");
-		 * rd.forward(request, response);
-		 * 
-		 * String marketNy = marketAgree != null && marketAgree.equals("Y") ? "Y" : "N";
-		 * m.setMarketNy(marketNy);
-		 * 
-		 * int result = new MemberService().insertMember(m);
-		 * 
-		 * if(result>0) { session = request.getSession();
-		 * session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
-		 * 
-		 * response.sendRedirect(request.getContextPath()); } else {
-		 * request.setAttribute("alertMsg", "회원가입에 실패했습니다.");
-		 * 
-		 * RequestDispatcher view =
-		 * request.getRequestDispatcher("/views/loginRegister/login.jsp");
-		 * view.forward(request, response); }
-		 */
-		
+			
 		  String memId=request.getParameter("memId"); 
 		  String memPwd=request.getParameter("memPwd"); 
 		  String memName=request.getParameter("memName"); 
@@ -121,8 +72,6 @@ public class MemberInsertController extends HttpServlet {
 		  String marketNy = request.getParameter("selectResult");
 		  System.out.println(marketNy);
 		 
-		  Member m = new Member();
-		  
 		m.setMemId(memId);
 		m.setMemPwd(memPwd);
 		m.setMemName(memName);
@@ -136,11 +85,15 @@ public class MemberInsertController extends HttpServlet {
 		  int result = new MemberService().insertMember(m);
 		  
 		  if(result>0) {
-				HttpSession session = request.getSession();
-			  response.sendRedirect(request.getContextPath());
+			  String message = "회원가입에 성공했습니다.";
+			  request.setAttribute("alertMsg", message);
 			} else {
-			  response.sendRedirect(request.getContextPath());
+				 String message = "회원가입에 실패했습니다. 다시 시도해주세요.";
+				  request.setAttribute("alertMsg", message);
 				 }
+
+		  RequestDispatcher rd = request.getRequestDispatcher("views/loginRegister/login.jsp");
+		  rd.forward(request, response);
 	}
 
 	/**
