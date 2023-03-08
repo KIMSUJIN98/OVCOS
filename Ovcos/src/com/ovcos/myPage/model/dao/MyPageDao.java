@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 //import javax.mail.Message;
@@ -67,6 +68,37 @@ public class MyPageDao {
 		}
 		
 		return mp;
+	}
+	
+	/**
+	 * 일자별 달린거리를 담은 리스트를 반환하는 메소드
+	 * @param conn
+	 * @param userId
+	 */
+	public ArrayList<MyPage> dayDistanceList(Connection conn, String userId) {
+		ArrayList<MyPage> list = new ArrayList<MyPage>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("dayDistanceList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new MyPage(rset.getString("MEM_ID"), rset.getDouble("DISTANCE"), rset.getString("RUNDATE")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 	
 	

@@ -1,3 +1,5 @@
+<%@page import="com.ovcos.myPage.model.vo.MyPage"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/nav.jsp" %>
@@ -7,6 +9,9 @@
    }else{
 	   monthDistance = (double)session.getAttribute("monthDistance");
    }
+%>
+<%
+	ArrayList<MyPage> list = (ArrayList<MyPage>)session.getAttribute("dayList");
 %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +51,11 @@
                 <tr height="50">
                     <td></td>
                     <td></td>
-                    <td id="introduce"><%= loginUser.getMemIntro() %></td>
+                    <td id="introduce">
+                    	<% if(loginUser.getMemIntro() != null){ %>
+                    			<%= loginUser.getMemIntro() %>
+                    	<% } %>
+                    </td>
                     <td></td>
                 </tr>
             </table>
@@ -75,20 +84,20 @@
 								 <div class="chart_box">
 								 	<ul class="axis_y">
 								    	<li class="item">0<span class="blind">km</span></li>
+								     	<li class="item">10<span class="blind">km</span></li>
 								     	<li class="item">20<span class="blind">km</span></li>
+								     	<li class="item">30<span class="blind">km</span></li>
 								     	<li class="item">40<span class="blind">km</span></li>
-								     	<li class="item">60<span class="blind">km</span></li>
-								     	<li class="item">80<span class="blind">km</span></li>
-								     	<li class="item">100<span class="blind">km</span></li>
+								     	<li class="item">50<span class="blind">km</span></li>
 								 	</ul>
 								   	<ul class="axis_x">
 								     	<li class="item">
 								       		<div class="text_box">
 								         		<strong class="day">01(수)</strong>
-								         		<span class="time">87km</span>
+								         		<span class="time">20km</span>
 								       		</div>
 								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:87%;"><span class="blind">data 타입 1</span></span>
+								         		<span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
 								       		</button>
 								     	</li>
 								     	<li class="item">
@@ -97,25 +106,25 @@
 								         		<span class="time">50km</span>
 								       		</div>
 								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
+								         		<span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
 								       		</button>
 								     	</li>
 								     	<li class="item">
 								       		<div class="text_box">
 								         		<strong class="day">03(금)</strong>
-								         		<span class="time">100km</span>
+								         		<span class="time">30km</span>
 								       		</div>
 								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
+								         		<span class="time data1" style="height:60%;"><span class="blind">data 타입 1</span></span>
 								       		</button>
 								     	</li>
 								     	<li class="item">
 								       		<div class="text_box">
 								         		<strong class="day">04(토)</strong>
-								         		<span class="time">100km</span>
+								         		<span class="time">25km</span>
 								       		</div>
 								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
+								         		<span class="time data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
 								       		</button>
 								     	</li>
 								     	<li class="item">
@@ -124,7 +133,7 @@
 								         		<span class="time">40km</span>
 								       		</div>
 								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
+								         		<span class="time data1" style="height:80%;"><span class="blind">data 타입 1</span></span>
 								       		</button>
 								     	</li>
 								     	<li class="item">
@@ -133,7 +142,7 @@
 								         		<span class="time">20km</span>
 								       		</div>
 								       		<button type="button" class="graph">
-								         		<span class="time data1" style="height:20%;"><span class="blind">data 타입 1</span></span>
+								         		<span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
 								        	</button>
 								      	</li>
 								      	<li class="item">
@@ -141,7 +150,9 @@
 								          		<strong class="day sun">TODAY</strong>
 								          		<span class="time">0km</span>
 								        	</div>
-								        	<button type="button" class="graph"></button>
+								        	<button type="button" class="graph">
+								        		<span class="time data1" style="height:0%;"><span class="blind">data 타입 1</span></span>
+								        	</button>
 								      	</li>
 								    </ul>
 								</div>                                                 
@@ -155,7 +166,13 @@
                         	<input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>" style="padding-left: 10px" readonly>
                         	<br><br>
                         	
-                    		<span>이번달 <%= loginUser.getMemNick() %>님의 목표기록은 <%= loginUser.getMemGoalDtn() %>km입니다. 현재까지 달성한 총 러닝기록은 <%= monthDistance %>km로, 목표치를 몇km 초과 달성했습니다! 목표치까지 몇km 남았습니다! </span>
+                       		<span>이번달 <%= loginUser.getMemNick() %>님의 목표기록은 <br></span>
+                    		<b><%= loginUser.getMemGoalDtn() %>km</b>
+                    		<span> 입니다. <br><br></span>
+                    		<span>현재까지 달성한 총 러닝기록은 <br></span>
+                    		<b><%= monthDistance %>km</b>
+                    		<span>로, <br><br></span>
+                    		<span>목표치를 몇km 초과 달성했습니다! 목표치까지 몇km 남았습니다! </span>
                     	</div>
                     	
                     	
