@@ -11,6 +11,23 @@
    }
 %>
 <%
+   double calculations = 0;
+   String calMsg;
+   if(monthDistance>loginUser.getMemGoalDtn()){
+   		calculations = monthDistance-loginUser.getMemGoalDtn();
+   		calMsg = "목표치보다 " + calculations + "km 초과 달성했습니다!";
+   }else if(monthDistance<loginUser.getMemGoalDtn()){
+		calculations = loginUser.getMemGoalDtn()-monthDistance;
+   		calMsg = "목표치까지 " + calculations +"km 남았습니다!";
+   }else{
+	   if(loginUser.getMemGoalDtn()== 0){
+		   calMsg = "목표를 세워볼까요?";
+	   }else{
+	       calMsg = "목표치를 달성했습니다!";
+	   }
+   }
+%>
+<%
 	ArrayList<MyPage> list = (ArrayList<MyPage>)session.getAttribute("dayList");
 %>
 <!DOCTYPE html>
@@ -161,18 +178,38 @@
                     	</div>
                     	
                     	<div id="inList_content_right">
-                    		<!-- 버튼 눌러서 모달로 목표 변경 -->
-                        	<button type="button" id="btnSetGoal">목표설정</button>
-                        	<input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>" style="padding-left: 10px" readonly>
-                        	<br><br>
+                        	
+                        	<br>
                         	
                        		<span>이번달 <%= loginUser.getMemNick() %>님의 목표기록은 <br></span>
                     		<b><%= loginUser.getMemGoalDtn() %>km</b>
                     		<span> 입니다. <br><br></span>
                     		<span>현재까지 달성한 총 러닝기록은 <br></span>
                     		<b><%= monthDistance %>km</b>
-                    		<span>로, <br><br></span>
-                    		<span>목표치를 몇km 초과 달성했습니다! 목표치까지 몇km 남았습니다! </span>
+                    		<span>로, <br></span>
+                    		<span><p><%= calMsg%></p></span>
+                        	
+                        	<br><br>
+                        	
+                        	<!-- modal 구동 버튼 (trigger) -->
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myGoal" style="margin-left: 20px; width: 280px;">목표설정</button>
+							
+							<!-- Modal -->
+							<div class="modal fade" id="myGoal" tabindex="-1" role="dialog" aria-labelledby="myGoalLabel">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h4 class="modal-title" id="myGoalLabel">목표설정</h4>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							      </div>
+							      <div class="modal-body">
+							        목표 km를 입력하세요 : <input type="text" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn() %>">
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-primary" data-dismiss="modal">저장하기</button>
+							      </div>
+							    </div>
+							  </div></div>
                     	</div>
                     	
                     	
@@ -205,9 +242,9 @@
                                     <div class="input-group">
                                         <label for="searchBox"></label>
                                         <input type="search" id="searchBox" style="width: 500px;" placeholder="키워드를 입력하세요">
-                                        <a href="#" class="btn btn-primary filter-btn" id="myFeed">피드조회</a>
-                                        <a href="#" class="btn btn-primary filter-btn" id="myComment">댓글조회</a>
-                                        <a href="#" class="btn btn-primary filter-btn" id="myPick">찜목록조회</a>
+                                        <a href="#" class="btn btn-secondary filter-btn" id="myFeed">피드조회</a>
+                                        <a href="#" class="btn btn-secondary filter-btn" id="myComment">댓글조회</a>
+                                        <a href="#" class="btn btn-secondary filter-btn" id="myPick">찜목록조회</a>
                                     </div>
                                 </div>
                             </div>
@@ -614,12 +651,19 @@
         </script>
         
         
-        <!-- footer 영역 -->
-        <div class="mp-section4">
-            
+        <!-- 푸터구역 -->
+        <div id="footer">
+            <div id="f1" align="center">
+                <a href="#"><br>이용약관&nbsp;</a> 
+                <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
+                <a href="#">&nbsp;고객센터&nbsp;</a>
+                <p style="margin-bottom: 0px;"> 
+                	<br>© 2023 KH OVCOS<br>
+                </p>
+            </div>
         </div>
 
-    </div>
 
+    </div>
 </body>
 </html>
