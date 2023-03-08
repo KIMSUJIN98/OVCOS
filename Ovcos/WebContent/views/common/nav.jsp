@@ -1,4 +1,4 @@
-<%@page import="com.ovcos.loginRegister.model.vo.Member"%>
+<%@ page import="com.ovcos.loginRegister.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -14,8 +14,8 @@
 <!-- <title>OVCOS</title> -->
 
 <!-- Favicon-->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" />
-<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16" />
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"/>
+<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16"/>
 
 <link rel="stylesheet" href="<%= contextPath %>/resources/css/navStyle.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
