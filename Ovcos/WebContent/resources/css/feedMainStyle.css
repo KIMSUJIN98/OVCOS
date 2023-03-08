@@ -365,3 +365,15 @@ img[src*='marker']{
 }
 
 
+#feedin{
+    border: 1px solid black;
+    width: 200px;
+    height: 600px;
+    position: relative;
+
+}
+
+#feedEnrollBtn{
+	visibility: visible;
+
+}
