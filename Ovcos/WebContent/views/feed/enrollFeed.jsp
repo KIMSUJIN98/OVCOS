@@ -1,3 +1,4 @@
+<%@ include file="../common/nav.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <html>
@@ -8,13 +9,12 @@
         <link rel="stylesheet" href="../../resources/css/Create.css">
         <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
-        <title>Insert title here</title>
+        <title>OVCOS - 피드등록</title>
 
     </head>
 
     <body>
         <!-- feed관련 페이지 작성 -->
-        <%@ include file="../common/nav.jsp" %>
             <div id="nav"></div>
             <div id="feedWrap">
 

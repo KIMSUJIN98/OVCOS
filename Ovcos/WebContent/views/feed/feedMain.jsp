@@ -1,6 +1,7 @@
-<%@page import="com.ovcos.explore.model.vo.Explore"%>
-<%@page import="com.ovcos.feed.model.vo.Feed"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.explore.model.vo.Explore"%>
+<%@ page import="com.ovcos.feed.model.vo.Feed"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -19,6 +20,8 @@
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
 <title>Insert title here</title>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
+<title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script>
 
@@ -30,7 +33,6 @@
 </head>
 <body>
 <!-- feed관련 페이지 작성 -->
-<%@ include file="../common/nav.jsp" %>
    <%if(message != null && message.equals("success")){ %>
       <div class="alert alert-primary alert-dismissable" id="succ">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>

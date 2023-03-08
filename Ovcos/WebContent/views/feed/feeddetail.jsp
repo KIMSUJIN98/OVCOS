@@ -1,5 +1,6 @@
-<%@page import="com.ovcos.feed.model.vo.Feeddetails" %>
-<%@page import="com.ovcos.feed.model.vo.Feed" %>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.feed.model.vo.Feeddetails" %>
+<%@ page import="com.ovcos.feed.model.vo.Feed" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% Feeddetails f=(Feeddetails)request.getAttribute("f"); %>
 
@@ -8,7 +9,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OVCOS - 상세피드</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMy.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feeddetail2.css">
 <script type="text/javascript"
@@ -19,8 +20,6 @@
 </head>
 
 <body>
-<%@ include file="../common/nav.jsp" %>
-
     <div id="course">
         <div id="left" class="floatWrap">
             

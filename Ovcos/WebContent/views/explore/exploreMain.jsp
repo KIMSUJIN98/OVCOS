@@ -1,7 +1,8 @@
-<%@page import="com.ovcos.explore.model.vo.Explore"%>
-<%@page import="com.ovcos.common.model.vo.Pageinfo"%>
-<%@page import="com.ovcos.feed.model.vo.Feed"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../common/nav.jsp" %>
+<%@ page import="com.ovcos.explore.model.vo.Explore"%>
+<%@ page import="com.ovcos.common.model.vo.Pageinfo"%>
+<%@ page import="com.ovcos.feed.model.vo.Feed"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -20,7 +21,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OVCOS - 코스검색</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMain.css">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
 <script src="${pageContext.request.contextPath}/resources/js/cluster.js"></script>
@@ -29,7 +30,6 @@
 
 </head>
 <body>
-<%@ include file="../common/nav.jsp" %>
 
     <div id="course">
         <!-- course_nav 시작-->

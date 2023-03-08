@@ -1,3 +1,4 @@
+<%@ include file="common/nav.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,12 +7,11 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Insert title here</title>
+	<title>OVCOS - 공지사항</title>
     <link rel="stylesheet" href="../resources/css/navStyle.css">
     <link rel="stylesheet" href="../resources/css/wrap.css">
 </head>
 <body>
-	 <%@ include file="common/nav.jsp" %>
 
 	 <div class="wrap">
 		
