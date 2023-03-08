@@ -331,6 +331,7 @@ body{
     padding-bottom: 15px;
     border-radius: 10px;
     padding-right: 15px;
+    visibility: hidden;
 }
 #weather{
     width: 150%;

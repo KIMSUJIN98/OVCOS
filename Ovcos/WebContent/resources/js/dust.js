@@ -11,17 +11,20 @@ function select1(sido){
             var pm10 = (($(response).find("pm10Value"))[0]).innerHTML;
             console.log("pm10 : "+pm10);
             console.log("pm25 : "+pm25);
+            $("#dust").css("visibility","visible")
 
             // console.log($("#mi").prop("src","/Ovcos/resources/image/Emo2.png"));
             // 미세먼지 관련 태그
             var mi1 = $("#mi");
             var status1 = $("#status1");
             var miVal = $("#miVal");
+            var num1;
 
             // 초미세먼지 관련 태그
-            var mi2 = $("mi2");
+            var mi2 = $("#mi2");
             var status2 = $("#status2");
-            var mival2 = $("#miVal2");
+            var miVal2 = $("#miVal2");
+            var num2;
             
            
 
@@ -30,21 +33,25 @@ function select1(sido){
                 mi1.prop("src","/Ovcos/resources/image/Emo3.png");
                 status1.html("좋음");
                 miVal.html(pm10);
+                num1 = 1;
   
             }else if(pm10 <=80){
                 mi1.prop("src","/Ovcos/resources/image/Emo4.png");
                 status1.html("보통");
                 miVal.html(pm10);
+                num1 = 2;
 
             }else if(pm10 <=150){
                 mi1.prop("src","/Ovcos/resources/image/Emo1.png");
                 status1.html("나쁨");
                 miVal.html(pm10);
+                num1 = 3;
 
             }else{
                 mi1.prop("src","/Ovcos/resources/image/Emo2.png");
                 status1.html("매우나쁨");
                 miVal.html(pm10);
+                num1 =4;
 
             }
 
@@ -56,18 +63,34 @@ function select1(sido){
                 mi2.prop("src","/Ovcos/resources/image/Emo3.png");
                 status2.html("좋음");
                 miVal2.html(pm25);
+                num2 = 1;
             }else if(pm25 <=35){
                 mi2.prop("src","/Ovcos/resources/image/Emo4.png");
                 status2.html("보통");
                 miVal2.html(pm25);
+                num2 = 2;
             }else if(pm25 <=75){
                 mi2.prop("src","/Ovcos/resources/image/Emo1.png");
                 status2.html("나쁨");
                 miVal2.html(pm25);
+                num2 = 3;
             }else{
                 mi2.prop("src","/Ovcos/resources/image/Emo2.png");
                 status2.html("매우나쁨");
                 miVal2.html(pm25);
+                num2 = 4;
+            }
+
+            var max = Math.max(num1,num2);
+            var $dust = $("#dust");
+            if(max == 1){
+                $dust.css("backgroundColor","rgb(67, 115, 176)")
+            }else if(max == 2){
+                $dust.css("backgroundColor","green")
+            }else if(max ==3){
+                $dust.css("backgroundColor","orange")
+            }else{
+                $dust.css("backgroundColor","red")
             }
 
 

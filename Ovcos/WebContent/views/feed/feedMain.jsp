@@ -255,46 +255,10 @@
                                     <tr>
                                         <td colspan="3" id="gpx">
                                             <div>
-                                                <!-- <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt=""> -->
+                                               
 
-                                                <div id="n<%=f.getFeedIndex()%>" style="width: 700px; height: 340px;"></div>
+                                                <img src="<%=contextPath %>/resources/gpx_img/<%=f.getImgPath()%>" style="width: 700px; height: 340px;"></img>
                                             </div>
-                                            <script>
-                                                    function startDataLayer(xmlDoc) {
-                                                    n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
-                                                    }
-                                                    var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
-                                                    center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
-                                                    zoom: 15
-                                                    })
-                                                    
-                                                    $.ajax({
-                                                        url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
-                                                        dataType: 'xml',
-                                                        strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                                        strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                                        strokeWeight: 3,   //선 두께
-                                                        success: startDataLayer
-                                                        });
-
-                                                    setTimeout(function(){
-                                                        
-                                                        var dis = <%=f.getDistance()%>;
-                                                        var zom=9;
-                                                        if(dis<2){
-                                                            zom = 14;
-                                                        }else if(dis<20){
-                                                            zom = 13;
-                                                        }else if(dis<40){
-                                                            zom = 12;
-                                                        }else{
-                                                            zom=11;
-                                                        }
-                                                    	n<%=f.getFeedIndex()%>.setZoom(zom);
-                                                    },800);
-                                                    
-                                            </script>
-                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -848,11 +812,11 @@
                     <div>
                         <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
-                                <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 10px;" id="mi2" >
+                                <img src="#" style="width: 40px; padding-top: 10px;" id="mi2" >
                                 <div style="padding-left: 10px; padding-top: 10px; color: white;" id="status2">나쁨</div>
                             </div>
                         </div>
-                        <div style="font-size: 0.9rem; color: white; padding-left: 50px;">
+                        <div style="font-size: 0.9rem; color: white; padding-left: 50px; font-weight: 600;">
                             <span id="miVal2" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
                         </div>
                     </div>
