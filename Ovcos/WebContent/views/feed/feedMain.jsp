@@ -866,8 +866,8 @@ if (nlist != null && !nlist.isEmpty()) {
                 <div id="weather" >
                
                <!-- Weather widget by https://meteodays.com -->
-                <a id="ms-informer-link-65e0c653d8918c445bf961303b939aea" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
-                <script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/65e0c653d8918c445bf961303b939aea"></script>
+                <a id="ms-informer-link-eda9c8f83a7945f9acc28bf4bdb4c88d" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
+                <script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/eda9c8f83a7945f9acc28bf4bdb4c88d"></script>
                 <!-- End -->
 
 				</div>
