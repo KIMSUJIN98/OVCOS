@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <!-- The Modal -->
-                    <div class="modal" id="newContestChallenge">
+                    <div class="modal fade" id="newContestChallenge">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <!-- Modal Header -->
@@ -138,10 +138,12 @@
                     </div>
                 </div>
                 <% int count = 0; %>
-
                 <% for(ContestChallenge cc : list) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
+                            <div id="icon-sm-complete" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div>
+                            <div id="icon-sm-entry" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem; display: none;">참가중</div>
+                            <!-- <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div> -->
                             <!-- image -->
                             <% if(cc.getChangeName() != null) { %>
                                 <img class="card-img-top" height="160px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
@@ -174,7 +176,7 @@
                         </div>
                         
                         <!-- The Modal -->
-                        <div class="modal" id="detailContestChallenge<%= count %>">
+                        <div class="modal fade" id="detailContestChallenge<%= count %>">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
@@ -187,7 +189,12 @@
                                         <table class="detail" style="width: 400px;">
                                             <tr>
                                                 <td>
-                                                    챌린지 날짜 : <%= cc.getContestChallengeDate() %> <%= cc.getContestChallengeId() %>
+                                                    <span>
+                                                        챌린지 날짜 : <%= cc.getContestChallengeDate() %> 
+                                                    </span>
+                                                    <span id="uploadNick">
+                                                        등록자 : <%= cc.getContestChallengeId() %>
+                                                    </span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -226,8 +233,9 @@
                                         </table>
                                         <br><br><br>
                                         <% if(loginUser != null && !loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
-                                            <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">
-                                            <!-- <input type="submit" id="enter" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkEntryId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);"> -->
+                                            <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">
+                                            <button id="trigger-btn" style="display: none;" onclick="iconShow(<%= cc.getCount() %>, <%= cc.getContestChallengeMax() %>);"></button>
+                                            <!-- <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkEntryId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);"> -->
                                         <% } %>
                                     </div>
                                     <!-- Modal footer -->
@@ -248,7 +256,7 @@
     </section>
 
     <!-- 대회 삭제 Modal -->
-    <div class="modal" id="delete">
+    <div class="modal fade" id="delete">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -289,6 +297,15 @@
     <script src="../../resources/js/scripts.js"></script>
 
     <script>
+        $(window).load(function(){
+    		$("#trigger-btn").trigger("click");
+            iconShow(num, max);
+    	})
+
+        // $(function(){
+
+        // })
+
         function substringDate(contestDate){
             var all = contestDate;
             var date1 = contestDate.split(" ");
@@ -344,14 +361,15 @@
                     console.log(result)
                     if(result > 0){
                         console.log("참가중");
-                        $("#enter").val("참가중");
-                        document.getElementById('enter').className = 'btn btn-lg btn-primary';
+                        $("#entry").val("참가중");
+                        document.getElementById('entry').className = 'btn btn-lg btn-primary';
                         // insertEntryList(num, max);
                         selectEntryList(num, max)
+                        iconShowEntry(num);
                     }else{
                         console.log("미참가");
-                        $("#enter").val("참가하기");
-                        document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
+                        $("#entry").val("참가하기");
+                        document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
                         deleteEntryList(num, max);
                         selectEntryList(num, max)
                     }
@@ -364,16 +382,14 @@
 
         // 엔트리 버튼 컨트롤
         function enterControll(num, max){
-            if($("#enter").val() === '참가하기') {
-                $("#enter").val("참가중");
-                document.getElementById('enter').className = 'btn btn-lg btn-primary';
+            if($("#entry").val() == '참가하기') {
+                $("#entry").val("참가중");
+                document.getElementById('entry').className = 'btn btn-lg btn-primary';
                 insertEntryList(num, max);
-            }else if($("#enter").val() === '참가중') {
-                $("#enter").val("참가하기");
-                document.getElementById('enter').className = 'btn btn-lg btn-outline-primary';
+            }else if($("#entry").val() == '참가중') {
+                $("#entry").val("참가하기");
+                document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
                 deleteEntryList(num, max);
-            }else {
-
             }
         }
 
@@ -430,9 +446,14 @@
                     console.log(result);
                     let value = "";
                     let value2 = "";
+                    let value3 = "";
+
                     for(let i = 0; i < result.length; i++){
-                        value += "<span>" + result[i].memNick + "</span><br>";
+                        value += "<span>" + (i+1) + " : " + result[i].memNick + " 님</span><br>";
                     }
+                    
+                    value3 += "등록자 : " + result[0].memNick + " 님"
+                    $("#uploadNick").html(value3);
 
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
                     $("#count-area>td").html(value);
@@ -441,11 +462,34 @@
                     
                     value2 += "참가인원 : " + result.length + " / " + max;
                     $("#area" + num).html(value2);
+
+
+                    if(result.length == max) {
+                        console.log("max!!");
+                        closeEntry();
+                    }
                 },
                 error:function(){
                     console.log("실패!");
                 }
             })
+        }
+
+        function closeEntry(){
+            if($("#entry").val() == '참가하기') {
+                $("#entry").val("모집완료");
+                $("#entry").attr("disabled", true);
+                // $("#icon-sm").show();
+                document.getElementById('entry').className = 'btn btn-lg btn-dark';
+            }
+        }
+
+        function iconShow(num, max){
+            if(num == max){
+                document.getElementById("icon-sm-complete").style.display = 'block';
+            }else {
+                document.getElementById("icon-sm-complete").style.display = 'none';
+            }
         }
 
     </script>

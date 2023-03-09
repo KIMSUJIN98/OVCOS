@@ -38,6 +38,7 @@ div{box-sizing: border-box; }
 
 #title{
 	padding:20px;
+	padding-top:20px;
 }
 
 #enrollBtn{
@@ -46,8 +47,24 @@ div{box-sizing: border-box; }
 
 table{
 	margin:auto;
+	margin-left:120px;
+	/* padding : 20px; */
 }
 
-td, th{
+ th{
 	text-align:center;
+	
+}
+input, select {
+    width: 500px;
+    margin: 5px;
+}
+
+#inqCnt{
+	height:300px;
+}
+
+enroll-form input, #enroll-form textarea {
+    width: 300px;
+    box-sizing: border-box;
 }

@@ -14,21 +14,22 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.ContestChallenge;
+import com.ovcos.challenge.model.vo.NormalChallenge;
 import com.ovcos.common.ChallengeFileRenamePolicy;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.ImageUpload;
 
 /**
- * Servlet implementation class ContestChallengeInsertController
+ * Servlet implementation class NormalChallengeInsertController
  */
-@WebServlet("/newContestChallenge.ch")
-public class ContestChallengeInsertController extends HttpServlet {
+@WebServlet("/newNormalChallenge.ch")
+public class NormalChallengeInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestChallengeInsertController() {
+    public NormalChallengeInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,37 +49,37 @@ public class ContestChallengeInsertController extends HttpServlet {
 			
 			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "utf-8", new ChallengeFileRenamePolicy());
 			
-			String contestChallengeId = multi.getParameter("userId");
-			String contestChallengeTitle = multi.getParameter("challengeName");
-			String challengeDate = multi.getParameter("challengeDate");
-			String challengeTime = multi.getParameter("challengeTime");
-			int contestChallengeMax = Integer.parseInt(multi.getParameter("challengeMax"));
-			String contestChallengeContent = multi.getParameter("challengeContent");
+			String normalChallengeId = multi.getParameter("userId");
+			String normalChallengeTitle = multi.getParameter("challengeName");
+			String normalChallengeLocal = multi.getParameter("insertLocal");
+			String normalDate = multi.getParameter("challengeDate");
+			String normalTime = multi.getParameter("challengeTime");
+			int normalChallengeMax = Integer.parseInt(multi.getParameter("challengeMax"));
+			String normalChallengeContent = multi.getParameter("challengeContent");
 			String fileName = multi.getFilesystemName("challengeImg");
-			String contestNo = multi.getParameter("contestNo");
 			
-			String YYYY = challengeDate.substring(0, 4);
-			String MM = challengeDate.substring(5, 7);
-			String DD = challengeDate.substring(8, 10);
-			String[] challengeTime1 = challengeTime.split(":");
+			String YYYY = normalDate.substring(0, 4);
+			String MM = normalDate.substring(5, 7);
+			String DD = normalDate.substring(8, 10);
+			String[] normalTime1 = normalTime.split(":");
 			
 //			System.out.println(YYYY);
 //			System.out.println(MM);
 //			System.out.println(DD);
-//			System.out.println(challengeTime1[0]);
-//			System.out.println(challengeTime1[1]);
+//			System.out.println(normalTime1[0]);
+//			System.out.println(normalTime1[1]);
 			
-			String contestChallengeDate = YYYY + MM + DD + challengeTime1[0] + challengeTime1[1];
+			String normalChallengeDate = YYYY + MM + DD + normalTime1[0] + normalTime1[1];
 			
-//			System.out.println(contestChallengeDate);
+//			System.out.println(normalChallengeDate);
 			
-			ContestChallenge cc = new ContestChallenge();
-			cc.setContestChallengeId(contestChallengeId);
-			cc.setContestChallengeTitle(contestChallengeTitle);
-			cc.setContestChallengeDate(contestChallengeDate);
-			cc.setContestNo(contestNo);
-			cc.setContestChallengeMax(contestChallengeMax);
-			cc.setContestChallengeContent(contestChallengeContent);
+			NormalChallenge nc = new NormalChallenge();
+			nc.setNormalChallengeId(normalChallengeId);
+			nc.setNormalChallengeTitle(normalChallengeTitle);
+			nc.setNormalChallengeDate(normalChallengeDate);
+			nc.setNormalChallengeMax(normalChallengeMax);
+			nc.setNormalChallengeContent(normalChallengeContent);
+			nc.setNormalChallengeLocal(normalChallengeLocal);
 			
 			ImageUpload img = null;
 			if(multi.getOriginalFileName("challengeImg") != null) {
@@ -91,9 +92,9 @@ public class ContestChallengeInsertController extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			
-			int result = new ChallengeService().insertContestChallenge(cc, img);
+			int result = new ChallengeService().insertNormalChallenge(nc, img);
 			
-			response.sendRedirect(request.getContextPath() + "/ccList.ch?contestNo=" + contestNo);
+			response.sendRedirect(request.getContextPath() + "/ncList.ch");
 			
 		}
 		
