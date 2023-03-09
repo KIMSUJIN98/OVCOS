@@ -40,14 +40,16 @@ div{box-sizing: border-box; }
 	padding:20px;
 }
 
-#enrollBtn{
-	margin-top:-20px;	
-}
-
 table{
 	margin:auto;
 }
 
 td, th{
 	text-align:center;
+	padding:5px;
+}
+
+#buttons{
+	margin-left:370px;
+	margin-top:-20px;
 }
