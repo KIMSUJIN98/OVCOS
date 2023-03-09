@@ -9,4 +9,14 @@
 		    BY MEM_ID, TO_CHAR(FEED_DATE, 'YYYY-MM')
 		 HAVING MEM_ID = ? AND TO_CHAR(FEED_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 	</entry>
+	
+	<!-- 로그인 유저가 일자별 달린거리를 담은 리스트 -->
+	<entry key="dayDistanceList">
+		SELECT MEM_ID, SUM(DISTANCE) "DISTANCE", TO_CHAR(FEED_DATE, 'YYYYMMDD') "RUNDATE"
+		  FROM FEED
+		 GROUP
+		    BY MEM_ID, TO_CHAR(FEED_DATE, 'YYYYMMDD')
+		HAVING MEM_ID = ?
+	</entry>
+	
 </properties>

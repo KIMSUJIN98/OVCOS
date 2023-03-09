@@ -20,8 +20,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
-<title>Insert title here</title>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
 <title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 
@@ -29,6 +27,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="<%=contextPath%>/resources/js/dom-to-image.js"></script>
 
 
 <style>
@@ -62,7 +63,6 @@
     <script>
         
     </script>
-
 
 
     <div id="feedWrap">
@@ -256,46 +256,10 @@
                                     <tr>
                                         <td colspan="3" id="gpx">
                                             <div>
-                                                <!-- <img src="${pageContext.request.contextPath}/resources/image/gpx_ex.png" alt=""> -->
+                                               
 
-                                                <div id="n<%=f.getFeedIndex()%>" style="width: 700px; height: 340px;"></div>
+                                                <img src="<%=contextPath %>/resources/gpx_img/<%=f.getImgPath()%>" style="width: 700px; height: 340px;"></img>
                                             </div>
-                                            <script>
-                                                    function startDataLayer(xmlDoc) {
-                                                    n<%=f.getFeedIndex()%>.data.addGpx(xmlDoc);
-                                                    }
-                                                    var n<%=f.getFeedIndex()%> = new naver.maps.Map('n<%=f.getFeedIndex()%>',{
-                                                    center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
-                                                    zoom: 15
-                                                    })
-                                                    
-                                                    $.ajax({
-                                                        url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getPath()%>',
-                                                        dataType: 'xml',
-                                                        strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                                        strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                                        strokeWeight: 3,   //선 두께
-                                                        success: startDataLayer
-                                                        });
-
-                                                    setTimeout(function(){
-                                                        
-                                                        var dis = <%=f.getDistance()%>;
-                                                        var zom=9;
-                                                        if(dis<2){
-                                                            zom = 14;
-                                                        }else if(dis<20){
-                                                            zom = 13;
-                                                        }else if(dis<40){
-                                                            zom = 12;
-                                                        }else{
-                                                            zom=11;
-                                                        }
-                                                    	n<%=f.getFeedIndex()%>.setZoom(zom);
-                                                    },800);
-                                                    
-                                            </script>
-                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -812,41 +776,70 @@
 
             </script>
             <div id="ct3">
-                <div id="dust">
+                <!-- <div id="dust">
                     <div id="date"></div>
                     
                     <div id="pm10"></div>
                     <div id="pm25"></div>
                     
-                </div>
+                </div> -->
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
                 <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
-                    <div style="font-weight: 600; color: white;">현재 위치</div>
+                    <div style="font-weight: 600; color: white; padding-right: 15px;" align="center">현재 위치</div>
+                    <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre"></div>
                     <div style="color: white;"> 
-                        날짜
+                        <div id="year" style="color: white; padding-right: 5px;" align="center"></div>
+                        <div id="hour" style="color: white; padding-right: 5px;" align="center"></div>
                     </div>
                 </div>   
                     <div >
                         <div style="font-weight: 600; padding-left: 15px; color: white;">미세먼지
                             <div style="display: flex;">
-                                <img src="${pageContext.request.contextPath}/resources/image/Emo1.png" style="width: 40px; padding-top: 5px;" >
-                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                                <img src="${pageContext.request.contextPath}/resources/image/Emo1.png" style="width: 40px; padding-top: 10px;" id="mi" >
+                                <div style="padding-left: 10px; padding-top: 18px; color: white;" id="status1">
+                                    
+                                </div>
+                                
                             </div>
+                            <div style="font-size: 0.9rem; color: white;">
+                                <span id="miVal" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                            </div>
+                            
                         </div>
                         
                     </div>
                     <div>
                         <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
-                                <img src="${pageContext.request.contextPath}/resources/image/Emo2.png" style="width: 40px; padding-top: 5px;" >
-                                <div style="padding-left: 10px; color: white;">나쁨</div>
+                                <img src="#" style="width: 40px; padding-top: 10px;" id="mi2" >
+                                <div style="padding-left: 10px; padding-top: 10px; color: white;" id="status2">나쁨</div>
                             </div>
                         </div>
-                        
+                        <div style="font-size: 0.9rem; color: white; padding-left: 50px; font-weight: 600;">
+                            <span id="miVal2" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                        </div>
                     </div>
-                    
+                    <script>
+                        var date = new Date();
+
+                        var format1 = date.getFullYear()+"-"+
+                                    ((date.getMonth()+1) <9? "0"+(date.getMonth()): (date.getMonth()))+"-"+
+                                    (date.getDate() <10? "0"+(date.getDate()): (date.getDate()));
+                        var format2 = (date.getHours()<10 ? "0"+
+                        (date.getHours()): (date.getHours()))+":"+
+                        (date.getMinutes() <10? "0"+
+                        (date.getMinutes()):date.getMinutes());
+
+
+                        console.log(format1);
+                        console.log(format2);
+
+                        $("#year").html(format1);
+                        $("#hour").html(format2);
+
+                    </script>
                 </div>
                 <div id="weather" >
                
@@ -1021,8 +1014,6 @@
                 </table>
 
 				</div>
-             
-                
                 
 
                 <div id="footer">
@@ -1037,9 +1028,14 @@
                         © 2023 KH OVCOS
                         </p>
                     </div>
+
                 </div>
+
+                <p style="margin-bottom: 0px;"> 
+                	<br>© 2023 KH OVCOS<br>
+                </p>
             </div>
-    </div>
+        </div>
 <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -1157,6 +1153,7 @@
                         id="reset">초기화</button>
                     <button type="submit" class="btn btn-primary"
                         id="insert" onclick="return fileSubmit()">제출</button>
+                    <button type="button" id="sc">스샷</button>
                 </div>
                 </form>
             </div>
@@ -1175,6 +1172,37 @@
             //     center: new naver.maps.LatLng(37.4923615, 127.0292881),
             //     zoom: 12
             //     });
+
+
+            $("#sc").click(function(){
+                // var input = document.querySelector("#map");
+                //             html2canvas(input,{ allowTaint: true, useCORS: true }).then((canvas) => {
+                //             var map = document.querySelector("#map");
+                //             domtoimage.toPng(map).then(function(dataUrl){
+                //             var img = new Image();
+                //             img.src = dataUrl;
+                //             var link = document.createElement('a');
+                //             var str = 'asdffdas'
+                //             link.download ='naver-map.png';
+                //             link.href = dataUrl;
+                //             link.click();
+                //         })
+                //         .catch(function(error){
+                //             console.log("oops, something went wrong!",error);
+                //             return false;
+                //         })
+                    
+                //             });
+                var map = document.querySelector("#map");
+                domtoimage.toPng(map).then(function(dataUrl){
+                    var img = new Image();
+                    img.src = dataUrl;
+                    document.body.appendChild(img);
+                })
+                .catch(function(error){
+                    console.log("oops, something went wrong!",error);
+                })
+            })
             
             function fileSubmit(){
                var title = $("input[name='title']");
@@ -1191,24 +1219,18 @@
                         content.val(String(len).substring(0,s-1));
                         
                         // map capture
-                        setTimeout(function(){
-                            var input = document.getElementById('map');
-                            html2canvas(input,{ allowTaint: true, useCORS: true }).then((canvas) => {
-                                var dataURL = canvas.toDataURL('image/jpg');
-                                var img = new Image();
-                                img.src = dataURL;
-                                var link = document.createElement('a');
-                                link.download = String(len).substring(0,s-1)+'.jpg';
-                                link.href = dataURL;
-                                link.click();
-                            });
-
-                        },1000)
-
-                }
+                        
+                    
+                    }// end if
+                } 
                 return true;
                }
-            }
+
+            
+
+
+            
+
             $("#insert").click(function () {
                 var last = $("#dist").text().lastIndexOf("k");
                 $("#distance").val($("#dist").text().substring(0, last));

@@ -45,6 +45,8 @@ public class FeedEnrollController extends HttpServlet {
 			double startLon = Double.parseDouble(multi.getParameter("startLon"));
 			double startLat = Double.parseDouble(multi.getParameter("startLat"));
 			double distance = Double.parseDouble(multi.getParameter("distance"));
+			String imgPath = multi.getParameter("imgPath");
+			System.out.println(imgPath);
 			int rate = 0;
 			if(multi.getParameter("rating") != null) {
 				rate = Integer.parseInt(multi.getParameter("rating"));
@@ -70,6 +72,7 @@ public class FeedEnrollController extends HttpServlet {
 			f.setFeedCnt(content);
 			f.setFeedPublicType(feedPublicType);
 			f.setFeedPathNy(feedPathNy);
+			f.setImgPath(imgPath);
 			
 			//Gpx 객체
 			Gpx gpx = null;
@@ -80,7 +83,6 @@ public class FeedEnrollController extends HttpServlet {
 				gpx.setFilePath("resources/gpx_upfiles/");
 			}
 			
-			PrintWriter out = response.getWriter();
 			
 			//서비스 요청 
 			int result = new FeedService().insertFeed(f,gpx);

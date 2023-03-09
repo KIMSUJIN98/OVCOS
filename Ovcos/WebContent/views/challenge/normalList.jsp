@@ -48,6 +48,7 @@
     
     <div style="float: left; padding-top: 30px; width: 84%;" align="right">
     <select name="local" id="selectLocal" onchange="selectBox();">
+        <option value="99">선택</option>
         <option value="0">전체</option>
     <% for(Local l : list1) { %>
         <option value="<%= l.getLocalNo() %>"><%= l.getLocalName() %></option>
@@ -212,10 +213,8 @@
             console.log(local);
             location.href='<%= contextPath %>/ncList.ch?local=' + local;
         }
-        document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
+        // document.getElementById('selectLocal').value = "<?= $_GET['local'] ?>";
         // $('#selectLocal option[value=' + value + ']').prop('selected', true);
-
-
 
         // $(function(){
         //     $("#selectLocal").val("${param.sb_cate}").attr("selected","selected");
