@@ -97,7 +97,10 @@
                         
                     </div>
                 </div>
-                <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
+                <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a>
+				</div>
+
+
             </div>
 <!--            <<nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -121,7 +124,6 @@
                         <div id="fw_feed" ><a href="<%= contextPath %>/clickList.feed?num=2&userId=<%=loginUser.getMemId()%>" id="friendFeed" >친구피드</a></div>
                         <div id="my_feed"><a href="<%= contextPath %>/clickList.feed?num=3&userId=<%=loginUser.getMemId()%>"  id="myFeed">내피드</a></div>
                     </div>
-
                     <form action="searchList.feed" method="get" id="searchForm">
                         <div id="feed_search">
                             <div id="f_select">
@@ -1014,17 +1016,19 @@
 				</div>
                 
 
-            </div>
-        </div>
-        <div id="footer">
-            <!-- 푸터구역 -->
-            <div id="f1" align="center">
-                <a href="#"><br>이용약관&nbsp;</a> 
-                <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
-                <a href="#">&nbsp;고객센터&nbsp;</a>
-                <div style="font-weight: 500;">
-                    
-                    
+                <div id="footer">
+                    <!-- 푸터구역 -->
+                    <div id="f1">
+                        <a href="#">약관&nbsp;</a> 
+                        <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
+                        <a href="<%=contextPath%>/list.bo">&nbsp;고객센터&nbsp;</a>
+                    </div>
+                    <div>
+                        <p> 
+                        © 2023 KH OVCOS
+                        </p>
+                    </div>
+
                 </div>
 
                 <p style="margin-bottom: 0px;"> 

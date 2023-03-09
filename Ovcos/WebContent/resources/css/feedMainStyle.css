@@ -391,3 +391,8 @@ img[src*='marker']{
 	visibility: visible;
 
 }
+
+.fa-comments{
+	height:500px;
+	width:500px;
+}
