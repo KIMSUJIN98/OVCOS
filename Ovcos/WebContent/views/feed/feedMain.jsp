@@ -48,7 +48,7 @@
         <script>
             setTimeout(function(){
                 $("#succ").slideUp(1000)
-            },2000);
+            },3000);
         </script>
     <%}%>
     <%if(message != null && message.equals("fail")){ %>
@@ -60,7 +60,7 @@
         <script>
             setTimeout(function(){
                 $("#fail").slideUp(1000)
-            },2000);
+            },3000);
         </script>
     <%}%>
     <%session.removeAttribute("enrollFeed"); %>
@@ -113,7 +113,11 @@ if (mylist != null && !mylist.isEmpty()) {
                         
                     </div>
                 </div>
-             <div id="notice"><a href="<%=contextPath%>/list.no">
+
+             
+
+				 <div id="notice"><a href="<%=contextPath%>/list.no">
+
 <%
 if (nlist != null && !nlist.isEmpty()) {
     out.println(nlist.get(0).getNtcTitle());
@@ -160,13 +164,20 @@ if (nlist != null && !nlist.isEmpty()) {
                        btn.css("backgroundColor","white")
                        $("#friendFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
                     </script>
-                    <%}else{ %>
+                    <%}else if(num.equals("3")){ %>
                     <script>
                        var btn = $("#btn_list div");
                        btn.css("backgroundColor","white")
                        $("#myFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
                     </script>
+                    <%}else{ %>
+                    <script>
+                        var btn = $("#btn_list div");
+                        btn.css("backgroundColor","white")
+                        $("#allfeed").parent().css("backgroundColor","rgb(235, 235, 235)");
+                    </script>
                     <%} %>
+                    
                     
                     
                     <form action="searchList.feed" method="get" id="searchForm">

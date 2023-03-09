@@ -49,7 +49,7 @@ function select1(sido){
 
             }else{
                 mi1.prop("src","/Ovcos/resources/image/Emo2.png");
-                status1.html("매우<br>나쁨");
+                status1.html("매우나쁨");
                 miVal.html(pm10);
                 num1 =4;
 
@@ -76,7 +76,7 @@ function select1(sido){
                 num2 = 3;
             }else{
                 mi2.prop("src","/Ovcos/resources/image/Emo2.png");
-                status2.html("매우<br>나쁨");
+                status2.html("매우나쁨");
                 miVal2.html(pm25);
                 num2 = 4;
             }
