@@ -1042,7 +1042,7 @@ if (nlist != null && !nlist.isEmpty()) {
                     <div id="f1">
                         <a href="#">약관&nbsp;</a> 
                         <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
-                        <a href="<%=contextPath%>/list.bo?cpage=1">&nbsp;고객센터&nbsp;</a>
+                        <a href="<%=contextPath%>/list.bo">&nbsp;고객센터&nbsp;</a>
                     </div>
                     <div>
                         <p> 
