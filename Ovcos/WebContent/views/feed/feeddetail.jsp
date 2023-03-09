@@ -240,7 +240,7 @@
 
                                     + "<td style= 'border-bottom: 3px solid rgb(67, 115, 176); font-weight:600'>" + result[i].feed_cmn_id + "</td>"
                                     + "<td style=''>" + result[i].feed_cmn_cnt + "</td>"
-                                    + "<td style='font-size:0.8rem;  padding-right:0px; ' > " + timeForToday(result[i].feed_cmn_date) + "</td>"
+                                    + "<td style='font-size:0.8rem; padding-left: 70px;  ' > " + timeForToday(result[i].feed_cmn_date) + "</td>"
                                     + "</tr>";
                                 console.log(result[i].feed_cmn_date)
 
