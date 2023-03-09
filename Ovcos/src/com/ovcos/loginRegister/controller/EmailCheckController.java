@@ -109,7 +109,7 @@ public class EmailCheckController extends HttpServlet {
 
 
         transport = session.getTransport("smtp");
-        transport.connect("smtp.gmail.com", "dlemrdl95@gmail.com", "ubzzupbswsvtzbnd");
+        transport.connect("smtp.gmail.com", "Ovcos@gmail.com", "ubzzupbswsvtzbnd");
 
         System.out.println("여기까지는 돼?");
         javax.mail.Transport.send(msg);

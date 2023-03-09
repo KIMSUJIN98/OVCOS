@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ovcos.inquiry.model.service.InquiryService;
+import com.ovcos.inquiry.model.vo.Inquiry;
+
 /**
  * Servlet implementation class InquiryUpdateFormController
  */
@@ -29,6 +32,10 @@ public class InquiryUpdateFormController extends HttpServlet {
 	
 		int inqNo = Integer.parseInt(request.getParameter("num"));
 		
+		Inquiry i = new InquiryService().selectInquiry(inqNo);
+		
+		request.setAttribute("i", i);
+		request.getRequestDispatcher("views/inquiry/inquiryUpdateForm.jsp").forward(request, response);
 		
 	
 	

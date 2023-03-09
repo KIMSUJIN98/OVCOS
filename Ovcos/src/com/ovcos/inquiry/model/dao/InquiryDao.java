@@ -181,44 +181,51 @@ public class InquiryDao {
 		}
 		
 		return i;
-
-}
+	}
 	
-	
-	public ArrayList<Inquiry> selectInquiryList(Connection conn){
-		ArrayList<Inquiry> list = new ArrayList<Inquiry>();
+	public int updateInquiry(Connection conn, Inquiry i) {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectInquiryList");
+		String sql = prop.getProperty("updateInquiry");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
 			
+			pstmt.setString(1, i.getInqTitle());
+			pstmt.setString(2, i.getInqCnt());
+			pstmt.setInt(3, i.getInqNo());
 			
-			while(rset.next()) {
-				list.add(new Inquiry(
-						rset.getInt("INQ_NO"),
-						rset.getInt("INQ_MENU"),
-						rset.getString("INQ_TITLE"),
-						rset.getString("INQ_DATE"),
-						rset.getString("INQ_CNT"),
-						rset.getString("ANS_CNT"),
-						rset.getString("INQ_DEL_NY"),
-						rset.getString("MEM_ID")
-						));
-							
-			}
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-		
-		return list;
+		return result;
 	}
 	
+	public int deleteInquiry(Connection conn, int inqNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inqNo);
+			
+			System.out.println(inqNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	
+	}
 }
