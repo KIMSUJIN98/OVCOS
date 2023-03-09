@@ -138,7 +138,7 @@
                                             </div>
                                             <!-- Modal footer -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary" onclick="checkDateTime();">등록</button>
+                                                <button type="submit" class="btn btn-primary" onclick="return checkDateTime();">등록</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                             </div>
                                         </form>
@@ -176,7 +176,6 @@
                                     </span>
                                 </div>
                             </div>
-                            <% count++; %>
                             <!-- actions -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
@@ -243,8 +242,7 @@
                                         </table>
                                         <br><br><br>
                                         <% if(loginUser != null && !loginUser.getMemId().equals(n.getNormalChallengeId())) { %>
-                                            <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">
-                                            <button id="trigger-btn" style="display: none;" onclick="iconShow(<%= n.getCount() %>, <%= n.getNormalChallengeMax() %>);"></button>
+                                            <input type="submit" id="entry<%= count %>" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>, <%= count %>);">
                                         <% } %>
                                     </div>
                                     <!-- Modal footer -->
@@ -259,6 +257,7 @@
                             </div>
                         </div>
                     </div>
+                <% count++; %>
                 <% } %>
             </div>
         </div>
@@ -282,8 +281,6 @@
                             정말로 삭제하시겠습니까? 
                         </b>
                         <br><br>
-
-                        비빌번호 : <input type="password" id="userPwd" required>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -351,9 +348,12 @@
                 alert("과거로 돌아갈 수는 없어요..ㅠ 날짜를 다시 확인해주세요.");
                 return false;
             }
-            if(inputTime < systime){
-                alert("시간을 확인해주세요.");
-                return false;
+
+            if(inputDate == sysdate){
+                if(inputTime < systime){
+                    alert("시간을 확인해주세요.");
+                    return false;
+                }
             }
         }
 
@@ -373,16 +373,16 @@
             }
         }
 
-        function checkPwd(){
-            const userPwd = document.getElementById("userPwd").value();
-            console.log(<%= loginUser.getMemPwd() %>);
-            console.log(userPwd);
+        // function checkPwd(){
+        //     const userPwd = document.getElementById("userPwd").value();
+        //     console.log(<%= loginUser.getMemPwd() %>);
+        //     console.log(userPwd);
 
-            if(userPwd != <%= loginUser.getMemPwd() %>) {
-            	alert("비밀번호가 일치하지 않습니다.");
-            	return false;
-            }
-        }
+        //     if(userPwd != <%= loginUser.getMemPwd() %>) {
+        //     	alert("비밀번호가 일치하지 않습니다.");
+        //     	return false;
+        //     }
+        // }
 
         function castNo(num){
             $("#delNo").val(num);
@@ -390,7 +390,7 @@
         }
         
         // ajax 상세보기 버튼 참가여부 확인
-        function checkEntryId(num, max){
+        function checkEntryId(num, max, count){
             $.ajax({
                 url:"normalCheckEntryId.ch",
                 data:{
@@ -404,13 +404,13 @@
                         $("#entry").val("참가중");
                         document.getElementById('entry').className = 'btn btn-lg btn-primary';
                         // insertEntryList(num, max);
-                        selectEntryList(num, max)
+                        selectEntryList(num, max, count)
                     }else{
                         console.log("미참가");
                         $("#entry").val("참가하기");
                         document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
-                        deleteEntryList(num, max);
-                        selectEntryList(num, max);
+                        deleteEntryList(num, max, count);
+                        selectEntryList(num, max, count);
                     }
                 },
                 error:function(){
@@ -420,20 +420,21 @@
         }
 
         // 엔트리 버튼 컨트롤
-        function enterControll(num, max){
-            if($("#entry").val() == '참가하기') {
-                $("#entry").val("참가중");
-                document.getElementById('entry').className = 'btn btn-lg btn-primary';
-                insertEntryList(num, max);
-            }else if($("#entry").val() == '참가중') {
-                $("#entry").val("참가하기");
-                document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
-                deleteEntryList(num, max);
+        function enterControll(num, max, count){
+            if($("#entry" + count).val() == '참가하기') {
+                $("#entry" + count).val("참가중");
+                $("#entry" + count).attr("class", "btn btn-lg btn-primary");
+                console.log(num);
+                insertEntryList(num, max, count);
+            }else if($("#entry" + count).val() == '참가중') {
+                $("#entry" + count).val("참가하기");
+                $("#entry" + count).attr("class", "btn btn-lg btn-outline-primary");
+                deleteEntryList(num, max, count);
             }
         }
 
         // ajax 엔트리 리스트 참가
-        function insertEntryList(num, max){
+        function insertEntryList(num, max, count){
             $.ajax({
                 url:"normalEntryInsert.ch",
                 data:{
@@ -444,7 +445,7 @@
                     console.log(result)
                     if(result > 0){
                         console.log("성공!");
-                        selectEntryList(num, max);
+                        selectEntryList(num, max, count);
                     }
                 },
                 error:function(){
@@ -454,7 +455,7 @@
         }
 
         // ajax 엔트리 리스트 참가취소
-        function deleteEntryList(num, max){
+        function deleteEntryList(num, max, count){
             $.ajax({
                 url:"normalEntryDelete.ch",
                 data:{
@@ -465,7 +466,7 @@
                     console.log(result)
                     if(result > 0){
                         console.log("성공!");
-                        selectEntryList(num, max);
+                        selectEntryList(num, max, count);
                     }
                 },
                 error:function(){
@@ -514,11 +515,11 @@
             })
         }
 
-        function closeEntry(){
-            if($("#entry").val() == '참가하기') {
-                $("#entry").val("모집완료");
-                $("#entry").attr("disabled", true);
-                document.getElementById('entry').className = 'btn btn-lg btn-dark';
+        function closeEntry(num, count){
+            if($("#entry" + count).val() == '참가하기') {
+                $("#entry" + count).val("모집완료");
+                $("#entry" + count).attr("disabled", true);
+                $("#entry" + count).attr("class", "btn btn-lg btn-dark");
             }
         }
 

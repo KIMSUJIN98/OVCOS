@@ -94,7 +94,7 @@ public class NormalChallengeInsertController extends HttpServlet {
 			
 			int result = new ChallengeService().insertNormalChallenge(nc, img);
 			
-			response.sendRedirect(request.getContextPath() + "/ncList.ch");
+			response.sendRedirect(request.getContextPath() + "/ncList.ch?local=0");
 			
 		}
 		

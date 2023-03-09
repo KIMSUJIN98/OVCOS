@@ -589,10 +589,18 @@ UPDATE
  WHERE CNTS_NO = 2;   
     
     
-    delete normal_challenge where NOR_CHLG_NO = 3;
+    
+    
     
 ROLLBACK;
 
+
+delete contest;
+delete contest_challenge;
+delete normal_challenge;
+delete upload;
+delete entry_list;
+delete nentry_list;
 
 COMMIT;
   
