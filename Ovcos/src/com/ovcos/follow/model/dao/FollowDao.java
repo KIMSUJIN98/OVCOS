@@ -31,6 +31,12 @@ public class FollowDao {
 	}
 	
 
+	/**
+	 * 페이징개수조회
+	 * @param conn
+	 * @param userId
+	 * @return
+	 */
 	public int selectListCount(Connection conn, String userId) {
 		
 	

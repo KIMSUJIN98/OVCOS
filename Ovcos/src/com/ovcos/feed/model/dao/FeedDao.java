@@ -10,16 +10,15 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.ovcos.common.JDBCTemplate.*;
+
+import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.feed.model.vo.Feeddetails;
 import com.ovcos.feed.model.vo.detail2comments;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
-/**
- * @author soyoung
- *
- */
+
 public class FeedDao {
 	
 	Properties prop = new Properties();
@@ -769,6 +768,13 @@ public class FeedDao {
 	}
 	
 	
+	/**
+	 * 신고 상태로 업뎃
+	 * @param conn
+	 * @param feedIndex
+	 * @param rprId
+	 * @return
+	 */
 	public int updateRpr(Connection conn, int feedIndex, String rprId) {
 
 		int result = 0;
@@ -831,9 +837,6 @@ public class FeedDao {
 						rset.getString("ORIGIN_NAME")
 						
 						);
-				
-				
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -842,13 +845,296 @@ public class FeedDao {
 			close(pstmt);
 		}
 		return f;
+	
+	}
+	
+	
+	
+	/**
+	 * 진짜 전체 조회 용 ( admin 피드조회)
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Feed> selectFeedList(Connection conn){
 		
 		
+		ArrayList<Feed> list = new ArrayList<Feed>();
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectFeedList");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
 		
-		
-		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Feed(rset.getInt("FEED_INDEX"),
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getString("FEED_RPR_NY"),
+						rset.getString("RPR_DATE"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("FEED_DEL_NY"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getInt("HIT"),
+						rset.getString("FEED_RPR_ID")
+						
+						));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
 		
 	}
+	
+	
+	
+	/**
+	 * 페이징개수 조회
+	 * @param conn
+	 * @return
+	 */
+	public int selectListCount(Connection conn) {
+		
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql  = prop.getProperty("selectListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	
+	
+	/**
+	 * 페이징이랑 게시글 조회랑 같이
+	 * @param conn
+	 * @param pi
+	 * @return
+	 */
+	public ArrayList<Feed> selectList(Connection conn, Pageinfo pi){
+		//select문 => resultSet 객체 필요, 여러행리턴 =>ArrayList
+		ArrayList<Feed> list = new ArrayList<Feed>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFeedList1");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			/*
+			 * currentPage(현재페이징번호) : 1번누름 -> 시작값:1 | 끝값 : 10 번 데이터 조회~
+			 * currentPage(현재페이징번호) : 2번누름 -> 시작값:11 | 끝값 : 20 번 까지의 게시판글 조회~
+			 * currentPage(현재페이징번호) : 3번누름 -> 시작값:21 | 끝값 : 30 번 까지의 게시판글 조회~
+			 * 
+			 * 시작값과 끝값을 구해서 쿼리로 넘겨주야함
+			 * 시작값  : (currentPage -1) * boardLimit +1
+			 * 끝값 	: 시작값 + boardLimit - 1
+			 */
+			
+			//물음표에 넘겨줄 값
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + (pi.getBoardLimit()-1);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+		
+			rset = pstmt.executeQuery();
+
+			//이쿼리 수행하면  데이터가 열행이가 나옴
+			while(rset.next()) {
+				list.add(new Feed(rset.getInt("FEED_INDEX"),
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getString("FEED_RPR_NY"),
+						rset.getString("RPR_DATE"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("FEED_DEL_NY"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getInt("HIT"),
+						rset.getString("FEED_RPR_ID")
+						
+						));
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
+	
+	
+
+	/**
+	 * 신고 피드 리스트 조회 
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Feed> selectRprList(Connection conn){
+		
+		
+		ArrayList<Feed> list = new ArrayList<Feed>();
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRprList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Feed(rset.getInt("FEED_INDEX"),
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getString("FEED_RPR_NY"),
+						rset.getString("RPR_DATE"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("FEED_DEL_NY"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getInt("HIT"),
+						rset.getString("FEED_RPR_ID")
+						
+						));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+		
+	}
+	
+	
+	/**
+	 * 신고 된 피드 원상태로 업데이트
+	 * @param conn
+	 * @param feedIndex
+	 * @return
+	 */
+	public int updateRprRestore(Connection conn,int feedIndex) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateRprRestore");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, feedIndex);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	public int updateRprCum(Connection conn,int feedIndex) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("updateRprCum");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, feedIndex);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	
+	
+
 	
 }

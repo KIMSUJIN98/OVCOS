@@ -5,10 +5,10 @@
 }
 
 .wrap{
-    background-color: coral;
+
     width: 300px;
     height: 1000px;
-    float: left;
+    float : left;
 }
 div, form, input{
     /* border: 1px solid black; */
@@ -29,7 +29,7 @@ div, form, input{
 
 #h1_1{height: 40%;}
 #h1_2{height: 60%;}
-#h1_2>img{ width:100%}
+#h1_2 img{ width:90%}
 
 #body>div{height: 100%; float: left;}
 #b1{width: 100%; position: relative;}
