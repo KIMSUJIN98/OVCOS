@@ -80,6 +80,18 @@ INQ_NO
 FROM INQUIRY
 ORDER BY INQ_NO DESC
 </entry>
+<entry key="updateInquiry">
+	UPDATE
+			INQUIRY
+	   SET INQ_TITLE = ?
+	     , INQ_CNT = ?
+	 WHERE INQ_NO = ?   	
+</entry>
+<entry key="deleteInquiry">
+	UPDATE
+		   INQUIRY
+	   SET INQ_DEL_NY='Y'
+	 WHERE INQ_NO = ?  	
 
-
+</entry>
 </properties>

@@ -30,7 +30,7 @@
    <div class="outer">
       <br>
       <div class="inner">
-      <h2 align="center" id="title">내 문의내역</h2>
+      <h2 align="center" id="title">나의 문의내역</h2>
       <br>
       	<div align="right" style="width:800px;" id="enrollBtn">
       		<a href="<%=contextPath %>/enrollForm.bo" class="btn btn-sm btn-secondary">글작성</a>
