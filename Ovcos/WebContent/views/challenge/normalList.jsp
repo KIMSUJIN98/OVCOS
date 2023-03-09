@@ -182,13 +182,13 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <!-- <a class="btn btn-outline-dark mt-auto" href="#">참가하기</a> -->
-                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge<%= count %>" onclick="checkEntryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">상세보기</button>
+                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailNormalChallenge<%= count %>" onclick="checkEntryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">상세보기</button>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- The Modal -->
-                        <div class="modal fade" id="detailContestChallenge<%= count %>">
+                        <div class="modal fade" id="detailNormalChallenge<%= count %>">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
@@ -266,6 +266,37 @@
             </div>
         </div>
     </section>
+
+    <!-- 삭제 Modal -->
+    <div class="modal fade" id="delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">챌린지 삭제</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <form action="deleteNormalChallenge.ch" method="post" id="deleteNormal-form">
+                    <input type="hidden" id="delNo" name="normalChallengeNo" value="">
+                    <div class="modal-body" align="center">
+                        <b>
+                            삭제 후 복구가 불가능 합니다. <br>
+                            정말로 삭제하시겠습니까? 
+                        </b>
+                        <br><br>
+
+                        비빌번호 : <input type="password" id="userPwd" required>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return checkPwd();">삭제</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">닫기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     
     
     <!-- Footer-->

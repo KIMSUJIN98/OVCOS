@@ -310,6 +310,13 @@
 	 WHERE CNTS_CHLG_NO = ?
 	</entry>
 	
+	<entry key="deleteNormalChallenge">
+		UPDATE
+	       NORMAL_CHALLENGE
+	   SET DEL_STATUS = 'Y'
+	 WHERE NOR_CHLG_NO = ?
+	</entry>
+	
 	<entry key="insertEntryListSelf">
 		INSERT
 		  INTO ENTRY_LIST

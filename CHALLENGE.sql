@@ -431,7 +431,13 @@ VALUES
            SELECT * FROM NORMAL_CHALLENGE;
     
     
-    
+    		SELECT
+		       NCHLG_NO_INLIST
+		     , NCHLG_ENTRY_ID
+		     , MEM_NICK
+		  FROM NENTRY_LIST
+		  JOIN MEMBER ON (NCHLG_ENTRY_ID = MEM_ID)
+		 WHERE NCHLG_NO_INLIST = ?;
     
     
 ROLLBACK;
