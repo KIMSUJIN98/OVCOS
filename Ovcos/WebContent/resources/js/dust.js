@@ -1,3 +1,5 @@
+
+
 function select1(sido){
     
     $.ajax({
@@ -9,57 +11,88 @@ function select1(sido){
             var pm10 = (($(response).find("pm10Value"))[0]).innerHTML;
             console.log("pm10 : "+pm10);
             console.log("pm25 : "+pm25);
+            $("#dust").css("visibility","visible")
 
-            // 현재 날짜 및 시간 표시
-            var date = new Date();
+            // console.log($("#mi").prop("src","/Ovcos/resources/image/Emo2.png"));
+            // 미세먼지 관련 태그
+            var mi1 = $("#mi");
+            var status1 = $("#status1");
+            var miVal = $("#miVal");
+            var num1;
 
-            var format = date.getFullYear()+"년 "+
-                         ((date.getMonth()+1) <9? "0"+(date.getMonth()): (date.getMonth()))+"월 "+
-                         (date.getDate() <9? "0"+(date.getDate()): (date.getDate()))+"일 "+
-                         (date.getHours()<9 ? "0"+(date.getHours()): (date.getHours()))+"시";
-            console.log(format);
-
-            var datext = document.getElementById("date");
-            datext.innerHTML= format;
+            // 초미세먼지 관련 태그
+            var mi2 = $("#mi2");
+            var status2 = $("#status2");
+            var miVal2 = $("#miVal2");
+            var num2;
+            
+           
 
             // pm10 : 0~30 좋음, 31~80 보통, 81~150 나쁨, 151~ 매우나쁨
-            var pm10text = document.getElementById("pm10");
-            var str;
-
             if(pm10 <= 30){
-                str = "<img src='/Ovcos/resources/image/blueEmo.png' style='width:25px'> 미세("+pm10+") 좋음"
-                pm10text.style.color = "blue";
+                mi1.prop("src","/Ovcos/resources/image/Emo3.png");
+                status1.html("좋음");
+                miVal.html(pm10);
+                num1 = 1;
+  
             }else if(pm10 <=80){
-                str = "<img src='/Ovcos/resources/image/greenEmo.png'style='width:25px'> 미세("+pm10+") 보통"
-                pm10text.style.color = "green";
-            }else if(pm10 <=150){
-                str = "<img src='/Ovcos/resources/image/OrangeEmo.png' style='width:25px'> 미세("+pm10+") 나쁨"
-                pm10text.style.color = "orange";
-            }else{
-                str = "<img src='/Ovcos/resources/image/redEmo.png' style='width:25px'> 미세("+pm10+") 매우나쁨"
-                pm10text.style.color = "red";
-            }
-            pm10text.innerHTML = str;
+                mi1.prop("src","/Ovcos/resources/image/Emo4.png");
+                status1.html("보통");
+                miVal.html(pm10);
+                num1 = 2;
 
-            var pm25text = document.getElementById("pm25");
-            var str1;
+            }else if(pm10 <=150){
+                mi1.prop("src","/Ovcos/resources/image/Emo1.png");
+                status1.html("나쁨");
+                miVal.html(pm10);
+                num1 = 3;
+
+            }else{
+                mi1.prop("src","/Ovcos/resources/image/Emo2.png");
+                status1.html("매우나쁨");
+                miVal.html(pm10);
+                num1 =4;
+
+            }
+
+
+
 
             // pm25 : 0~15 좋음, 15~35 보통, 36~75 나쁨, 76~ 매우나쁨
             if(pm25 <= 15){
-                str1 = "<img src='/Ovcos/resources/image/blueEmo.png'> 초미세("+pm25+") 좋음"
-                pm25text.style.color = "blue";
+                mi2.prop("src","/Ovcos/resources/image/Emo3.png");
+                status2.html("좋음");
+                miVal2.html(pm25);
+                num2 = 1;
             }else if(pm25 <=35){
-                str1 = "<img src='/Ovcos/resources/image/greenEmo.png'style='width:25px'> 초미세("+pm25+") 보통"
-                pm25text.style.color = "green";
+                mi2.prop("src","/Ovcos/resources/image/Emo4.png");
+                status2.html("보통");
+                miVal2.html(pm25);
+                num2 = 2;
             }else if(pm25 <=75){
-                str1 = "<img src='/Ovcos/resources/image/OrangeEmo.png'style='width:25px'> 초미세("+pm25+") 나쁨"
-                pm25text.style.color = "blue";
+                mi2.prop("src","/Ovcos/resources/image/Emo1.png");
+                status2.html("나쁨");
+                miVal2.html(pm25);
+                num2 = 3;
             }else{
-                str1 = "<img src='/Ovcos/resources/image/redEmo.png'> 초미세("+pm25+") 매우나쁨"
-                pm25text.style.color = "red";
+                mi2.prop("src","/Ovcos/resources/image/Emo2.png");
+                status2.html("매우나쁨");
+                miVal2.html(pm25);
+                num2 = 4;
             }
 
-            pm25text.innerHTML = str1;
+            var max = Math.max(num1,num2);
+            var $dust = $("#dust");
+            if(max == 1){
+                $dust.css("backgroundColor","rgb(67, 115, 176)")
+            }else if(max == 2){
+                $dust.css("backgroundColor","green")
+            }else if(max ==3){
+                $dust.css("backgroundColor","orange")
+            }else{
+                $dust.css("backgroundColor","red")
+            }
+
 
 
         }
@@ -86,6 +119,9 @@ function select1(sido){
 
                 var item = items[0].addrdetail.sido;
                 sido = String(item).substring(0,2);
+                var dong = items[1].addrdetail.dongmyun;
+                $("#addre").html("("+dong+")");
+
 
                 select1(sido);
 
@@ -95,6 +131,7 @@ function select1(sido){
 
         function getUserLocation(){
             if(!navigator.geolocation){
+                alert("위치 정보가 지원되지 않습니다");
                 throw "위치 정보가 지원되지 않습니다."
             }else{
                 navigator.geolocation.getCurrentPosition(success);

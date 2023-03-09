@@ -93,20 +93,22 @@
     width: 10px;
   }
   #feed90::-webkit-scrollbar-thumb {
-    background-color: rgb(67, 115, 176);
+    background-color: gray;
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
   }
   #feed90::-webkit-scrollbar-track {
-    background-color: rgb(122, 171, 255);
+    background-color: white;
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
 
-path{
-    stroke: red !important;
+  path{
+    stroke: orangered !important;
+    stroke-width: 7px !important;
 }
+
 img[src*='marker']{
     display: none !important;
 }

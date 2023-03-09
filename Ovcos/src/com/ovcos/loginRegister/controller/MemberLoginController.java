@@ -36,6 +36,7 @@ public class MemberLoginController extends HttpServlet {
 			session.setAttribute("erroMsg", "로그인에 실패했습니다");
 		}else {
 			session.setAttribute("loginUser", m);
+			session.setMaxInactiveInterval(60*60);
 			response.sendRedirect(request.getContextPath()+"/list.feed");
 			
 			//RequestDispatcher view = request.getRequestDispatcher("views/feed/feedMain.jsp");
