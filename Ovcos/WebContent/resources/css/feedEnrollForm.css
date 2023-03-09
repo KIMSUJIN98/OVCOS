@@ -6,7 +6,7 @@
 
 #feedex{
     width: 700px;
-    height: 1230px;
+    height: 1100px;
     margin: auto;
     border: 1px solid black;
     border-radius: 10px;
@@ -92,6 +92,15 @@ img[src*='marker']{
     display: none !important;
 }
 
-  
+#back{
+  width: 65px;
+  height: 30px;
+}
+
+button{
+  width: 60px;
+  height: 30px;
+
+}
 
 

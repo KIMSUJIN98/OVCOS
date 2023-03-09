@@ -344,6 +344,22 @@ public class ChallengeService {
 		return list;
 	}
 
+	public int deleteNormalChallenge(int normalChallengeNo) {
+		Connection conn = getConnection();
+		int result = new ChallengeDao().deleteNormalChallenge(conn, normalChallengeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
 
 
 	

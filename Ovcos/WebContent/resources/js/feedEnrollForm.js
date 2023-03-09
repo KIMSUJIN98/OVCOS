@@ -46,20 +46,17 @@
                 var name = String(len).substring(0,s-1)+str+".png";
                 imgPath.val(name);
                 // map capture
-                screenShot($("#map"),name);
-               
-                    
-                console.log("gkdl"+$("#imgPath").val())
-            
-                
-               
-                
-            
-            }// end if
-        } 
-        return true;
-
+                screenShot($("#map"),name);      
+            }else{
+                var name = title.val()+str+".png";
+                imgPath.val(name);
+                screenShot($("#map"),name);   
+            }
         }
+        
+        return true;
+        }
+        
 
         function screenShot(target,name){
             if(target != null && target.length >0){

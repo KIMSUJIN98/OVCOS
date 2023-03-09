@@ -38,7 +38,7 @@ public class FeedUpdateFormController extends HttpServlet {
 		System.out.println(f);
 		
 		//컨씨알, 포워딩
-		request.getRequestDispatcher("views/feed/updateFeed.jsp").forward(request, response);
+		request.getRequestDispatcher("views/feed/feedUpdateForm.jsp").forward(request, response);
 	
 	}
 

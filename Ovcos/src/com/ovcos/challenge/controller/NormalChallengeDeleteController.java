@@ -1,4 +1,4 @@
-package com.ovcos.myPage.controller;
+package com.ovcos.challenge.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,22 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ovcos.loginRegister.model.service.MemberService;
-import com.ovcos.loginRegister.model.vo.Member;
-import com.ovcos.myPage.model.service.MyPageService;
-import com.ovcos.myPage.model.vo.MyPage;
+import com.ovcos.challenge.model.service.ChallengeService;
 
 /**
- * Servlet implementation class GoalSetController
+ * Servlet implementation class NormalChallengeDeleteController
  */
-@WebServlet("/goalSet.me")
-public class GoalSetController extends HttpServlet {
+@WebServlet("/deleteNormalChallenge.ch")
+public class NormalChallengeDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoalSetController() {
+    public NormalChallengeDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +29,16 @@ public class GoalSetController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setCharacterEncoding("utf-8");
-		int userGoal = Integer.parseInt(request.getParameter("userGoal"));
-		String userId = request.getParameter("goal-userId");
-		
-		int result = new MyPageService().updateSetGoal(userGoal, userId);
-		Member m = new MemberService().refreshMember(userId);
+		int normalChallengeNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
 		
 		HttpSession session = request.getSession();
 		
-		if(result <= 0) {
-			request.setAttribute("alertMsg", "목표설정에 실패했습니다!");
-		}else {
-			session.removeAttribute("loginUser");
-			session.setAttribute("loginUser", m);
-		}
+		int result = new ChallengeService().deleteNormalChallenge(normalChallengeNo);
 		
-		response.sendRedirect(request.getContextPath() + "/myPage.me");
+		
+		response.sendRedirect(request.getContextPath() + "/ncList.ch");
 	}
 
 	/**
