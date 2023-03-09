@@ -353,7 +353,7 @@
         // ajax 상세보기 버튼 참가여부 확인
         function checkEntryId(num, max){
             $.ajax({
-                url:"checkEntryId.ch",
+                url:"normalCheckEntryId.ch",
                 data:{
                     contestChallengeNo:num
                 },

@@ -16,13 +16,13 @@ import com.ovcos.loginRegister.model.vo.Member;
  * Servlet implementation class AjaxContestChallengeEntryCheckController
  */
 @WebServlet("/checkEntryId.ch")
-public class AjaxContestChallengeEntryCheckController extends HttpServlet {
+public class AjaxContestChallengeEntryCheckIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxContestChallengeEntryCheckController() {
+	public AjaxContestChallengeEntryCheckIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
