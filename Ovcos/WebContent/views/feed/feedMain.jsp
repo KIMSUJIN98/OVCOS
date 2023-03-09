@@ -591,7 +591,7 @@ if (nlist != null && !nlist.isEmpty()) {
                         value="">
                     <table id="text2">
                         <div id="exmap2"
-                            style="width:799px;height:500px; margin: auto;">
+                            style="width:799px; height:500px; margin: auto;">
                             <div id="map2"
                                 style="width:100%;height:100%;"></div>
                         </div>
@@ -626,6 +626,8 @@ if (nlist != null && !nlist.isEmpty()) {
 
                             <!--여기까지-->
                         </div>
+                        
+                        
                         <hr>
     
                         <tr>
@@ -886,8 +888,8 @@ if (nlist != null && !nlist.isEmpty()) {
                         © 2023 KH OVCOS
                         </p>
                     </div>
+           		</div>    
 
-                </div>
 
 <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
