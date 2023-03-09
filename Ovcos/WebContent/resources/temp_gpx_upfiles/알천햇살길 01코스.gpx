@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" creator="bikeroute.xyz">
+	<metadata>
+		<desc>bikeroute.xyz</desc>
+		<bounds maxlat="35.84800522438894" maxlon="129.25873918139078" minlat="35.84303742836053" minlon="129.24804230345222"/>
+	</metadata>
+
+
+	<wpt lat="35.84303742836053" lon="129.24804230345222">
+		<name>START</name>
+		<sym>Flag, Green</sym>
+		<extensions>
+			<gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			</gpxx:WaypointExtension>
+		</extensions>
+		<ele>0</ele>
+	</wpt>
+
+	<wpt lat="35.84800522438894" lon="129.2587316611223">
+		<name>END</name>
+		<sym>Flag, Green</sym>
+		<extensions>
+			<gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			</gpxx:WaypointExtension>
+		</extensions>
+		<ele>0</ele>
+	</wpt>
+
+
+
+	<trk>
+		<extensions>
+			<gpxx:TrackExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayColor>Green</gpxx:DisplayColor>
+			</gpxx:TrackExtension>
+		</extensions>
+		<trkseg>
+			<trkpt lat="35.84303742836053" lon="129.24804230345222">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84305134051525" lon="129.24806925546014">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.843078253906775" lon="129.24817182573653">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84311982463404" lon="129.2482615303037">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.843234721934216" lon="129.24886235859216">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.843234721934216" lon="129.24886235859216">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84326751366639" lon="129.24903592019805">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84326751366639" lon="129.24903592019805">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.843304238779034" lon="129.249191886838">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84340021328458" lon="129.24945576473533">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84351275066176" lon="129.24960502056842">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84375049336556" lon="129.24999684957322">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84433507383851" lon="129.25092082337898">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.8443867857763" lon="129.2510462303735">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84447551502642" lon="129.25111956473017">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.844994049370214" lon="129.25191331452427">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.8452027171941" lon="129.2523176152725">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.845683012739975" lon="129.25342016576144">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84606977452259" lon="129.25432087931833">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.846217943403495" lon="129.2546836381122">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.846579283965944" lon="129.25540214768873">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84697287377286" lon="129.25613043114927">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84724262574987" lon="129.2567356886829">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84745825804066" lon="129.257343842576">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84766601724723" lon="129.2579871907225">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84778698683128" lon="129.25864578709655">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84778698683128" lon="129.25864578709655">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84789363885353" lon="129.2587240684534">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84795822914435" lon="129.25873918139078">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.84800522438894" lon="129.2587316611223">
+				<ele>0</ele>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>
