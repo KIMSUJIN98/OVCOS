@@ -1,6 +1,10 @@
+<%@page import="com.ovcos.inquiry.model.vo.Inquiry"%>
 <%@ include file="../common/nav.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    Inquiry i = (Inquiry) request.getAttribute("i");
+    %>
         
 <!DOCTYPE html>
 <html>
@@ -20,12 +24,12 @@
 <div class="outer">
       <br>
       <div class="inner">
-      <h2 align="center" id="title">문의하기</h2>
+      <h2 align="center" id="title">문의사항 수정하기</h2>
       <br>
 
-      <form id="enroll-form" action="<%= contextPath%>/insert.bo" method="post">
+      <form id="update-form" action="<%= contextPath%>/update.bo" method="post">
       
-       <input type = "hidden" name="memId" value="<%= loginUser.getMemId() %>">
+       <input type = "hidden" name="num" value="<%= i.getInqNo() %>">
          <table align="center">
             <th width="100px">분류</th>
             <td width="150px"><select name="select">
@@ -38,22 +42,21 @@
             <tr>
                <th>제목</th>
                <td>
-                  <input type="text" name="inqTitle" required>
+                  <input type="text" name="inqTitle" required value="<%=i.getInqTitle()%>">
                </td>
             </tr>
             <tr>
                <th>내용</th>
                <td>
-                  <input type="text" name="inqCnt" id="inqCnt" required>
+                  <input type="text" name="inqCnt" id="inqCnt" required value="<%=i.getInqCnt()%>">
                </td>
             </tr>
             
          </table>
          <br>
          <div align="center">
-            <button type="submit" class="btn btn-sm btn-light">작성하기</button>
-            <button type="reset"class="btn btn-sm btn-warning">취소하기</button>
-            <button type="button" onclick="history.back()"class="btn btn-sm btn-danger">뒤로가기</button>
+            <button type="submit" class="btn btn-sm btn-light">수정하기</button>
+            \<button type="button" onclick="history.back()"class="btn btn-sm btn-danger">뒤로가기</button>
          </div>
       </form>
    </div>
