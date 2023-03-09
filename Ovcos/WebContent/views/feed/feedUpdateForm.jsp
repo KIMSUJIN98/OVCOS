@@ -23,8 +23,6 @@
    Feed f = (Feed)request.getAttribute("f");   
  %>
 
- 
-    
     </head>
     <body>
         
@@ -90,7 +88,7 @@
                         <tr>
                             <th style="box-sizing: content-box;">제목</th>
                             <td>
-                                <input type="text" name="title" size="79"  placeholder="제목입력해주세요" value="<%=f.getFeedTitle() %>"
+                                <input type="text" id="feedTitle" name="title" size="79"  placeholder="제목입력해주세요" value="<%=f.getFeedTitle() %>"
                                 style="height: 40px;" required>
                             </td>
     
@@ -132,6 +130,7 @@
                             id="reset">초기화</button>
                         <button type="submit" style="margin-right: 20px;"
                             id="insert" onclick="return fileSubmit()">제출</button>
+                        <button type="button" onclick="test();">테스트</button>
                     </div>
                     </div>
                 </form>
@@ -141,6 +140,13 @@
      
         	<!-- <script src="${pageContext.request.contextPath}/resources/js/feedUpdateForm.js"></script> -->
         <script>
+        	function test(){
+        		var title = $("#feedTitle");
+        		console.log(title.val());
+        		title.val("");
+        	}
+        
+        
             var map = new naver.maps.Map('map', {
             center: new naver.maps.LatLng(37.4923615, 127.0292881),
             zoom: 12
@@ -158,53 +164,51 @@
                             map.data.addGpx(result);
                         }
                     });
-            },1000)
+            },100)
 
             function fileSubmit(){
-    var today = new Date();
-    const year = today.getFullYear();
-    const month = (today.getMonth() <10? "0"+(today.getMonth()+1): today.getMonth);
-    const date = (today.getDate() <10? "0"+(today.getDate()): today.getDate());
-    const hour = (today.getHours() <10? "0"+(today.getHours()): today.getHours());
-    const min = (today.getMinutes() <10? "0"+(today.getMinutes()): today.getMinutes());
-    const sec = (today.getSeconds() <10? "0"+(today.getSeconds()): today.getSeconds());
-
-    var str = year+month+date+hour+min+sec;
-    console.log(year+month+date+hour+min+sec);
-
-
-    var title = $("input[name='title']");
-    var file = document.getElementById('avatar');
-    var content = $("textarea");
-    var imgPath = $("#imgPath");
-
-    console.log($("#startLon").val());
-    console.log($("#startLat").val());
-
-    if(file.files.length <1){
-        var name = title.val()+str+".png";
-        screenShot($("#map"),name);
-        return true;
-    }else{
-        if(String(title.val()).length <1){
-            var len = file.files[0].name;
-            var s = String(len).lastIndexOf("g");
-            title.val(String(len).substring(0,s-1));
-            content.val(String(len).substring(0,s-1));
-            var name = String(len).substring(0,s-1)+str+".png";
-            imgPath.val(name);
-            // map capture
-            screenShot($("#map"),name);
-        }else{
-            var name = title.val()+str+".png";
-            imgPath.val(name);
-            screenShot($("#map"),name);
-        }
-    
-    return true;
-
-    }
-}
+			    var today = new Date();
+			    const year = today.getFullYear();
+			    const month = (today.getMonth() <10? "0"+(today.getMonth()+1): today.getMonth);
+			    const date = (today.getDate() <10? "0"+(today.getDate()): today.getDate());
+			    const hour = (today.getHours() <10? "0"+(today.getHours()): today.getHours());
+			    const min = (today.getMinutes() <10? "0"+(today.getMinutes()): today.getMinutes());
+			    const sec = (today.getSeconds() <10? "0"+(today.getSeconds()): today.getSeconds());
+			
+			    var str = year+month+date+hour+min+sec;
+			    console.log(year+month+date+hour+min+sec);
+			
+			
+			    var title = $("input[name='title']");
+			    var file = document.getElementById('avatar');
+			    var content = $("textarea");
+			    var imgPath = $("#imgPath");
+			
+			    console.log($("#startLon").val());
+			    console.log($("#startLat").val());
+			
+			    if(file.files.length <1){
+			        var name = imgPath.val();
+			        // 스크린 샷을 찍을 필요가 없음.
+			        return true;
+			    }else{
+		            var len = file.files[0].name;
+		            var s = String(len).lastIndexOf("g");
+		            var name = String(len).substring(0,s-1)+str+".png";
+		            console.log("이전"+imgPath.val());
+		            imgPath.val(name);
+		            console.log("이후"+imgPath.val())
+		            // map capture
+		            
+                    screenShot($("#map"),name);
+                   
+		            
+		            console.log($("#imgPath").val())
+			    
+			    return true;
+			
+			    }
+			}
 
     function screenShot(target,name){
         if(target != null && target.length >0){
@@ -212,50 +216,38 @@
             var path="";
             htmlToImage.toPng(t).then(function(dataUrl){
 
-                var myImg = dataUrl.replace("data:image/png;base64,","");
-                $.ajax({
-                    type:"post",
-                    data:{
-                        "imgSrc" : myImg,
-                        "fileName": name
-                    },
-                    dataType:"text",
-                    url:"/Ovcos/aft",
-                    success:function(data){
-                        // console.log(data+".png")
-                       path = data;
-                       console.log(path)
-            
-
-                    },
-                    error:function(){
-                        alert("error!");
-                    }
-                })
-                
-            })
+	             var myImg = dataUrl.replace("data:image/png;base64,","");
+	             $.ajax({
+	                 type:"post",
+	                 data:{
+	                     "imgSrc" : myImg,
+	                     "fileName": name
+	                 },
+	                 dataType:"text",
+	                 url:"/Ovcos/aft",
+	                 success:function(data){
+	                    path = data;
+	                    console.log(path)
+	                 },
+	                 error:function(){
+	                     alert("error!");
+	                 }
+	             })
+	         })
         }
-        return path;
     }
         
 
-    
-
-
-    $(function () {
+   
         $("#reset").click(function () {
-            $("#title").val("");
+        	console.log($("feedTitle").val());
+        	$("feedTitle").val("");
+        	console.log($("feedTitle").val());
             $("textarea").val("");
             $("#avatar").val("");
             $(".star-rating label")
+            $("#dist").text("");
         })
-    });
-
-
-    $("#reset").click(function () {
-        $("#path").remove();
-        $("#dist").text("");
-    })
 
 
     var polyline = null;

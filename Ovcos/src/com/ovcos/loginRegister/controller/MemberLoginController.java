@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.SendResult;
 
 import com.ovcos.loginRegister.model.service.MemberService;
 import com.ovcos.loginRegister.model.vo.Member;
@@ -34,6 +35,7 @@ public class MemberLoginController extends HttpServlet {
 		
 		if(m == null) {
 			session.setAttribute("erroMsg", "로그인에 실패했습니다");
+			response.sendRedirect(request.getContextPath()+"/login");
 		}else {
 			session.setAttribute("loginUser", m);
 			session.setMaxInactiveInterval(60*60);

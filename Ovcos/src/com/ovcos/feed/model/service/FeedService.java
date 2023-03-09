@@ -51,10 +51,12 @@ public class FeedService {
 		int result1 = 1;
 		
 		int result2 = new FeedDao().updateFeed(conn,f);
+		System.out.println("result2 : "+result2);
 		
 		if(gpx != null) {
 			result1 = new FeedDao().updateGpx(conn, gpx);
 		}
+		System.out.println("result1 : "+result1);
 		
 		if(result1 * result2 >0) {
 			commit(conn);

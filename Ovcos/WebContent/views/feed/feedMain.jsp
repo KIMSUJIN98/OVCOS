@@ -13,6 +13,7 @@
    request.setAttribute("data", allList);
    ArrayList<Notice> nlist = (ArrayList<Notice>)request.getAttribute("nlist");//공지사항제목용
    ArrayList<Feed> mylist= (ArrayList<Feed>)request.getAttribute("mylist");//최근활동출력용
+   System.out.print("nlist"+nlist);
 %>
 <!DOCTYPE html>
 <html>
@@ -34,11 +35,6 @@
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="<%=contextPath%>/resources/js/dom-to-image.js"></script>
 
-
-<style>
-    path{
-    stroke: red !important;
-}
 </style>
 </head>
 <body>
@@ -48,19 +44,26 @@
             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
             <strong>피드등록에 성공헀습니다!</strong>   
         </div>
+
+        <script>
+            setTimeout(function(){
+                $("#succ").slideUp(1000)
+            },2000);
+        </script>
     <%}%>
     <%if(message != null && message.equals("fail")){ %>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>피드등록에 실패했습니다!!</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+
+        <script>
+            setTimeout(function(){
+                $("#fail").slideUp(1000)
+            },2000);
+        </script>
     <%}%>
     <%session.removeAttribute("enrollFeed"); %>
-    
-    <% if(alertMsg != null) { %>
-		alert("<%= alertMsg %>");
-	<% session.removeAttribute("alertMsg"); %>
-	<% } %>
     
 
     <script>
@@ -94,11 +97,7 @@ if (mylist != null && !mylist.isEmpty()) {
     out.println(title);
 }else{out.println("최근 활동이 없습니다.");}
 %>
-							&nbsp;<span><%
-if (mylist != null && !mylist.isEmpty()) {
-    out.println(mylist.get(0).getFeedDate());
-}else{out.println(" ");}
-%></span></a></div>
+                     &nbsp;<span></span></a></div>
                                 
                             </div>
                             <div id="last_ac2">
@@ -114,11 +113,12 @@ if (mylist != null && !mylist.isEmpty()) {
                         
                     </div>
                 </div>
-
-                <div id="notice"><a href="<%=contextPath%>/list.no">
+				 <div id="notice"><a href="<%=contextPath%>/list.no">
 <%
 if (nlist != null && !nlist.isEmpty()) {
     out.println(nlist.get(0).getNtcTitle());
+}else{
+   out.println(" ");
 }
 %></a></div>
 
@@ -211,7 +211,7 @@ if (nlist != null && !nlist.isEmpty()) {
                 </script>
                 <div id="content_feed">
 
-					<div id="fix_div"></div>
+               <div id="fix_div"></div>
                     
                     <div class="feedContent">
                     
@@ -276,10 +276,8 @@ if (nlist != null && !nlist.isEmpty()) {
                                     
                                     <tr>
                                         <td colspan="3" id="gpx">
-                                            <div>
-                                               
-
-                                                <img src="<%=contextPath %>/resources/gpx_img/<%=f.getImgPath()%>" style="width: 700px; height: 340px;"></img>
+                                            <div style="border: 1px solid white;">
+                                                <img src="<%=contextPath %>/resources/gpx_img/<%=f.getImgPath()%>" style="width: 700px; height: 340px; overflow: hidden;"></img>
                                             </div>
                                         </td>
                                     </tr>
@@ -559,157 +557,6 @@ if (nlist != null && !nlist.isEmpty()) {
                             }
                     </script>
 <!------------------------ 피드 삭제 Modal & 공유하기 끝 ------------------------------------------------------------------------------------------------------------------------->
-
-
-
-<!------------- 피드 수정 modal 시작 ------------------------------------------------------------------------------------------------------------------------------------------->
-<div class="modal" id="updatefeedmodal<%=f.getFeedIndex()%>" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-    
-            <!-- 모달헤더-->
-            <div class="modal-header">
-                <h4 class="modal-title"><b>피드 수정</b></h4>
-                <button type="button" class="close"
-                    data-dismiss="modal">&times;</button>
-            </div>
-    
-            <!-- 모달바디 -->
-            <div class="modal-body"
-                style="padding-left: 0px; padding-right: 0px;">
-                 <!--폼시작-->
-                <form action="<%=contextPath %>/update.feed" 
-                    method="post" id="updateform"
-                    enctype="multipart/form-data">
-                    <input type="hidden" name="userId"
-                        value="<%= loginUser.getMemId()%>">
-                    <input type="hidden" name="startLon" id="startLon2"
-                        value="">
-                    <input type="hidden" name="startLat" id="startLat2"
-                        value="">
-                    <input type="hidden" name="distance" id="distance2"
-                        value="">
-                    <table id="text2">
-                        <div id="exmap2"
-                            style="width:799px;height:500px; margin: auto;">
-                            <div id="map2"
-                                style="width:100%;height:100%;"></div>
-                        </div>
-    
-                        <hr>
-                        <div style=" display: flex;">
-                            <div>
-                                <label for="avatar2"
-                                    style="margin-left: 30px;"><b>파일 첨부
-                                        :</b></label>
-                                <input type="file" id="avatar2"
-                                    name="avatar2" accept=".gpx">
-                            </div>
-                           
-                            <div style="display: flex; float: right;">
-                                <b style="padding-top: 5px; padding-right: 5px; margin-left: 160px;">별점</b>
-                                <% String rating =  String.valueOf(f.getFeedEval()); %>
-                                <div class="star-rating">
-                                <input type="radio" id="5-stars1" name="rating2" value="5" <% if ("5".equals(rating)) out.print("checked"); %> />
-                                <label for="5-stars1" class="star">★</label>
-                                <input type="radio" id="4-stars1" name="rating2" value="4" <% if ("4".equals(rating)) out.print("checked"); %> />
-                                <label for="4-stars1" class="star">★</label>
-                                <input type="radio" id="3-stars1" name="rating2" value="3" <% if ("3".equals(rating)) out.print("checked"); %> />
-                                <label for="3-stars1" class="star">★</label>
-                                <input type="radio" id="2-stars1" name="rating2" value="2" <% if ("2".equals(rating)) out.print("checked"); %> />
-                                <label for="2-stars1" class="star">★</label>
-                                <input type="radio" id="1-star1" name="rating2" value="1" <% if ("1".equals(rating)) out.print("checked"); %> />
-                                <label for="1-star1" class="star">★</label>
-                                </div>
-                                </div>
-
-
-                            <!--여기까지-->
-                        </div>
-                        <hr>
-    
-                        <tr>
-                            <th>제목</th>
-                            <td><input type="text" name="title2"
-                                    size="62" placeholder="제목입력해주세요" value="<%=f.getFeedTitle() %>">
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-                    <table id="text3">
-                        <tr>
-                            <th style="padding-bottom: 100px;">내용</th>
-                            <td>
-                                <textarea name="content2"  cols="62" rows="5" style="resize: none;"><%=f.getFeedCnt() %></textarea>
-                            </td>
-                        </tr>
-    
-                    </table>
-    
-    
-    
-            </div>
-            <!-- 모달푸터-->
-            <div style="display: flex;">
-    
-                <div>
-                    <b style="margin-left: 50px;">공개여부</b>
-                    <select name="displayNy2" id="displayNy2">
-                        <option value="전체">전체공개</option>
-                        <option value="비공개">비공개</option>
-                        <option value="친구">친구에게만</option>
-                    </select>
-                    <script>
-                    $(function(){ //피드공개여부 가져오기
-                        
-                            $("#displayNy2>option").each(function(){
-                                
-                                
-                                
-                                if($(this).val() == "<%=f.getFeedPublicType()%>"){
-                                $(this).attr("selected",true);
-                                
-                                }
-                            })
-                        
-                    })
-                    </script>
-
-                </div>
-                <div style="margin-left: 400px;">
-                    <b style="margin-right: 5px;">경로등록하기</b>
-                    <select name="trackNy2" id="trackNy2">
-                        <option value="Y">등록</option>
-                        <option value="N">미등록</option>
-                    </select>
-                </div>
-                <script>
-                    $(function(){ //경로공개여부 가져오기
-                        $(function(){
-                            $("#trackNy2>option").each(function(){
-                            if($(this).text() == "<%=f.getFeedPathNy()%>"){
-                                $(this).attr("selected",true);
-                                }
-                            })
-                        })
-                    })
-                    </script>
-            </div>
-            <div class="modal-footer">
-                <div id="dist2">총길이 :<span id="dist3"></span></div>
-                <button type="reset" class="btn btn-primary"
-                    id="reset2">초기화</button>
-                <input type="submit" class="btn btn-primary"
-                    id="insert2" onclick="return fileSubmit2()"></input>
-            </div>
-            </form>
-        </div>
-    </div>
-    </div>
-
-<!--피드 수정 모달 끝 ----------------------------------------------------------------------------------------------------------------------------------->
-
-
                             <% } %>
                             <%} %>
 
@@ -870,7 +717,7 @@ if (nlist != null && !nlist.isEmpty()) {
                 <script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/eda9c8f83a7945f9acc28bf4bdb4c88d"></script>
                 <!-- End -->
 
-				</div>
+            </div>
                 
                 </div>
                 </div>
@@ -889,388 +736,9 @@ if (nlist != null && !nlist.isEmpty()) {
 
                 </div>
 
-<!-- The Modal -->
-    <div class="modal" id="myModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-        
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title"><b>피드 등록</b></h4>
-                    <button type="button" class="close"
-                        data-dismiss="modal">&times;</button>
-                </div>
-        
-                <!-- Modal body -->
-                <div class="modal-body"
-                    style="padding-left: 0px; padding-right: 0px;">
-                    <form action="<%=contextPath %>/enroll.feed"
-                        method="post" id="enrollfrm"
-                        enctype="multipart/form-data">
-                        <input type="hidden" name="userId"
-                            value="<%= loginUser.getMemId()%>">
-                        <input type="hidden" name="startLon" id="startLon"
-                            value="">
-                        <input type="hidden" name="startLat" id="startLat"
-                            value="">
-                        <input type="hidden" name="distance" id="distance"
-                            value="">
-                        <table id="text1">
-                            <div id="exmap"
-                                style="width:799px;height:500px; margin: auto;">
-                                <div id="map"
-                                    style="width:100%;height:100%;"></div>
-                            </div>
-        
-                            <hr>
-                            <div style=" display: flex;">
-                                <div>
-                                    <label for="avatar"
-                                        style="margin-left: 30px;"><b>파일 첨부
-                                            :</b></label>
-                                    <input type="file" id="avatar"
-                                        name="avatar" accept=".gpx">
-                                </div>
-                                <div style="display: flex; float: right;">
-                                    <b
-                                        style="padding-top: 5px; padding-right: 5px; margin-left: 160px;">별점</b>
-                                    <div class="star-rating">
-                                        <input type="radio" id="5-stars"
-                                            name="rating" value="5" />
-                                        <label for="5-stars"
-                                            class="star">&#9733;</label>
-                                        <input type="radio" id="4-stars"
-                                            name="rating" value="4" />
-                                        <label for="4-stars"
-                                            class="star">&#9733;</label>
-                                        <input type="radio" id="3-stars"
-                                            name="rating" value="3" />
-                                        <label for="3-stars"
-                                            class="star">&#9733;</label>
-                                        <input type="radio" id="2-stars"
-                                            name="rating" value="2" />
-                                        <label for="2-stars"
-                                            class="star">&#9733;</label>
-                                        <input type="radio" id="1-star"
-                                            name="rating" value="1" />
-                                        <label for="1-star"
-                                            class="star">&#9733;</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-        
-                            <tr>
-                                <th>제목</th>
-                                <td><input type="text" name="title"
-                                        size="62" placeholder="제목입력해주세요" value="">
-                                </td>
-                            </tr>
-                        </table>
-                        <br>
-                        <table id="text">
-                            <tr>
-                                <th style="padding-bottom: 100px;">내용</th>
-                                <td>
-                                    <textarea name="content"  cols="62" rows="5" style="resize: none;"></textarea>
-                                </td>
-                            </tr>
-        
-                        </table>
-        
-        
-        
-                </div>
-                <!-- Modal footer -->
-                <div style="display: flex;">
-        
-                    <div>
-                        <b style="margin-left: 50px;">공개여부</b>
-                        <select name="displayNy" id="displayNy">
-                            <option value="전체">전채공개</option>
-                            <option value="비공개">비공개</option>
-                            <option value="친구">친구에게만</option>
-                        </select>
-                    </div>
-                    <div style="margin-left: 400px;">
-                        <b style="margin-right: 5px;">경로등록하기</b>
-                        <select name="trackNy" id="trackNy">
-                            <option value="Y">등록</option>
-                            <option value="N">미등록</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div id="dist1">총길이 :<span id="dist"></span></div>
-                    <button type="reset" class="btn btn-primary"
-                        id="reset">초기화</button>
-                    <button type="submit" class="btn btn-primary"
-                        id="insert" onclick="return fileSubmit()">제출</button>
-                    <button type="button" id="sc">스샷</button>
-                </div>
-                </form>
+
             </div>
         </div>
-        </div>
-       
-        
-         <!-- 피드 상세 -->
-        <script>
-            
-            
-            // function startDataLayer(xmlDoc) {
-            // map.data.addGpx(xmlDoc);
-            // }
-            // map = new naver.maps.Map('map', {
-            //     center: new naver.maps.LatLng(37.4923615, 127.0292881),
-            //     zoom: 12
-            //     });
-
-
-            $("#sc").click(function(){
-                // var input = document.querySelector("#map");
-                //             html2canvas(input,{ allowTaint: true, useCORS: true }).then((canvas) => {
-                //             var map = document.querySelector("#map");
-                //             domtoimage.toPng(map).then(function(dataUrl){
-                //             var img = new Image();
-                //             img.src = dataUrl;
-                //             var link = document.createElement('a');
-                //             var str = 'asdffdas'
-                //             link.download ='naver-map.png';
-                //             link.href = dataUrl;
-                //             link.click();
-                //         })
-                //         .catch(function(error){
-                //             console.log("oops, something went wrong!",error);
-                //             return false;
-                //         })
-                    
-                //             });
-                var map = document.querySelector("#map");
-                domtoimage.toPng(map).then(function(dataUrl){
-                    var img = new Image();
-                    img.src = dataUrl;
-                    document.body.appendChild(img);
-                })
-                .catch(function(error){
-                    console.log("oops, something went wrong!",error);
-                })
-            })
-            
-            function fileSubmit(){
-               var title = $("input[name='title']");
-               var file = document.getElementById('avatar');
-               var content = $("textarea");
-               if(file.files.length <1){
-                alert("Gpx 파일을 선택해주세요");
-                return false;
-               }else{
-                    if(String(title.val()).length <1){
-                        var len = file.files[0].name;
-                        var s = String(len).lastIndexOf("g");
-                        title.val(String(len).substring(0,s-1));
-                        content.val(String(len).substring(0,s-1));
-                        
-                        // map capture
-                        
-                    
-                    }// end if
-                } 
-                return true;
-               }
-
-            
-
-
-            
-
-            $("#insert").click(function () {
-                var last = $("#dist").text().lastIndexOf("k");
-                $("#distance").val($("#dist").text().substring(0, last));
-                $("#startLat").val(startLat);
-                $("#startLon").val(startLon);
-                $(":radio").each(function (index, value) {
-                    if ($(this).attr("checked")) {
-                        $("#rate").val($(this).val());
-                    }
-                })
-            })
-            $(function () {
-                $("#reset").click(function () {
-                    $("#title").val("");
-                    $("textarea").val("");
-                    $("#avatar").val("");
-                    $(".star-rating label")
-                })
-            });
-            $("#reset").click(function () {
-                $("#map").css("visibility", "hidden");
-                $("#dist").text("");
-            })
-            var polyline = null;
-            var marker = null;
-            var array = [];
-            var lats = [];
-            var lons = [];
-            var startLat = null;
-            var startLon = null;
-            // 거리구하는데 필요한 변수
-            var sum = 0;
-            function deg2rad(deg) {
-                return (deg * Math.PI / 180)
-            }
-            function rad2deg(deg) {
-                return (deg * 180 / Math.PI);
-            }
-            var R = 6371; // Radius of the earth in km
-            var gpxFileInput = document.getElementById('avatar');
-            gpxFileInput.addEventListener('change', handleFileSelect, false);
-            
-            
-            function handleFileSelect(event) {
-                array = [];
-                lats = [];
-                lons = [];
-                sum = 0;
-                var total ="";
-                $("#map").remove();
-                var map = "<div id='map' style='width:100%;height:100%;''></div>"
-                $("#exmap").append(map);
-                var map = new naver.maps.Map('map', {
-                            center: new naver.maps.LatLng(37.4923615, 127.0292881),
-                            zoom: 12
-                            }); 
-                
-                
-                
-                var file = event.target.files[0];
-                var formData = new FormData();
-                formData.append("file", file);
-                setTimeout(function(){
-                    $.ajax({
-                        url:"enroll.ajax",
-                        type:'post',
-                        processData:false,
-                        contentType:false,
-                        enctype:'multipart/form-data',
-                        data:formData,
-                        success:function(result){
-                            console.log(result)
-    
-                            $.ajax({
-                                url: '<%=contextPath%>/resources/gpx_upfiles/'+result,
-                                dataType: 'xml',
-                                strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                                strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                                strokeWeight: 5,   //선 두께
-                                success: function(result){
-                                    map.data.addGpx(result);
-                                }
-                            });
-                            
-                        },
-                        error:function(){
-    
-                        }
-                        
-                    })
-                },30
-                )
-
-                var reader = new FileReader();
-                
-                reader.onload = function (event) {
-                    var gpx = $.parseXML(event.target.result);
-                    console.log(gpx);
-                    
-                    var trackPoints = $(gpx).find('trkpt');
-                    // console.log(trackPoints);
-                    trackPoints.each(function (index, value) {
-                        var lat = $(this).attr('lat');
-                        var lon = $(this).attr('lon');
-                        
-                        
-                        array.push(new naver.maps.LatLng(lat, lon));
-                        lats.push(lat);
-                        lons.push(lon);
-                        if (index == 0) {
-                            startLat = lat;
-                            startLon = lon;
-                        }
-                    });
-                    
-                    
-                    for (let i = 1; i < lats.length; i++) {
-                        if (lats[i - 1] == lats[i]) {
-                            dist = 0
-                        } else {
-                            var theta = lons[i - 1] - lons[i];
-                            // console.log(theta)
-                            var dist = Math.sin(deg2rad(lats[i - 1])) * Math.sin(deg2rad(lats[i])) + Math.cos(deg2rad(lats[i - 1])) * Math.cos(deg2rad(lats[i])) * Math.cos(deg2rad(theta));
-                            dist = Math.acos(dist);
-                            dist = rad2deg(dist);
-                            dist = dist * 60 * 1.1515;
-                            dist = dist * 1.609344;
-                            if (dist === NaN) {
-                                dist = 0;
-                            }
-                            sum += dist;
-                        }
-                    }
-                    // hidden에 초기 위도와 경도 대입하기
-                    $("#startLat").val(startLat);
-                    $("#startLon").val(startLon);
-                    $("#distance").val(sum.toFixed(1));
-                    // 화면에 경로 표시하기
-                    $("#dist").text(sum.toFixed(2) + 'km');
-                    // 지도 표시
-                    // var zom;
-                    // var dist = sum;
-                    // if(sum<2){
-                    //     zom = 15;
-                    // }else if(sum<10){
-                    //     zom = 13;
-                    // }else if(sum<50){
-                    //     zom = 12;
-                    // }else if(sum<90){
-                    //     zom = 11;
-                    // }else{
-                    //     zom = 10;
-                    // }
-                    // map = new naver.maps.Map('map', {
-                    //     center: new naver.maps.LatLng(startLat, startLon),
-                    //     zoom: zom
-                    // });
-                    // // 지도에 선 그리기
-                    // polyline = new naver.maps.Polyline({
-                    //     path: array,      //선 위치 변수배열
-                    //     strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
-                    //     strokeOpacity: 0.8, //선 투명도 0 ~ 1
-                    //     strokeWeight: 3,   //선 두께
-                    //     map: map           //오버레이할 지도
-                    // });
-                    //지도에 마커 표시하기
-                    marker = new naver.maps.Marker({
-                        position: new naver.maps.LatLng(lats[lats.length - 1], lons[lons.length - 1]),
-                        map: map,
-                        icon: {
-                            content: '<img src=/Ovcos/resources/image/endlocation5.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                            size: new naver.maps.Size(45, 45),
-                            anchor: new naver.maps.Point(26, 40)
-                        }
-                    });
-                    marker = new naver.maps.Marker({
-                        position: new naver.maps.LatLng(startLat, startLon),
-                        map: map,
-                        icon: {
-                        	 content: '<img src=/Ovcos/resources/image/location3.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
-                            size: new naver.maps.Size(45, 45),
-                            anchor: new naver.maps.Point(26, 40)
-                        }
-                    });
-                };
-                reader.readAsText(file);
-            };
-        </script>
-
+</body>
+</html>
 

@@ -12,13 +12,9 @@
 <title>OVCOS - 상세피드</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/exMy.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feeddetail2.css">
-<script type="text/javascript"
-    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
-<%-- <%=contextPath %>'/views/feeddetail2.jsp' --%>
-
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
 
 </head>
-
 <body>
     <div id="course">
         <div id="left" class="floatWrap">
@@ -138,8 +134,23 @@
                         </div>
                         <br>
                         <div>
-                            <b style="padding-left: 15px;">시작위치 : (<%= f.getStartLat()%>, <%=f.getStartLon()%>)</b>
-                        
+                            <b style="padding-left: 15px;" id="start"> </b>
+                        	<script>
+	                        	naver.maps.Service.reverseGeocode({
+	    	                        location: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
+	    	                    }, function(status, response) {
+	    	                        if (status !== naver.maps.Service.Status.OK) {
+	    	                            return alert('Something wrong!');
+	    	                        }
+	    	
+	    	                        var result = response.result, // 검색 결과의 컨테이너
+	    	                        items = result.items; // 검색 결과의 배열
+	    	
+	    	                        var address = items[0].address;
+	                                $("#start").html("시작위치 : "+address);
+	    	                    });
+                        		
+                        	</script>
                         </div>
                     </div>
                 </div>
@@ -184,7 +195,6 @@
 
             
             <script>
-
 
                 $(function () {
                     selectdetail2();
@@ -285,19 +295,30 @@
                         map.data.addGpx(xmlDoc);
                     }
                     var map = new naver.maps.Map('map', {
-                        center: new naver.maps.LatLng(37.492, 127.029),
+                        center: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
                         zoom: 12
                     })
                     setTimeout(function () {
 
                         $.ajax({
-                            url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getChangeName()%>',
+                        	url: '<%=contextPath%>/resources/gpx_upfiles/<%=f.getChangeName()%>',
                             dataType: 'xml',
                             strokeColor: '#FF0000', //선 색 빨강 #빨강,초록,파랑
                             strokeOpacity: 0.8, //선 투명도 0 ~ 1
                             strokeWeight: 5,   //선 두께
                             success: startDataLayer
                         });
+                    var marker = new naver.maps.Marker({
+                        position: new naver.maps.LatLng(<%=f.getStartLat()%>, <%=f.getStartLon()%>),
+                        map: map,
+                        icon: {
+                                content: '<img src=/Ovcos/resources/image/location3.png alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 45px; height: 45px; left: 0px; top: 0px;">',
+                            size: new naver.maps.Size(45, 45),
+                            anchor: new naver.maps.Point(26, 40)
+                        }
+                    });
+                        
+                        
                     }, 100);
 
 

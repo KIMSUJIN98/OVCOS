@@ -6,7 +6,7 @@
 
 #feedex{
     width: 700px;
-    height: 1100px;
+    height: 1000px;
     margin: auto;
     border: 1px solid black;
     border-radius: 10px;
@@ -19,17 +19,16 @@
     padding: 16px;
     font-weight: bolder;
     font-size: 1.5rem;
-    /* border-bottom: 1px solid black; */
+    border-bottom: 1px solid black;
 }
 
 #mapContent{
-    height: 500px;
+    height: 400px;
 
 }
 #map{
     height: 100%;
     width: 100%;
-    border-top: 1px solid black;
 }
 
 #content{

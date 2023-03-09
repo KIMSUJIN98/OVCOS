@@ -370,7 +370,7 @@ body{
 
 /*피드 성공실패 alert 부분*/
 
-#succ{
+#succ, #fail{
     width: 800px;
     margin: auto;
     position: absolute;
@@ -404,3 +404,4 @@ img[src*='marker']{
 	height:500px;
 	width:500px;
 }
+
