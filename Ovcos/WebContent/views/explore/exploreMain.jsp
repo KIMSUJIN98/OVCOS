@@ -88,7 +88,7 @@
                     <!-- case 2 반복문으로  -->
                     	<%for(Explore f: list){ %>
                     <div class="exList" id="f<%=f.getRowNum()%>">
-                        <span class="list_num"><%=f.getRowNum() %></span>
+                        <span class="list_num"><b><%=f.getRowNum() %></b></span>
                         <div class="innertext">
                             <h6 style="font-weight: bolder; font-size:0.9rem"><%=f.getFeedTitle() %></h6>
                             <table>
@@ -241,7 +241,7 @@
                             position: new naver.maps.LatLng(<%=e.getStartLat()%>,<%=e.getStartLon()%>),
                             icon: {
                                 content: 
-                                "<span class='list_num'><%=e.getRowNum()%></span>",
+                                "<span class='list_num'><b><%=e.getRowNum()%></b></span>",
                                 size: new naver.maps.Size(38, 58),
                                 anchor: new naver.maps.Point(19, 40),
                             }

@@ -178,12 +178,17 @@ input:focus {outline: none;}
     background-image: url("../image/mark.png");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 23px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     float: left;
     text-align: center;
     margin: 10px;
     margin-top: 18px;
+}
+.list_num>b{
+	display:block;
+	padding-top: 5px;
+	padding-right: 7px;
 }
 .innertext{
     padding-top: 20px;

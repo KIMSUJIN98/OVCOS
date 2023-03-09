@@ -100,6 +100,8 @@ function select1(sido){
 
 
 }
+
+// select1("서울");
     
     
     function success({coords,timestamp}){
