@@ -30,6 +30,10 @@
             width: 100%;
             box-sizing: border-box;
         }
+
+        .count-area{
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -42,8 +46,8 @@
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">나의 챌린지</h1>
                 <p class="lead fw-normal text-white-50 mb-0">
-                    <span>참가중 <%= totalProgressCount %> [대회 : <%= contestProgressCount %> / 일반 : <%= normalProgressCount %>]</span> <br>
-                    <span>참가완료 <%= totalCompleteCount %> [대회 : <%= contestCompleteCount %> / 일반 : <%= normalCompleteCount %>]</span>
+                    <span class="count-area" onclick="countIng();">참가중 <%= totalProgressCount %> [대회 : <%= contestProgressCount %> / 일반 : <%= normalProgressCount %>]</span> <br>
+                    <span class="count-area" onclick="countComplete();">참가완료 <%= totalCompleteCount %> [대회 : <%= contestCompleteCount %> / 일반 : <%= normalCompleteCount %>]</span>
                 </p>
             </div>
         </div>
@@ -59,7 +63,7 @@
             <img src="resources/image/challengeMain2.png" style="margin-top: 40px;">
             <br><br>
             <a href="cntsMain.ch" style="text-decoration: none; font-size: 20px; margin-right: 50px;">대회챌린지</a>
-            <a href="" style="text-decoration: none; font-size: 20px; ">일반챌린지</a>
+            <a href="ncList.ch" style="text-decoration: none; font-size: 20px; ">일반챌린지</a>
             <br>
         </div>
     <% }else { %>

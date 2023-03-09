@@ -383,7 +383,7 @@ public class ChallengeDao {
 	public int insertContestImg(Connection conn, ImageUpload img) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertImg");
+		String sql = prop.getProperty("insertContestImg");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

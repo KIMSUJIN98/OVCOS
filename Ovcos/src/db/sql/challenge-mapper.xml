@@ -220,7 +220,7 @@
 		     )
 	</entry>
 	
-	<entry key="insertImg">
+	<entry key="insertContestImg">
 		INSERT
 		  INTO UPLOAD
 		     (
