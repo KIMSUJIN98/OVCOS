@@ -315,6 +315,125 @@ SELECT
 		   AND C.DEL_STATUS = 'N'
 		   AND C.RPR_STATUS = 'N';
 
+
+
+		SELECT 
+		       CNTS_CHLG_NO
+		     , CNTS_CHLG_TITLE
+		     , CNTS_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , CNTS_CHLG_DATE
+		     , CNTS_CHLG_MAX
+		     , CNTS_CHLG_ID
+		     , CNTS_NAME
+		     , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(CHLG_ENTRY_ID)
+		          FROM ENTRY_LIST 
+		         WHERE CHLG_NO_INLIST = CNTS_CHLG_NO) COUNT
+		  FROM CONTEST_CHALLENGE C
+		  JOIN CONTEST USING (CNTS_NO)
+		  LEFT JOIN UPLOAD ON (CNTS_CHLG_NO = UPL_NO)
+		 WHERE
+		       C.DEL_STATUS = 'N'
+		   AND C.RPR_STATUS = 'N'
+		   AND CNTS_NO = 6
+           AND CNTS_CHLG_DATE > SYSDATE
+		 ORDER
+		    BY 1 DESC;
+   
+   
+   		SELECT 
+		       CNTS_NO
+		     , CNTS_NAME
+		     , CNTS_DATE
+		     , CNTS_URL
+		     , CHANGE_NAME
+		  FROM CONTEST C
+		  JOIN UPLOAD ON (CNTS_NO = UPL_NO)
+		 WHERE 
+		       C.DEL_STATUS = 'N'
+           AND CNTS_DATE > SYSDATE
+		 ORDER
+		    BY CNTS_DATE;
+   
+INSERT
+  INTO NORMAL_CHALLENGE
+     (
+       NOR_CHLG_NO
+     , NOR_CHLG_TITLE
+     , NOR_CHLG_CONTENT
+     , ENROLL_DATE
+     , NOR_CHLG_DATE
+     , NOR_CHLG_MAX
+     , NOR_CHLG_ID
+     , NOR_CHLG_LOCAL
+     )
+VALUES
+     (
+       SEQ_NCHLG_NO.NEXTVAL
+     , ?
+     , ?
+     , SYSDATE
+     , TO_DATE(?,'YYYYMMDDHH24MI')
+     , ?
+     , ?
+     , ?
+     );
+     
+     
+INSERT
+  INTO ENTRY_LIST
+     (
+       CHLG_NO_INLIST
+     , CHLG_ENTRY_ID
+     )
+VALUES
+     (
+       SEQ_CHLG_NO.CURRVAL
+     , ?
+     );
+     
+INSERT
+  INTO NENTRY_LIST
+     (
+       NCHLG_NO_INLIST
+     , NCHLG_ENTRY_ID
+     )
+VALUES
+     (
+       SEQ_NCHLG_NO.CURRVAL
+     , ?
+     )     ;
+     
+     
+		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N';
+           
+           SELECT * FROM NORMAL_CHALLENGE;
+    
+    
+    
+    
+    
 ROLLBACK;
 
 

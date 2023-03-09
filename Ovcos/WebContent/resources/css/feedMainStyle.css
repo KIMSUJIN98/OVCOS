@@ -6,6 +6,9 @@
     font-style: normal;
 }
 
+a{
+    text-decoration: none !important;
+}
 
 *{
     margin: 0px;
@@ -123,6 +126,7 @@ body{
 }
 #f_title{
     line-height: 50px;
+    font-size: 15px;
 }
 .h51>h5{
     padding: 10px;
@@ -276,9 +280,9 @@ body{
     /* border: 1px solid green; */
     /* background-color: aquamarine; */
 
-      font-size: 14px;
+    font-size: 14px;
     margin: 5px;
-   padding: 0;
+    padding: 0;
     width: 20%;
     color: gray;
 
@@ -347,7 +351,20 @@ body{
     height: 20%;
     /* margin: auto; */
     /* margin-top: 40px; */
-    background-color: blanchedalmond;
+    background-color: gray; /* blanchedalmond; */
+}
+#footer a{
+	color: white;
+	font-size: 15px;
+	font-weight: 500;
+}
+#footer a:hover{
+	color: black;
+}
+#footer p{
+	color: white;
+	font-size: 12px;
+	font-weight: 400;
 }
 
 /*피드 성공실패 alert 부분*/
@@ -381,3 +398,8 @@ img[src*='marker']{
 
 }
 
+
+.fa-comments{
+	height:500px;
+	width:500px;
+}

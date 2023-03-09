@@ -8,7 +8,7 @@ public class NormalChallenge {
 	private String normalChallengeTitle;
 	private String normalChallengeContent;
 	private Date enrollDate;
-	private Date normalChallengeDate;
+	private String normalChallengeDate;
 	private int normalChallengeMax;
 	private String rprStatus;
 	private Date rprDate;
@@ -17,13 +17,17 @@ public class NormalChallenge {
 	private String normalChallengeId;
 	private String normalChallengeLocal;
 	
+	private String changeName;
+	private String localName;
+	private int localNo;
 	private int count;
+	
 	
 	public NormalChallenge() {}
 	
 
 	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, String normalChallengeContent,
-			Date enrollDate, Date normalChallengeDate, int normalChallengeMax, String rprStatus, Date rprDate,
+			Date enrollDate, String normalChallengeDate, int normalChallengeMax, String rprStatus, Date rprDate,
 			String delStatus, String rprId, String normalChallengeId, String normalChallengeLocal, int count) {
 		super();
 		this.normalChallengeNo = normalChallengeNo;
@@ -43,7 +47,7 @@ public class NormalChallenge {
 
 
 	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, Date enrollDate,
-			Date normalChallengeDate, int normalChallengeMax, String normalChallengeId, String normalChallengeLocal,
+			String normalChallengeDate, int normalChallengeMax, String normalChallengeId, String normalChallengeLocal,
 			int count) {
 		super();
 		this.normalChallengeNo = normalChallengeNo;
@@ -56,7 +60,7 @@ public class NormalChallenge {
 		this.count = count;
 	}
 
-	public NormalChallenge(String normalChallengeTitle, Date enrollDate, Date normalChallengeDate,
+	public NormalChallenge(String normalChallengeTitle, Date enrollDate, String normalChallengeDate,
 			int normalChallengeMax, String normalChallengeId, String normalChallengeLocal) {
 		super();
 		this.normalChallengeTitle = normalChallengeTitle;
@@ -67,6 +71,35 @@ public class NormalChallenge {
 		this.normalChallengeLocal = normalChallengeLocal;
 	}
 	
+	
+	
+	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, String normalChallengeContent,
+			Date enrollDate, String normalChallengeDate, int normalChallengeMax, String normalChallengeId,
+			String normalChallengeLocal, String changeName, int count) {
+		super();
+		this.normalChallengeNo = normalChallengeNo;
+		this.normalChallengeTitle = normalChallengeTitle;
+		this.normalChallengeContent = normalChallengeContent;
+		this.enrollDate = enrollDate;
+		this.normalChallengeDate = normalChallengeDate;
+		this.normalChallengeMax = normalChallengeMax;
+		this.normalChallengeId = normalChallengeId;
+		this.normalChallengeLocal = normalChallengeLocal;
+		this.changeName = changeName;
+		this.count = count;
+	}
+
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
 	public int getCount() {
 		return count;
 	}
@@ -99,11 +132,11 @@ public class NormalChallenge {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getNormalChallengeDate() {
+	public String getNormalChallengeDate() {
 		return normalChallengeDate;
 	}
 
-	public void setNormalChallengeDate(Date normalChallengeDate) {
+	public void setNormalChallengeDate(String normalChallengeDate) {
 		this.normalChallengeDate = normalChallengeDate;
 	}
 
@@ -172,6 +205,29 @@ public class NormalChallenge {
 
 	public void setNormalChallengeContent(String normalChallengeContent) {
 		this.normalChallengeContent = normalChallengeContent;
+	}
+	
+	
+
+
+	public String getLocalName() {
+		return localName;
+	}
+
+
+	public void setLocalName(String localName) {
+		this.localName = localName;
+	}
+
+
+	
+	public int getLocalNo() {
+		return localNo;
+	}
+
+
+	public void setLocalNo(int localNo) {
+		this.localNo = localNo;
 	}
 
 

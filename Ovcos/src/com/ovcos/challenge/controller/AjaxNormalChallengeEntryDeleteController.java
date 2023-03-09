@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.challenge.model.vo.NEntryList;
 import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class AjaxContestChallengeEntryCheckController
+ * Servlet implementation class AjaxNormalChallengeDeleteController
  */
-@WebServlet("/checkEntryId.ch")
-public class AjaxContestChallengeEntryCheckController extends HttpServlet {
+@WebServlet("/normalEntryDelete.ch")
+public class AjaxNormalChallengeEntryDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxContestChallengeEntryCheckController() {
+    public AjaxNormalChallengeEntryDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,16 @@ public class AjaxContestChallengeEntryCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		int contestChallengeNo = Integer.parseInt(request.getParameter("contestChallengeNo"));
+		String normalEntryId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
+		int normalChallNo = Integer.parseInt(request.getParameter("normalEntryDelete"));
 		
-		EntryList el = new EntryList();
-		el.setContestChallNo(contestChallengeNo);
-		el.setContestEntryId(userId);
+		NEntryList nel = new NEntryList();
+		nel.setNormalChallNo(normalChallNo);
+		nel.setNormalEntryId(normalEntryId);
 		
-		int result = new ChallengeService().checkEntryId(el);
+		int result = new ChallengeService().deleteNEntryList(nel);
 		
-		response.getWriter().print(result); // 1, 0
-		
+		response.getWriter().print(result);
 	}
 
 	/**

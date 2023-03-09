@@ -535,6 +535,7 @@ WHERE FEED_INDEX = ?
      JOIN MEMBER USING(MEM_ID)
 	WHERE FEED_INDEX = ? 
 	</entry>
+
 	
 	<entry key="updateFeed">
 		UPDATE FEED
@@ -557,6 +558,131 @@ WHERE FEED_INDEX = ?
 	</entry>
 	
 	
+
+
+
+<!-- 피드리스트 완전 전체 조회 -->
+<entry key="selectFeedList">
+SELECT
+FEED_INDEX
+,TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+,FEED_TITLE
+,FEED_CNT
+,FEED_EVAL
+,FEED_PUBLIC_TYPE
+,FEED_PATH_NY
+,FEED_RPR_NY
+,TO_CHAR(FEED_RPR_DATE,'YYYY-MM-DD HH24:MI') "RPR_DATE"
+,DISTANCE
+,START_LAT
+,START_LON
+,FEED_DEL_NY
+,MEM_ID
+,HIT
+,FEED_RPR_ID
+,MEM_NAME
+, MEM_NICK
+, REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+, CHANGE_NAME
+     FROM FEED
+     JOIN GPX_FILES USING(FEED_INDEX)
+     JOIN MEMBER USING(MEM_ID)
+</entry>
+
+<!-- 페이징을위한 게시물 개수 조회 -->
+<entry key="selectListCount">
+SELECT
+    COUNT(*) COUNT
+    FROM feed
+
+</entry>
+
+<!-- 페이징과함께 피드조회  -->
+<entry key="selectFeedList1">
+SELECT * FROM 
+(SELECT ROWNUM RNUM, A.*
+ FROM     
+(SELECT
+FEED_INDEX
+,TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+,FEED_TITLE
+,FEED_CNT
+,FEED_EVAL
+,FEED_PUBLIC_TYPE
+,FEED_PATH_NY
+,FEED_RPR_NY
+,TO_CHAR(FEED_RPR_DATE,'YYYY-MM-DD HH24:MI') "RPR_DATE"
+,DISTANCE
+,START_LAT
+,START_LON
+,FEED_DEL_NY
+,MEM_ID
+,HIT
+,FEED_RPR_ID
+,MEM_NAME
+, MEM_NICK
+, REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+, CHANGE_NAME
+     FROM FEED
+     JOIN GPX_FILES USING(FEED_INDEX)
+     JOIN MEMBER USING(MEM_ID)) A
+     )
+    WHERE RNUM BETWEEN ? AND  ?
+    </entry>
+
+
+<!-- 신고된 피드 리스트 조회 -->
+<entry key="selectRprList">
+         SELECT
+FEED_INDEX
+,TO_CHAR(FEED_DATE,'YYYY-MM-DD HH24:MI') "DATE"
+,FEED_TITLE
+,FEED_CNT
+,FEED_EVAL
+,FEED_PUBLIC_TYPE
+,FEED_PATH_NY
+,FEED_RPR_NY
+,TO_CHAR(FEED_RPR_DATE,'YYYY-MM-DD HH24:MI') "RPR_DATE"
+,DISTANCE
+,START_LAT
+,START_LON
+,FEED_DEL_NY
+,MEM_ID
+,HIT
+,FEED_RPR_ID
+,MEM_NAME
+, MEM_NICK
+, REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
+, CHANGE_NAME
+     FROM FEED
+     JOIN GPX_FILES USING(FEED_INDEX)
+     JOIN MEMBER USING(MEM_ID)
+     WHERE FEED_RPR_NY = 'Y'
+
+
+</entry>
+
+<!-- 신고상태 원상태로 복귀 -->
+<entry key="updateRprRestore">
+UPDATE FEED
+SET FEED_RPR_NY = 'N'
+WHERE FEED_INDEX = ?
+
+</entry>
+
+
+
+<!-- 누전신고수 업데이트 -->
+<entry key="updateRprCum">
+update member 
+set mem_rpr_cum = +1
+WHERE MEM_ID = ( select MEM_ID
+from feed
+where FEED_INDEX = ? )
+</entry>
+
+
+
 </properties>
 
 

@@ -32,7 +32,6 @@ public class AjaxContestChallengeEntryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int contestChallengeNo = Integer.parseInt(request.getParameter("contestChallengeNo"));
 		
 		ArrayList<EntryList> eList = new ChallengeService().selectEntryList(contestChallengeNo);

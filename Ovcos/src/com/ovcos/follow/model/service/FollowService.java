@@ -16,7 +16,7 @@ public class FollowService {
 	
 	
 	/**
-	 * 조회수조회....안해도되는딧
+	 * 페이징개수조회
 	 * @param userId
 	 * @return
 	 */

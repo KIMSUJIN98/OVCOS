@@ -36,7 +36,7 @@ public class FollowListController extends HttpServlet {
 
 		
 		String userId = request.getParameter("userId");
-		System.out.println("타니?"+userId);
+		
 		
 		int listCount;		//현재 총 게시글 개수 저장용
 		int currentPage; 	//현재 페이지 (즉, 사용자가 요청한 페이지)
