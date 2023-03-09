@@ -6,21 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ovcos.inquiry.model.service.InquiryService;
-import com.ovcos.inquiry.model.vo.Inquiry;
 
 /**
- * Servlet implementation class InquiryUpdateFormController
+ * Servlet implementation class InquiryDeleteController
  */
-@WebServlet("/updateForm.bo")
-public class InquiryUpdateFormController extends HttpServlet {
+@WebServlet("/deleteForm.bo")
+public class InquiryDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InquiryUpdateFormController() {
+    public InquiryDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,19 @@ public class InquiryUpdateFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int inqNo = Integer.parseInt(request.getParameter("num"));
+		System.out.println(inqNo);
+		int result = new InquiryService().deleteNotice(inqNo);
 		
-		Inquiry i = new InquiryService().selectInquiry(inqNo);
 		
-		request.setAttribute("i", i);
-		request.getRequestDispatcher("views/inquiry/inquiryUpdateForm.jsp").forward(request, response);
+		HttpSession session = request.getSession();
 		
-	
+		if(result>0) {
+			session.setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath()+"/list.bo");
+		} else {
+			request.setAttribute("alertMsg", "문의사항 삭제가 실패했습니다.");
+			response.sendRedirect(request.getContextPath()+"/list.bo");
+		}
 	
 	}
 

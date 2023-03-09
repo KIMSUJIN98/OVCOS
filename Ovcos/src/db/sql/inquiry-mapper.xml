@@ -63,23 +63,18 @@ WHERE INQ_DEL_NY = 'N'
   AND INQ_NO=?
 ORDER BY INQ_NO DESC
 </entry>
-
-
-
-
-<entry key="selectInquiryList">
-SELECT
-INQ_NO
-,INQ_MENU
-,INQ_TITLE
-,INQ_DATE
-,INQ_CNT
-,ANS_CNT
-,INQ_DEL_NY
-,MEM_ID
-FROM INQUIRY
-ORDER BY INQ_NO DESC
+<entry key="updateInquiry">
+	UPDATE
+			INQUIRY
+	   SET INQ_TITLE = ?
+	     , INQ_CNT = ?
+	 WHERE INQ_NO = ?   	
 </entry>
+<entry key="deleteInquiry">
+	UPDATE
+		   INQUIRY
+	   SET INQ_DEL_NY='Y'
+	 WHERE INQ_NO = ?  	
 
-
+</entry>
 </properties>
