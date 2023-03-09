@@ -23,7 +23,7 @@
     
     </head>
     <body>
-        <%@ include file ="inquiry.jsWITHDRAWALp"%>
+        <%@ include file ="adminNav.jsp"%>
         
         <div id="header">
         <h1>탈퇴 관리</h1>

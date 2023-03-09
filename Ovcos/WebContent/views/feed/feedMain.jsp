@@ -15,6 +15,14 @@
    ArrayList<Feed> mylist= (ArrayList<Feed>)request.getAttribute("mylist");//최근활동출력용
    System.out.print("nlist"+nlist);
 %>
+<% double monthDistance; 
+   if(session.getAttribute("monthDistance") == null){
+	   monthDistance = 0; 
+   }else{
+	   monthDistance = (double)session.getAttribute("monthDistance");
+   }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +95,7 @@
                         <div id="ac_recode">
                             <div id="last_ac1">
                                 <div class="h51"><h5>LAST ACTIVITY</h5></div>
-                                <div id="last_info"><a href="#" id="f_title">
+                                <div id="last_info"><a href="<%=contextPath%>/myPage.me" id="f_title">
 <%
 if (mylist != null && !mylist.isEmpty()) {
     String title = mylist.get(0).getFeedTitle();
@@ -103,11 +111,11 @@ if (mylist != null && !mylist.isEmpty()) {
                             <div id="last_ac2">
                                 <div class="h51"><h5>THIS WEEK</h5></div>
                                 <div id="km1" class="km">
-                                    <a href="#">0km</a></div>
+                                    <a href="<%=contextPath%>/myPage.me"><%=monthDistance %>km</a></div>
                             </div>
                             <div id="last_ac3">
                                 <div class="h51" id="ac3_h5"><h5>THIS YEAR</h5></div>
-                                <div id="km2" class="km"><a href="#">0km</a></div>
+                                <div id="km2" class="km"><a href="<%=contextPath%>/myPage.me"><%=monthDistance %>km</a></div>
                             </div>
                         </div>
                         
@@ -461,11 +469,9 @@ if (nlist != null && !nlist.isEmpty()) {
                                 </div>
                                 <div class="modal-body">
                                     
-                                    블라블라<br>
-                                    신고시 블락 처리 블ㄹ라블발<br>
-                                    신속한검토 븗랍<br>
-                                    허위신고시 블발발바르<br>
-                                    ㅂ랍랍라<br>
+                                    
+                                    신고 시 관리자에 접수되며 <br>
+                                    허위신고시 불이익이 있을 수 있습니다<br>
                                     피드를 정말 <b>신고</b> 하시겠습니까?
                                 </div>
                                 <div class="modal-footer">  

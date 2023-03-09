@@ -94,4 +94,13 @@ public class InquiryService {
 		return result;
 	}
 	
+	
+	public ArrayList<Inquiry> selectInquiryList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Inquiry> list = new InquiryDao().selectInquiryList(conn);
+		
+		close(conn);
+		return list;
+	}
 }

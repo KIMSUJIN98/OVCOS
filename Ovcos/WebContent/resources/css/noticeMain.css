@@ -32,7 +32,7 @@ body{background-color: rgb(247, 247, 250);}
     width: 100%;
     height: 20%;
     margin: auto;
-    background-color: aquamarine;
+    /*background-color:rgb(67, 115, 176);*/
     padding: 20px;
 }
 #title>h1{
@@ -48,6 +48,9 @@ body{background-color: rgb(247, 247, 250);}
 tbody *{
     font-size: 13px;
     font-weight: lighter;
+}
+tbody>tr{
+    cursor: pointer;
 }
 table{
     width: 90%;
@@ -77,5 +80,5 @@ td{
 #footer{
     width: 100%;
     height: 10%;
-    background-color: darkblue;
+    /*background-color: darkblue;*/
 }
