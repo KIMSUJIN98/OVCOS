@@ -15,6 +15,18 @@ import com.ovcos.follow.model.vo.Follow;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
+/**
+ * @author soyoung
+ *
+ */
+/**
+ * @author soyoung
+ *
+ */
+/**
+ * @author soyoung
+ *
+ */
 public class FeedService {
 	
 	public int insertFeed(Feed f, Gpx gpx) {
@@ -473,7 +485,6 @@ public class FeedService {
 		
 	}
 
-
-
+	
 	
 }
