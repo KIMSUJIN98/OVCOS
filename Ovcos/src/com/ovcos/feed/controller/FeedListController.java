@@ -18,6 +18,8 @@ import com.ovcos.explore.model.vo.Explore;
 import com.ovcos.feed.model.service.FeedService;
 import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.loginRegister.model.vo.Member;
+import com.ovcos.notice.model.service.NoticeService;
+import com.ovcos.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class FeedListController
@@ -53,13 +55,20 @@ public class FeedListController extends HttpServlet {
 //		request.setAttribute("allList", allList);
 //		request.getRequestDispatcher("views/feed/feedMain.jsp").forward(request, response);
 //		
-		
+	
 		
 //		-----------수정 코드------------ sorting 값을 가져오고 메인(전체피드)띄우는데 select box 정렬 가능하게하기
 		
 		HttpSession session = request.getSession();
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
 		String select = request.getParameter("sorting");
+		
+		
+		ArrayList<Notice> nlist = new NoticeService().selectNoticeList();
+		request.setAttribute("nlist", nlist);//메인 공지사항 출력용
+		
+		ArrayList<Feed> mylist = new FeedService().selectMyList(userId); 
+		request.setAttribute("mylist", mylist);//메인 최근활동 출력용
 		
 		
 		ArrayList<Feed>  allList = new FeedService().selectArrayList(userId);
