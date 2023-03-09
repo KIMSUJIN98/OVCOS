@@ -8,25 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.ovcos.feed.model.service.FeedService;
 import com.ovcos.feed.model.vo.Feed;
-import com.ovcos.inquiry.model.service.InquiryService;
-import com.ovcos.inquiry.model.vo.Inquiry;
-import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class AdminMainController
+ * Servlet implementation class DelListController
  */
-@WebServlet("/main.admin")
-public class AdminMainController extends HttpServlet {
+@WebServlet("/delList.admin")
+public class DelListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMainController() {
+    public DelListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,16 +33,11 @@ public class AdminMainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		ArrayList<Feed>  list  = new FeedService().selectFeedList();
-		ArrayList<Inquiry> iqList = new InquiryService().selectInquiryList();
+		ArrayList<Feed> list = new FeedService().selectDelList();
 		response.setContentType("application/json; charset=utf-8");
+	
+		new Gson().toJson(list,response.getWriter());
 		
-		
-		request.setAttribute("list", list);
-		request.setAttribute("iqList", iqList);
-		
-		request.getRequestDispatcher("views/admin/adminMain.jsp").forward(request, response);
 	}
 
 	/**

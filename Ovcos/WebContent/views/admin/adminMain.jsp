@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.inquiry.model.vo.Inquiry"%>
 <%@page import="com.ovcos.feed.model.vo.Feed"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,8 @@ pageEncoding="UTF-8"%>
 <%
 String contextPath = request.getContextPath();
 ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
+ArrayList<Inquiry> iqList = (ArrayList<Inquiry>)request.getAttribute("iqList");
+
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -35,7 +38,7 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
              
             }
             #wrap{
-                padding: 50px;
+                padding: 20px;
                 padding-left: 100px;    
             }
             table{
@@ -49,6 +52,10 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
     
             #table1{
                 float: left;
+                margin-right: 20px;
+            }
+            #table2{
+                margin-left: 30px;
             }
     
         </style>
@@ -67,15 +74,25 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
                     <h3>문의 </h3>
                     <thead align="center">
                         <tr>
-                            <th width="70">피드번호</th>
+                            <th width="70">문의번호</th>
                             <th width="300">제목</th>
 
                         </tr>
                     </thead>
                     <tbody >
-                        <!-- case1. 게시글이 없을 경우 == 리스트가 텅 비어 있을때-->
-                         
-                        
+                        <% if(iqList.isEmpty()) { %>
+                            <tr>
+                                <td colspan="6">조회된 데이터가 없습니다.</td>
+                            </tr>
+                            <%} else { %>
+                            <%  for (int i = 0; i <= 4 && i <iqList.size(); i++) { %>
+                            <tr>
+                                <td><%= iqList.get(i).getInqNo() %></td>
+                                <td><%= iqList.get(i).getInqTitle() %></td>
+    
+                            </tr>
+                            <% } %>
+                            <%} %> 
                     </tbody>
                 </table>
             </div>
@@ -85,27 +102,26 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
             
             <div id="table2">
                 <table class="myTable table hover" >
-                    <h3>최근 등록한 코스</h3>
+                    <h3>최근 등록 된 코스</h3>
                     <thead align="center">
                         <tr>
-                            <th width="100">게시글</th>
+                            <th width="100"></th>
                             <th width="300">코스</th>
                         
                         </tr>
                     </thead>
                     <tbody >
-                       <% if(list.isEmpty()) { %>
+                    <% if(list.isEmpty()) { %>
                         <tr>
                             <td colspan="6">조회된 데이터가 없습니다.</td>
                         </tr>
                         <%} else { %>
-                        <%  for (int i = 0; i <= 4 && i < list.size(); i++) { %>
-                        <tr>
-                            <td><%= list.get(i).getFeedIndex() %></td>
-                            <td><%= list.get(i).getOriginName() %></td>
-
-                        </tr>
-                        <% } %>
+                            <% for (int i = list.size() - 1; i >= 0 && i >= list.size() - 5; i--) { %>
+                                <tr>
+                                    <td><%= list.get(i).getFeedIndex() %></td>
+                                    <td><%= list.get(i).getOriginName() %></td>
+                                </tr>
+                            <% } %>
                         <%} %> 
                         
                     </tbody>

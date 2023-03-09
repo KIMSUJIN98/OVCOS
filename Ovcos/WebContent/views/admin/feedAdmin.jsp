@@ -82,6 +82,7 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
                 <div class="body">
                     <div class="input-group">
                     <button onclick="rprList();">신고조회</button>
+                    <br><br>
                     </div>
                 </div>
                 <table class="myTable table hover" >
@@ -190,6 +191,10 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
 
             }
 
+
+
+         
+
             // 피드 삭제처리하기 
             function deletefeed(feedIndex){
                 var r = confirm("피드를 삭제하시겠습니까? 삭제된 피드 작성자의 누적신고수가 올라갑니다.");
@@ -216,6 +221,32 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
                 }
             });
             }
+            }
+
+            function restore(feedIndex){
+
+                $.ajax({
+                url: "rprRestore.admin",
+                data:{feedIndex:feedIndex},
+                type: "POST",
+
+                success: function(result) {
+                    var html = '';
+                    if(result>0) {
+                        
+                        alert("피드 신고 상태가 복구되었습니다")
+                       
+                        
+                    } else {
+                        alert("복구실패.")
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error: " + textStatus + " " + errorThrown);
+                }
+            });
+
+
             }
 
             //유저 누적신고수 업하기
