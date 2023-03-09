@@ -102,11 +102,16 @@
                         		</div>
                         	</li> -->
                             <li class="subMenuList"><a href="<%= contextPath %>/myPage.me?userId=<%=loginUser.getMemId()%>">마이페이지</a></li>
-                            <li class="subMenuList"><a href="<%= contextPath %>/editInfo.me?userId=<%=loginUser.getMemId()%>">개인정보수정</a></li>
+                            <li class="subMenuList"><a data-toggle="modal" data-target="#checkPwd">개인정보수정</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/logout.me">로그아웃</a></li>
                         </ul>
                     </li>
+                    <%if(loginUser.getMemId().equals("admin")){ %>
+                    <li id="li3" class="menu">
+                        <a href="<%=contextPath %>/main.admin" class="btn btn-sm  btn-danger">관리자페이지</a>
+                    </li>
+                    <% }%>
                 </ul>
             </div>
             
@@ -127,6 +132,33 @@
         });
     });
 	</script>
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="checkPwd" tabindex="-1" role="dialog" aria-labelledby="checkPwdLabel">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<h4 class="modal-title" id="checkPwdLabel">본인확인</h4>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		
+		      	<form action="<%= contextPath %>/editInfo.me?userId=<%=loginUser.getMemId()%>" method="post">
+		      	<div class="modal-body">
+	      			<input type="hidden" id="check-userId" name="check-userId" value="<%= loginUser.getMemId()%>">
+	      			<input type="hidden" id="check-userPwd" name="check-userPwd" value="<%= loginUser.getMemPwd()%>">
+		      		비밀번호를 입력하세요  <input type="password" name="inputPwd" id="inputPwd">
+		      	</div>
+		      	
+		      	<div class="modal-footer">
+		        	<button type="submit" class="btn btn-primary">인증하기</button>
+		      	</div>
+		      	</form>
+	    	</div>
+	  	</div>
+	 </div>
     
 </body>
 </html>

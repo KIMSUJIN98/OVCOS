@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+	font-family: 'SUIT-Regular';
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: black;
+}
+div{box-sizing: border-box; }
+/* #wrap{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.7);
+    position: relative;
+}
+ */
+.outer{
+	background-color: rgb(235, 235, 235);
+	width: 1000px;
+	height:700px;
+	margin: auto;
+	margin-top:50px;
+}
+
+.inner{
+	background-color:white;
+	width:900px;
+	height:600px;
+	margin:auto;
+	margin-top:20px;
+}
+
+#title{
+	padding:20px;
+	padding-top:20px;
+}
+
+#enrollBtn{
+	margin-top:-20px;	
+}
+
+table{
+	margin:auto;
+	margin-left:120px;
+	/* padding : 20px; */
+}
+
+ th{
+	text-align:center;
+	
+}
+input, select {
+    width: 500px;
+    margin: 5px;
+}
+
+#inqCnt{
+	height:300px;
+}
+
+enroll-form input, #enroll-form textarea {
+    width: 300px;
+    box-sizing: border-box;
+}

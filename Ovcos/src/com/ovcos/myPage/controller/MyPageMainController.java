@@ -47,13 +47,13 @@ public class MyPageMainController extends HttpServlet {
 		if(monthDistance != 0 && !list.isEmpty()) {
 			session.setAttribute("monthDistance", monthDistance);
 			session.setAttribute("dayList", list);
-		}else if(monthDistance != 0 && list.isEmpty()){
-			session.setAttribute("alertMsg", "저장된 러닝 기록이 없을리가 없는데...");
-		}else if(monthDistance == 0 && !list.isEmpty()){
-			session.setAttribute("alertMsg", "이번달은 러닝 기록이 없습니다.");
-		}else {
-			session.setAttribute("alertMsg", "저장된 러닝 기록이 없습니다.");
-		}
+		} /*
+			 * else if(monthDistance != 0 && list.isEmpty()){
+			 * session.setAttribute("alertMsg", "저장된 러닝 기록이 없을리가 없는데..."); }else
+			 * if(monthDistance == 0 && !list.isEmpty()){ session.setAttribute("alertMsg",
+			 * "이번달은 러닝 기록이 없습니다."); }else { session.setAttribute("alertMsg",
+			 * "저장된 러닝 기록이 없습니다."); }
+			 */
 		
 		if(today != null) {
 			session.setAttribute("today", today);

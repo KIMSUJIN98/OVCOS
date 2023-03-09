@@ -174,23 +174,30 @@
 							
 							<!-- Modal -->
 							<div class="modal fade" id="myGoal" tabindex="-1" role="dialog" aria-labelledby="myGoalLabel">
-							  <div class="modal-dialog" role="document">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h4 class="modal-title" id="myGoalLabel">목표설정</h4>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							      </div>
-							      <form action="<%= contextPath %>/goalSet.me" method="post">
-							      	  <input type="hidden" id="goal-userId" name="goal-userId" value="<%= loginUser.getMemId()%>">
-								      <div class="modal-body">
-								      	목표 km를 입력하세요 : <input type="number" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn()%>">
-								      </div>
-								      <div class="modal-footer">
-								        <button type="submit" class="btn btn-primary" data-dismiss="modal">저장하기</button>
-								      </div>
-							      </form>
-							    </div>
-							  </div></div>
+								<div class="modal-dialog" role="document">
+							    	<div class="modal-content">
+							      		<div class="modal-header">
+							        		<h4 class="modal-title" id="myGoalLabel">목표설정</h4>
+							        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							        			<span aria-hidden="true">&times;</span>
+							        		</button>
+							      		</div>
+							      		
+								      	<form action="<%= contextPath %>/goalSet.me" method="get">
+								      	<div class="modal-body">
+							      			<input type="hidden" id="goal-userId" name="goal-userId" value="<%= loginUser.getMemId()%>">
+								      		목표 km를 입력하세요 : <input type="number" name="userGoal" id="userGoal" value="<%= loginUser.getMemGoalDtn()%>">
+								      	</div>
+								      	
+								      	<div class="modal-footer">
+								        	<button type="submit" class="btn btn-primary">저장하기</button>
+								      	</div>
+								      	</form>
+							    	</div>
+							  	</div>
+							 </div>
+							 
+                    	
                     	</div>
                     	
                     	
@@ -232,371 +239,20 @@
                             <table class="myTable table hover">
                                 <tbody>
                                 <tr>
-                                    <th>USER ID</th>
-                                    <th>ID</th>
-                                    <th>TITTLE</th>
-                                    <th>COMPLETED</th>
+                                	<th>no.</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                    <th>공개범위</th>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>delectus aut autem</td>
-                                    <td></td>
+                                    <td>카운트</td>
+                                    <td><a>어디 뛰고 왔습니다</a></td>
+                                    <td>닉네임</td>
+                                    <td>2023-03-09</td>
+                                    <td>전체공개</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>quis ut nam facilis et officia qui</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>fugiat veniam minus</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>et porro tempora</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>laboriosam mollitia et enim quasi adipisci quia provident illum</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>6</td>
-                                    <td>qui ullam ratione quibusdam voluptatem quia omnis</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>7</td>
-                                    <td>illo expedita consequatur quia in</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>8</td>
-                                    <td>quo adipisci enim quam ut ab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>9</td>
-                                    <td>molestiae perspiciatis ipsa</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10</td>
-                                    <td>illo est ratione doloremque quia maiores aut</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>vero rerum temporibus dolor</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12</td>
-                                    <td>ipsa repellendus fugit nisi</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>delectus aut autem</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>quis ut nam facilis et officia qui</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>fugiat veniam minus</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>et porro tempora</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>laboriosam mollitia et enim quasi adipisci quia provident illum</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>6</td>
-                                    <td>qui ullam ratione quibusdam voluptatem quia omnis</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>7</td>
-                                    <td>illo expedita consequatur quia in</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>8</td>
-                                    <td>quo adipisci enim quam ut ab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>9</td>
-                                    <td>molestiae perspiciatis ipsa</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10</td>
-                                    <td>illo est ratione doloremque quia maiores aut</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>vero rerum temporibus dolor</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12</td>
-                                    <td>ipsa repellendus fugit nisi</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>delectus aut autem</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>quis ut nam facilis et officia qui</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>fugiat veniam minus</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>et porro tempora</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>laboriosam mollitia et enim quasi adipisci quia provident illum</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>6</td>
-                                    <td>qui ullam ratione quibusdam voluptatem quia omnis</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>7</td>
-                                    <td>illo expedita consequatur quia in</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>8</td>
-                                    <td>quo adipisci enim quam ut ab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>9</td>
-                                    <td>molestiae perspiciatis ipsa</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10</td>
-                                    <td>illo est ratione doloremque quia maiores aut</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>vero rerum temporibus dolor</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12</td>
-                                    <td>ipsa repellendus fugit nisi</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>delectus aut autem</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>quis ut nam facilis et officia qui</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>fugiat veniam minus</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>et porro tempora</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>laboriosam mollitia et enim quasi adipisci quia provident illum</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>6</td>
-                                    <td>qui ullam ratione quibusdam voluptatem quia omnis</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>7</td>
-                                    <td>illo expedita consequatur quia in</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>8</td>
-                                    <td>quo adipisci enim quam ut ab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>9</td>
-                                    <td>molestiae perspiciatis ipsa</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10</td>
-                                    <td>illo est ratione doloremque quia maiores aut</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>vero rerum temporibus dolor</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12</td>
-                                    <td>ipsa repellendus fugit nisi</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>delectus aut autem</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>quis ut nam facilis et officia qui</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>fugiat veniam minus</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>et porro tempora</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>laboriosam mollitia et enim quasi adipisci quia provident illum</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>6</td>
-                                    <td>qui ullam ratione quibusdam voluptatem quia omnis</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>7</td>
-                                    <td>illo expedita consequatur quia in</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>8</td>
-                                    <td>quo adipisci enim quam ut ab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>9</td>
-                                    <td>molestiae perspiciatis ipsa</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10</td>
-                                    <td>illo est ratione doloremque quia maiores aut</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>vero rerum temporibus dolor</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12</td>
-                                    <td>ipsa repellendus fugit nisi</td>
-                                    <td></td>
-                                </tr>
+                                
                                 </tbody>
                             </table>
                         </div>

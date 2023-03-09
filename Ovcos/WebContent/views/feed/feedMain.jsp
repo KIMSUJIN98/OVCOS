@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.notice.model.vo.Notice"%>
 <%@ include file="../common/nav.jsp" %>
 <%@ page import="com.ovcos.explore.model.vo.Explore"%>
 <%@ page import="com.ovcos.feed.model.vo.Feed"%>
@@ -10,6 +11,8 @@
    //ArrayList<Explore> allList = (ArrayList<Explore>)request.getAttribute("allList");
    ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
    request.setAttribute("data", allList);
+   ArrayList<Notice> nlist = (ArrayList<Notice>)request.getAttribute("nlist");//공지사항제목용
+   ArrayList<Feed> mylist= (ArrayList<Feed>)request.getAttribute("mylist");//최근활동출력용
 %>
 <!DOCTYPE html>
 <html>
@@ -81,7 +84,21 @@
                         <div id="ac_recode">
                             <div id="last_ac1">
                                 <div class="h51"><h5>LAST ACTIVITY</h5></div>
-                                <div id="last_info"><a href="#" id="f_title">피드제목&nbsp;<span>2023-02-11</span></a></div>
+                                <div id="last_info"><a href="#" id="f_title">
+<%
+if (mylist != null && !mylist.isEmpty()) {
+    String title = mylist.get(0).getFeedTitle();
+    if (title.length() > 3) {
+        title = title.substring(0, 3);
+    }
+    out.println(title);
+}else{out.println("최근 활동이 없습니다.");}
+%>
+							&nbsp;<span><%
+if (mylist != null && !mylist.isEmpty()) {
+    out.println(mylist.get(0).getFeedDate());
+}else{out.println(" ");}
+%></span></a></div>
                                 
                             </div>
                             <div id="last_ac2">
@@ -97,7 +114,14 @@
                         
                     </div>
                 </div>
-                <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
+
+                <div id="notice"><a href="<%=contextPath%>/list.no">
+<%
+if (nlist != null && !nlist.isEmpty()) {
+    out.println(nlist.get(0).getNtcTitle());
+}
+%></a></div>
+
             </div>
 <!--            <<nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -121,7 +145,6 @@
                         <div id="fw_feed" ><a href="<%= contextPath %>/clickList.feed?num=2&userId=<%=loginUser.getMemId()%>" id="friendFeed" >친구피드</a></div>
                         <div id="my_feed"><a href="<%= contextPath %>/clickList.feed?num=3&userId=<%=loginUser.getMemId()%>"  id="myFeed">내피드</a></div>
                     </div>
-
                     <form action="searchList.feed" method="get" id="searchForm">
                         <div id="feed_search">
                             <div id="f_select">
@@ -222,12 +245,12 @@
                                                 <ul class="dropdown-menu">
                                                     
                                                     <li><a class="dropdown-item" href="#" onclick="clip();">공유하기</a></li>
-                                                    <%if(!(f.getMemId().equals(loginUser.getMemId()))){%>
+                                                    <%if(!(f.getMemId().equals(loginUser.getMemId()))||loginUser.getMemId().equals("admin")){%>
                                                         <!--남의피드일때만 보임-->
                                                     <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#cutfeedmodal<%=f.getFeedIndex()%>" >차단하기</a></li>
                                                     <li><a class="dropdown-item" href="#"  data-toggle="modal" data-target="#rprfeedmodal<%=f.getFeedIndex()%>">신고하기</a></li>
                                                     <%} %>
-                                                    <%if(f.getMemId().equals(loginUser.getMemId())){%>
+                                                    <%if(f.getMemId().equals(loginUser.getMemId())|| loginUser.getMemId().equals("admin")){%>
                                                         <!--내피드에만 보임-->
                                                     <li><a class="dropdown-item"  href="<%= contextPath %>/updateForm.feed?no=<%=f.getFeedIndex() %>" >수정하기</a></li><!--data-toggle="modal" data-target="#updatefeedmodal<%=f.getFeedIndex()%>"-->
                                                     <li><a class="dropdown-item" href="#"  data-toggle="modal" data-target="#deletefeedmodal<%=f.getFeedIndex()%>">삭제하기</a></li>
@@ -640,12 +663,12 @@
                     $(function(){ //피드공개여부 가져오기
                         
                             $("#displayNy2>option").each(function(){
-                                console.log("도니");
-                                console.log("<%=f.getFeedPublicType()%>");
-                                console.log($(this).val());
+                                
+                                
+                                
                                 if($(this).val() == "<%=f.getFeedPublicType()%>"){
                                 $(this).attr("selected",true);
-                                console.log("탄다!!왜 안되는겨 ㅗ ")
+                                
                                 }
                             })
                         
@@ -783,13 +806,14 @@
                 </div> -->
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
+                
                 <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center">현재 위치</div>
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre"></div>
                     <div style="color: white;"> 
-                        <div id="year" style="color: white; padding-right: 5px;" align="center"></div>
-                        <div id="hour" style="color: white; padding-right: 5px;" align="center"></div>
+                        <div id="year" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
+                        <div id="hour" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
                     </div>
                 </div>   
                     <div >
@@ -802,7 +826,7 @@
                                 
                             </div>
                             <div style="font-size: 0.9rem; color: white;">
-                                <span id="miVal" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                                <span id="miVal" style="color: white; "></span> &micro;g/m<sup style="color: white;">3</sup>
                             </div>
                             
                         </div>
@@ -812,7 +836,7 @@
                         <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
                                 <img src="#" style="width: 40px; padding-top: 10px;" id="mi2" >
-                                <div style="padding-left: 10px; padding-top: 10px; color: white;" id="status2">나쁨</div>
+                                <div style="padding-left: 10px; padding-top: 18px; color: white;" id="status2">나쁨</div>
                             </div>
                         </div>
                         <div style="font-size: 0.9rem; color: white; padding-left: 50px; font-weight: 600;">
@@ -841,197 +865,29 @@
                 </div>
                 <div id="weather" >
                
-                <table cellspacing="0" style="background-color: rgb(67, 115, 176); border-radius: 15px; width: 100%; height: 450px;">
-                    <thead class="header" style="">
-                        <tr>
-                            <td colspan="3">
-                                <div style="font-weight: 900; padding-left: 15px; padding-top: 15px; border-bottom: 2px solid white;">
-                                지역 위치
-                                </div>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="fact" style="display: none; ">
-                            
-                            <td class="time" style="width: 150px;">
-                                <span class="date">3월 8일</span>
-                                <div class="hours" style="width: 70px;">오전 9:33</div>
-                            </td>
-                            <th class="weather-icon-container "  data-icon-id="overcast" data-wi-icon-id="cloud" data-title="중요한 구름" data-icon-size="36">
-                           
-                               
-                            </th>
-                            <td class="weather" style="width: 150px; padding-left: 15px;">
-                                <div class="temperature" title="기온" style="">13°</div>
-                                <div class="wind" title="바람" style="display: none;">
-                                    남동 3.6 km/h                            </div>
-                            </td>
-                        </tr>
-                            <tr class="days day_1">
-                                <td class="time" style="width: 150px; padding-left: 15px;">
-                                    <span class="weekday">수</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 8일</div>
-                                </td>
-                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_rain" data-wi-icon-id="rain" data-title="대체로 흐리고 비가 내림" data-icon-size="36">
-                                    <!-- 이미지 들어가는 부분 -->
-                                    <img style="width: 20px; " src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-                                </th>
-                                <td class="weather" style="width: 150px; padding-right: 15px;" >
-                                    <div class="temperature" title="기온" style="">
-                                        7~16°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        43% </div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    남 23 km/h</div>
-                                </td>
-                            </tr>
-
-                            <tr class="days day_2" style="width: 150px;">
-                                <td class="time" style="padding-left: 15px;">
-                                    <span class="weekday">목</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 9일</div>
-                                </td>
-
-                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_rain" data-wi-icon-id="rain" data-title="대체로 흐리고 비가 내림" data-icon-size="36">
-                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-
-                                </th>
-                                <td class="weather" style="width: 150px; padding-right: 15px;">
-                                    <div class="temperature" title="기온" style="">
-                                        7~13°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        56%</div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    남서 14 km/h</div>
-                                </td>
-                            </tr>
-
-                            <tr class="days day_3" style="width: 150px;">
-                                <td class="time" style="padding-left: 15px;">
-                                    <span class="weekday">금</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 10일</div>
-                                </td>
-                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clear" data-wi-icon-id="day-sunny" data-title="화창하고 구름 한 점 없는 하늘" data-icon-size="36">
-                                <!-- 이미지 들어가는 부분 -->
-                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-                                </th>
-                                <td class="weather" style="width: 150px; padding-right: 15px;">
-                                    <div class="temperature" title="기온" style="">
-                                        5~20°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        0%</div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    동 15 km/h</div>
-                                </td>
-                            </tr>
-
-                            <tr class="days day_4" style="width: 150px;">
-                                <td class="time" style="padding-left: 15px;">
-                                    <span class="weekday">토</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 11일</div>
-                                </td>
-                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds" data-wi-icon-id="day-cloudy" data-title="부분적으로 흐림" data-icon-size="36">
-                                <!-- 이미지 들어가는 부분 -->
-                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-                                </th>
-                                <td class="weather" style="width: 150px; padding-right: 15px;">
-                                    <div class="temperature" title="기온" style="">
-                                        9~20°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        5%</div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    남서 20 km/h</div>
-                                </td>
-                            </tr>
-
-                            <tr class="days day_5" style="width: 150px;">
-                                <td class="time" style="padding-left: 15px;">
-                                    <span class="weekday">일</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 12일</div>
-                                </td>
-                                <th class="weather-icon-container "  style="padding-left: 50px; padding-right: 100px;" data-icon-id="rain_light" data-wi-icon-id="day-showers" data-title="흐리고 약간의 비가 내림" data-icon-size="36">
-                                <!-- 이미지 들어가는 부분 -->
-                                <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-                                </th>
-                                <td class="weather" style="width: 150px ; padding-right: 15px;">
-                                    <div class="temperature" title="기온" style="">
-                                        4~9°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        66%</div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    북 13 km/h</div>
-                                </td>
-                            </tr>
-
-                                <tr class="days day_6" style="width: 150px;">
-                                <td class="time" style="padding-left: 15px;">
-                                    <span class="weekday">월</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 13일</div>
-                                </td>
-                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_light" data-wi-icon-id="day-sunny-overcast" data-title="화창하고 구름이 적음" data-icon-size="36">
-                                    <!-- 이미지 들어가는 부분 -->
-                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-                                </th>
-                                <td class="weather" style="width: 150px; padding-right: 15px;">
-                                    <div class="temperature" title="기온" style="">
-                                        0~8°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        25%</div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    북서 15 km/h</div>
-                                </td>
-                            </tr>
-
-                                <tr class="days day_7" style="width: 150px;">
-                                <td class="time" style="padding-left: 15px;">
-                                    <span class="weekday">화</span>
-                                    <br>
-                                    <div class="date" style="width: 70px;">3월 14일</div>
-                                </td>
-                                <th class="weather-icon-container " style="padding-left: 50px; padding-right: 100px;" data-icon-id="clouds_light" data-wi-icon-id="day-sunny-overcast" data-title="화창하고 구름이 적음" data-icon-size="36">
-                                    <!-- 이미지 들어가는 부분 -->
-                                    <img style="width: 20px;" src="${pageContext.request.contextPath}/resources/image/icon-cloud.png" alt="">
-                                </th>
-                                <td class="weather" style="width: 150px; padding-right: 15px;">
-                                    <div class="temperature" title="기온" style="">
-                                        1~11°</div>
-                                    <div class="precip" title="강수 확률" style="">
-                                        1%</div>
-                                    <div class="wind" title="바람" style="display: none;">
-                                    남 19 km/h</div>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
+               <!-- Weather widget by https://meteodays.com -->
+                <a id="ms-informer-link-eda9c8f83a7945f9acc28bf4bdb4c88d" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
+                <script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/eda9c8f83a7945f9acc28bf4bdb4c88d"></script>
+                <!-- End -->
 
 				</div>
                 
 
-            </div>
-        </div>
-        <div id="footer">
-            <!-- 푸터구역 -->
-            <div id="f1" align="center">
-                <a href="#"><br>이용약관&nbsp;</a> 
-                <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
-                <a href="#">&nbsp;고객센터&nbsp;</a>
-                <div style="font-weight: 500;">
-                    
-                    
+                <div id="footer">
+                    <!-- 푸터구역 -->
+                    <div id="f1">
+                        <a href="#">약관&nbsp;</a> 
+                        <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
+                        <a href="<%=contextPath%>/list.bo">&nbsp;고객센터&nbsp;</a>
+                    </div>
+                    <div>
+                        <p> 
+                        © 2023 KH OVCOS
+                        </p>
+                    </div>
+
                 </div>
 
-                <p style="margin-bottom: 0px;"> 
-                	<br>© 2023 KH OVCOS<br>
-                </p>
-            </div>
-        </div>
 <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
