@@ -1052,11 +1052,6 @@ if (nlist != null && !nlist.isEmpty()) {
 
                 </div>
 
-                <p style="margin-bottom: 0px;"> 
-                	<br>© 2023 KH OVCOS<br>
-                </p>
-            </div>
-        </div>
 <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
