@@ -10,13 +10,31 @@
 		 HAVING MEM_ID = ? AND TO_CHAR(FEED_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 	</entry>
 	
-	<!-- 로그인 유저가 일자별 달린거리를 담은 리스트 -->
+	<!-- 오늘 날짜를 계산하는 쿼리 -->
+	<entry key="selectToday">
+		SELECT TO_CHAR(SYSDATE,'YYYYMMDD') "RUNDATE"
+		  FROM DUAL
+	</entry>
+	
+	<!-- 로그인 유저가 일주일간 일자별 달린거리를 담은 리스트 -->
 	<entry key="dayDistanceList">
-		SELECT MEM_ID, SUM(DISTANCE) "DISTANCE", TO_CHAR(FEED_DATE, 'YYYYMMDD') "RUNDATE"
-		  FROM FEED
+		SELECT MEM_ID, SUM(DISTANCE) "DISTANCE", TO_CHAR(FEED_DATE,'YYYYMMDD') "RUNDATE"
+		  FROM (SELECT MEM_ID, DISTANCE, FEED_DATE
+		          FROM FEED
+		         WHERE SYSDATE >= FEED_DATE AND FEED_DATE >= (SYSDATE-6))
 		 GROUP
-		    BY MEM_ID, TO_CHAR(FEED_DATE, 'YYYYMMDD')
+		    BY MEM_ID, TO_CHAR(FEED_DATE,'YYYYMMDD')
 		HAVING MEM_ID = ?
+		 ORDER
+		    BY RUNDATE DESC
+	</entry>
+	
+	<!-- 목표 재설정하는 쿼리 -->
+	<entry key="updateSetGoal">
+		UPDATE
+		       MEMBER
+		   SET MEM_GOAL_DTN = ?
+		 WHERE MEM_ID = ?
 	</entry>
 	
 </properties>

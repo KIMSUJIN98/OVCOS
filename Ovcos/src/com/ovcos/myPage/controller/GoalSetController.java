@@ -1,29 +1,26 @@
-package com.ovcos.challenge.controller;
+package com.ovcos.myPage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.myPage.model.service.MyPageService;
+import com.ovcos.myPage.model.vo.MyPage;
 
 /**
- * Servlet implementation class AjaxContestChallengeEntryListController
+ * Servlet implementation class GoalSetController
  */
-@WebServlet("/entryList.ch")
-public class AjaxContestChallengeEntryListController extends HttpServlet {
+@WebServlet("/goalSet.me")
+public class GoalSetController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxContestChallengeEntryListController() {
+    public GoalSetController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +29,18 @@ public class AjaxContestChallengeEntryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int contestChallengeNo = Integer.parseInt(request.getParameter("contestChallengeNo"));
 		
-		ArrayList<EntryList> eList = new ChallengeService().selectEntryList(contestChallengeNo);
+		request.setCharacterEncoding("utf-8");
+		int userGoal = Integer.parseInt(request.getParameter("userGoal"));
+		String userId = request.getParameter("goal-userId");
 		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(eList, response.getWriter());
+		int result = new MyPageService().updateSetGoal(userGoal, userId);
+		
+		if(result <= 0) {
+			request.setAttribute("alertMsg", "목표설정에 실패했습니다!");
+		}
+		response.sendRedirect(request.getContextPath() + "/myPage.me");
+		
 	}
 
 	/**
