@@ -857,8 +857,9 @@
 
 				</div>
                 
-
-                <div id="footer">
+                </div>
+                </div>
+                <div id="footer" align="center" >
                     <!-- 푸터구역 -->
                     <div id="f1">
                         <a href="#">약관&nbsp;</a> 
@@ -866,7 +867,7 @@
                         <a href="<%=contextPath%>/list.bo">&nbsp;고객센터&nbsp;</a>
                     </div>
                     <div>
-                        <p> 
+                        <p style="margin-bottom: 0;"> 
                         © 2023 KH OVCOS
                         </p>
                     </div>

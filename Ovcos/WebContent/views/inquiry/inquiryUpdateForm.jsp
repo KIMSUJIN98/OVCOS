@@ -56,7 +56,7 @@
          <br>
          <div align="center">
             <button type="submit" class="btn btn-sm btn-light">수정하기</button>
-            \<button type="button" onclick="history.back()"class="btn btn-sm btn-danger">뒤로가기</button>
+            <button type="button" onclick="history.back()"class="btn btn-sm btn-danger">뒤로가기</button>
          </div>
       </form>
    </div>

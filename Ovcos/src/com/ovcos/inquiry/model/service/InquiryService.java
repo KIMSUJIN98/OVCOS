@@ -62,17 +62,36 @@ public class InquiryService {
 		return i;
 	}
 	
-	public ArrayList<Inquiry> selectInquiryList(){
+	public int updateInquiry(Inquiry i) {
 		Connection conn = getConnection();
-		ArrayList<Inquiry> list = new InquiryDao().selectInquiryList(conn);
 		
+		int result = new InquiryDao().updateInquiry(conn, i);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		close(conn);
 		
-		return list;
+		return result;
+	}
+	
+	public int deleteNotice(int inqNo) {
 		
+		System.out.println(inqNo);
+		Connection conn = getConnection();
 		
+		int result = new InquiryDao().deleteInquiry(conn, inqNo);
 		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
 		
+		return result;
 	}
 	
 }
