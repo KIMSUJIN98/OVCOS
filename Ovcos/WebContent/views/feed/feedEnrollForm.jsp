@@ -7,7 +7,10 @@
     <html>
     <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>OVCOS - 피드등록</title>
+    <!-- Favicon-->
+	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"/>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/image/favicon.png" sizes="16x16"/>
     <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'></script> -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedEnrollForm.css">
