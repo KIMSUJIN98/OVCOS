@@ -310,16 +310,16 @@ public class ChallengeDao {
 				
 				while(rset.next()) {
 					list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
-							rset.getString("NOR_CHLG_TITLE"),
-							rset.getString("NOR_CHLG_CONTENT"),
-							rset.getDate("ENROLL_DATE"),
-							rset.getString("NOR_CHLG_DATE"),
-							rset.getInt("NOR_CHLG_MAX"),
-							rset.getString("NOR_CHLG_ID"),
-							rset.getString("LOCAL_NAME"),
-							rset.getString("CHANGE_NAME"),
-							rset.getInt("COUNT")
-							));
+												  rset.getString("NOR_CHLG_TITLE"),
+												  rset.getString("NOR_CHLG_CONTENT"),
+												  rset.getDate("ENROLL_DATE"),
+												  rset.getString("NOR_CHLG_DATE"),
+												  rset.getInt("NOR_CHLG_MAX"),
+												  rset.getString("NOR_CHLG_ID"),
+												  rset.getString("LOCAL_NAME"),
+												  rset.getString("CHANGE_NAME"),
+												  rset.getInt("COUNT")
+												  ));
 				}
 				
 				
@@ -331,14 +331,16 @@ public class ChallengeDao {
 				
 				while(rset.next()) {
 					list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
-							rset.getString("NOR_CHLG_TITLE"),
-							rset.getDate("ENROLL_DATE"),
-							rset.getString("NOR_CHLG_DATE"),
-							rset.getInt("NOR_CHLG_MAX"),
-							rset.getString("NOR_CHLG_ID"),
-							rset.getString("LOCAL_NAME"),
-							rset.getInt("COUNT")
-							));
+												  rset.getString("NOR_CHLG_TITLE"),
+												  rset.getString("NOR_CHLG_CONTENT"),
+												  rset.getDate("ENROLL_DATE"),
+												  rset.getString("NOR_CHLG_DATE"),
+												  rset.getInt("NOR_CHLG_MAX"),
+												  rset.getString("NOR_CHLG_ID"),
+												  rset.getString("LOCAL_NAME"),
+												  rset.getString("CHANGE_NAME"),
+												  rset.getInt("COUNT")
+												  ));
 				}
 				
 			}
@@ -725,6 +727,111 @@ public class ChallengeDao {
 		}
 		
 		return result2;
+		
+	}
+
+	public ArrayList<NEntryList> checkNEntryId(Connection conn, NEntryList nel) {
+		ArrayList<NEntryList> list = new ArrayList<NEntryList>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkNEntryId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nel.getNormalChallNo());
+			pstmt.setString(2, nel.getNormalEntryId());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new NEntryList(rset.getInt("NCHLG_NO_INLIST"),
+								   	   rset.getString("NCHLG_ENTRY_ID")
+								   ));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+
+	public int insertNEntryList(Connection conn, NEntryList nel) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nel.getNormalChallNo());
+			pstmt.setString(2, nel.getNormalEntryId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteNEntryList(Connection conn, NEntryList nel) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nel.getNormalChallNo());
+			pstmt.setString(2, nel.getNormalEntryId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<NEntryList> selectNEntryList(Connection conn, int normalChallengeNo) {
+		ArrayList<NEntryList> list = new ArrayList<NEntryList>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNEntryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, normalChallengeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new NEntryList(rset.getInt("NCHLG_NO_INLIST"),
+								   	   rset.getString("NCHLG_ENTRY_ID"),
+								   	   rset.getString("MEM_NICK")
+								   ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 		
 	}
 
