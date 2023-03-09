@@ -6,7 +6,8 @@
     return random;
     }
 %>
-<%String selectResult=(String)request.getAttribute("select"); %>
+<% String selectResult=(String)request.getAttribute("select"); %>
+<%  %>
 
 <!DOCTYPE html>
 <html lang="en">

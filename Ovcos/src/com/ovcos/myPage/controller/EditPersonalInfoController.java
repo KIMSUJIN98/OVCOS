@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class EditInfoController
@@ -28,9 +29,20 @@ public class EditPersonalInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
+		String userId = request.getParameter("check-userId");
+		String userPwd = request.getParameter("check-userPwd");
+		String inputPwd = request.getParameter("inputPwd");
 		
-		request.getRequestDispatcher("views/myPage/editPersonalInfo.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if(inputPwd.equals(userPwd)) {
+			request.getRequestDispatcher("views/myPage/editPersonalInfo.jsp").forward(request, response);
+		}else {
+			session.removeAttribute("alertMsg");
+			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			response.sendRedirect(request.getContextPath() + "/myPage.me?userId=" + userId);
+		}
+		
 	}
 
 	/**
