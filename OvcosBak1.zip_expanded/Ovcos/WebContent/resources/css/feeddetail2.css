@@ -1,0 +1,162 @@
+#left{
+    border-right: 1px solid black;
+    width: 445px;
+    height: 804px;
+}
+#feed1{
+    margin-top: auto;
+}
+#mypage1{
+    padding-bottom: 15px;
+    margin-top: 15px;
+    display: flex;
+}
+#name{
+    display: flex;
+    margin-left: 15px;
+}
+#detail{
+    margin-left: 15px;
+}
+#run{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#distance{
+    padding-top: 4px;
+    padding-bottom: 2px;
+    height: 82%;
+}
+
+#btn00{
+    margin-top: 27px;
+    margin-left: 15px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    resize: none;
+    border-bottom: 3px solid rgb(67, 115, 176);
+    background-color: white;
+    font-weight: 600;
+   
+}
+#fontth{
+    padding-right: 9px;
+    padding-top: 29px;
+}
+#feeds{
+    font-size: 1.3rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 15px;
+    height: 10%; 
+    /* border: 1px solid rgb(255, 0, 0); */
+}
+#feeds1{
+    width: 410px;
+    height: 150px;
+}
+#reply-area{
+    padding-left: 10px;
+    position: absolute;
+    bottom: 10px;
+    position: fixed;
+}
+#eye{
+    width: 17px; 
+    margin-left: 15px;
+    padding-top: 5px;
+}
+
+
+#love{
+    width: 13px; 
+    margin-left: 150px; 
+    padding-top: 5px;
+    /* padding-left: 170px; */
+}
+#download1{
+    width: 13px; 
+    /* margin-left: 150px;  */
+    padding-top: 5px;
+    /* padding-left: 170px; */
+}
+#feedt{
+   text-align: center;
+   font-weight: 400;
+   padding-bottom: 10px;
+   padding-top: 5px;
+}
+#com {
+    
+  }
+  #feed90::-webkit-scrollbar {
+    width: 10px;
+  }
+  #feed90::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  #feed90::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+
+  path{
+    stroke: orangered !important;
+    stroke-width: 7px !important;
+}
+
+img[src*='marker']{
+    display: none !important;
+}
+
+
+#feeddox{
+    height: 100%;
+    /* border: 1px solid red; */
+}
+#userid{
+    height: 20%;
+    /* border: 1px solid rgb(249, 5, 5);  */
+}
+#feedy{
+    height: 10%;
+    /* border: 2px solid rgb(255, 0, 0);  */
+}
+#feed4 {
+    height: 25%;
+    /* border: 2px solid rgb(255, 0, 0);  */
+}
+
+#run1{
+    height: 15%;
+    /* border: 2px solid rgb(255, 0, 0);  */
+}
+
+#feed90{
+    height: 95%;
+    /* border-bottom: 1px solid rgb(253, 1, 1); */
+    overflow: auto;
+}
+#comment{
+    height: 25%;
+    /* border-bottom: 3px solid rgb(253, 1, 1); */
+}
+#comm1{
+    /* border: 1px solid rgb(255, 0, 0);  */
+    height: 5%;
+}
+
+#feed_cmn_cnt{
+    width: 320px;
+    margin-top: 27px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    resize: none;
+    border-bottom: 3px solid rgb(67, 115, 176);
+}
