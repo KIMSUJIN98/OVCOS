@@ -431,7 +431,18 @@ VALUES
            SELECT * FROM NORMAL_CHALLENGE;
     
     
-    
+    		SELECT
+		       NCHLG_NO_INLIST
+		     , NCHLG_ENTRY_ID
+		     , MEM_NICK
+		  FROM NENTRY_LIST
+		  JOIN MEMBER ON (NCHLG_ENTRY_ID = MEM_ID)
+		 WHERE NCHLG_NO_INLIST = ?;
+         
+         		UPDATE
+	       NORMAL_CHALLENGE
+	   SET DEL_STATUS = 'Y'
+	 WHERE NOR_CHLG_NO = ?
     
     
 ROLLBACK;

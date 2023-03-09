@@ -9,20 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.NEntryList;
-import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class AjaxNormalChallengeDeleteController
+ * Servlet implementation class NormalChallengeDeleteController
  */
-@WebServlet("/normalEntryDelete.ch")
-public class AjaxNormalChallengeEntryDeleteController extends HttpServlet {
+@WebServlet("/deleteNormalChallenge.ch")
+public class NormalChallengeDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxNormalChallengeEntryDeleteController() {
+    public NormalChallengeDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +29,16 @@ public class AjaxNormalChallengeEntryDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		int normalChallengeNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
+		
 		HttpSession session = request.getSession();
-		String normalEntryId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		int normalChallNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
 		
-		NEntryList nel = new NEntryList();
-		nel.setNormalChallNo(normalChallNo);
-		nel.setNormalEntryId(normalEntryId);
+		int result = new ChallengeService().deleteNormalChallenge(normalChallengeNo);
 		
-		int result = new ChallengeService().deleteNEntryList(nel);
 		
-		response.getWriter().print(result);
+		response.sendRedirect(request.getContextPath() + "/ncList.ch");
 	}
 
 	/**
