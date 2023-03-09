@@ -843,9 +843,9 @@
                 <div id="weather" >
                
                <!-- Weather widget by https://meteodays.com -->
-<a id="ms-informer-link-65e0c653d8918c445bf961303b939aea" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
-<script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/65e0c653d8918c445bf961303b939aea"></script>
-<!-- End -->
+                <a id="ms-informer-link-65e0c653d8918c445bf961303b939aea" class="ms-informer-link" href="https://meteodays.com/ko/weather/overview/seoul">서울날씨</a>
+                <script class="ms-informer-script" src="https://meteodays.com/ko/informer/script/65e0c653d8918c445bf961303b939aea"></script>
+                <!-- End -->
 
 				</div>
                 
