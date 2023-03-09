@@ -550,7 +550,7 @@ VALUES
 		 WHERE
 		       N.DEL_STATUS = 'N'
 		   AND N.RPR_STATUS = 'N'
-		   AND LOCAL_NO = 1
+		   AND LOCAL_NO = 12
 		   AND NOR_CHLG_DATE > SYSDATE
 		 ORDER
 		    BY 1 DESC;
@@ -589,7 +589,7 @@ UPDATE
  WHERE CNTS_NO = 2;   
     
     
-    
+    delete normal_challenge where NOR_CHLG_NO = 3;
     
 ROLLBACK;
 

@@ -167,7 +167,6 @@
                             <!-- actions -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <!-- <a class="btn btn-outline-dark mt-auto" href="#">참가하기</a> -->
                                     <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailContestChallenge<%= cc.getContestChallengeNo() %>" onclick="checkEntryId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">상세보기</button>
                                 </div>
                             </div>
@@ -232,7 +231,6 @@
                                         <% if(loginUser != null && !loginUser.getMemId().equals(cc.getContestChallengeId())) { %>
                                             <input type="submit" id="entry<%= cc.getContestChallengeNo() %>" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);">
                                             <button id="trigger-btn" style="display: none;" onclick="iconShow(<%= cc.getCount() %>, <%= cc.getContestChallengeMax() %>);"></button>
-                                            <!-- <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkEntryId(<%= cc.getContestChallengeNo() %>, <%= cc.getContestChallengeMax() %>);"> -->
                                         <% } %>
                                     </div>
                                     <!-- Modal footer -->
@@ -293,15 +291,6 @@
     <script src="../../resources/js/scripts.js"></script>
 
     <script>
-        // $(window).load(function(){
-    	// 	$("#trigger-btn").trigger("click");
-        //     iconShow(num, max);
-    	// })
-
-        // $(function(){
-
-        // })
-
         function substringDate(contestDate){
             var all = contestDate;
             var date1 = contestDate.split(" ");
@@ -328,17 +317,6 @@
                 return false;
             }
         }
-
-        // function checkPwd(){
-        //     const userPwd = document.getElementById("userPwd").value();
-        //     console.log(<%= loginUser.getMemPwd() %>);
-        //     console.log(userPwd);
-
-        //     if(userPwd != <%= loginUser.getMemPwd() %>) {
-        //     	alert("비밀번호가 일치하지 않습니다.");
-        //     	return false;
-        //     }
-        // }
 
         function castNo(num){
             $("#delNo").val(num);
@@ -476,19 +454,9 @@
             if($("#entry" + num).val() == '참가하기') {
                 $("#entry" + num).val("모집완료");
                 $("#entry" + num).attr("disabled", true);
-                // $("#icon-sm").show();
                 $("#entry" + num).attr("class", "btn btn-lg btn-dark");
             }
         }
-
-        // function iconShow(num, max){
-        //     if(num == max){
-        //         document.getElementById("icon-sm-complete").style.display = 'block';
-        //     }else {
-        //         document.getElementById("icon-sm-complete").style.display = 'none';
-        //     }
-        // }
-
     </script>
 
 
