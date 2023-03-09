@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creator="Tranggle Track 1.1.0 - http://www.tranggle.com" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <metadata>
+        <link href="http://www.tranggle.com">
+            <text>Tranggle 3.14.0</text>
+        </link>
+        <time>2022-10-21 09:13:29</time>
+        <bounds maxlat="38.290489" maxlon="128.171707" minlat="38.254616" minlon="128.144135"/>
+    </metadata>
+    <trk>
+        <trkseg>
+            <trkpt lat="38.290489" lon="128.144135">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.290161" lon="128.144684">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288830" lon="128.146118">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288712" lon="128.146194">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288486" lon="128.146484">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288292" lon="128.146637">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288219" lon="128.146896">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288036" lon="128.147034">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.287987" lon="128.147217">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288059" lon="128.147461">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.288269" lon="128.147751">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+            <trkpt lat="38.259262" lon="128.147079">
+                <ele>0.000</ele>
+                <time>2022-10-07 16:27:19</time>
+                <extensions>
+                    <ptid>1</ptid>
+                    <rtcd></rtcd>
+                </extensions>
+            </trkpt>
+        </trkseg>
+    </trk>
+    <extensions>
+        <rtsc ept="292" fin="1" rtcd="0" scid="1" spt="1">
+            <name><![CDATA[기타]]></name>
+            <stime>2022-10-07 16:38:39</stime>
+            <etime>2022-10-07 16:38:39</etime>
+        </rtsc>
+    </extensions>
+</gpx>
