@@ -144,7 +144,31 @@ if (nlist != null && !nlist.isEmpty()) {
                         <div id="all_feed"><a href="<%= contextPath %>/clickList.feed?num=1&userId=<%=loginUser.getMemId()%>" id="allfeed"  >전체피드</a></div>
                         <div id="fw_feed" ><a href="<%= contextPath %>/clickList.feed?num=2&userId=<%=loginUser.getMemId()%>" id="friendFeed" >친구피드</a></div>
                         <div id="my_feed"><a href="<%= contextPath %>/clickList.feed?num=3&userId=<%=loginUser.getMemId()%>"  id="myFeed">내피드</a></div>
+
                     </div>
+                    <%String num = String.valueOf(session.getAttribute("num"));%>
+                    <%System.out.print(num); %>
+                    <%if(num.equals("1")){ %>
+                    <script>
+                        var btn = $("#btn_list div");
+                        btn.css("backgroundColor","white")
+                        $("#allfeed").parent().css("backgroundColor","rgb(235, 235, 235)");
+                    </script>
+                    <%}else if(num.equals("2")){ %>
+                    <script>
+	                    var btn = $("#btn_list div");
+	                    btn.css("backgroundColor","white")
+	                    $("#friendFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
+                    </script>
+                    <%}else{ %>
+                    <script>
+	                    var btn = $("#btn_list div");
+	                    btn.css("backgroundColor","white")
+	                    $("#myFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
+                    </script>
+                    <%} %>
+                    
+                    
                     <form action="searchList.feed" method="get" id="searchForm">
                         <div id="feed_search">
                             <div id="f_select">
