@@ -33,9 +33,16 @@ public class RprListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-		ArrayList<Feed> list = new FeedService().selectRprList();
-		response.setContentType("application/json; charset=utf-8");
+		ArrayList<Feed> list = null;
+		
+		
+	
+			
+			list = new FeedService().selectRprList();
+			response.setContentType("application/json; charset=utf-8");
+				
+					
+			
 		
 		new Gson().toJson(list,response.getWriter());
 	}

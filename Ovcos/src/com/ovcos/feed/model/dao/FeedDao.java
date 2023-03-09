@@ -1110,6 +1110,12 @@ public class FeedDao {
 	
 	
 	
+	/**
+	 * 누적신고수 업데이트
+	 * @param conn
+	 * @param feedIndex
+	 * @return
+	 */
 	public int updateRprCum(Connection conn,int feedIndex) {
 
 		int result = 0;
@@ -1134,6 +1140,57 @@ public class FeedDao {
 	}
 	
 	
+	public ArrayList<Feed> selectDelList(Connection conn){
+		
+		
+		ArrayList<Feed> list = new ArrayList<Feed>();
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDelList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Feed(rset.getInt("FEED_INDEX"),
+						rset.getString("DATE"),
+						rset.getString("FEED_TITLE"),
+						rset.getString("FEED_CNT"),
+						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
+						rset.getString("FEED_RPR_NY"),
+						rset.getString("RPR_DATE"),
+						rset.getDouble("DISTANCE"),
+						rset.getDouble("START_LAT"),
+						rset.getDouble("START_LON"),
+						rset.getString("FEED_DEL_NY"),
+						rset.getString("MEM_ID"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("MEM_NAME"),
+						rset.getString("MEM_NICK"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getInt("HIT"),
+						rset.getString("FEED_RPR_ID")
+						
+						));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+		
+	}
 	
 
 	

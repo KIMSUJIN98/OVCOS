@@ -19,6 +19,14 @@ import com.ovcos.upload.model.vo.Gpx;
  * @author soyoung
  *
  */
+/**
+ * @author soyoung
+ *
+ */
+/**
+ * @author soyoung
+ *
+ */
 public class FeedService {
 	
 	public int insertFeed(Feed f, Gpx gpx) {
@@ -435,6 +443,24 @@ public class FeedService {
 		return result;
 		
 	}
+	
+	
+	
+	/**
+	 * 삭제된 게시글 조회
+	 * @return
+	 */
+	public ArrayList<Feed> selectDelList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectDelList(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+
 	
 	
 }

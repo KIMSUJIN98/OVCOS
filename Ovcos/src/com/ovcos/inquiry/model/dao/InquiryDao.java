@@ -183,4 +183,42 @@ public class InquiryDao {
 		return i;
 
 }
+	
+	
+	public ArrayList<Inquiry> selectInquiryList(Connection conn){
+		ArrayList<Inquiry> list = new ArrayList<Inquiry>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectInquiryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				list.add(new Inquiry(
+						rset.getInt("INQ_NO"),
+						rset.getInt("INQ_MENU"),
+						rset.getString("INQ_TITLE"),
+						rset.getString("INQ_DATE"),
+						rset.getString("INQ_CNT"),
+						rset.getString("ANS_CNT"),
+						rset.getString("INQ_DEL_NY"),
+						rset.getString("MEM_ID")
+						));
+							
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
 }
