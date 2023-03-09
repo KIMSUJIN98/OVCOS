@@ -86,9 +86,9 @@ function select1(sido){
             if(max == 1){
                 $dust.css("backgroundColor","rgb(67, 115, 176)")
             }else if(max == 2){
-                $dust.css("backgroundColor","green")
+                $dust.css("backgroundColor","rgb(7, 174, 7)")
             }else if(max ==3){
-                $dust.css("backgroundColor","orange")
+                $dust.css("backgroundColor","darkorange")
             }else{
                 $dust.css("backgroundColor","red")
             }

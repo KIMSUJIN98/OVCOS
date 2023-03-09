@@ -57,12 +57,14 @@ public class FeedUpdateController extends HttpServlet {
 			double startLon = Double.parseDouble(multi.getParameter("startLon"));
 			double startLat = Double.parseDouble(multi.getParameter("startLat"));
 			double distance = Double.parseDouble(multi.getParameter("distance"));
+			System.out.println(multi.getParameter("startLon"));
 			int rate = 0;
+			int feedIndex = Integer.parseInt(multi.getParameter("feedIndex"));
 			if(multi.getParameter("rating") != null) {
 				rate = Integer.parseInt(multi.getParameter("rating"));
 			}
 			
-			
+			String imgPath = multi.getParameter("imgPath");
 			String title = multi.getParameter("title");	
 			String content = multi.getParameter("content");
 			String feedPublicType = multi.getParameter("displayNy");
@@ -83,6 +85,8 @@ public class FeedUpdateController extends HttpServlet {
 			f.setFeedCnt(content);
 			f.setFeedPublicType(feedPublicType);
 			f.setFeedPathNy(feedPathNy);
+			f.setImgPath(imgPath);
+			f.setFeedIndex(feedIndex);
 			
 			//Gpx 객체
 			Gpx gpx = null;
@@ -91,12 +95,13 @@ public class FeedUpdateController extends HttpServlet {
 				gpx.setOriginName(multi.getOriginalFileName("avatar"));
 				gpx.setChangeName(fileName);
 				gpx.setFilePath("resources/gpx_upfiles/");
+				gpx.setFeedIndex(feedIndex);
 			}
 			
 			PrintWriter out = response.getWriter();
 			
 			//서비스 요청 
-			int result = new FeedService().insertFeed(f,gpx);
+			int result = new FeedService().updateFeed(f,gpx);
 			
 			HttpSession session = request.getSession();
 			//응답뷰 지정
