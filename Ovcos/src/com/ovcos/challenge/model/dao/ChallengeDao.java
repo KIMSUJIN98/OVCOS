@@ -835,6 +835,28 @@ public class ChallengeDao {
 		
 	}
 
+	public int deleteNormalChallenge(Connection conn, int normalChallengeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNormalChallenge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, normalChallengeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
 
 
 	
