@@ -6,7 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.ovcos.loginRegister.model.service.MemberService;
+import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.myPage.model.service.MyPageService;
 import com.ovcos.myPage.model.vo.MyPage;
 
@@ -35,12 +38,18 @@ public class GoalSetController extends HttpServlet {
 		String userId = request.getParameter("goal-userId");
 		
 		int result = new MyPageService().updateSetGoal(userGoal, userId);
+		Member m = new MemberService().refreshMember(userId);
+		
+		HttpSession session = request.getSession();
 		
 		if(result <= 0) {
 			request.setAttribute("alertMsg", "목표설정에 실패했습니다!");
+		}else {
+			session.removeAttribute("loginUser");
+			session.setAttribute("loginUser", m);
 		}
-		response.sendRedirect(request.getContextPath() + "/myPage.me");
 		
+		response.sendRedirect(request.getContextPath() + "/myPage.me");
 	}
 
 	/**

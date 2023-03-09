@@ -23,6 +23,27 @@
 		AND MEM_PWD = ?
 	</entry>
 	
+	<entry key="refreshMember">
+		SELECT  MEM_ID
+		      , MEM_PWD
+		      , MEM_NAME
+		      , MEM_NICK
+		      , MEM_INTRO
+		      , MEM_BIRTH
+		      , MEM_STATUS
+		      , MEM_LOC_INFO
+		      , MEM_PUBLIC_NY
+		      , MEM_GOAL_DTN
+		      , MEM_CODE_NY
+		      , MEM_RPR_CUM
+		      , MEM_API_TYPE
+		      , MEM_API_TOKEN
+		      , MEM_EML
+		      , MARKET_NY
+		FROM MEMBER
+		WHERE MEM_ID = ?
+	</entry>
+	
 		<entry key="selectMember">
 		SELECT  MEM_ID
 		      , MEM_PWD

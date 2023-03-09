@@ -18,6 +18,14 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	public Member refreshMember(String userId) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().refreshMember(conn, userId);
+		close(conn);
+		return m;
+	}
 
 public int insertMember(Member m) {
 		
