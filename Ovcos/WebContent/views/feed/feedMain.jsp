@@ -113,8 +113,7 @@ if (mylist != null && !mylist.isEmpty()) {
                         
                     </div>
                 </div>
-                <%if(nlist != null && !nlist.isEmpty){ %>
-				<div id="notice"><a href="<%=contextPath%>/list.no">
+             <div id="notice"><a href="<%=contextPath%>/list.no">
 <%
 if (nlist != null && !nlist.isEmpty()) {
     out.println(nlist.get(0).getNtcTitle());
@@ -157,15 +156,15 @@ if (nlist != null && !nlist.isEmpty()) {
                     </script>
                     <%}else if(num.equals("2")){ %>
                     <script>
-	                    var btn = $("#btn_list div");
-	                    btn.css("backgroundColor","white")
-	                    $("#friendFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
+                       var btn = $("#btn_list div");
+                       btn.css("backgroundColor","white")
+                       $("#friendFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
                     </script>
                     <%}else{ %>
                     <script>
-	                    var btn = $("#btn_list div");
-	                    btn.css("backgroundColor","white")
-	                    $("#myFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
+                       var btn = $("#btn_list div");
+                       btn.css("backgroundColor","white")
+                       $("#myFeed").parent().css("backgroundColor","rgb(235, 235, 235)");
                     </script>
                     <%} %>
                     
@@ -768,4 +767,3 @@ if (nlist != null && !nlist.isEmpty()) {
 
 </body>
 </html>
-
