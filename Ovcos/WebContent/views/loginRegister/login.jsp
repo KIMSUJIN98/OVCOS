@@ -23,8 +23,8 @@
                     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
                         charset="utf-8"></script>
                     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-					<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-	
+               <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+   
                 </head>
 
                 <body>
@@ -58,68 +58,13 @@
                             <span id="test1">간편 로그인</span>
                             <div id="login_img">
                                 <div id="naverIdLogin">
-                                    <img src="${pageContext.request.contextPath}/resources/image/naver.png" alt=""
-                                        onclick="loginNaver();">
+                                    <img src="${pageContext.request.contextPath}/resources/image/naver.png" alt="">
                                 </div>
                                 <img src="${pageContext.request.contextPath}/resources/image/kakao.png" alt="">
                                 <img src="${pageContext.request.contextPath}/resources/image/google.png" alt="">
                             </div>
                         </div>
                     </div>
-
- <script>
-function loginNaver() {
-  var naverLogin = new naver.LoginWithNaverId({
-    clientId: "KcHVwRHK_KE6cV1dfnlJ",
-    callbackUrl: "http://localhost:8581/Ovcos/views/loginRegister/naverLogin.jsp",
-    isPopup: false,
-    loginButton: { color: "green", type: 3, height: 60 }
-  });
-
-  naverLogin.init();
-
-  window.addEventListener("load", function () {
-    naverLogin.getLoginStatus(function (status) {
-      if (status) {
-        var email = neaverLogin.user.getEmail();
-        var name = neaverLogin.user.getName();
-        var nickname = neaverLogin.user.getNickname();
-
-        console.log(naverLogin.user);
-
-        if (email == undefined || email == null) {
-          alert("이메일은 필수 정보입니다.");
-          naverLogin.reprompt();
-          return;
-        }
-      } else {
-        console.log("callback 처리에 실패했습니다.");
-      }
-    });
-  });
-
-  var testPopUp;
-
-  function openPopUp() {
-    testPopUp = window.open(
-      "https://nid.naver.com/nidlogin.logout",
-      "_blank",
-      "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1"
-    );
-  }
-
-  function closePopUp() {
-    testPopUp.close();
-  }
-
-  function naverLogout() {
-    openPopUp();
-    setTimeout(function () {
-      closePopUp();
-    }, 1000);
-  }
-}
-</script>
 
 
                 </body>
