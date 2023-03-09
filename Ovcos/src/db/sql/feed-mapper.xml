@@ -15,10 +15,12 @@
 		      , START_LAT
 		      , START_LON
 		      , MEM_ID
+		      , IMGPATH
 		    )
 		    VALUES
 		    (
 		       SEQ_FEED_INDEX.NEXTVAL
+		     , ?
 		     , ?
 		     , ?
 		     , ?
@@ -92,6 +94,7 @@
         , MEM_NICK
         , REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
         , CHANGE_NAME
+        , IMGPATH
      FROM FEED
      JOIN GPX_FILES USING(FEED_INDEX)
      JOIN MEMBER USING(MEM_ID)

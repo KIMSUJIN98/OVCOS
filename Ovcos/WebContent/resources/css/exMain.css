@@ -256,19 +256,20 @@ td{
 }
 
 .btn1{
-    border: 1px solid #ccc;
+    margin-top: 2px;
     border-radius: 5px;
     padding: 0;
     width: 87px;
-    height: 10px;
+    height: 8px;
     font-size: 0.2rem;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
 }
 
 
 
 path{
     stroke: orangered !important;
+    stroke-width: 7px !important;
 }
 
 .iw_inner{

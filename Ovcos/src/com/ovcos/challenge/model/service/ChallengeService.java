@@ -155,7 +155,7 @@ public class ChallengeService {
 		
 		int result1 = new ChallengeDao().insertContestChallenge(conn, cc);
 		int result2 = 1;
-		int result3 = new ChallengeDao().insertEntryList(conn, cc);
+		int result3 = new ChallengeDao().insertEntryListSelf(conn, cc);
 				
 		if(img != null) {
 			result2 = new ChallengeDao().insertContestChallengeImg(conn, cc, img);
@@ -197,6 +197,69 @@ public class ChallengeService {
 		return result;
 		
 	}
+
+	public int insertEntryList(EntryList el) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertEntryList(conn, el);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<EntryList> selectEntryList(int contestChallengeNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<EntryList> list = new ChallengeDao().selectEntryList(conn, contestChallengeNo);
+		
+		close(conn);
+		
+		return list;
+	
+	}
+
+	public int deleteEntryList(EntryList el) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().deleteEntryList(conn, el);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int checkEntryId(EntryList el) {
+		Connection conn = getConnection();
+		
+		ArrayList<EntryList> list = new ChallengeDao().checkEntryId(conn, el);
+		
+		int result = 0;
+		
+		if(list == null || list.isEmpty()) {
+			result = 0;
+		} else {
+			result = 1;
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+
 
 	
 }

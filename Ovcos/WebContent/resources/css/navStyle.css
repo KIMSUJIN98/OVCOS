@@ -148,6 +148,14 @@ body{
     margin: 12px;
 }
 
+#checkAdmin{
+	font-family: 'SUIT-Regular';
+	color: red;
+	margin: auto;
+	margin-right: 20px;
+	text-align: 35px;
+}
+
 #feedEnrollBtn{
 	width: 100%;
 	height: 100%;
@@ -181,7 +189,7 @@ body{
 
 /* 마이페이지서브메뉴 */
 #subMenu{
-    width: 300px;
+    width: 150px; /* 알림메세지 div 적용시 300 */
     height: auto;
     margin: 0;
     padding: 0;

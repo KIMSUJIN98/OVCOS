@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.Contest;
 import com.ovcos.challenge.model.vo.ContestChallenge;
+import com.ovcos.challenge.model.vo.EntryList;
 
 /**
  * Servlet implementation class ContestChallengeListViewController

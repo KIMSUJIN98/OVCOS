@@ -1,6 +1,8 @@
 package com.ovcos.myPage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,11 +39,19 @@ public class MyPageMainController extends HttpServlet {
 		MyPage mp = new MyPageService().totalDistance(userId);
 		double monthDistance = mp.getDistance();
 		
+		
+		ArrayList<MyPage> list = new MyPageService().dayDistanceList(userId);
+		
 		HttpSession session = request.getSession();
-		if(monthDistance != 0) {
+		if(monthDistance != 0 && !list.isEmpty()) {
 			session.setAttribute("monthDistance", monthDistance);
-		}else {
+			session.setAttribute("dayList", list);
+		}else if(monthDistance != 0 && list.isEmpty()){
+			session.setAttribute("alertMsg", "저장된 러닝 기록이 없을리가 없는데...");
+		}else if(monthDistance == 0 && !list.isEmpty()){
 			session.setAttribute("alertMsg", "이번달은 러닝 기록이 없습니다.");
+		}else {
+			session.setAttribute("alertMsg", "저장된 러닝 기록이 없습니다.");
 		}
 		
 		request.getRequestDispatcher("views/myPage/myPageMain.jsp").forward(request, response);

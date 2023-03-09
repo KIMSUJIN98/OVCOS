@@ -75,19 +75,24 @@
             
             <div id="lastGroup">
                 <ul>
+                	<li id="checkAdmin">
+                		<% if(loginUser.getMemId().equals("admin")){ %>
+                        	관리자계정 접속중
+                        <% } %>
+                	</li>
                     <li id="li1">
                         <!-- <div id="feedEnrollBtn" class="btn" data-toggle="modal" data-target="#myModal">
                             <img src="<%= contextPath %>/resources/image/plus1.png" alt="">
                         </div> -->
                         
-	                    <button type="button" id="feedEnrollBtn" data-toggle="modal" data-target="#myModal">피드등록</button>
+	                    <button type="button" id="feedEnrollBtn" onclick="location.href='<%=contextPath%>/to.feed'" >피드등록</button>
                         
                     </li>
                     
                     <li id="li2" class="menu">
                         <div id="myPage"><img src="<%= contextPath %>/resources/image/mypage.png" alt="프로필이미지"></div>
-                        <ul id="subMenu" class="hide">
-                        	<li>
+                        <ul id="subMenu" class="hide" style="margin-left:-55px;">
+                        	<!-- <li>
                         		<div id="alert">message<hr>
                         			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
                         			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
@@ -95,7 +100,7 @@
                         			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a><br>
                         			<a href="#">이형근님이 회원님의 게시글에 좋아요를 눌렀습니다.</a>
                         		</div>
-                        	</li>
+                        	</li> -->
                             <li class="subMenuList"><a href="<%= contextPath %>/myPage.me?userId=<%=loginUser.getMemId()%>">마이페이지</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/editInfo.me?userId=<%=loginUser.getMemId()%>">개인정보수정</a></li>
                             <li class="subMenuList"><a href="<%= contextPath %>/list.fw?cpage=1&userId=<%=loginUser.getMemId()%>">친구목록</a></li>

@@ -70,19 +70,27 @@
 	<!-- 챌린지 메인 리스트 -->
 	<entry key="mainContestList">
 		SELECT 
-		       CNTS_CHLG_TITLE
+		       CNTS_CHLG_NO
+		     , CNTS_CHLG_TITLE
+		     , CNTS_CHLG_CONTENT
 		     , ENROLL_DATE
 		     , CNTS_CHLG_DATE
 		     , CNTS_CHLG_MAX
 		     , CNTS_CHLG_ID
 		     , CNTS_NAME
+		     , CNTS_NO
+             , CHANGE_NAME
 		  FROM CONTEST_CHALLENGE C
-		  JOIN CONTEST USING (CNTS_NO)
-		  JOIN ENTRY_LIST ON (CHLG_NO_INLIST = CNTS_NO)
+		  JOIN CONTEST T USING (CNTS_NO)
+		  JOIN ENTRY_LIST E ON (CHLG_NO_INLIST = CNTS_CHLG_NO)
+          LEFT 
+          JOIN UPLOAD U ON (CNTS_CHLG_NO = UPL_NO)
 		 WHERE
-		       CHLG_ENTRY_ID = ?
+		       E.CHLG_ENTRY_ID = ?
 		   AND C.DEL_STATUS = 'N'
-		   AND RPR_STATUS = 'N'
+		   AND C.RPR_STATUS = 'N'
+		 ORDER
+		    BY 1 DESC
 	</entry>
 	
 	<entry key="mainNormalList">
@@ -288,7 +296,7 @@
 	 WHERE CNTS_CHLG_NO = ?
 	</entry>
 	
-	<entry key="insertEntryList">
+	<entry key="insertEntryListSelf">
 		INSERT
 		  INTO ENTRY_LIST
 		     (
@@ -300,6 +308,47 @@
 		       SEQ_CHLG_NO.CURRVAL
 		     , ?
 		     )
+	</entry>
+	
+	<entry key="insertEntryList">
+		INSERT
+		  INTO ENTRY_LIST
+		     (
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     )
+	</entry>
+	
+	
+	<entry key="selectEntryList">
+		SELECT
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		     , MEM_NICK
+		  FROM ENTRY_LIST
+		  JOIN MEMBER ON (CHLG_ENTRY_ID = MEM_ID)
+		 WHERE CHLG_NO_INLIST = ?
+	</entry>
+	
+	<entry key="deleteEntryList">
+		DELETE
+		  FROM ENTRY_LIST
+		 WHERE CHLG_NO_INLIST = ?
+		   AND CHLG_ENTRY_ID = ?
+	</entry>
+	
+	<entry key="checkEntryId">
+		SELECT
+		       CHLG_NO_INLIST
+		     , CHLG_ENTRY_ID
+		  FROM ENTRY_LIST
+		 WHERE CHLG_NO_INLIST = ?
+		   AND CHLG_ENTRY_ID = ?
 	</entry>
 	
 </properties>

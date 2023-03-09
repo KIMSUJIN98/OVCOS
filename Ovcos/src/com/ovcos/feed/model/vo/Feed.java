@@ -22,15 +22,45 @@ public class Feed {
 	private String memName;//회원이름
 	private String memNick;//회원닉네임
 	private String originName;//파일원래이름
-	private int count; //조회수
 	private String feedRprId;
-	
+	private int count; //찜개수 
+	private String imgPath;
+
 
 	
 	public Feed() {}
+	
+	
 
 	
 	
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
+			String feedPathNy, double distance, double startLat, double startLon, String memId, String path,
+			String memName, String memNick, String originName, String imgPath) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.feedPublicType = feedPublicType;
+		this.feedPathNy = feedPathNy;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		MemId = memId;
+		this.path = path;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.originName = originName;
+		this.imgPath = imgPath;
+	}
+
+
+
+
+
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
 			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
@@ -240,6 +270,24 @@ public class Feed {
 		this.memNick = memNick;
 		this.originName = originName;
 		this.count = count;
+	}
+	
+	
+	
+	
+
+
+
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+
+
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	
@@ -547,9 +595,14 @@ public class Feed {
 				+ feedCnt + ", feedEval=" + feedEval + ", feedPublicType=" + feedPublicType + ", feedPathNy="
 				+ feedPathNy + ", feedRprNy=" + feedRprNy + ", feedRprDate=" + feedRprDate + ", distance=" + distance
 				+ ", startLat=" + startLat + ", startLon=" + startLon + ", feedDelNy=" + feedDelNy + ", MemId=" + MemId
-				+ ", path=" + path + "]";
+				+ ", path=" + path + ", memName=" + memName + ", memNick=" + memNick + ", originName=" + originName
+				+ ", count=" + count + ", imgPath=" + imgPath + "]";
 	}
 
+
+
+
+	
 
 
 

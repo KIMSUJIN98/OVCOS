@@ -52,7 +52,7 @@ public class FeedDao {
 			pstmt.setDouble(7, f.getStartLat());
 			pstmt.setDouble(8, f.getStartLon());
 			pstmt.setString(9, f.getMemId());
-			
+			pstmt.setString(10, f.getImgPath());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -203,7 +203,8 @@ public class FeedDao {
 						rset.getString("CHANGE_NAME"),
 						rset.getString("MEM_NAME"),
 						rset.getString("MEM_NICK"),
-						rset.getString("ORIGIN_NAME")
+						rset.getString("ORIGIN_NAME"),
+						rset.getString("IMGPATH")
 						));
 			}
 			
