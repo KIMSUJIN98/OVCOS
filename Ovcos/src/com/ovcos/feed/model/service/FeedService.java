@@ -5,13 +5,28 @@ import static com.ovcos.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.feed.model.dao.FeedDao;
 import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.feed.model.vo.Feeddetails;
 import com.ovcos.feed.model.vo.detail2comments;
+import com.ovcos.follow.model.dao.FollowDao;
+import com.ovcos.follow.model.vo.Follow;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
+/**
+ * @author soyoung
+ *
+ */
+/**
+ * @author soyoung
+ *
+ */
+/**
+ * @author soyoung
+ *
+ */
 public class FeedService {
 	
 	public int insertFeed(Feed f, Gpx gpx) {
@@ -29,6 +44,28 @@ public class FeedService {
 		
 		close(conn);
 		return result*result2;
+	}
+	
+	public int updateFeed(Feed f, Gpx gpx) {
+		Connection conn = getConnection();
+		int result1 = 1;
+		
+		int result2 = new FeedDao().updateFeed(conn,f);
+		
+		if(gpx != null) {
+			result1 = new FeedDao().updateGpx(conn, gpx);
+		}
+		
+		if(result1 * result2 >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
+		
+		
 	}
 	
 	
@@ -244,7 +281,7 @@ public class FeedService {
 	
 	
 	/**
-	 * 내 피드에서 찜 많은 순 정렬 조회.. 노가다 오지쥬?
+	 * 내 피드에서 찜 많은 순 정렬 조회
 	 * @param userId
 	 * @return
 	 */
@@ -319,6 +356,133 @@ public class FeedService {
 		
 	}
 	
+	
+	//진짜 완전 전체 조회용 리스트 
+	public ArrayList<Feed> selectFeedList() {
+		
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectFeedList(conn);
+		
+		close(conn);
+		
+		return list; 
+		
+	}
+	
+	
+	
+	/**
+	 * 페이징개수
+	 * @return
+	 */
+	public int selectListCount() {
+		
+		Connection conn = getConnection();
+		
+		int listCount = new FeedDao().selectListCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+		
+	}
+	
+	
+	/**
+	 * 페이징으로 피드 전체 목록 조회
+	 * @param pi
+	 * @return
+	 */
+	public ArrayList<Feed> selectList(Pageinfo pi){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectList(conn, pi);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	
+	
+	/**
+	 * 신고당한 피드 리스트 조회
+	 * @return
+	 */
+	public ArrayList<Feed> selectRprList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectRprList(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+
+	
+	/**
+	 * 신고당한 게시글 복귀(신고상태-n으로)
+	 * @param feedIndex
+	 * @return
+	 */
+	public int updateRprRestore(int feedIndex) {
+	Connection conn = getConnection();
+	int result = new FeedDao().updateRprRestore(conn, feedIndex);
+		
+	if(result > 0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+		close(conn);
+	
+		return result;
+		
+	}
+	
+	
+	
+	/**
+	 * 누적신고수 업데이트 
+	 * @param feedIndex
+	 * @return
+	 */
+	public int updateRprCum(int feedIndex) {
+	Connection conn = getConnection();
+	int result = new FeedDao().updateRprCum(conn, feedIndex);
+		
+	if(result > 0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+		close(conn);
+	
+		return result;
+		
+	}
+	
+	
+	
+	/**
+	 * 삭제된 게시글 조회
+	 * @return
+	 */
+	public ArrayList<Feed> selectDelList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectDelList(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+
 	
 	
 }

@@ -1,4 +1,4 @@
-package com.ovcos.feed.controller;
+package com.ovcos.inquiry.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ovcos.feed.model.service.FeedService;
-import com.ovcos.feed.model.vo.Feed;
-
 /**
- * Servlet implementation class FeedUpdateFormController
+ * Servlet implementation class InquiryUpdateFormController
  */
-@WebServlet("/updateForm.feed")
-public class FeedUpdateFormController extends HttpServlet {
+@WebServlet("/updateForm.bo")
+public class InquiryUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FeedUpdateFormController() {
+    public InquiryUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +26,11 @@ public class FeedUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int inqNo = Integer.parseInt(request.getParameter("num"));
 		
-		int feedIndex = Integer.parseInt(request.getParameter("no"));
 		
-		Feed f = new FeedService().selectFeed(feedIndex);
-		
-		request.setAttribute("f", f);
-		System.out.println(f);
-		
-		//컨씨알, 포워딩
-		request.getRequestDispatcher("views/feed/feedUpdateForm.jsp").forward(request, response);
+	
 	
 	}
 

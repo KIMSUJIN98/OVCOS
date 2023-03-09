@@ -1,4 +1,4 @@
-package com.ovcos.feed.controller;
+package com.ovcos.inquiry.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ovcos.feed.model.service.FeedService;
-import com.ovcos.feed.model.vo.Feed;
+import com.ovcos.inquiry.model.service.InquiryService;
+import com.ovcos.inquiry.model.vo.Inquiry;
 
 /**
- * Servlet implementation class FeedUpdateFormController
+ * Servlet implementation class InquiryDetailController
  */
-@WebServlet("/updateForm.feed")
-public class FeedUpdateFormController extends HttpServlet {
+@WebServlet("/detail.bo")
+public class InquiryDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FeedUpdateFormController() {
+    public InquiryDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +29,15 @@ public class FeedUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int inqNo = Integer.parseInt(request.getParameter("num"));
 		
-		int feedIndex = Integer.parseInt(request.getParameter("no"));
+		Inquiry i = new InquiryService().selectInquiry(inqNo);
 		
-		Feed f = new FeedService().selectFeed(feedIndex);
 		
-		request.setAttribute("f", f);
-		System.out.println(f);
+		request.setAttribute("inquiry", i);
+		request.getRequestDispatcher("views/inquiry/inquiryDetailView.jsp").forward(request, response);
 		
-		//컨씨알, 포워딩
-		request.getRequestDispatcher("views/feed/feedUpdateForm.jsp").forward(request, response);
+	
 	
 	}
 

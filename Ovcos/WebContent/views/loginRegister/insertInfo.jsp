@@ -38,7 +38,6 @@
           <%-- <%@ include file="../common/nav.jsp" %> --%>
 
             <script>
-
               $(function () {
                 $("#lastgroup").remove();
               })
@@ -155,16 +154,13 @@
               </div>
             </div>
             <script>
-
               function checkCode() {
                 var v1 = document.getElementById('code_check').value;
                 var v2 = document.getElementById('code').value;
                 const selectInput = document.querySelector("#code_check");
-
                 if (v1 != v2) {
                   document.getElementById('checkCode').style.color = "red";
                   document.getElementById('checkCode').innerHTML = "잘못된 인증번호입니다. 다시 인증해주세요.";
-
                   makeNull();
                 } else {
                   document.getElementById('checkCode').innerHTML = "인증되었습니다.";
@@ -172,12 +168,10 @@
                   makeReal();
                 }
               }
-
               function makeReal() {
                 var hi = document.getElementById("hi");
                 hi.type = "submit";
               }
-
               function makeNull() {
                 document.getElementById('code').value = '';
                 var hi = document.getElementById("hi");
@@ -185,7 +179,6 @@
               }
             </script>
             <script>
-
               function callServlet() {
                 var email = document.getElementById('memEml');
                 if (email.value.trim() === "") {
@@ -194,18 +187,14 @@
                   document.getElementById('checkEml').innerHTML = "이메일로 인증번호가 전송되었습니다.";
                   var code = document.getElementById('code_check').value;
                   var email = document.getElementById('memEml').value;
-
                   var data = {
                     'code': code,
                     'email': email
                   };
-
                   console.log(data);
-
                   var xhr = new XMLHttpRequest();
                   xhr.open('POST', '<%=contextPath %>/send.ma1', true);
                   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
                   xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                       if (xhr.status === 200) {
@@ -215,41 +204,31 @@
                       }
                     }
                   };
-
                   xhr.send(JSON.stringify(data));
                   console.log("안녕");
                 }
               }
-
-
-
               $(function validate() {
                 $("#checkIdBtn").on("click", function () {
                   const $idInput = $("#memId");
-
                   if ($idInput.val().trim().length === 0) {
                     $("#checkId").text("아이디를 입력해주세요.").css("color", "black");
                     $idInput.val("");
                     $idInput.focus();
                     return;
                   }
-
                   const regExp = /^[a-z\d]{4,20}$/;
-
                   if (!regExp.test($idInput.val())) {
                     $("#checkId").text("올바른 형식의 아이디가 아닙니다.").css("color", "red");
                     $idInput.val("");
                     $idInput.focus();
                     return;
-
                   }
-
                   $.ajax({
                     url: "idCheck.me",
                     data: { checkId: $idInput.val() },
                     success: function (result) {
                       console.log(result);
-
                       if (result === "NNNNY") {
                         $("#checkId").text("사용 가능한 아이디입니다.").css("color", "black");
                       } else {
@@ -263,20 +242,15 @@
                     }
                   });
                 })
-
                 $("#memPwd").on("blur", function () {
                   if ($(this).val().trim().length == 0) {
                     $(this).val("");
                     $("#checkPwd").text("비밀번호를 입력해주세요.").css("color", "red");;
                     /* $("#memPwd").val("");
                     $("#memPwd").focus(); */
-
                     return;
                   }
-
-
                   const regExp = /^[a-z\d!@#$%^&*]{6,15}$/i;
-
                   if (regExp.test($(this).val())) {
                     $("#checkPwd").text("사용 가능한 비밀번호입니다.").css("color", "black");;
                   } else {
@@ -284,9 +258,7 @@
                     $("#memPwd").val("");
                     $("#memPwd").focus();
                   }
-
                 })
-
                 $("#memPwd2").on("blur", function () {
                   if ($("#memPwd2").val().trim().length == 0) {
                     $(this).val("");
@@ -294,7 +266,6 @@
                     /*  $("#memPwd2").focus(); */
                     return;
                   }
-
                   if ($(this).val().trim().length == 0) {
                     $("#checkPwd2").text("");
                     return;
@@ -307,14 +278,12 @@
                     $("#memPwd2").focus();
                   }
                 })
-
                 $("#memBirth").on("blur", function () {
                   if ($(this).val().trim().length == 0) {
                     $("checkBirth").text("");
                     return;
                   }
                   const regExp = /^[0-9]{8}$/;
-
                   if (!regExp.test($("#memBirth").val())) {
                     $("#checkBirth").text("숫자로 8자리를 입력해주세요.").css("color", "red");
                     $("#memBirth").val("");
@@ -323,24 +292,19 @@
                     $("#checkBirth").text("올바른 형식입니다.").css("color", "black");
                   }
                 });
-
                 $("#checkNickBtn").on("click", function () {
                   const $nickInput = $("#memNick");
-
                   if ($nickInput.val().trim().length === 0) {
                     $("#checkNick").text("닉네임을 입력해주세요.").css("color", "red");
                     $nickInput.val("");
                     $nickInput.focus();
                     return;
                   }
-
                   $.ajax({
                     url: "nickCheck.me",
                     data: { checkNick: $nickInput.val() },
                     success: function (result) {
                       console.log(result);
-
-
                       if (result == "NNNNY") {
                         $("#checkNick").text("사용 가능한 닉네임입니다.").css("color", "black");
                       } else {
@@ -355,8 +319,6 @@
                   });
                 });
               })
-
-
             </script>
 
         </body>

@@ -1,4 +1,4 @@
-package com.ovcos.follow.controller;
+package com.ovcos.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,22 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ovcos.common.model.vo.Pageinfo;
+import com.ovcos.feed.model.service.FeedService;
+import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.follow.model.service.FollowService;
 import com.ovcos.follow.model.vo.Follow;
+import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class FollowListController
+ * Servlet implementation class AdminFeedListController
  */
-@WebServlet("/list.fw")
-public class FollowListController extends HttpServlet {
+@WebServlet("/feedList.admin")
+public class AdminFeedListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowListController() {
+    public AdminFeedListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +37,9 @@ public class FollowListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
 		
-		String userId = request.getParameter("userId");
+		
+		
 		
 		
 		int listCount;		//현재 총 게시글 개수 저장용
@@ -47,7 +51,8 @@ public class FollowListController extends HttpServlet {
 		int startPage; 		//페이징 바의 시작 수 4번선택시 1, 12번시 11
 		int endPage; 		//페이징 바의 끝 수 4번선택시10, 12선택시 20
 		
-		listCount = new FollowService().selectListCount(userId);
+		listCount = new FeedService().selectListCount();
+		
 		currentPage =  Integer.parseInt(request.getParameter("cpage"));
 		pageLimit = 10;
 		boardLimit = 10;
@@ -61,20 +66,24 @@ public class FollowListController extends HttpServlet {
 		
 		Pageinfo pi = new Pageinfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Follow> list = new FollowService().selectList(pi, userId);
+		ArrayList<Feed> list = new FeedService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
-		System.out.println(list);
+		//System.out.println(list);
+		response.setContentType("application/json; charset=utf-8");
+		request.getRequestDispatcher("views/admin/feedAdmin.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("views/follow/followListView.jsp").forward(request, response);
-
-		
-		
-		
-		
-		
-		
+//		
+//		
+//		ArrayList<Feed> list  = new FeedService().selectFeedList();
+//		response.setContentType("application/json; charset=utf-8");
+//		
+//		
+//		request.setAttribute("list", list);
+//		
+//		
+//		request.getRequestDispatcher("views/admin/feedAdmin.jsp").forward(request, response);
 	}
 
 	/**

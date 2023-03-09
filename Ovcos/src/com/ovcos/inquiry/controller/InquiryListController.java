@@ -1,26 +1,31 @@
-package com.ovcos.feed.controller;
+package com.ovcos.inquiry.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ovcos.feed.model.service.FeedService;
-import com.ovcos.feed.model.vo.Feed;
+import com.ovcos.common.model.vo.Pageinfo;
+import com.ovcos.inquiry.model.service.InquiryService;
+import com.ovcos.inquiry.model.vo.Inquiry;
+import com.ovcos.loginRegister.model.vo.Member;
 
 /**
- * Servlet implementation class FeedUpdateFormController
+ * Servlet implementation class InquiryListController
  */
-@WebServlet("/updateForm.feed")
-public class FeedUpdateFormController extends HttpServlet {
+@WebServlet("/list.bo")
+public class InquiryListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FeedUpdateFormController() {
+    public InquiryListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +34,14 @@ public class FeedUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String userId=((Member)request.getSession().getAttribute("loginUser")).getMemId();
 		
-		int feedIndex = Integer.parseInt(request.getParameter("no"));
+		ArrayList<Inquiry> list = new InquiryService().selectInquiryList(userId);
 		
-		Feed f = new FeedService().selectFeed(feedIndex);
+		request.setAttribute("list", list);
 		
-		request.setAttribute("f", f);
-		System.out.println(f);
-		
-		//컨씨알, 포워딩
-		request.getRequestDispatcher("views/feed/feedUpdateForm.jsp").forward(request, response);
-	
+		request.getRequestDispatcher("views/inquiry/inquiryListView.jsp").forward(request, response);
 	}
 
 	/**

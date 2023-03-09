@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+<entry key="selectInquiryList">
+SELECT INQ_NO, INQ_MENU, INQ_TITLE, INQ_DATE, MEM_ID
+FROM INQUIRY
+WHERE INQ_DEL_NY = 'N' 
+ AND MEM_ID=?
+ORDER BY INQ_NO DESC
+</entry>
+<entry key="selectListCount">
+
+	SELECT 
+            COUNT(*) count 
+    	FROM INQUIRY
+	WHERE INQ_DEL_NY='N'
+</entry>
+<entry key="selectList">
+                     SELECT *
+FROM (
+  SELECT ROWNUM RNUM, A.*
+  FROM (
+    SELECT INQ_NO,
+           INQ_MENU,
+           INQ_TITLE,
+           INQ_DATE,
+           INQ_CNT
+    FROM INQUIRY
+    WHERE INQ_DEL_NY='N'
+    ORDER BY INQ_NO DESC
+  ) A
+  WHERE ROWNUM BETWEEN ? AND ?
+);
+</entry>
+<entry key="insertInquiry">
+INSERT 
+       INTO INQUIRY
+       (
+       INQ_NO,
+       INQ_MENU,
+       INQ_TITLE,
+       INQ_DATE,
+       INQ_CNT,
+       MEM_ID
+       )
+       VALUES
+       (
+       SEQ_INQ_NO.NEXTVAL,
+       ?,
+       ?,
+       SYSDATE,
+       ?,
+       ?
+       )
+
+</entry>
+<entry key="selectInquiry">
+SELECT INQ_NO, INQ_MENU, INQ_TITLE, INQ_DATE, INQ_CNT, MEM_ID
+FROM INQUIRY
+WHERE INQ_DEL_NY = 'N' 
+  AND INQ_NO=?
+ORDER BY INQ_NO DESC
+</entry>
+
+
+
+
+<entry key="selectInquiryList">
+SELECT
+INQ_NO
+,INQ_MENU
+,INQ_TITLE
+,INQ_DATE
+,INQ_CNT
+,ANS_CNT
+,INQ_DEL_NY
+,MEM_ID
+FROM INQUIRY
+ORDER BY INQ_NO DESC
+</entry>
+
+
+</properties>
