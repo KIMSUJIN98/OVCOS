@@ -364,14 +364,13 @@
                         $("#entry").val("참가중");
                         document.getElementById('entry').className = 'btn btn-lg btn-primary';
                         // insertEntryList(num, max);
-                        selectEntryList(num, max)
-                        iconShowEntry(num);
+                        selectEntryList(num, max);
                     }else{
                         console.log("미참가");
                         $("#entry").val("참가하기");
                         document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
                         deleteEntryList(num, max);
-                        selectEntryList(num, max)
+                        selectEntryList(num, max);
                     }
                 },
                 error:function(){
@@ -404,7 +403,7 @@
                 success:function(result){
                     console.log(result)
                     if(result > 0){
-                        console.log("성공!")
+                        console.log("성공!");
                         selectEntryList(num, max);
                     }
                 },
@@ -425,7 +424,7 @@
                 success:function(result){
                     console.log(result)
                     if(result > 0){
-                        console.log("성공!")
+                        console.log("성공!");
                         selectEntryList(num, max);
                     }
                 },

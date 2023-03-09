@@ -33,7 +33,7 @@ public class AjaxNormalChallengeEntryDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String normalEntryId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		int normalChallNo = Integer.parseInt(request.getParameter("normalEntryDelete"));
+		int normalChallNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
 		
 		NEntryList nel = new NEntryList();
 		nel.setNormalChallNo(normalChallNo);

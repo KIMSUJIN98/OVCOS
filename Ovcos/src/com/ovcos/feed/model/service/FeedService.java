@@ -46,6 +46,28 @@ public class FeedService {
 		return result*result2;
 	}
 	
+	public int updateFeed(Feed f, Gpx gpx) {
+		Connection conn = getConnection();
+		int result1 = 1;
+		
+		int result2 = new FeedDao().updateFeed(conn,f);
+		
+		if(gpx != null) {
+			result1 = new FeedDao().updateGpx(conn, gpx);
+		}
+		
+		if(result1 * result2 >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
+		
+		
+	}
+	
 	
 	
 	public ArrayList<Feed> selectAllFeedList(){

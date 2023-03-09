@@ -85,6 +85,8 @@ public class FeedDao {
 		
 		return result;
 	}
+	
+	
 
 	
 	public ArrayList<Feed> selectAllFeedList(Connection conn){
@@ -834,7 +836,8 @@ public class FeedDao {
 						rset.getString("CHANGE_NAME"),
 						rset.getString("MEM_NAME"),
 						rset.getString("MEM_NICK"),
-						rset.getString("ORIGIN_NAME")
+						rset.getString("ORIGIN_NAME"),
+						rset.getString("IMGPATH")
 						
 						);
 			}
@@ -905,6 +908,61 @@ public class FeedDao {
 
 		return list;
 		
+	}
+
+	public int updateGpx(Connection conn, Gpx gpx) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateGpx");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gpx.getOriginName());
+			pstmt.setString(2, gpx.getChangeName());
+			pstmt.setInt(3, gpx.getFeedIndex());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateFeed(Connection conn, Feed f) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateFeed");
+		System.out.println(f);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, f.getFeedTitle());
+			pstmt.setString(2, f.getFeedCnt());
+			pstmt.setInt(3, f.getFeedEval());
+			pstmt.setString(4, f.getFeedPublicType());
+			pstmt.setString(5, f.getFeedPathNy());
+			pstmt.setDouble(6, f.getDistance());
+			pstmt.setDouble(7, f.getStartLat());
+			pstmt.setDouble(8, f.getStartLon());
+			pstmt.setInt(9, f.getFeedIndex());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 	
 	

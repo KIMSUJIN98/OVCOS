@@ -37,7 +37,7 @@ public class NormalChallengeListViewController extends HttpServlet {
 //		HttpSession session = request.getSession();
 		
 		ArrayList<Local> list1 = new ChallengeService().selectLocalList();
-		System.out.println(list1);
+//		System.out.println(list1);
 		
 		int local = 0;
 		if(local != 0) {
@@ -48,7 +48,7 @@ public class NormalChallengeListViewController extends HttpServlet {
 //		session.setAttribute("local2", local);
 		
 		ArrayList<NormalChallenge> list2 = new ChallengeService().normalChallengeList(local);
-		System.out.println(list2);
+//		System.out.println(list2);
 		
 		
 		request.setAttribute("list1", list1);
