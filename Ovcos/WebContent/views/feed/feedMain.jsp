@@ -784,13 +784,14 @@
                 </div> -->
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
+                
                 <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center">현재 위치</div>
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre"></div>
                     <div style="color: white;"> 
-                        <div id="year" style="color: white; padding-right: 5px;" align="center"></div>
-                        <div id="hour" style="color: white; padding-right: 5px;" align="center"></div>
+                        <div id="year" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
+                        <div id="hour" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
                     </div>
                 </div>   
                     <div >
@@ -803,7 +804,7 @@
                                 
                             </div>
                             <div style="font-size: 0.9rem; color: white;">
-                                <span id="miVal" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                                <span id="miVal" style="color: white; "></span> &micro;g/m<sup style="color: white;">3</sup>
                             </div>
                             
                         </div>
@@ -813,7 +814,7 @@
                         <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
                                 <img src="#" style="width: 40px; padding-top: 10px;" id="mi2" >
-                                <div style="padding-left: 10px; padding-top: 10px; color: white;" id="status2">나쁨</div>
+                                <div style="padding-left: 10px; padding-top: 18px; color: white;" id="status2">나쁨</div>
                             </div>
                         </div>
                         <div style="font-size: 0.9rem; color: white; padding-left: 50px; font-weight: 600;">

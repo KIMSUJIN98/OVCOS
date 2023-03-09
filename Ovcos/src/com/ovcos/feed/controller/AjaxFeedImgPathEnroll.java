@@ -50,6 +50,7 @@ public class AjaxFeedImgPathEnroll extends HttpServlet {
 			stream.close();
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().print(name);
+			System.out.println("저장성공");
 		    
 		}catch(Exception e){
 			e.printStackTrace();

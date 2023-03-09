@@ -529,11 +529,34 @@ WHERE FEED_INDEX = ?
         , MEM_NICK
         , REPLACE(REPLACE(ORIGIN_NAME, '_', ' '), '.gpx', '') as ORIGIN_NAME
         , CHANGE_NAME
+        , IMGPATH
      FROM FEED
      JOIN GPX_FILES USING(FEED_INDEX)
      JOIN MEMBER USING(MEM_ID)
 	WHERE FEED_INDEX = ? 
 	</entry>
+	
+	<entry key="updateFeed">
+		UPDATE FEED
+		   SET FEED_TITLE =?,
+		       FEED_CNT = ?,
+		       FEED_EVAL = ?,
+		       FEED_PUBLIC_TYPE = ?,
+		       FEED_PATH_NY = ?,
+		       DISTANCE = ?,
+		       START_LAT = ?,
+		       START_LON = ?
+		  WHERE FEED_INDEX = ?
+	</entry>
+	
+	<entry key="updateGpx">
+		UPDATE GPX_FILES
+		   SET ORIGIN_NAME = ?,
+		       CHANGE_NAME = ?
+		 WHERE FEED_INDEX = ?
+	</entry>
+	
+	
 </properties>
 
 
