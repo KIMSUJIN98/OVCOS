@@ -39,6 +39,7 @@ public class MyPageMainController extends HttpServlet {
 		MyPage mp = new MyPageService().totalDistance(userId);
 		double monthDistance = mp.getDistance();
 		
+		String today = new MyPageService().selectToday();
 		
 		ArrayList<MyPage> list = new MyPageService().dayDistanceList(userId);
 		
@@ -52,6 +53,10 @@ public class MyPageMainController extends HttpServlet {
 			session.setAttribute("alertMsg", "이번달은 러닝 기록이 없습니다.");
 		}else {
 			session.setAttribute("alertMsg", "저장된 러닝 기록이 없습니다.");
+		}
+		
+		if(today != null) {
+			session.setAttribute("today", today);
 		}
 		
 		request.getRequestDispatcher("views/myPage/myPageMain.jsp").forward(request, response);

@@ -21,6 +21,17 @@ public class MyPageService {
 		return mp;
 	}
 	
+	public String selectToday() {
+		
+		Connection conn = getConnection();
+		
+		String today = new MyPageDao().selectToday(conn);
+		
+		close(conn);
+		
+		return today;
+	}
+	
 	public ArrayList<MyPage> dayDistanceList(String userId) {
 		
 		Connection conn = getConnection();
@@ -30,6 +41,22 @@ public class MyPageService {
 		close(conn);
 		
 		return list;
+	}
+	
+	public int updateSetGoal(int userGoal, String userId) {
+
+		Connection conn = getConnection();
+		
+		int result = new MyPageDao().updateSetGoal(conn, userGoal, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 
 }

@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.notice.model.vo.Notice"%>
 <%@ include file="../common/nav.jsp" %>
 <%@ page import="com.ovcos.explore.model.vo.Explore"%>
 <%@ page import="com.ovcos.feed.model.vo.Feed"%>
@@ -10,6 +11,8 @@
    //ArrayList<Explore> allList = (ArrayList<Explore>)request.getAttribute("allList");
    ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
    request.setAttribute("data", allList);
+   ArrayList<Notice> nlist = (ArrayList<Notice>)request.getAttribute("nlist");//공지사항제목용
+   ArrayList<Feed> mylist= (ArrayList<Feed>)request.getAttribute("mylist");//최근활동출력용
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +23,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedContent.css">
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=97s38uvudx&submodules=geocoder"></script>
-<title>Insert title here</title>
 <title>OVCOS - 메인피드</title>
 <script src="https://kit.fontawesome.com/f54b74b3a0.js" crossorigin="anonymous"></script>
 
@@ -82,7 +84,21 @@
                         <div id="ac_recode">
                             <div id="last_ac1">
                                 <div class="h51"><h5>LAST ACTIVITY</h5></div>
-                                <div id="last_info"><a href="#" id="f_title">피드제목&nbsp;<span>2023-02-11</span></a></div>
+                                <div id="last_info"><a href="#" id="f_title">
+<%
+if (mylist != null && !mylist.isEmpty()) {
+    String title = mylist.get(0).getFeedTitle();
+    if (title.length() > 3) {
+        title = title.substring(0, 3);
+    }
+    out.println(title);
+}else{out.println("최근 활동이 없습니다.");}
+%>
+							&nbsp;<span><%
+if (mylist != null && !mylist.isEmpty()) {
+    out.println(mylist.get(0).getFeedDate());
+}else{out.println(" ");}
+%></span></a></div>
                                 
                             </div>
                             <div id="last_ac2">
@@ -98,7 +114,14 @@
                         
                     </div>
                 </div>
-                <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
+
+                <div id="notice"><a href="<%=contextPath%>/list.no">
+<%
+if (nlist != null && !nlist.isEmpty()) {
+    out.println(nlist.get(0).getNtcTitle());
+}
+%></a></div>
+
             </div>
 <!--            <<nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -122,7 +145,6 @@
                         <div id="fw_feed" ><a href="<%= contextPath %>/clickList.feed?num=2&userId=<%=loginUser.getMemId()%>" id="friendFeed" >친구피드</a></div>
                         <div id="my_feed"><a href="<%= contextPath %>/clickList.feed?num=3&userId=<%=loginUser.getMemId()%>"  id="myFeed">내피드</a></div>
                     </div>
-
                     <form action="searchList.feed" method="get" id="searchForm">
                         <div id="feed_search">
                             <div id="f_select">
@@ -223,12 +245,12 @@
                                                 <ul class="dropdown-menu">
                                                     
                                                     <li><a class="dropdown-item" href="#" onclick="clip();">공유하기</a></li>
-                                                    <%if(!(f.getMemId().equals(loginUser.getMemId()))){%>
+                                                    <%if(!(f.getMemId().equals(loginUser.getMemId()))||loginUser.getMemId().equals("admin")){%>
                                                         <!--남의피드일때만 보임-->
                                                     <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#cutfeedmodal<%=f.getFeedIndex()%>" >차단하기</a></li>
                                                     <li><a class="dropdown-item" href="#"  data-toggle="modal" data-target="#rprfeedmodal<%=f.getFeedIndex()%>">신고하기</a></li>
                                                     <%} %>
-                                                    <%if(f.getMemId().equals(loginUser.getMemId())){%>
+                                                    <%if(f.getMemId().equals(loginUser.getMemId())|| loginUser.getMemId().equals("admin")){%>
                                                         <!--내피드에만 보임-->
                                                     <li><a class="dropdown-item"  href="<%= contextPath %>/updateForm.feed?no=<%=f.getFeedIndex() %>" >수정하기</a></li><!--data-toggle="modal" data-target="#updatefeedmodal<%=f.getFeedIndex()%>"-->
                                                     <li><a class="dropdown-item" href="#"  data-toggle="modal" data-target="#deletefeedmodal<%=f.getFeedIndex()%>">삭제하기</a></li>
@@ -641,12 +663,12 @@
                     $(function(){ //피드공개여부 가져오기
                         
                             $("#displayNy2>option").each(function(){
-                                console.log("도니");
-                                console.log("<%=f.getFeedPublicType()%>");
-                                console.log($(this).val());
+                                
+                                
+                                
                                 if($(this).val() == "<%=f.getFeedPublicType()%>"){
                                 $(this).attr("selected",true);
-                                console.log("탄다!!왜 안되는겨 ㅗ ")
+                                
                                 }
                             })
                         
@@ -784,13 +806,14 @@
                 </div> -->
                 <!-- 미세먼지 관련 js -->
                 <script src="<%=contextPath %>/resources/js/dust.js"></script>
+                
                 <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center">현재 위치</div>
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre"></div>
                     <div style="color: white;"> 
-                        <div id="year" style="color: white; padding-right: 5px;" align="center"></div>
-                        <div id="hour" style="color: white; padding-right: 5px;" align="center"></div>
+                        <div id="year" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
+                        <div id="hour" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
                     </div>
                 </div>   
                     <div >
@@ -803,7 +826,7 @@
                                 
                             </div>
                             <div style="font-size: 0.9rem; color: white;">
-                                <span id="miVal" style="color: white;"></span> &micro;g/m<sup style="color: white;">3</sup>
+                                <span id="miVal" style="color: white; "></span> &micro;g/m<sup style="color: white;">3</sup>
                             </div>
                             
                         </div>
@@ -813,7 +836,7 @@
                         <div style="font-weight: 600; padding-left: 50px; color: white;">초미세먼지
                             <div style="display: flex;">
                                 <img src="#" style="width: 40px; padding-top: 10px;" id="mi2" >
-                                <div style="padding-left: 10px; padding-top: 10px; color: white;" id="status2">나쁨</div>
+                                <div style="padding-left: 10px; padding-top: 18px; color: white;" id="status2">나쁨</div>
                             </div>
                         </div>
                         <div style="font-size: 0.9rem; color: white; padding-left: 50px; font-weight: 600;">
@@ -850,26 +873,21 @@
 				</div>
                 
 
-            </div>
-        </div>
-        <div id="footer">
-            <!-- 푸터구역 -->
-            <div id="f1" style="" align="center">
-                <a href="#">약관&nbsp;</a> 
-                <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
-                <a href="#">&nbsp;고객센터&nbsp;</a>
-                <div style="font-weight: 500;">
-                    
-                    
+                <div id="footer">
+                    <!-- 푸터구역 -->
+                    <div id="f1">
+                        <a href="#">약관&nbsp;</a> 
+                        <a href="#">&nbsp;개인정보취급방침&nbsp;</a> 
+                        <a href="<%=contextPath%>/list.bo">&nbsp;고객센터&nbsp;</a>
+                    </div>
+                    <div>
+                        <p> 
+                        © 2023 KH OVCOS
+                        </p>
+                    </div>
+
                 </div>
 
-                <p style="margin-bottom: 0px;"> 
-                © 2023 KH OVCOS
-                </p>
-            </div>
-            <div>
-            </div>
-        </div>
 <!-- The Modal -->
     <div class="modal" id="myModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
