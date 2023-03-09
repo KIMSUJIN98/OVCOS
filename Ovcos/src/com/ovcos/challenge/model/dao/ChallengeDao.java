@@ -216,7 +216,7 @@ public class ChallengeDao {
 			while(rset.next()) {
 				list2.add(new NormalChallenge(rset.getString("NOR_CHLG_TITLE"),
 											  rset.getDate("ENROLL_DATE"),
-											  rset.getDate("NOR_CHLG_DATE"),
+											  rset.getString("NOR_CHLG_DATE"),
 											  rset.getInt("NOR_CHLG_MAX"),
 											  rset.getString("NOR_CHLG_ID"),
 											  rset.getString("LOCAL_NAME")
@@ -311,11 +311,13 @@ public class ChallengeDao {
 				while(rset.next()) {
 					list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
 							rset.getString("NOR_CHLG_TITLE"),
+							rset.getString("NOR_CHLG_CONTENT"),
 							rset.getDate("ENROLL_DATE"),
-							rset.getDate("NOR_CHLG_DATE"),
+							rset.getString("NOR_CHLG_DATE"),
 							rset.getInt("NOR_CHLG_MAX"),
 							rset.getString("NOR_CHLG_ID"),
 							rset.getString("LOCAL_NAME"),
+							rset.getString("CHANGE_NAME"),
 							rset.getInt("COUNT")
 							));
 				}
@@ -331,7 +333,7 @@ public class ChallengeDao {
 					list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
 							rset.getString("NOR_CHLG_TITLE"),
 							rset.getDate("ENROLL_DATE"),
-							rset.getDate("NOR_CHLG_DATE"),
+							rset.getString("NOR_CHLG_DATE"),
 							rset.getInt("NOR_CHLG_MAX"),
 							rset.getString("NOR_CHLG_ID"),
 							rset.getString("LOCAL_NAME"),
@@ -650,6 +652,80 @@ public class ChallengeDao {
 		}
 		
 		return list;
+	}
+
+	public int insertNormalChallenge(Connection conn, NormalChallenge nc) {
+		int result1 = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertNormalChallenge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nc.getNormalChallengeTitle());
+			pstmt.setString(2, nc.getNormalChallengeContent());
+			pstmt.setString(3, nc.getNormalChallengeDate());
+			pstmt.setInt(4, nc.getNormalChallengeMax());
+			pstmt.setString(5, nc.getNormalChallengeId());
+			pstmt.setInt(6, Integer.parseInt(nc.getNormalChallengeLocal()));
+			
+			result1 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result1;
+	}
+
+	public int insertNEntryListSelf(Connection conn, NormalChallenge nc) {
+		int result3 = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNEntryListSelf");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nc.getNormalChallengeId());
+			
+			result3 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result3;	
+		
+	}
+
+	public int insertNormalChallengeImg(Connection conn, NormalChallenge nc, ImageUpload img) {
+		int result2 = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNormalChallengeImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, img.getUplId());
+			pstmt.setInt(2, img.getUplMenu());
+			pstmt.setString(3, img.getOriginName());
+			pstmt.setString(4, img.getChangeName());
+			
+			result2 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result2;
+		
 	}
 
 

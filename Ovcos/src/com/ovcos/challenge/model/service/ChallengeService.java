@@ -259,6 +259,30 @@ public class ChallengeService {
 		return result;
 	}
 
+	public int insertNormalChallenge(NormalChallenge nc, ImageUpload img) {
+		Connection conn = getConnection();
+		
+		int result1 = new ChallengeDao().insertNormalChallenge(conn, nc);
+		System.out.println(result1);
+		int result2 = 1;
+		int result3 = new ChallengeDao().insertNEntryListSelf(conn, nc);
+				
+		if(img != null) {
+			result2 = new ChallengeDao().insertNormalChallengeImg(conn, nc, img);
+		}
+		
+		if(result1 * result2 * result3 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2 * result3;
+		
+	}
+
 
 
 	

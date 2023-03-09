@@ -151,20 +151,23 @@
 		SELECT 
 		       NOR_CHLG_NO
 		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
 		     , ENROLL_DATE
 		     , NOR_CHLG_DATE
 		     , NOR_CHLG_MAX
 		     , NOR_CHLG_ID
 		     , LOCAL_NAME
+             , CHANGE_NAME
 		     , (SELECT 
 		               COUNT(NCHLG_ENTRY_ID)
 		          FROM NENTRY_LIST 
 		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
 		  FROM NORMAL_CHALLENGE N
 		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
 		 WHERE
 		       N.DEL_STATUS = 'N'
-		   AND RPR_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
 	</entry>
 	
 	<entry key="normalChallengeListLocal">
@@ -351,6 +354,69 @@
 		  FROM ENTRY_LIST
 		 WHERE CHLG_NO_INLIST = ?
 		   AND CHLG_ENTRY_ID = ?
+	</entry>
+	
+	<entry key="insertNormalChallenge">
+		INSERT
+		  INTO NORMAL_CHALLENGE
+		     (
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+		     , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , NOR_CHLG_LOCAL
+		     )
+		VALUES
+		     (
+		       SEQ_NCHLG_NO.NEXTVAL
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , TO_DATE(?,'YYYYMMDDHH24MI')
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key="insertNEntryListSelf">
+		INSERT
+		  INTO NENTRY_LIST
+		     (
+		       NCHLG_NO_INLIST
+		     , NCHLG_ENTRY_ID
+		     )
+		VALUES
+		     (
+		       SEQ_NCHLG_NO.CURRVAL
+		     , ?
+		     )
+	</entry>
+	<entry key="insertNormalChallengeImg">
+		INSERT
+		  INTO UPLOAD
+		     (
+		       UPL_ID
+		     , UPL_MENU
+		     , UPL_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , VER_STATUS
+		     , DEL_STATUS
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     , SEQ_NCHLG_NO.CURRVAL
+		     , ?
+		     , ?
+		     , DEFAULT
+		     , DEFAULT
+		     )
 	</entry>
 	
 </properties>

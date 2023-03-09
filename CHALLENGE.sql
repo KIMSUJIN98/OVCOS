@@ -357,8 +357,83 @@ SELECT
 		 ORDER
 		    BY CNTS_DATE;
    
-            
-            
+INSERT
+  INTO NORMAL_CHALLENGE
+     (
+       NOR_CHLG_NO
+     , NOR_CHLG_TITLE
+     , NOR_CHLG_CONTENT
+     , ENROLL_DATE
+     , NOR_CHLG_DATE
+     , NOR_CHLG_MAX
+     , NOR_CHLG_ID
+     , NOR_CHLG_LOCAL
+     )
+VALUES
+     (
+       SEQ_NCHLG_NO.NEXTVAL
+     , ?
+     , ?
+     , SYSDATE
+     , TO_DATE(?,'YYYYMMDDHH24MI')
+     , ?
+     , ?
+     , ?
+     );
+     
+     
+INSERT
+  INTO ENTRY_LIST
+     (
+       CHLG_NO_INLIST
+     , CHLG_ENTRY_ID
+     )
+VALUES
+     (
+       SEQ_CHLG_NO.CURRVAL
+     , ?
+     );
+     
+INSERT
+  INTO NENTRY_LIST
+     (
+       NCHLG_NO_INLIST
+     , NCHLG_ENTRY_ID
+     )
+VALUES
+     (
+       SEQ_NCHLG_NO.CURRVAL
+     , ?
+     )     ;
+     
+     
+		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N';
+           
+           SELECT * FROM NORMAL_CHALLENGE;
+    
+    
+    
+    
+    
 ROLLBACK;
 
 

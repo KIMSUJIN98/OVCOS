@@ -141,7 +141,8 @@
                 <% for(ContestChallenge cc : list) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <div id="icon-sm" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div>
+                            <div id="icon-sm-complete" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div>
+                            <div id="icon-sm-entry" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem; display: none;">참가중</div>
                             <!-- <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div> -->
                             <!-- image -->
                             <% if(cc.getChangeName() != null) { %>
@@ -188,7 +189,12 @@
                                         <table class="detail" style="width: 400px;">
                                             <tr>
                                                 <td>
-                                                    챌린지 날짜 : <%= cc.getContestChallengeDate() %> <%= cc.getContestChallengeId() %>
+                                                    <span>
+                                                        챌린지 날짜 : <%= cc.getContestChallengeDate() %> 
+                                                    </span>
+                                                    <span id="uploadNick">
+                                                        등록자 : <%= cc.getContestChallengeId() %>
+                                                    </span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -297,6 +303,7 @@
     	})
 
         // $(function(){
+
         // })
 
         function substringDate(contestDate){
@@ -358,6 +365,7 @@
                         document.getElementById('entry').className = 'btn btn-lg btn-primary';
                         // insertEntryList(num, max);
                         selectEntryList(num, max)
+                        iconShowEntry(num);
                     }else{
                         console.log("미참가");
                         $("#entry").val("참가하기");
@@ -438,10 +446,14 @@
                     console.log(result);
                     let value = "";
                     let value2 = "";
-        
+                    let value3 = "";
+
                     for(let i = 0; i < result.length; i++){
                         value += "<span>" + (i+1) + " : " + result[i].memNick + " 님</span><br>";
                     }
+                    
+                    value3 += "등록자 : " + result[0].memNick + " 님"
+                    $("#uploadNick").html(value3);
 
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
                     $("#count-area>td").html(value);
@@ -450,6 +462,7 @@
                     
                     value2 += "참가인원 : " + result.length + " / " + max;
                     $("#area" + num).html(value2);
+
 
                     if(result.length == max) {
                         console.log("max!!");
@@ -473,9 +486,9 @@
 
         function iconShow(num, max){
             if(num == max){
-                document.getElementById("icon-sm").style.display = 'block';
+                document.getElementById("icon-sm-complete").style.display = 'block';
             }else {
-                document.getElementById("icon-sm").style.display = 'none';
+                document.getElementById("icon-sm-complete").style.display = 'none';
             }
         }
 
