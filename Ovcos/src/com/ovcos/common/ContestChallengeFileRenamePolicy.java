@@ -11,7 +11,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
  * @author user1
  *
  */
-public class ChallengeFileRenamePolicy implements FileRenamePolicy {
+public class ContestChallengeFileRenamePolicy implements FileRenamePolicy {
 	
 	@Override
 	public File rename(File originFile) {
@@ -24,7 +24,7 @@ public class ChallengeFileRenamePolicy implements FileRenamePolicy {
 		
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		String changeName = currentTime + "-challenge_" + ranNum + ext;
+		String changeName = currentTime + "-contestChallenge_" + ranNum + ext;
 		
 		return new File(originFile.getParent(), changeName);
 	}

@@ -63,7 +63,7 @@
             <img src="resources/image/challengeMain2.png" style="margin-top: 40px;">
             <br><br>
             <a href="cntsMain.ch" style="text-decoration: none; font-size: 20px; margin-right: 50px;">대회챌린지</a>
-            <a href="ncList.ch" style="text-decoration: none; font-size: 20px; ">일반챌린지</a>
+            <a href="ncList.ch?local=0" style="text-decoration: none; font-size: 20px; ">일반챌린지</a>
             <br>
         </div>
     <% }else { %>

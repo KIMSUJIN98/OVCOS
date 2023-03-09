@@ -550,7 +550,7 @@ VALUES
 		 WHERE
 		       N.DEL_STATUS = 'N'
 		   AND N.RPR_STATUS = 'N'
-		   AND LOCAL_NO = 1
+		   AND LOCAL_NO = 12
 		   AND NOR_CHLG_DATE > SYSDATE
 		 ORDER
 		    BY 1 DESC;
@@ -591,8 +591,16 @@ UPDATE
     
     
     
+    
 ROLLBACK;
 
+
+delete contest;
+delete contest_challenge;
+delete normal_challenge;
+delete upload;
+delete entry_list;
+delete nentry_list;
 
 COMMIT;
   

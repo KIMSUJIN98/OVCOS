@@ -15,7 +15,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.NormalChallenge;
-import com.ovcos.common.ChallengeFileRenamePolicy;
+import com.ovcos.common.NormalChallengeFileRenamePolicy;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.ImageUpload;
 
@@ -47,7 +47,7 @@ public class NormalChallengeInsertController extends HttpServlet {
 			
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/");
 			
-			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "utf-8", new ChallengeFileRenamePolicy());
+			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "utf-8", new NormalChallengeFileRenamePolicy());
 			
 			String normalChallengeId = multi.getParameter("userId");
 			String normalChallengeTitle = multi.getParameter("challengeName");
@@ -94,7 +94,7 @@ public class NormalChallengeInsertController extends HttpServlet {
 			
 			int result = new ChallengeService().insertNormalChallenge(nc, img);
 			
-			response.sendRedirect(request.getContextPath() + "/ncList.ch");
+			response.sendRedirect(request.getContextPath() + "/ncList.ch?local=0");
 			
 		}
 		

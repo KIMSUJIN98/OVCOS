@@ -64,7 +64,6 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <!-- <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /> -->
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center" style="margin-top: 50px;">
@@ -149,6 +148,7 @@
                         </div>
                     </div>
                 </div>
+                <% int count = 0; %>
                 <% for(NormalChallenge n : list2) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -179,14 +179,13 @@
                             <!-- actions -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <!-- <a class="btn btn-outline-dark mt-auto" href="#">참가하기</a> -->
-                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailNormalChallenge<%= n.getNormalChallengeNo() %>" onclick="checkEntryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">상세보기</button>
+                                    <button type="submit" class="btn btn-outline-dark mt-auto" data-toggle="modal" data-target="#detailNormalChallenge<%= count %>" onclick="checkEntryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">상세보기</button>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- The Modal -->
-                        <div class="modal fade" id="detailNormalChallenge<%= n.getNormalChallengeNo() %>">
+                        <div class="modal fade" id="detailNormalChallenge<%= count %>">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
@@ -202,7 +201,7 @@
                                                     <span>
                                                         챌린지 날짜 : <%= n.getNormalChallengeDate() %> 
                                                     </span>
-                                                    <span class="uploadNick">
+                                                    <span id="uploadNick">
                                                         등록자 : <%= n.getNormalChallengeId() %>
                                                     </span>
                                                 </td>
@@ -221,29 +220,29 @@
                                                     <%= n.getNormalChallengeContent() %>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <br><br>
-                                                </td>
-                                            </tr>
-                                            <tr class="count-area">
+                                            <tr id="count-area">
                                                 <td>
                                                 	<!--  -->
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <br><br>
                                                 	업로드날짜 : <%= n.getEnrollDate() %>
                                                 </td>
                                             </tr>
-
+                                            <tr>
+                                                <td>
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                            </tr>
                                         </table>
-                                        <br>
+                                        <br><br><br>
                                         <% if(loginUser != null && !loginUser.getMemId().equals(n.getNormalChallengeId())) { %>
-                                            <input type="submit" id="entry<%= n.getNormalChallengeNo() %>" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">
-                                            <button id="trigger-btn" style="display: none;" onclick="iconShow(<%= n.getCount() %>, <%= n.getNormalChallengeMax() %>);"></button>
-                                            <!-- <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkNentryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);"> -->
+                                            <input type="submit" id="entry<%= count %>" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>, <%= count %>);">
                                         <% } %>
                                     </div>
                                     <!-- Modal footer -->
@@ -258,6 +257,7 @@
                             </div>
                         </div>
                     </div>
+                <% count++; %>
                 <% } %>
             </div>
         </div>
@@ -281,7 +281,6 @@
                             정말로 삭제하시겠습니까? 
                         </b>
                         <br><br>
-
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -304,41 +303,13 @@
     <script src="../../resources/js/scripts.js"></script>
 
     <script>
-        // $(function(){
-        // })
-
-        // summernote
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                height: 300,
-                lang: "ko-KR",
-                placeholder: '상세 내용을 입력하세요.',
-                toolbar: [
-							['style', ['style']],
-							['fontsize', ['fontsize']],
-							['font', ['bold', 'italic', 'underline', 'clear']],
-							['fontname', ['fontname']],
-							['color', ['color']],
-							['para', ['ul', 'ol', 'paragraph']],
-							['height', ['height']],
-							['view', ['codeview']],
-							['help', ['help']]
-						]
-            })
-        })
-
-        // $(window).load(function(){
-    	// 	$("#trigger-btn").trigger("click");
-        //     iconShow(num, max);
-    	// })
-
         var selectBox = function(local){
             var selectLocal = document.getElementById("selectLocal");
             var local = (selectLocal.options[selectLocal.selectedIndex].value);
             // console.log(local);
             location.href='<%= contextPath %>/ncList.ch?local=' + local;
             // console.log(selectLocal.options[selectLocal.selectedIndex].text);
-            // $("#local-tag").val(selectLocal.options[selectLocal.selectedIndex].text);
+            $("#local-tag").val(selectLocal.options[selectLocal.selectedIndex].text);
 
             // $.ajax({
             //     url:"selectLocalView.ch",
@@ -377,6 +348,7 @@
                 alert("과거로 돌아갈 수는 없어요..ㅠ 날짜를 다시 확인해주세요.");
                 return false;
             }
+
             if(inputDate == sysdate){
                 if(inputTime < systime){
                     alert("시간을 확인해주세요.");
@@ -418,7 +390,7 @@
         }
         
         // ajax 상세보기 버튼 참가여부 확인
-        function checkEntryId(num, max){
+        function checkEntryId(num, max, count){
             $.ajax({
                 url:"normalCheckEntryId.ch",
                 data:{
@@ -429,16 +401,16 @@
                     console.log(result)
                     if(result > 0){
                         console.log("참가중");
-                        $("#entry" + num).val("참가중");
-                        $("#entry" + num).attr("class", "btn btn-lg btn-primary");
+                        $("#entry").val("참가중");
+                        document.getElementById('entry').className = 'btn btn-lg btn-primary';
                         // insertEntryList(num, max);
-                        selectEntryList(num, max)
+                        selectEntryList(num, max, count)
                     }else{
                         console.log("미참가");
-                        $("#entry" + num).val("참가하기");
-                        $("#entry" + num).attr("class", "btn btn-lg btn-outline-primary");
-                        deleteEntryList(num, max);
-                        selectEntryList(num, max);
+                        $("#entry").val("참가하기");
+                        document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
+                        deleteEntryList(num, max, count);
+                        selectEntryList(num, max, count);
                     }
                 },
                 error:function(){
@@ -448,20 +420,21 @@
         }
 
         // 엔트리 버튼 컨트롤
-        function enterControll(num, max){
-            if($("#entry" + num).val() == '참가하기') {
-                $("#entry" + num).val("참가중");
-                $("#entry" + num).attr("class", "btn btn-lg btn-primary");
-                insertEntryList(num, max);
-            }else if($("#entry" + num).val() == '참가중') {
-                $("#entry" + num).val("참가하기");
-                $("#entry" + num).attr("class", "btn btn-lg btn-outline-primary");
-                deleteEntryList(num, max);
+        function enterControll(num, max, count){
+            if($("#entry" + count).val() == '참가하기') {
+                $("#entry" + count).val("참가중");
+                $("#entry" + count).attr("class", "btn btn-lg btn-primary");
+                console.log(num);
+                insertEntryList(num, max, count);
+            }else if($("#entry" + count).val() == '참가중') {
+                $("#entry" + count).val("참가하기");
+                $("#entry" + count).attr("class", "btn btn-lg btn-outline-primary");
+                deleteEntryList(num, max, count);
             }
         }
 
         // ajax 엔트리 리스트 참가
-        function insertEntryList(num, max){
+        function insertEntryList(num, max, count){
             $.ajax({
                 url:"normalEntryInsert.ch",
                 data:{
@@ -472,7 +445,7 @@
                     console.log(result)
                     if(result > 0){
                         console.log("성공!");
-                        selectEntryList(num, max);
+                        selectEntryList(num, max, count);
                     }
                 },
                 error:function(){
@@ -482,7 +455,7 @@
         }
 
         // ajax 엔트리 리스트 참가취소
-        function deleteEntryList(num, max){
+        function deleteEntryList(num, max, count){
             $.ajax({
                 url:"normalEntryDelete.ch",
                 data:{
@@ -493,7 +466,7 @@
                     console.log(result)
                     if(result > 0){
                         console.log("성공!");
-                        selectEntryList(num, max);
+                        selectEntryList(num, max, count);
                     }
                 },
                 error:function(){
@@ -520,19 +493,20 @@
                     }
                     
                     value3 += "등록자 : " + result[0].memNick + " 님"
-                    $(".uploadNick").html(value3);
+                    $("#uploadNick").html(value3);
 
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
-                    $(".count-area>td").html(value);
+                    $("#count-area>td").html(value);
                     
                     $("#hiddenTarget" + num).remove();
                     
                     value2 += "참가인원 : " + result.length + " / " + max;
                     $("#area" + num).html(value2);
 
+
                     if(result.length == max) {
                         console.log("max!!");
-                        closeEntry(num);
+                        closeEntry();
                     }
                 },
                 error:function(){
@@ -541,22 +515,13 @@
             })
         }
 
-        function closeEntry(num){
-            if($("#entry" + num).val() == '참가하기') {
-                $("#entry" + num).val("모집완료");
-                $("#entry" + num).attr("disabled", true);
-                // $("#icon-sm").show();
-                $("#entry" + num).attr("class", "btn btn-lg btn-dark");
+        function closeEntry(num, count){
+            if($("#entry" + count).val() == '참가하기') {
+                $("#entry" + count).val("모집완료");
+                $("#entry" + count).attr("disabled", true);
+                $("#entry" + count).attr("class", "btn btn-lg btn-dark");
             }
         }
-
-        // function iconShow(num, max){
-        //     if(num == max){
-        //         document.getElementById("icon-sm-complete").style.display = 'block';
-        //     }else {
-        //         document.getElementById("icon-sm-complete").style.display = 'none';
-        //     }
-        // }
 
     </script>
 
