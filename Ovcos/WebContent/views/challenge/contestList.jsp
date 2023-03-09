@@ -429,8 +429,8 @@
                         value += "<span>" + (i+1) + " : " + result[i].memNick + " 님</span><br>";
                     }
                     
-                    value3 += "등록자 : " + result[0].memNick + " 님"
-                    $(".uploadNick").html(value3);
+                    // value3 += "등록자 : " + result[0].memNick + " 님"
+                    // $(".uploadNick").html(value3);
 
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
                     $(".count-area>td").html(value);
