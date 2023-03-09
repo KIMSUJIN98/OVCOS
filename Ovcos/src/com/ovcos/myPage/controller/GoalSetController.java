@@ -49,7 +49,7 @@ public class GoalSetController extends HttpServlet {
 			session.setAttribute("loginUser", m);
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/myPage.me?userId=" + userId);
+		response.sendRedirect(request.getContextPath() + "/myPage.me");
 	}
 
 	/**

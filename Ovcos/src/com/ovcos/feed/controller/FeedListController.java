@@ -64,11 +64,11 @@ public class FeedListController extends HttpServlet {
 		String select = request.getParameter("sorting");
 		
 		
-		//ArrayList<Notice> nlist = new NoticeService().selectNoticeList();
-		//request.setAttribute("nlist", nlist);//메인 공지사항 출력용
+		ArrayList<Notice> nlist = new NoticeService().selectNoticeList();
+		request.setAttribute("nlist", nlist);//메인 공지사항 출력용
 		
-		//ArrayList<Feed> mylist = new FeedService().selectMyList(userId); 
-		//request.setAttribute("mylist", mylist);//메인 최근활동 출력용
+		ArrayList<Feed> mylist = new FeedService().selectMyList(userId); 
+		request.setAttribute("mylist", mylist);//메인 최근활동 출력용
 		
 		
 		ArrayList<Feed>  allList = new FeedService().selectArrayList(userId);

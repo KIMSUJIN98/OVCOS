@@ -6,8 +6,8 @@
     return random;
     }
 %>
-<%-- <% String selectResult=(String)request.getAttribute("select"); %> --%>
-<% Member m = (Member)request.getAttribute("userInfo"); %>
+<% String selectResult=(String)request.getAttribute("select"); %>
+<%  %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@
 	    <div id="edit-wrap">
 	    	<div id="content-area">
 	    		<form id="enroll-form" action="<%=contextPath %>/?????" method="post" onsubmit="return validate();">
-	       			<%-- <input type="hidden" name="selectResult" value="<%=selectResult%>"> --%>
+	       			<input type="hidden" name="selectResult" value="<%=selectResult%>">
 	     			<table id="insertInfo">
 	       				<tr>
 	       					<td colspan="2"><h3>OVCOS 개인정보수정</h3></td>
@@ -50,12 +50,12 @@
 	       				<tr>
 	         				<td>아이디</td>
 	         				<td style="width: 330px;">
-	         					<input type="text" id="memId" name="memId" maxlength="20" value="<%= loginUser.getMemId()%>" readonly> <!-- 아이디값 받아오기 -->
+	         					<input type="text" id="memId" name="memId" maxlength="20" value="<%= loginUser.getMemId()%>" readonly><!-- 아이디값 받아오기 -->
 	         				</td>
 	       				</tr>
 	       				<tr>
 	         				<td>비밀번호</td>
-	         				<td><input type="password" id="memPwd" name="memPwd" required placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
+	         				<td><input type="password" id="memPwd" name="memPwd" value="<%= loginUser.getMemPwd()%>" required placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
 	       				</tr>
 		                <tr>
 		                    <td></td>
@@ -63,7 +63,7 @@
 		                </tr>
 		                <tr>
 		                    <td style="width: 100px;">비밀번호 확인</td>
-		                    <td><input type="password" id="memPwd2" name="memPwd2" required placeholder="다시 한 번 입력하세요."></td>
+		                    <td><input type="password" id="memPwd2" value="<%= loginUser.getMemPwd()%>" required placeholder="다시 한 번 입력하세요."></td>
 		                </tr>
 		                <tr>
 		                    <td></td>
