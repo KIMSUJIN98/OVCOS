@@ -15,18 +15,6 @@ import com.ovcos.follow.model.vo.Follow;
 import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
-/**
- * @author soyoung
- *
- */
-/**
- * @author soyoung
- *
- */
-/**
- * @author soyoung
- *
- */
 public class FeedService {
 	
 	public int insertFeed(Feed f, Gpx gpx) {
@@ -51,10 +39,12 @@ public class FeedService {
 		int result1 = 1;
 		
 		int result2 = new FeedDao().updateFeed(conn,f);
+		System.out.println("result2 : "+result2);
 		
 		if(gpx != null) {
 			result1 = new FeedDao().updateGpx(conn, gpx);
 		}
+		System.out.println("result1 : "+result1);
 		
 		if(result1 * result2 >0) {
 			commit(conn);
@@ -483,6 +473,7 @@ public class FeedService {
 		
 	}
 
-	
+
+
 	
 }

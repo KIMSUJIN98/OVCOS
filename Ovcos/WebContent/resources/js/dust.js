@@ -131,16 +131,12 @@ function select1(sido){
 
         function getUserLocation(){
             if(!navigator.geolocation){
-                alert("위치 정보가 지원되지 않습니다");
-                throw "위치 정보가 지원되지 않습니다."
+                // alert("위치 정보가 지원되지 않습니다");
+                select1("서울");
+                
             }else{
                 navigator.geolocation.getCurrentPosition(success);
             }
         }
-
         
-
-
-        
-
         getUserLocation();
