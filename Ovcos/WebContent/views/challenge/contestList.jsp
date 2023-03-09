@@ -148,8 +148,8 @@
                 <% for(ContestChallenge cc : list) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <div id="icon-sm-complete" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div>
-                            <div id="icon-sm-entry" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem; display: none;">참가중</div>
+                            <!-- <div id="icon-sm-complete" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div> -->
+                            <!-- <div id="icon-sm-entry" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem; display: none;">참가중</div> -->
                             <!-- <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div> -->
                             <!-- image -->
                             <% if(cc.getChangeName() != null) { %>
@@ -304,10 +304,10 @@
     <script src="../../resources/js/scripts.js"></script>
 
     <script>
-        $(window).load(function(){
-    		$("#trigger-btn").trigger("click");
-            iconShow(num, max);
-    	})
+        // $(window).load(function(){
+    	// 	$("#trigger-btn").trigger("click");
+        //     iconShow(num, max);
+    	// })
 
         // $(function(){
 
@@ -511,13 +511,13 @@
             }
         }
 
-        function iconShow(num, max){
-            if(num == max){
-                document.getElementById("icon-sm-complete").style.display = 'block';
-            }else {
-                document.getElementById("icon-sm-complete").style.display = 'none';
-            }
-        }
+        // function iconShow(num, max){
+        //     if(num == max){
+        //         document.getElementById("icon-sm-complete").style.display = 'block';
+        //     }else {
+        //         document.getElementById("icon-sm-complete").style.display = 'none';
+        //     }
+        // }
 
     </script>
 

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.ovcos.challenge.model.service.ChallengeService;
 import com.ovcos.challenge.model.vo.Contest;
 import com.ovcos.challenge.model.vo.ContestChallenge;
 import com.ovcos.challenge.model.vo.EntryList;
@@ -854,6 +855,43 @@ public class ChallengeDao {
 		}
 		
 		return result;
+		
+	}
+
+	public ArrayList<NormalChallenge> selectLocalView(Connection conn, int localNo) {
+		ArrayList<NormalChallenge> list = new ChallengeService().selectLocalView(localNo);
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLocalView");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, localNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
+										  rset.getString("NOR_CHLG_TITLE"),
+										  rset.getString("NOR_CHLG_CONTENT"),
+										  rset.getDate("ENROLL_DATE"),
+										  rset.getString("NOR_CHLG_DATE"),
+										  rset.getInt("NOR_CHLG_MAX"),
+										  rset.getString("NOR_CHLG_ID"),
+										  rset.getString("LOCAL_NAME"),
+										  rset.getString("CHANGE_NAME"),
+										  rset.getInt("COUNT")
+										  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 		
 	}
 

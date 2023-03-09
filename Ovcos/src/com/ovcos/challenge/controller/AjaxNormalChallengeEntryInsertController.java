@@ -33,10 +33,10 @@ public class AjaxNormalChallengeEntryInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String normalEntryId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		int normalChallNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
+		int normalChallengeNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
 		
 		NEntryList nel = new NEntryList();
-		nel.setNormalChallNo(normalChallNo);
+		nel.setNormalChallNo(normalChallengeNo);
 		nel.setNormalEntryId(normalEntryId);
 		
 		int result = new ChallengeService().insertNEntryList(nel);

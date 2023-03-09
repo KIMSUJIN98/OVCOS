@@ -163,8 +163,8 @@
                 <% for(NormalChallenge n : list2) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <div id="icon-sm-complete" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div>
-                            <div id="icon-sm-entry" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem; display: none;">참가중</div>
+                            <!-- <div id="icon-sm-complete" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; display: none;">모집완료</div> -->
+                            <!-- <div id="icon-sm-entry" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem; display: none;">참가중</div> -->
                             <!-- <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">모집완료</div> -->
                             <!-- image -->
                             <% if(n.getChangeName() != null) { %>
@@ -342,18 +342,32 @@
             })
         })
 
-        $(window).load(function(){
-    		$("#trigger-btn").trigger("click");
-            iconShow(num, max);
-    	})
+        // $(window).load(function(){
+    	// 	$("#trigger-btn").trigger("click");
+        //     iconShow(num, max);
+    	// })
 
         var selectBox = function(local){
             var selectLocal = document.getElementById("selectLocal");
             var local = (selectLocal.options[selectLocal.selectedIndex].value);
-            console.log(local);
+            // console.log(local);
             location.href='<%= contextPath %>/ncList.ch?local=' + local;
-            console.log(selectLocal.options[selectLocal.selectedIndex].text);
-            $("#local-tag").val(selectLocal.options[selectLocal.selectedIndex].text);
+            // console.log(selectLocal.options[selectLocal.selectedIndex].text);
+            // $("#local-tag").val(selectLocal.options[selectLocal.selectedIndex].text);
+
+            // $.ajax({
+            //     url:"selectLocalView.ch",
+            //     data:{
+            //         localNo:local
+            //     },
+            //     type:"post",
+            //     success:function(result){
+            //         console.log(result);
+            //     },
+            //     error:function(){
+            //         console.log("실패!");
+            //     }
+            // })
         }
 
         function checkDateTime(){
@@ -550,13 +564,13 @@
             }
         }
 
-        function iconShow(num, max){
-            if(num == max){
-                document.getElementById("icon-sm-complete").style.display = 'block';
-            }else {
-                document.getElementById("icon-sm-complete").style.display = 'none';
-            }
-        }
+        // function iconShow(num, max){
+        //     if(num == max){
+        //         document.getElementById("icon-sm-complete").style.display = 'block';
+        //     }else {
+        //         document.getElementById("icon-sm-complete").style.display = 'none';
+        //     }
+        // }
 
     </script>
 

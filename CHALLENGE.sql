@@ -442,7 +442,126 @@ VALUES
          		UPDATE
 	       NORMAL_CHALLENGE
 	   SET DEL_STATUS = 'Y'
-	 WHERE NOR_CHLG_NO = ?
+	 WHERE NOR_CHLG_NO = ?;
+    
+    
+    
+    
+    
+    		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
+		   AND NOR_CHLG_DATE > SYSDATE
+           AND NOR_CHLG_LOCAL = 4
+		 ORDER
+		    BY 1 DESC;
+    
+    		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
+		   AND NOR_CHLG_DATE > SYSDATE
+		 ORDER
+		    BY 1 DESC;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
+		   AND NOR_CHLG_DATE > SYSDATE
+		 ORDER
+		    BY 1 DESC;
+    
+    		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
+		   AND LOCAL_NO = 1
+		   AND NOR_CHLG_DATE > SYSDATE
+		 ORDER
+		    BY 1 DESC;
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 ROLLBACK;

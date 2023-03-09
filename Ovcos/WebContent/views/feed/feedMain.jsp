@@ -113,14 +113,8 @@ if (mylist != null && !mylist.isEmpty()) {
                         
                     </div>
                 </div>
-             <div id="notice"><a href="<%=contextPath%>/list.no">
-<%
-if (nlist != null && !nlist.isEmpty()) {
-    out.println(nlist.get(0).getNtcTitle());
-}else{
-   out.println(" ");
-}
-%></a></div>
+				<div id="notice"><a href="<%=contextPath%>/list.no">
+</a></div>
 
             </div>
 <!--            <<nav>
