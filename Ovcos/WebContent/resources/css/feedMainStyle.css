@@ -349,9 +349,10 @@ body{
 #footer{
     width: 100%;
     height: 20%;
-    /* margin: auto; */
-    /* margin-top: 40px; */
+    /* margin: auto;
+    margin-top: 40px; */
     background-color: gray; /* blanchedalmond; */
+    
 }
 #footer a{
 	color: white;
