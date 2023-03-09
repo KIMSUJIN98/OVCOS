@@ -39,13 +39,13 @@
 	       			<input type="hidden" name="selectResult" value="<%=selectResult%>">
 	     			<table id="insertInfo">
 	       				<tr>
-	       					<td colspan="2"><h2>OVCOS 개인정보수정</h2></td>
+	       					<td colspan="2"><h3>OVCOS 개인정보수정</h3></td>
 	       				</tr>
 	       				<tr>
 	       					<td colspan="2"><img id="profileImg" src="<%= contextPath %>/resources/image/mypage.png" alt="프로필이미지"></td>
 	       				</tr>
 	       				<tr>
-	       					<td colspan="2">첨부파일버튼넣을공간</td>
+	       					<th colspan="2"><input type="file" name="profileFile" style="background-color: white;"></th>
 	       				</tr>
 	       				<tr>
 	         				<td>아이디</td>
@@ -121,6 +121,8 @@
 	            			
 	            	<button type="submit" class="next_btn">저장하기</button>
 	            	<button type="button" class="next_btn">취소하기</button>
+	            	<br><br>
+	            	<a href="#" style="margin-left: 350px; color: gray;">탈퇴하기</a>
 	            	
 				</form>
 	    	</div>

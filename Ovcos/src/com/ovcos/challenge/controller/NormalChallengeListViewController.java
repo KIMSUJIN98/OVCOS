@@ -36,6 +36,7 @@ public class NormalChallengeListViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		HttpSession session = request.getSession();
 		
+//		ArrayList<Local> list1 = new ArrayList<Local>();
 		ArrayList<Local> list1 = new ChallengeService().selectLocalList();
 //		System.out.println(list1);
 		

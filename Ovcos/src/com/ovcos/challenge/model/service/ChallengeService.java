@@ -360,6 +360,19 @@ public class ChallengeService {
 		
 	}
 
+	public ArrayList<NormalChallenge> selectLocalView(int localNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<NormalChallenge> list = new ChallengeDao().selectLocalView(conn, localNo);
+		
+		close(conn);
+		
+		return list;
+		
+		
+	}
+	
+
 
 
 	

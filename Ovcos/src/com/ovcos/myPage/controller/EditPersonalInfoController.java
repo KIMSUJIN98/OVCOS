@@ -39,7 +39,6 @@ public class EditPersonalInfoController extends HttpServlet {
 			request.getRequestDispatcher("views/myPage/editPersonalInfo.jsp").forward(request, response);
 		}else {
 			session.removeAttribute("alertMsg");
-			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			response.sendRedirect(request.getContextPath() + "/myPage.me?userId=" + userId);
 		}
 		

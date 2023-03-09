@@ -84,8 +84,7 @@
 		  FROM CONTEST_CHALLENGE C
 		  JOIN CONTEST T USING (CNTS_NO)
 		  JOIN ENTRY_LIST E ON (CHLG_NO_INLIST = CNTS_CHLG_NO)
-          LEFT 
-          JOIN UPLOAD U ON (CNTS_CHLG_NO = UPL_NO)
+          LEFT JOIN UPLOAD U ON (CNTS_CHLG_NO = UPL_NO)
 		 WHERE
 		       E.CHLG_ENTRY_ID = ?
 		   AND C.DEL_STATUS = 'N'
@@ -164,7 +163,7 @@
 		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
 		  FROM NORMAL_CHALLENGE N
 		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
-          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+          LEFT JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
 		 WHERE
 		       N.DEL_STATUS = 'N'
 		   AND N.RPR_STATUS = 'N'
@@ -190,7 +189,7 @@
 		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
 		  FROM NORMAL_CHALLENGE N
 		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
-          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+          LEFT JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
 		 WHERE
 		       N.DEL_STATUS = 'N'
 		   AND N.RPR_STATUS = 'N'
@@ -221,7 +220,7 @@
 		     )
 	</entry>
 	
-	<entry key="insertImg">
+	<entry key="insertContestImg">
 		INSERT
 		  INTO UPLOAD
 		     (
@@ -474,4 +473,30 @@
 		 WHERE NCHLG_NO_INLIST = ?
 	</entry>
 	
+	<entry key="selectLocalView">
+   		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+		     , LOCAL_NAME
+             , CHANGE_NAME
+		     , (SELECT 
+		               COUNT(NCHLG_ENTRY_ID)
+		          FROM NENTRY_LIST 
+		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
+		  FROM NORMAL_CHALLENGE N
+		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
+		   AND NOR_CHLG_DATE > SYSDATE
+           AND NOR_CHLG_LOCAL = ?
+		 ORDER
+		    BY 1 DESC
+	</entry>
 </properties>

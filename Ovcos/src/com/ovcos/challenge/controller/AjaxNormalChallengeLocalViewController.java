@@ -1,28 +1,29 @@
 package com.ovcos.challenge.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.NEntryList;
-import com.ovcos.loginRegister.model.vo.Member;
+import com.ovcos.challenge.model.vo.NormalChallenge;
 
 /**
- * Servlet implementation class AjaxNormalChallengeDeleteController
+ * Servlet implementation class AjaxNormalChallengeLocalViewController
  */
-@WebServlet("/normalEntryDelete.ch")
-public class AjaxNormalChallengeEntryDeleteController extends HttpServlet {
+@WebServlet("/selectLocalView.ch")
+public class AjaxNormalChallengeLocalViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxNormalChallengeEntryDeleteController() {
+    public AjaxNormalChallengeLocalViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +32,13 @@ public class AjaxNormalChallengeEntryDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String normalEntryId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		int normalChallengeNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
+		int localNo = Integer.parseInt(request.getParameter("localNo"));
 		
-		NEntryList nel = new NEntryList();
-		nel.setNormalChallNo(normalChallengeNo);
-		nel.setNormalEntryId(normalEntryId);
+		ArrayList<NormalChallenge> list = new ChallengeService().selectLocalView(localNo);
 		
-		int result = new ChallengeService().deleteNEntryList(nel);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 		
-		response.getWriter().print(result);
 	}
 
 	/**
