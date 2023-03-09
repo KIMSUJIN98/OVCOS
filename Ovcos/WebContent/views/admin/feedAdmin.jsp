@@ -159,11 +159,11 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
             function delList(){
                 
                 $.ajax({
-                url: "rprList.admin",
+                url: "delList.admin",
                 type: "POST",
 
                 success: function(list) {
-                    console.log("타냐??????????????");
+                    // console.log("타냐??????????????");
                     var html = '';
                     if(list.length == 0) {
                         html += '<tr><td colspan="6">조회된 데이터가 없습니다.</td></tr>';
