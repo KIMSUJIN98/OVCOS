@@ -31,9 +31,41 @@ public class Feed {
 	public Feed() {}
 	
 	
+	
+	
 
 	
 	
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
+			String feedPathNy, double distance, double startLat, double startLon, String memId, String path,
+			String memName, String memNick, String originName, int count, String imgPath) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.feedPublicType = feedPublicType;
+		this.feedPathNy = feedPathNy;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		MemId = memId;
+		this.path = path;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.originName = originName;
+		this.count = count;
+		this.imgPath = imgPath;
+	}
+
+
+
+
+
+
+
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
 			String feedPathNy, double distance, double startLat, double startLon, String memId, String path,
@@ -144,7 +176,7 @@ public class Feed {
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
 			double startLat, double startLon, String memId, String path, String memName, String memNick,
-			String originName) {
+			String originName, String imgPath) {
 		super();
 		this.feedIndex = feedIndex;
 		this.feedDate = feedDate;
@@ -159,6 +191,7 @@ public class Feed {
 		this.memName = memName;
 		this.memNick = memNick;
 		this.originName = originName;
+		this.imgPath = imgPath;
 	}
 
 
@@ -254,7 +287,7 @@ public class Feed {
 
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, double distance,
 			double startLat, double startLon, String memId, String path, String memName, String memNick,
-			String originName, int count) {
+			String originName, int count, String imgPath) {
 		super();
 		this.feedIndex = feedIndex;
 		this.feedDate = feedDate;
@@ -270,6 +303,7 @@ public class Feed {
 		this.memNick = memNick;
 		this.originName = originName;
 		this.count = count;
+		this.imgPath = imgPath;
 	}
 	
 	
@@ -296,7 +330,7 @@ public class Feed {
 	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
 			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
 			String feedDelNy, String memId, String path, String memName, String memNick, String originName, int count,
-			String feedRprId) {
+			String feedRprId, String imgPath) {
 		super();
 		this.feedIndex = feedIndex;
 		this.feedDate = feedDate;
@@ -318,6 +352,7 @@ public class Feed {
 		this.originName = originName;
 		this.count = count;
 		this.feedRprId = feedRprId;
+		this.imgPath = imgPath;
 	}
 
 

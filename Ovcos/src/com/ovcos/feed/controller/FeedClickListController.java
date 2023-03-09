@@ -49,6 +49,8 @@ public class FeedClickListController extends HttpServlet {
 		
 		ArrayList<Feed>  allList = null;
 		
+		request.getSession().setAttribute("num", num);
+		
 		switch (num) {
 		
 		
@@ -57,6 +59,7 @@ public class FeedClickListController extends HttpServlet {
 			
 			allList = new FeedService().selectArrayList(userId);//전체피드 조회 데이터			
 			response.setContentType("application/json; charset=utf-8");
+			
 			
 			
 			if(sorting==null) { //정렬 선택전에는 NULL  (최신순)

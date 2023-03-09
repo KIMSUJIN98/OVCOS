@@ -65,6 +65,7 @@ public class FeedUpdateController extends HttpServlet {
 			}
 			
 			String imgPath = multi.getParameter("imgPath");
+			System.out.println("컨트롤러"+imgPath);
 			String title = multi.getParameter("title");	
 			String content = multi.getParameter("content");
 			String feedPublicType = multi.getParameter("displayNy");
@@ -106,10 +107,10 @@ public class FeedUpdateController extends HttpServlet {
 			HttpSession session = request.getSession();
 			//응답뷰 지정
 			if(result>0) {
-				response.sendRedirect("/Ovcos/list.feed");
+				response.sendRedirect(request.getContextPath()+"/list.feed");
 				//session.setAttribute("enrollFeed", "success");
 			}else {
-				response.sendRedirect("/Ovcos/list.feed");
+				response.sendRedirect(request.getContextPath()+"/list.feed");
 				//session.setAttribute("enrollFeed", "fail");
 			}
 			

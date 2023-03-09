@@ -148,9 +148,9 @@ public class FeedDao {
 									  rset.getString("feed_title"),
 									  rset.getString("feed_cnt"),
 									  rset.getInt("feed_eval"),
-									  rset.getInt("distance"),
-									  rset.getInt("start_lat"),
-									  rset.getInt("start_lon"),
+									  rset.getDouble("distance"),
+									  rset.getDouble("start_lat"),
+									  rset.getDouble("start_lon"),
 									  rset.getString("mem_id"),
 									  rset.getString("change_name"),
 									  rset.getString("origin_name"),
@@ -321,7 +321,8 @@ public class FeedDao {
 						rset.getString("CHANGE_NAME"),
 						rset.getString("MEM_NAME"),
 						rset.getString("MEM_NICK"),
-						rset.getString("ORIGIN_NAME")
+						rset.getString("ORIGIN_NAME"),
+						rset.getString("IMGPATH")
 						));
 			}
 			
@@ -425,7 +426,8 @@ public class FeedDao {
 								rset.getString("CHANGE_NAME"),
 								rset.getString("MEM_NAME"),
 								rset.getString("MEM_NICK"),
-								rset.getString("ORIGIN_NAME")
+								rset.getString("ORIGIN_NAME"),
+								rset.getString("IMGPATH")
 								));
 				}
 				
@@ -476,7 +478,8 @@ public class FeedDao {
 							rset.getString("CHANGE_NAME"),
 							rset.getString("MEM_NAME"),
 							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
+							rset.getString("ORIGIN_NAME"),
+							rset.getString("IMGPATH")
 							));
 			}
 			
@@ -527,7 +530,8 @@ public class FeedDao {
 							rset.getString("CHANGE_NAME"),
 							rset.getString("MEM_NAME"),
 							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
+							rset.getString("ORIGIN_NAME"),
+							rset.getString("IMGPATH")
 							));
 			}
 			
@@ -576,7 +580,8 @@ public class FeedDao {
 							rset.getString("CHANGE_NAME"),
 							rset.getString("MEM_NAME"),
 							rset.getString("MEM_NICK"),
-							rset.getString("ORIGIN_NAME")
+							rset.getString("ORIGIN_NAME"),
+							rset.getString("IMGPATH")
 							));
 			}
 			
@@ -627,7 +632,8 @@ public class FeedDao {
 							rset.getString("MEM_NAME"),
 							rset.getString("MEM_NICK"),
 							rset.getString("ORIGIN_NAME"),
-							rset.getInt("BOOKMARK_COUNT")
+							rset.getInt("BOOKMARK_COUNT"),
+							rset.getString("IMGPATH")
 							));
 			}
 			
@@ -671,6 +677,8 @@ public class FeedDao {
 						rset.getString("FEED_TITLE"),
 						rset.getString("FEED_CNT"),
 						rset.getInt("FEED_EVAL"),
+						rset.getString("FEED_PUBLIC_TYPE"),
+						rset.getString("FEED_PATH_NY"),
 						rset.getDouble("DISTANCE"),
 						rset.getDouble("START_LAT"),
 						rset.getDouble("START_LON"),
@@ -679,7 +687,8 @@ public class FeedDao {
 						rset.getString("MEM_NAME"),
 						rset.getString("MEM_NICK"),
 						rset.getString("ORIGIN_NAME"),
-						rset.getInt("BOOKMARK_COUNT")
+						rset.getInt("BOOKMARK_COUNT"),
+						rset.getString("IMGPATH")
 						));
 			}
 			
@@ -731,7 +740,8 @@ public class FeedDao {
 						rset.getString("MEM_NAME"),
 						rset.getString("MEM_NICK"),
 						rset.getString("ORIGIN_NAME"),
-						rset.getInt("BOOKMARK_COUNT")
+						rset.getInt("BOOKMARK_COUNT"),
+						rset.getString("IMGPATH")
 						));
 			}
 			
@@ -900,7 +910,8 @@ public class FeedDao {
 						rset.getString("MEM_NICK"),
 						rset.getString("ORIGIN_NAME"),
 						rset.getInt("HIT"),
-						rset.getString("FEED_RPR_ID")
+						rset.getString("FEED_RPR_ID"),
+						rset.getString("IMGPATH")
 						
 						));
 			}
@@ -957,7 +968,8 @@ public class FeedDao {
 			pstmt.setDouble(6, f.getDistance());
 			pstmt.setDouble(7, f.getStartLat());
 			pstmt.setDouble(8, f.getStartLon());
-			pstmt.setInt(9, f.getFeedIndex());
+			pstmt.setString(9, f.getImgPath());
+			pstmt.setInt(10, f.getFeedIndex());
 			
 			result = pstmt.executeUpdate();
 			
@@ -1064,7 +1076,8 @@ public class FeedDao {
 						rset.getString("MEM_NICK"),
 						rset.getString("ORIGIN_NAME"),
 						rset.getInt("HIT"),
-						rset.getString("FEED_RPR_ID")
+						rset.getString("FEED_RPR_ID"),
+						rset.getString("IMGPATH")
 						
 						));
 			}
@@ -1125,7 +1138,8 @@ public class FeedDao {
 						rset.getString("MEM_NICK"),
 						rset.getString("ORIGIN_NAME"),
 						rset.getInt("HIT"),
-						rset.getString("FEED_RPR_ID")
+						rset.getString("FEED_RPR_ID"),
+						rset.getString("IMGPATH")
 						
 						));
 			}
@@ -1240,7 +1254,8 @@ public class FeedDao {
 						rset.getString("MEM_NICK"),
 						rset.getString("ORIGIN_NAME"),
 						rset.getInt("HIT"),
-						rset.getString("FEED_RPR_ID")
+						rset.getString("FEED_RPR_ID"),
+						rset.getString("IMGPATH")
 						
 						));
 			}
