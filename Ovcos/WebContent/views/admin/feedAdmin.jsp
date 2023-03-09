@@ -83,7 +83,6 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
                     <div class="input-group">
                     <button onclick="rprList();">신고조회</button>
                     <br><br>
-                    <button onclick="delList();">삭제조회</button>
                     </div>
                 </div>
                 <table class="myTable table hover" >
@@ -154,45 +153,6 @@ ArrayList<Feed> list = (ArrayList<Feed>)request.getAttribute("list");
 
      
         <script>
-
-          //삭제되 리스트 조회
-            function delList(){
-                
-                $.ajax({
-                url: "delList.admin",
-                type: "POST",
-
-                success: function(list) {
-                    // console.log("타냐??????????????");
-                    var html = '';
-                    if(list.length == 0) {
-                        html += '<tr><td colspan="6">조회된 데이터가 없습니다.</td></tr>';
-                    } else {
-                        $.each(list, function(index, f) {
-                        html += '<tr>';
-                        html += '<td>' + f.feedIndex + '</td>';
-                        html += '<td>' + f.feedTitle + '</td>';
-                        html += '<td>' + f.MemId + '</td>';
-                        html += '<td>' + f.memNick + '</td>';
-                        html += '<td>' + f.count + '</td>';
-                        html += '<td>' + f.feedDate + '</td>';
-                        html += '<td>' + f.feedRprNy + '</td>';
-                        html += '<td>' + f.feedDelNy + '</td>';
-                        html += '<td><button onclick="restore('+f.feedIndex+');">복구</button></td>';
-                        html += '<td><button onclick="deletefeed('+f.feedIndex+');">삭제</button></td>';
-                        html += '</tr>';
-                        });
-                    }
-                    $('table').find('tbody').html(html); },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("Error: " + textStatus + " " + errorThrown);
-                    }
-            });
-
-
-
-
-            }
 
             //신고된 리스트 조회
             function rprList(){

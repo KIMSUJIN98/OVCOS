@@ -130,7 +130,6 @@
                             id="reset">초기화</button>
                         <button type="submit" style="margin-right: 20px;"
                             id="insert" onclick="return fileSubmit()">제출</button>
-                        <button type="button" onclick="test();">테스트</button>
                     </div>
                     </div>
                 </form>
