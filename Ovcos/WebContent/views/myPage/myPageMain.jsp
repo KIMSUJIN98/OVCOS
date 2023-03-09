@@ -1,3 +1,5 @@
+<%@page import="com.ovcos.bookmark.model.vo.BookMark"%>
+<%@page import="com.ovcos.feed.model.vo.Feed"%>
 <%@page import="com.ovcos.myPage.model.vo.MyPage"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,10 +17,10 @@
    String calMsg;
    if(monthDistance>loginUser.getMemGoalDtn()){
    		calculations = monthDistance-loginUser.getMemGoalDtn();
-   		calMsg = "목표치보다 " + calculations + "km 초과 달성했습니다!";
+   		calMsg = "목표치보다 " + String.format("%.2f", calculations) + "km 초과 달성했습니다!";
    }else if(monthDistance<loginUser.getMemGoalDtn()){
 		calculations = loginUser.getMemGoalDtn()-monthDistance;
-   		calMsg = "목표치까지 " + calculations +"km 남았습니다!";
+   		calMsg = "목표치까지 " + String.format("%.2f", calculations) + "km 남았습니다!";
    }else{
 	   if(loginUser.getMemGoalDtn()== 0){
 		   calMsg = "목표를 세워볼까요?";
@@ -30,6 +32,9 @@
 <%
 	ArrayList<MyPage> list = (ArrayList<MyPage>)session.getAttribute("dayList");
 	String today = (String)session.getAttribute("today");
+	ArrayList<Feed> fList = (ArrayList<Feed>)session.getAttribute("feedList");
+	ArrayList<Feed> cList = (ArrayList<Feed>)session.getAttribute("CommentList");
+	ArrayList<BookMark> bList = (ArrayList<BookMark>)session.getAttribute("BookmarkList");
 %>
 <!DOCTYPE html>
 <html>
@@ -230,31 +235,131 @@
                                     <div class="input-group">
                                         <label for="searchBox"></label>
                                         <input type="search" id="searchBox" style="width: 500px;" placeholder="키워드를 입력하세요">
-                                        <a href="#" class="btn btn-secondary filter-btn" id="myFeed">피드조회</a>
-                                        <a href="#" class="btn btn-secondary filter-btn" id="myComment">댓글조회</a>
-                                        <a href="#" class="btn btn-secondary filter-btn" id="myPick">찜목록조회</a>
+                                        <a class="btn btn-secondary filter-btn" id="myFeed" onclick=";">피드조회</a>
+                                        <a class="btn btn-secondary filter-btn" id="myComment" onclick="selectcList();">댓글조회</a>
+                                        <a class="btn btn-secondary filter-btn" id="myPick" onclick="selectbList();">찜목록조회</a>
                                     </div>
                                 </div>
                             </div>
-                            <table class="myTable table hover">
-                                <tbody>
-                                <tr>
-                                	<th>no.</th>
-                                    <th>제목</th>
-                                    <th>작성자</th>
-                                    <th>작성일</th>
-                                    <th>공개범위</th>
-                                </tr>
-                                
-                                <tr>
-                                    <td>카운트</td>
-                                    <td><a>어디 뛰고 왔습니다</a></td>
-                                    <td>닉네임</td>
-                                    <td>2023-03-09</td>
-                                    <td>전체공개</td>
-                                </tr>
-                                
-                                </tbody>
+                            <table id="changeTable" class="myTable table hover">
+                                <thead id="headValue">
+					                <tr>
+					                    <th width="70">글번호</th>
+					                    <th width="300">제목</th>
+					                    <th width="100">작성자</th>
+					                    <th width="100">작성일</th>
+					                    <th width="100">공개범위</th>
+					                </tr>
+					            </thead>
+					            <tbody id="bodyValue">
+					            	<% if(fList.isEmpty()) { %>
+						                <tr>
+						                    <td colspan="5">조회된 게시글이 없습니다.</td>
+						                </tr>
+									<% }else { %>
+						
+						                <% for(Feed f: fList) { %>
+							                <tr>
+							                    <td><%= f.getFeedIndex() %></td>
+							                    <td><%= f.getFeedTitle() %></td>
+							                    <td><%= f.getMemNick() %></td>
+							                    <td><%= f.getFeedDate() %></td>
+							                    <td><%= f.getFeedPublicType() %></td>
+							                </tr>
+						                <% } %>
+					               <% } %>
+					            </tbody>
+					            
+					            	
+					           <!-- <thead>
+					                <tr>
+					                    <th width="70">글번호</th>
+					                    <th width="300">제목</th>
+					                    <th width="100">작성자</th>
+					                    <th width="100">작성일</th>
+					                    <th width="100">공개범위</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+					            	<% if(fList.isEmpty()) { %>
+						                <tr>
+						                    <td colspan="5">조회된 게시글이 없습니다.</td>
+						                </tr>
+									<% }else { %>
+						
+						                <% for(Feed f: fList) { %>
+							                <tr>
+							                    <td><%= f.getFeedIndex() %></td>
+							                    <td><%= f.getFeedTitle() %></td>
+							                    <td><%= f.getMemNick() %></td>
+							                    <td><%= f.getFeedDate() %></td>
+							                    <td><%= f.getFeedPublicType() %></td>
+							                </tr>
+						                <% } %>
+					               <% } %>
+					            </tbody>
+					            
+					            
+					            <thead>
+					                <tr>
+					                    <th width="70">댓글번호</th>
+					                    <th width="300">댓글내용</th>
+					                    <th width="100">작성자</th>
+					                    <th width="100">작성일</th>
+					                	<th width="100">피드번호</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+					            	<% if(cList.isEmpty()) { %>
+						                <tr>
+						                    <td colspan="5">조회된 댓글이 없습니다.</td>
+						                </tr>
+									<% }else { %>
+						
+						                <% for(Feed f: cList) { %>
+							                <tr>
+							                    <td><%= f.getFeedCommentNo() %></td>
+							                    <td><%= f.getFeedCommentContent() %></td>
+							                    <td><%= f.getMemNick() %></td>
+							                    <td><%= f.getFeedDate() %></td>
+							                    <td><%= f.getFeedIndex() %></td>
+							                </tr>
+						                <% } %>
+					               <% } %>
+					            </tbody>
+					            
+					            
+					            
+					            <thead>
+					                <tr>
+					                    <th width="70">피드번호</th>
+					                    <th width="300">피드제목</th>
+					                    <th width="100">찜한사람</th>
+					                    <th width="100">찜날짜</th>
+					                	<th width="100">찜한상태</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+					            	<% if(bList.isEmpty()) { %>
+						                <tr>
+						                    <td colspan="5">찜한 피드가 없습니다.</td>
+						                </tr>
+									<% }else { %>
+						
+						                <% for(BookMark b: bList) { %>
+							                <tr>
+							                    <td><%= b.getBkNo() %></td>
+							                    <td><%= b.getfTitle() %></td>
+							                    <td><%= b.getBkId() %></td>
+							                    <td><%= b.getBkDate() %></td>
+							                    <td><%= b.getBkFolloeeNy() %></td>
+							                </tr>
+						                <% } %>
+					               <% } %>
+					            </tbody>
+					             --> 
+					            
+					            
                             </table>
                         </div>
                     </div>
@@ -267,12 +372,6 @@
                 </div>
                 <div class="sec2-blank"><!-- 하단 여백--></div>
             </div>
-
-
-
-
-
-
 
         <script>
             let options = {

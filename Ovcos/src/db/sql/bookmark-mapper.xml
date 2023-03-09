@@ -24,6 +24,15 @@ INSERT
     AND BK_STATUS = 'Y'
 </entry>
 
+<entry key="selectMyBookmark">
+	SELECT BK_NO, FEED_TITLE, BK_ID, BK_DATE, BK_STATUS
+	  FROM BOOKMARK
+	  JOIN FEED ON BK_NO = FEED_INDEX
+	 WHERE BK_ID = ?
+	   AND BK_STATUS = 'Y'
+</entry>
+
+
 <!--찜 삭제 -->
 <entry key="deleteBookMark">
 	UPDATE

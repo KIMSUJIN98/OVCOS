@@ -39,19 +39,23 @@
 	       			<input type="hidden" name="selectResult" value="<%=selectResult%>">
 	     			<table id="insertInfo">
 	       				<tr>
-	       					<td colspan="2"><h3>OVCOS 개인정보수정</h3></td>
+	       					<td colspan="2"><h3>OVCOS 개인정보수정</h3><br></td>
 	       				</tr>
 	       				<tr>
 	       					<td colspan="2"><img id="profileImg" src="<%= contextPath %>/resources/image/mypage.png" alt="프로필이미지"></td>
 	       				</tr>
 	       				<tr>
-	       					<th colspan="2"><input type="file" name="profileFile" style="background-color: white;"></th>
+	       					<th colspan="2"><input type="file" name="profileFile" style="background-color: white;"><br><br></th>
 	       				</tr>
 	       				<tr>
 	         				<td>아이디</td>
 	         				<td style="width: 330px;">
 	         					<input type="text" id="memId" name="memId" maxlength="20" value="<%= loginUser.getMemId()%>" readonly><!-- 아이디값 받아오기 -->
 	         				</td>
+	       				</tr>
+	       				<tr>
+	         				<td>이메일</td>
+	         				<td><input type="text" id="memEmail" name="memEmail" maxlength="20" value="<%= loginUser.getMemEml()%>" readonly></td>
 	       				</tr>
 	       				<tr>
 	         				<td>비밀번호</td>
@@ -90,9 +94,9 @@
 		                </tr>
 		                <tr>
 		                    <td></td>
-		                    <td colspan="2" id="checkNick"></td>
+		                    <td colspan="2" id="checkNick"><br></td>
 		                </tr>
-		                <tr>
+		                <%-- <tr>
 		                    <td>이메일</td>
 		                    <td>
 		                    	<input type="email" id="memEml" name="memEml" value="<%= loginUser.getMemEml()%>" placeholder="이메일을 입력해주세요."> <!-- 이메일값 받아오기 -->
@@ -116,11 +120,11 @@
 		                    <td colspan="2" id="checkCode">
 		                    	<input type="hidden" readonly="readonly" name="code" id="code" value="<%=request.getAttribute("code") %>">
 		                    </td>
-		                </tr>
+		                </tr> --%>
 					</table>
 	            			
 	            	<button type="submit" class="next_btn">저장하기</button>
-	            	<button type="button" class="next_btn">취소하기</button>
+	            	<button type="button" class="next_btn" onclick="history.back()">취소하기</button>
 	            	<br><br>
 	            	<a href="#" style="margin-left: 350px; color: gray;">탈퇴하기</a>
 	            	

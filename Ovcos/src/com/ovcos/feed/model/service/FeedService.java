@@ -70,6 +70,16 @@ public class FeedService {
 		
 	}
 	
+	public ArrayList<Feed> selectMyComments(String userId){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Feed> list = new FeedDao().selectMyComments(conn, userId);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 	
 	public ArrayList<Feed> selectAllFeedList(){

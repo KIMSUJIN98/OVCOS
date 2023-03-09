@@ -3,6 +3,7 @@ package com.ovcos.bookmark.model.vo;
 public class BookMark {
 
 	 private int bkNo;
+	 private String fTitle;
 	 private String bkId;
 	 private String bkDate;
 	 private String bkFolloeeNy;
@@ -20,7 +21,16 @@ public class BookMark {
 		this.bkFolloeeNy = bkFolloeeNy;
 	}
 
-
+	public BookMark(int bkNo, String fTitle, String bkId, String bkDate, String bkFolloeeNy) {
+		super();
+		this.bkNo = bkNo;
+		this.fTitle = fTitle;
+		this.bkId = bkId;
+		this.bkDate = bkDate;
+		this.bkFolloeeNy = bkFolloeeNy;
+	}
+	
+	
 
 
 	public BookMark(int bkNo) {
@@ -28,6 +38,19 @@ public class BookMark {
 		this.bkNo = bkNo;
 	}
 
+
+	
+
+
+	public String getfTitle() {
+		return fTitle;
+	}
+
+
+
+	public void setfTitle(String fTitle) {
+		this.fTitle = fTitle;
+	}
 
 
 

@@ -87,6 +87,39 @@ public class FeedDao {
 	}
 	
 	
+	public ArrayList<Feed> selectMyComments(Connection conn, String userId){
+		
+		ArrayList<Feed> list = new ArrayList<Feed>();
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyComments");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Feed(rset.getInt("FEED_INDEX"),
+							rset.getInt("FEED_CMN_NO"),
+							rset.getString("FEED_CMN_ID"),
+							rset.getString("FEED_CMN_CNT"),
+							rset.getString("FEED_CMN_DATE")
+							));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+	
 
 	
 	public ArrayList<Feed> selectAllFeedList(Connection conn){
