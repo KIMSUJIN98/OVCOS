@@ -283,6 +283,67 @@ public class ChallengeService {
 		
 	}
 
+	public int checkNEntryId(NEntryList nel) {
+		Connection conn = getConnection();
+		
+		ArrayList<NEntryList> list = new ChallengeDao().checkNEntryId(conn, nel);
+		
+		int result = 0;
+		
+		if(list == null || list.isEmpty()) {
+			result = 0;
+		} else {
+			result = 1;
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertNEntryList(NEntryList nel) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().insertNEntryList(conn, nel);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteNEntryList(NEntryList nel) {
+		Connection conn = getConnection();
+		
+		int result = new ChallengeDao().deleteNEntryList(conn, nel);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+	public ArrayList<NEntryList> selectNEntryList(int normalChallengeNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<NEntryList> list = new ChallengeDao().selectNEntryList(conn, normalChallengeNo);
+		
+		close(conn);
+		
+		return list;
+	}
+
 
 
 	

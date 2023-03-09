@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.ovcos.challenge.model.service.ChallengeService;
-import com.ovcos.challenge.model.vo.EntryList;
+import com.ovcos.challenge.model.vo.NEntryList;
 
 /**
- * Servlet implementation class AjaxContestChallengeEntryListController
+ * Servlet implementation class AjaxNomalChallengeEntryListContoller
  */
-@WebServlet("/entryList.ch")
-public class AjaxContestChallengeEntryListController extends HttpServlet {
+@WebServlet("/normalEntryList.ch")
+public class AjaxNormalChallengeEntryListContoller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxContestChallengeEntryListController() {
+    public AjaxNormalChallengeEntryListContoller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +32,9 @@ public class AjaxContestChallengeEntryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int contestChallengeNo = Integer.parseInt(request.getParameter("contestChallengeNo"));
+		int normalChallengeNo = Integer.parseInt(request.getParameter("normalChallengeNo"));
 		
-		ArrayList<EntryList> eList = new ChallengeService().selectEntryList(contestChallengeNo);
+		ArrayList<NEntryList> eList = new ChallengeService().selectNEntryList(normalChallengeNo);
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(eList, response.getWriter());

@@ -3,8 +3,17 @@ package com.ovcos.challenge.model.vo;
 public class NEntryList {
 	private int normalChallNo;
 	private String normalEntryId;
+	private String memNick;
 	
 	public NEntryList() {}
+
+	public NEntryList(int normalChallNo, String normalEntryId, String memNick) {
+		super();
+		this.normalChallNo = normalChallNo;
+		this.normalEntryId = normalEntryId;
+		this.memNick = memNick;
+	}
+	
 
 	public NEntryList(int normalChallNo, String normalEntryId) {
 		super();
@@ -27,12 +36,23 @@ public class NEntryList {
 	public void setNormalEntryId(String normalEntryId) {
 		this.normalEntryId = normalEntryId;
 	}
+	
+
+	public String getMemNick() {
+		return memNick;
+	}
+
+	public void setMemNick(String memNick) {
+		this.memNick = memNick;
+	}
 
 	@Override
 	public String toString() {
-		return "NentryList [normalChallNo=" + normalChallNo + ", normalEntryId=" + normalEntryId + "]";
+		return "NEntryList [normalChallNo=" + normalChallNo + ", normalEntryId=" + normalEntryId + ", memNick="
+				+ memNick + "]";
 	}
-	
+
+
 	
 	
 }

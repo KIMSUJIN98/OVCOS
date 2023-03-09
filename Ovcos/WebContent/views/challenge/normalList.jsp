@@ -281,6 +281,11 @@
         // $(function(){
         // })
 
+        $(window).load(function(){
+    		$("#trigger-btn").trigger("click");
+            iconShow(num, max);
+    	})
+
         var selectBox = function(local){
             var selectLocal = document.getElementById("selectLocal");
             var local = (selectLocal.options[selectLocal.selectedIndex].value);
@@ -355,7 +360,7 @@
             $.ajax({
                 url:"normalCheckEntryId.ch",
                 data:{
-                    contestChallengeNo:num
+                    normalChallengeNo:num
                 },
                 type:"post",
                 success:function(result){
@@ -395,11 +400,11 @@
         }
 
         // ajax 엔트리 리스트 참가
-        function insertEntryList(num, max){
+        function insertNEntryList(num, max){
             $.ajax({
-                url:"entryInsert.ch",
+                url:"normalEntryInsert.ch",
                 data:{
-                    contestChallengeNo:num
+                    normalChallengeNo:num
                 },
                 type:"post",
                 success:function(result){
@@ -418,9 +423,9 @@
         // ajax 엔트리 리스트 참가취소
         function deleteEntryList(num, max){
             $.ajax({
-                url:"entryDelete.ch",
+                url:"normalEntryDelete.ch",
                 data:{
-                    contestChallengeNo:num
+                    normalChallengeNo:num
                 },
                 type:"post",
                 success:function(result){
@@ -439,9 +444,9 @@
         // ajax 엔트리 리스트 조회
         function selectEntryList(num, max){
             $.ajax({
-                url:"entryList.ch",
+                url:"normalEntryList.ch",
                 data:{
-                    contestChallengeNo:num
+                    normalChallengeNo:num
                 },
                 success:function(result){
                     console.log(result);

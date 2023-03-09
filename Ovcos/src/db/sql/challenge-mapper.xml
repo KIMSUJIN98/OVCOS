@@ -168,27 +168,36 @@
 		 WHERE
 		       N.DEL_STATUS = 'N'
 		   AND N.RPR_STATUS = 'N'
+		   AND NOR_CHLG_DATE > SYSDATE
+		 ORDER
+		    BY 1 DESC
 	</entry>
 	
 	<entry key="normalChallengeListLocal">
 		SELECT 
 		       NOR_CHLG_NO
 		     , NOR_CHLG_TITLE
+             , NOR_CHLG_CONTENT
 		     , ENROLL_DATE
 		     , NOR_CHLG_DATE
 		     , NOR_CHLG_MAX
 		     , NOR_CHLG_ID
 		     , LOCAL_NAME
+             , CHANGE_NAME
 		     , (SELECT 
 		               COUNT(NCHLG_ENTRY_ID)
 		          FROM NENTRY_LIST 
 		         WHERE NCHLG_NO_INLIST = NOR_CHLG_NO) COUNT
 		  FROM NORMAL_CHALLENGE N
 		  JOIN LOCAL ON (NOR_CHLG_LOCAL = LOCAL_NO)
+          JOIN UPLOAD ON (NOR_CHLG_NO = UPL_NO)
 		 WHERE
 		       N.DEL_STATUS = 'N'
-		   AND RPR_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
 		   AND LOCAL_NO = ?
+		   AND NOR_CHLG_DATE > SYSDATE
+		 ORDER
+		    BY 1 DESC
 	</entry>
 	
 	<!-- 대회 추가 -->
@@ -329,7 +338,6 @@
 		     )
 	</entry>
 	
-	
 	<entry key="selectEntryList">
 		SELECT
 		       CHLG_NO_INLIST
@@ -417,6 +425,46 @@
 		     , DEFAULT
 		     , DEFAULT
 		     )
+	</entry>
+	
+	<entry key="checkNEntryId">
+		SELECT
+		       NCHLG_NO_INLIST
+		     , NCHLG_ENTRY_ID
+		  FROM NENTRY_LIST
+		 WHERE NCHLG_NO_INLIST = ?
+		   AND NCHLG_ENTRY_ID = ?
+	</entry>
+	
+	<entry key="insertNEntryList">
+		INSERT
+		  INTO NENTRY_LIST
+		     (
+		       NCHLG_NO_INLIST
+		     , NCHLG_ENTRY_ID
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key="deleteNEntryList">
+		DELETE
+		  FROM NENTRY_LIST
+		 WHERE NCHLG_NO_INLIST = ?
+		   AND NCHLG_ENTRY_ID = ?
+	</entry>
+	
+	<entry key="selectNEntryList">
+   		SELECT
+		       NCHLG_NO_INLIST
+		     , NCHLG_ENTRY_ID
+		     , MEM_NICK
+		  FROM NENTRY_LIST
+		  JOIN MEMBER ON (NCHLG_ENTRY_ID = MEM_ID)
+		 WHERE NCHLG_NO_INLIST = ?
 	</entry>
 	
 </properties>
