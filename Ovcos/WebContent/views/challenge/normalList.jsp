@@ -247,7 +247,7 @@
                                         <% if(loginUser != null && !loginUser.getMemId().equals(n.getNormalChallengeId())) { %>
                                             <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="enterControll(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);">
                                             <button id="trigger-btn" style="display: none;" onclick="iconShow(<%= n.getCount() %>, <%= n.getNormalChallengeMax() %>);"></button>
-                                            <!-- <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkEntryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);"> -->
+                                            <!-- <input type="submit" id="entry" class="btn btn-lg btn-outline-primary" value="참가하기" onclick="checkNentryId(<%= n.getNormalChallengeNo() %>, <%= n.getNormalChallengeMax() %>);"> -->
                                         <% } %>
                                     </div>
                                     <!-- Modal footer -->
@@ -371,13 +371,12 @@
                         document.getElementById('entry').className = 'btn btn-lg btn-primary';
                         // insertEntryList(num, max);
                         selectEntryList(num, max)
-                        iconShowEntry(num);
                     }else{
                         console.log("미참가");
                         $("#entry").val("참가하기");
                         document.getElementById('entry').className = 'btn btn-lg btn-outline-primary';
                         deleteEntryList(num, max);
-                        selectEntryList(num, max)
+                        selectEntryList(num, max);
                     }
                 },
                 error:function(){
@@ -400,7 +399,7 @@
         }
 
         // ajax 엔트리 리스트 참가
-        function insertNEntryList(num, max){
+        function insertEntryList(num, max){
             $.ajax({
                 url:"normalEntryInsert.ch",
                 data:{
@@ -410,7 +409,7 @@
                 success:function(result){
                     console.log(result)
                     if(result > 0){
-                        console.log("성공!")
+                        console.log("성공!");
                         selectEntryList(num, max);
                     }
                 },
@@ -431,7 +430,7 @@
                 success:function(result){
                     console.log(result)
                     if(result > 0){
-                        console.log("성공!")
+                        console.log("성공!");
                         selectEntryList(num, max);
                     }
                 },
