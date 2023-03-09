@@ -15,7 +15,6 @@ import com.ovcos.common.model.vo.Pageinfo;
 import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.feed.model.vo.Feeddetails;
 import com.ovcos.feed.model.vo.detail2comments;
-import com.ovcos.loginRegister.model.vo.Member;
 import com.ovcos.upload.model.vo.Gpx;
 
 
@@ -178,10 +177,12 @@ public class FeedDao {
 	 */
 	public ArrayList<Feed> selectArrayList(Connection conn,String userId){
 		
+		 
 		ArrayList<Feed> list = new ArrayList<Feed>();
 		PreparedStatement pstmt= null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectArrayList");
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -214,9 +215,15 @@ public class FeedDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			close(rset);
-			close(pstmt);
+			
+			        close(rset);
+
+			        close(pstmt);
+	
 		}
+		
+
+	  
 		return list;
 	}
 
@@ -1264,6 +1271,12 @@ public class FeedDao {
 		return list;
 		
 	}
+	
+	
+	
+	
+	
+	
 	
 
 	

@@ -19,6 +19,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
+<!-- summernote -->
+<script src="resources/js/summernote/summernote-lite.js"></script>
+<script src="resources/js/summernote/summernote-ko-KR.js"></script>
+
+<!-- <link rel="stylesheet" href="resources/css/summernote-lite.css"> -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 <style>
     .modal-body input{
@@ -29,6 +35,7 @@
         font-size: 13px;
         color: gray;
     }
+
 </style>
 
 </head>
@@ -86,7 +93,7 @@
                                         <table class="newUpload">
                                             <tr>
                                                 <td>
-                                                    <h5><%= c.getContestName() %></h5>
+                                                    <h4><%= c.getContestName() %></h4>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -96,7 +103,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="text" id="challengeDate" name="challengeDate" readonly>
+                                                    <input type="text" id="challengeDate" name="challengeDate" style="background-color: lightgray; color: gray;" readonly>
                                                     <br>
                                                     <span id="contestTime"></span>
                                                 </td>
@@ -122,7 +129,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <textarea name="challengeContent" cols="38" rows="10" style="resize: none;" placeholder="상세설명"></textarea>
+                                                    <textarea id="summernote" name="challengeContent" required></textarea>
                                                 </td>
                                             </tr>
                                         </table>
@@ -199,11 +206,11 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                	<% if(cc.getChangeName() != null) { %>
+                                                    <% if(cc.getChangeName() != null) { %>
                                                         <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
                                                     <% }else { %>
                                                         <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
-                                                	<% } %>
+                                                    <% } %>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -213,12 +220,12 @@
                                             </tr>
                                             <tr id="count-area">
                                                 <td>
-                                                	<!--  -->
+                                                    <!--  -->
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                	업로드날짜 : <%= cc.getEnrollDate() %>
+                                                    업로드날짜 : <%= cc.getEnrollDate() %>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -305,6 +312,27 @@
         // $(function(){
 
         // })
+
+        // summernote
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                
+                height: 300,
+                lang: "ko-KR",
+                placeholder: '상세 내용을 입력하세요.',
+                toolbar: [
+							['style', ['style']],
+							['fontsize', ['fontsize']],
+							['font', ['bold', 'italic', 'underline', 'clear']],
+							['fontname', ['fontname']],
+							['color', ['color']],
+							['para', ['ul', 'ol', 'paragraph']],
+							['height', ['height']],
+							['view', ['codeview']],
+							['help', ['help']]
+						]
+            })
+        })
 
         function substringDate(contestDate){
             var all = contestDate;

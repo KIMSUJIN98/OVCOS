@@ -88,6 +88,7 @@
                             <div id="last_ac1">
                                 <div class="h51"><h5>LAST ACTIVITY</h5></div>
                                 <div id="last_info"><a href="#" id="f_title">
+
 <%
 if (mylist != null && !mylist.isEmpty()) {
     String title = mylist.get(0).getFeedTitle();
@@ -98,6 +99,10 @@ if (mylist != null && !mylist.isEmpty()) {
 }else{out.println("최근 활동이 없습니다.");}
 %>
                      &nbsp;<span></span></a></div>
+
+
+							&nbsp;<span></span></a></div>
+
                                 
                             </div>
                             <div id="last_ac2">
@@ -113,14 +118,7 @@ if (mylist != null && !mylist.isEmpty()) {
                         
                     </div>
                 </div>
-				 <div id="notice"><a href="<%=contextPath%>/list.no">
-<%
-if (nlist != null && !nlist.isEmpty()) {
-    out.println(nlist.get(0).getNtcTitle());
-}else{
-   out.println(" ");
-}
-%></a></div>
+
 
             </div>
 <!--            <<nav>
@@ -302,6 +300,8 @@ if (nlist != null && !nlist.isEmpty()) {
                                         <td colspan="3" id="gpx">
                                             <div style="border: 1px solid white;">
                                                 <img src="<%=contextPath %>/resources/gpx_img/<%=f.getImgPath()%>" style="width: 700px; height: 340px; overflow: hidden;"></img>
+                                            <div>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -346,7 +346,7 @@ if (nlist != null && !nlist.isEmpty()) {
                         </div>
     <!-- feeddiv끝 -->
                         <script>
-
+                            
                             //좋아요체크해서 한거면 빨갛게 아니면 말게..
                             checklike("<%= loginUser.getMemId() %>","<%= f.getFeedIndex() %>","#like<%= f.getFeedIndex() %>");
 
@@ -357,7 +357,7 @@ if (nlist != null && !nlist.isEmpty()) {
                                     type: 'POST',
                                     data: { feedIndex: feedIndex, userId: userId}, 
                                     success: function(result) {
-                                    if (result.length >0 ) {
+                                    if (result && result.length > 0 ) {
                                         ///좋아요를 누른 상태~~~~~ 하트를 빨간색으로 바꿈
                                         $(id).attr({
                                         'src': 'https://cdn-icons-png.flaticon.com/512/803/803087.png',
@@ -405,7 +405,7 @@ if (nlist != null && !nlist.isEmpty()) {
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body" id="cutbody" align="center">
-                                        xxx님이 차단되었습니다
+                                        <%=f.getMemNick() %>님이 차단되었습니다
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary delfeedbtn" data-dismiss="modal" onclick="location.reload();" >확인</button>
@@ -450,11 +450,10 @@ if (nlist != null && !nlist.isEmpty()) {
                                 </div>
                                 <div class="modal-body">
                                     
-                                    블라블라<br>
-                                    신고시 블락 처리 블ㄹ라블발<br>
-                                    신속한검토 븗랍<br>
-                                    허위신고시 블발발바르<br>
-                                    ㅂ랍랍라<br>
+                                    
+                                    신고시 해당 피드는 블락 된 후 운영팀의 검토 후 처리 됩니다<br>
+                                    허위신고시 서비스 이용 제한 등의 불이익을 받을 수 있습니다<br>
+                                    
                                     피드를 정말 <b>신고</b> 하시겠습니까?
                                 </div>
                                 <div class="modal-footer">  
@@ -757,8 +756,8 @@ if (nlist != null && !nlist.isEmpty()) {
                         © 2023 KH OVCOS
                         </p>
                     </div>
+           		</div>    
 
-                </div>
 
 
             </div>

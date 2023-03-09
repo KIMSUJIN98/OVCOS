@@ -6,8 +6,8 @@
     return random;
     }
 %>
-<% String selectResult=(String)request.getAttribute("select"); %>
-<%  %>
+<%-- <% String selectResult=(String)request.getAttribute("select"); %> --%>
+<% Member m = (Member)request.getAttribute("userInfo"); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@
 	    <div id="edit-wrap">
 	    	<div id="content-area">
 	    		<form id="enroll-form" action="<%=contextPath %>/?????" method="post" onsubmit="return validate();">
-	       			<input type="hidden" name="selectResult" value="<%=selectResult%>">
+	       			<%-- <input type="hidden" name="selectResult" value="<%=selectResult%>"> --%>
 	     			<table id="insertInfo">
 	       				<tr>
 	       					<td colspan="2"><h2>OVCOS 개인정보수정</h2></td>
@@ -50,12 +50,12 @@
 	       				<tr>
 	         				<td>아이디</td>
 	         				<td style="width: 330px;">
-	         					<input type="text" id="memId" name="memId" maxlength="20" value="<%= loginUser.getMemId()%>" readonly><!-- 아이디값 받아오기 -->
+	         					<input type="text" id="memId" name="memId" maxlength="20" value="<%= loginUser.getMemId()%>" readonly> <!-- 아이디값 받아오기 -->
 	         				</td>
 	       				</tr>
 	       				<tr>
 	         				<td>비밀번호</td>
-	         				<td><input type="password" id="memPwd" name="memPwd" value="<%= loginUser.getMemPwd()%>" required placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
+	         				<td><input type="password" id="memPwd" name="memPwd" value="<%= m.getMemPwd()%>" required placeholder="8자 이상 영문 대소문자,숫자,특수문자 조합"></td>
 	       				</tr>
 		                <tr>
 		                    <td></td>
@@ -63,7 +63,7 @@
 		                </tr>
 		                <tr>
 		                    <td style="width: 100px;">비밀번호 확인</td>
-		                    <td><input type="password" id="memPwd2" value="<%= loginUser.getMemPwd()%>" required placeholder="다시 한 번 입력하세요."></td>
+		                    <td><input type="password" id="memPwd2" value="<%= m.getMemPwd()%>" required placeholder="다시 한 번 입력하세요."></td>
 		                </tr>
 		                <tr>
 		                    <td></td>
@@ -71,11 +71,11 @@
 		                </tr>
 		                <tr>
 		                    <td>이름</td>
-		                    <td><input type="text" id="memName" name="memName" value="<%= loginUser.getMemName()%>" required placeholder="이름(실명)을 입력하세요."></td> <!-- 이름값 받아오기 -->
+		                    <td><input type="text" id="memName" name="memName" value="<%= m.getMemName()%>" required placeholder="이름(실명)을 입력하세요."></td> <!-- 이름값 받아오기 -->
 		                </tr>
 		                <tr>
 		                    <td>생년월일</td>
-		                    <td><input type="text" id="memBirth" name="memBirth" value="<%= loginUser.getMemBirth()%>" placeholder="YYYY-MM-DD 숫자만 입력해주세요."></td> <!-- 생년월일값 받아오기 -->
+		                    <td><input type="text" id="memBirth" name="memBirth" value="<%= m.getMemBirth()%>" placeholder="YYYY-MM-DD 숫자만 입력해주세요."></td> <!-- 생년월일값 받아오기 -->
 		                </tr>
 		                <tr>
 		                    <td></td>
@@ -84,7 +84,7 @@
 		                <tr>
 		                    <td>닉네임</td>
 		                    <td>
-		                    	<input type="text" id="memNick" name="memNick" value="<%= loginUser.getMemNick()%>" placeholder="닉네임 입력"> <!-- 닉네임값 받아오기 -->
+		                    	<input type="text" id="memNick" name="memNick" value="<%= m.getMemNick()%>" placeholder="닉네임 입력"> <!-- 닉네임값 받아오기 -->
 		                    	<button type="button" id="checkNickBtn">중복확인</button>
 		                    </td>
 		                </tr>
@@ -95,7 +95,7 @@
 		                <tr>
 		                    <td>이메일</td>
 		                    <td>
-		                    	<input type="email" id="memEml" name="memEml" value="<%= loginUser.getMemEml()%>" placeholder="이메일을 입력해주세요."> <!-- 이메일값 받아오기 -->
+		                    	<input type="email" id="memEml" name="memEml" value="<%= m.getMemEml()%>" placeholder="이메일을 입력해주세요."> <!-- 이메일값 받아오기 -->
 		                      	<button type="button" id="authBtn" onclick="callServlet()">인증요청</button>
 		                      	<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%= getRandom() %>">
 		                  	</td>
