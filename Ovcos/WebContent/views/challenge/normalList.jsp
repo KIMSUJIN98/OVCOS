@@ -19,12 +19,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
-<!-- summernote -->
-<script src="resources/js/summernote/summernote-lite.js"></script>
-<script src="resources/js/summernote/summernote-ko-KR.js"></script>
-
-<!-- <link rel="stylesheet" href="resources/css/summernote-lite.css"> -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 <style>
     .modal-body input {
@@ -117,15 +111,11 @@
                                                     <tr>
                                                         <td>
                                                             <input type="date" id="challengeDate" name="challengeDate" required>
-                                                            <br>
-                                                            <span>지난 날짜는 등록이 불가합니다.</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <input type="time" id="challengeTime" name="challengeTime" required>
-                                                            <br>
-                                                            <span>지난 시간은 등록이 불가합니다.</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -142,7 +132,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <textarea id="summernote" name="challengeContent" required></textarea>
+                                                            <textarea name="challengeContent" cols="38" rows="10" style="resize: none;" placeholder="상세설명" required></textarea>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -321,26 +311,6 @@
     <script>
         // $(function(){
         // })
-
-        // summernote
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                height: 300,
-                lang: "ko-KR",
-                placeholder: '상세 내용을 입력하세요.',
-                toolbar: [
-							['style', ['style']],
-							['fontsize', ['fontsize']],
-							['font', ['bold', 'italic', 'underline', 'clear']],
-							['fontname', ['fontname']],
-							['color', ['color']],
-							['para', ['ul', 'ol', 'paragraph']],
-							['height', ['height']],
-							['view', ['codeview']],
-							['help', ['help']]
-						]
-            })
-        })
 
         $(window).load(function(){
     		$("#trigger-btn").trigger("click");

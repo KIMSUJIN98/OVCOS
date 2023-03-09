@@ -145,7 +145,7 @@
 	        		</button>
 	      		</div>
 	      		
-		      	<form action="<%= contextPath %>/editInfo.me?userId=<%= loginUser.getMemId()%>" method="post">
+		      	<form action="<%= contextPath %>/editInfo.me?userId=<%=loginUser.getMemId()%>" method="post">
 		      	<div class="modal-body">
 	      			<input type="hidden" id="check-userId" name="check-userId" value="<%= loginUser.getMemId()%>">
 	      			<input type="hidden" id="check-userPwd" name="check-userPwd" value="<%= loginUser.getMemPwd()%>">

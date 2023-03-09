@@ -385,6 +385,8 @@ int maxPage = pi.getMaxPage();
                     type: 'POST',
                     data: { friendId: memId, userId: userId },
                     success: function(result) {
+                        
+                        alert("친추성공");
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                     console.log("Error: " + textStatus + " " + errorThrown);

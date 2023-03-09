@@ -12,10 +12,10 @@ ORDER BY INQ_NO DESC
 </entry>
 <entry key="selectListCount">
 
-	SELECT 
+   SELECT 
             COUNT(*) count 
-    	FROM INQUIRY
-	WHERE INQ_DEL_NY='N'
+       FROM INQUIRY
+   WHERE INQ_DEL_NY='N'
 </entry>
 <entry key="selectList">
                      SELECT *
@@ -64,17 +64,17 @@ WHERE INQ_DEL_NY = 'N'
 ORDER BY INQ_NO DESC
 </entry>
 <entry key="updateInquiry">
-	UPDATE
-			INQUIRY
-	   SET INQ_TITLE = ?
-	     , INQ_CNT = ?
-	 WHERE INQ_NO = ?   	
+   UPDATE
+         INQUIRY
+      SET INQ_TITLE = ?
+        , INQ_CNT = ?
+    WHERE INQ_NO = ?      
 </entry>
 <entry key="deleteInquiry">
-	UPDATE
-		   INQUIRY
-	   SET INQ_DEL_NY='Y'
-	 WHERE INQ_NO = ?  	
+   UPDATE
+         INQUIRY
+      SET INQ_DEL_NY='Y'
+    WHERE INQ_NO = ?     
 
 </entry>
 </properties>
