@@ -102,6 +102,11 @@
                             <li class="subMenuList"><a href="<%= contextPath %>/logout.me">로그아웃</a></li>
                         </ul>
                     </li>
+                    <%if(loginUser.getMemId().equals("admin")){ %>
+                    <li id="li3" class="menu">
+                        <a href="<%=contextPath %>/main.admin" class="btn btn-sm  btn-danger">관리자페이지</a>
+                    </li>
+                    <% }%>
                 </ul>
             </div>
             

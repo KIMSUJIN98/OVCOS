@@ -22,7 +22,9 @@ public class Feed {
 	private String memName;//회원이름
 	private String memNick;//회원닉네임
 	private String originName;//파일원래이름
-	private int count; //찜개수 
+	private int count; //조회수
+	private String feedRprId;
+	
 
 	
 	public Feed() {}
@@ -217,22 +219,6 @@ public class Feed {
 		MemId = memId;
 	}
 	
-	
-	
-	
-	
-	
-
-
-	
-
-
-
-
-
-
-
-	
 
 
 
@@ -254,6 +240,36 @@ public class Feed {
 		this.memNick = memNick;
 		this.originName = originName;
 		this.count = count;
+	}
+
+	
+
+
+	public Feed(int feedIndex, String feedDate, String feedTitle, String feedCnt, int feedEval, String feedPublicType,
+			String feedPathNy, String feedRprNy, String feedRprDate, double distance, double startLat, double startLon,
+			String feedDelNy, String memId, String path, String memName, String memNick, String originName, int count,
+			String feedRprId) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedDate = feedDate;
+		this.feedTitle = feedTitle;
+		this.feedCnt = feedCnt;
+		this.feedEval = feedEval;
+		this.feedPublicType = feedPublicType;
+		this.feedPathNy = feedPathNy;
+		this.feedRprNy = feedRprNy;
+		this.feedRprDate = feedRprDate;
+		this.distance = distance;
+		this.startLat = startLat;
+		this.startLon = startLon;
+		this.feedDelNy = feedDelNy;
+		this.MemId = memId;
+		this.path = path;
+		this.memName = memName;
+		this.memNick = memNick;
+		this.originName = originName;
+		this.count = count;
+		this.feedRprId = feedRprId;
 	}
 
 

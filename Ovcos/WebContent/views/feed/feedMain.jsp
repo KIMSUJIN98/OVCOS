@@ -1,3 +1,4 @@
+<%@page import="com.ovcos.notice.model.vo.Notice"%>
 <%@ include file="../common/nav.jsp" %>
 <%@ page import="com.ovcos.explore.model.vo.Explore"%>
 <%@ page import="com.ovcos.feed.model.vo.Feed"%>
@@ -10,6 +11,8 @@
    //ArrayList<Explore> allList = (ArrayList<Explore>)request.getAttribute("allList");
    ArrayList<Feed> allList = (ArrayList<Feed>)request.getAttribute("allList");
    request.setAttribute("data", allList);
+   ArrayList<Notice> nlist = (ArrayList<Notice>)request.getAttribute("nlist");//공지사항제목용
+   ArrayList<Feed> mylist= (ArrayList<Feed>)request.getAttribute("mylist");//최근활동출력용
 %>
 <!DOCTYPE html>
 <html>
@@ -81,7 +84,21 @@
                         <div id="ac_recode">
                             <div id="last_ac1">
                                 <div class="h51"><h5>LAST ACTIVITY</h5></div>
-                                <div id="last_info"><a href="#" id="f_title">피드제목&nbsp;<span>2023-02-11</span></a></div>
+                                <div id="last_info"><a href="#" id="f_title">
+<%
+if (mylist != null && !mylist.isEmpty()) {
+    String title = mylist.get(0).getFeedTitle();
+    if (title.length() > 3) {
+        title = title.substring(0, 3);
+    }
+    out.println(title);
+}else{out.println("최근 활동이 없습니다.");}
+%>
+							&nbsp;<span><%
+if (mylist != null && !mylist.isEmpty()) {
+    out.println(mylist.get(0).getFeedDate());
+}else{out.println(" ");}
+%></span></a></div>
                                 
                             </div>
                             <div id="last_ac2">
@@ -97,7 +114,12 @@
                         
                     </div>
                 </div>
-                <div id="notice"><a href="<%=contextPath%>/list.no">서버 점검 예정 2023-03-03</a></div>
+                <div id="notice"><a href="<%=contextPath%>/list.no">
+<%
+if (nlist != null && !nlist.isEmpty()) {
+    out.println(nlist.get(0).getNtcTitle());
+}
+%></a></div>
             </div>
 <!--            <<nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -222,12 +244,12 @@
                                                 <ul class="dropdown-menu">
                                                     
                                                     <li><a class="dropdown-item" href="#" onclick="clip();">공유하기</a></li>
-                                                    <%if(!(f.getMemId().equals(loginUser.getMemId()))){%>
+                                                    <%if(!(f.getMemId().equals(loginUser.getMemId()))||loginUser.getMemId().equals("admin")){%>
                                                         <!--남의피드일때만 보임-->
                                                     <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#cutfeedmodal<%=f.getFeedIndex()%>" >차단하기</a></li>
                                                     <li><a class="dropdown-item" href="#"  data-toggle="modal" data-target="#rprfeedmodal<%=f.getFeedIndex()%>">신고하기</a></li>
                                                     <%} %>
-                                                    <%if(f.getMemId().equals(loginUser.getMemId())){%>
+                                                    <%if(f.getMemId().equals(loginUser.getMemId())|| loginUser.getMemId().equals("admin")){%>
                                                         <!--내피드에만 보임-->
                                                     <li><a class="dropdown-item"  href="<%= contextPath %>/updateForm.feed?no=<%=f.getFeedIndex() %>" >수정하기</a></li><!--data-toggle="modal" data-target="#updatefeedmodal<%=f.getFeedIndex()%>"-->
                                                     <li><a class="dropdown-item" href="#"  data-toggle="modal" data-target="#deletefeedmodal<%=f.getFeedIndex()%>">삭제하기</a></li>
@@ -676,12 +698,12 @@
                     $(function(){ //피드공개여부 가져오기
                         
                             $("#displayNy2>option").each(function(){
-                                console.log("도니");
-                                console.log("<%=f.getFeedPublicType()%>");
-                                console.log($(this).val());
+                                
+                                
+                                
                                 if($(this).val() == "<%=f.getFeedPublicType()%>"){
                                 $(this).attr("selected",true);
-                                console.log("탄다!!왜 안되는겨 ㅗ ")
+                                
                                 }
                             })
                         
