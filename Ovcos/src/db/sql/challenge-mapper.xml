@@ -10,7 +10,7 @@
 		     , CNTS_URL
 		     , CHANGE_NAME
 		  FROM CONTEST C
-		  JOIN UPLOAD ON (CNTS_NO = UPL_NO)
+		  LEFT JOIN UPLOAD ON (CNTS_NO = UPL_NO)
 		 WHERE 
 		       C.DEL_STATUS = 'N'
            AND CNTS_DATE > SYSDATE
@@ -26,7 +26,7 @@
 		     , CNTS_URL
 		     , CHANGE_NAME
 		  FROM CONTEST 
-		  JOIN UPLOAD ON (CNTS_NO = UPL_NO)
+		  LEFT JOIN UPLOAD ON (CNTS_NO = UPL_NO)
 		 WHERE 
 		       CNTS_NO = ?
 	</entry>

@@ -19,6 +19,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath}/resources/css/challengeStyles.css" rel="stylesheet" />
+<!-- summernote -->
+<script src="resources/js/summernote/summernote-lite.js"></script>
+<script src="resources/js/summernote/summernote-ko-KR.js"></script>
+
+<!-- <link rel="stylesheet" href="resources/css/summernote-lite.css"> -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
 
 <style>
     .modal-body input {
@@ -132,7 +139,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <textarea name="challengeContent" cols="38" rows="10" style="resize: none;" placeholder="상세설명" required></textarea>
+                                                            <textarea id="summernote" name="challengeContent" required></textarea>
                                                         </td>
                                                     </tr>
                                                 </table>
