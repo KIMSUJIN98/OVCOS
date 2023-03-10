@@ -23,6 +23,24 @@ public class NormalChallenge {
 	private int count;
 	
 	
+	
+
+	public NormalChallenge(int normalChallengeNo, String normalChallengeTitle, String normalChallengeContent,
+			Date enrollDate, String normalChallengeDate, int normalChallengeMax, String normalChallengeId,
+			String changeName, String localName) {
+		super();
+		this.normalChallengeNo = normalChallengeNo;
+		this.normalChallengeTitle = normalChallengeTitle;
+		this.normalChallengeContent = normalChallengeContent;
+		this.enrollDate = enrollDate;
+		this.normalChallengeDate = normalChallengeDate;
+		this.normalChallengeMax = normalChallengeMax;
+		this.normalChallengeId = normalChallengeId;
+		this.changeName = changeName;
+		this.localName = localName;
+	}
+
+
 	public NormalChallenge() {}
 	
 

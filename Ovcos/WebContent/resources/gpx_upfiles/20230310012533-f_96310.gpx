@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" creator="bikeroute.xyz">
+	<metadata>
+		<desc>bikeroute.xyz</desc>
+		<bounds maxlat="35.107390481641886" maxlon="128.95699496877174" minlat="35.087610989552346" minlon="128.9526299195116"/>
+	</metadata>
+
+
+	<wpt lat="35.106570111237815" lon="128.95699496877174">
+		<name>START</name>
+		<sym>Flag, Green</sym>
+		<extensions>
+			<gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			</gpxx:WaypointExtension>
+		</extensions>
+		<ele>0</ele>
+	</wpt>
+
+	<wpt lat="35.087610989552346" lon="128.9526299195116">
+		<name>END</name>
+		<sym>Flag, Green</sym>
+		<extensions>
+			<gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+			</gpxx:WaypointExtension>
+		</extensions>
+		<ele>0</ele>
+	</wpt>
+
+
+
+	<trk>
+		<extensions>
+			<gpxx:TrackExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+			<gpxx:DisplayColor>Green</gpxx:DisplayColor>
+			</gpxx:TrackExtension>
+		</extensions>
+		<trkseg>
+			<trkpt lat="35.106570111237815" lon="128.95699496877174">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10661979453763" lon="128.95659698040873">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10661979453763" lon="128.95659698040873">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10673298541577" lon="128.9565075687973">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10673298541577" lon="128.9565075687973">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10680667378741" lon="128.9566321542589">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10690629355419" lon="128.95671349427047">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10702802903982" lon="128.95676465725313">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.107390481641886" lon="128.95686544216926">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.107390481641886" lon="128.95686544216926">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10737119031027" lon="128.95694393957697">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10737119031027" lon="128.95694393957697">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10704738348043" lon="128.9569054904878">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10664126573064" lon="128.95682998117198">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10664126573064" lon="128.95682998117198">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10629654663415" lon="128.95674716763884">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.1055929070728" lon="128.95656804387056">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.1055929070728" lon="128.95656804387056">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10558662062695" lon="128.95651086909749">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10558662062695" lon="128.95651086909749">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10537734242435" lon="128.95652341209686">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.105143760929025" lon="128.95647834989157">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.10434515916094" lon="128.95637591741593">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09632535338878" lon="128.9554342506135">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09632535338878" lon="128.9554342506135">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09515242268681" lon="128.95529658809062">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09405961431917" lon="128.95510821299885">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.092949707657155" lon="128.95486241972935">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09229297693008" lon="128.9546800809573">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09114943831926" lon="128.9542843825411">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.09057657337908" lon="128.95404265465817">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.088458210707564" lon="128.95307113578164">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.08773958138275" lon="128.95270315418833">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="35.087610989552346" lon="128.9526299195116">
+				<ele>0</ele>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>

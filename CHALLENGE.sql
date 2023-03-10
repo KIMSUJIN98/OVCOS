@@ -550,7 +550,7 @@ VALUES
 		 WHERE
 		       N.DEL_STATUS = 'N'
 		   AND N.RPR_STATUS = 'N'
-		   AND LOCAL_NO = 1
+		   AND LOCAL_NO = 12
 		   AND NOR_CHLG_DATE > SYSDATE
 		 ORDER
 		    BY 1 DESC;
@@ -590,9 +590,39 @@ UPDATE
     
     
     
+    		SELECT 
+		       NOR_CHLG_NO
+		     , NOR_CHLG_TITLE
+		     , NOR_CHLG_CONTENT
+		     , ENROLL_DATE
+		     , NOR_CHLG_DATE
+		     , NOR_CHLG_MAX
+		     , NOR_CHLG_ID
+             , CHANGE_NAME
+		     , LOCAL_NAME
+		  FROM NORMAL_CHALLENGE N
+		  JOIN NENTRY_LIST ON (NCHLG_NO_INLIST = NOR_CHLG_NO)
+          JOIN LOCAL ON (LOCAL_NO = NOR_CHLG_LOCAL)
+          LEFT JOIN UPLOAD  ON (NOR_CHLG_NO = UPL_NO)
+		 WHERE
+		       NCHLG_ENTRY_ID = 'skarnd13'
+		   AND N.DEL_STATUS = 'N'
+		   AND N.RPR_STATUS = 'N'
+		 ORDER
+		    BY 1 DESC;
+    
+    
+    
     
 ROLLBACK;
 
+
+delete contest;
+delete contest_challenge;
+delete normal_challenge;
+delete upload;
+delete entry_list;
+delete nentry_list;
 
 COMMIT;
   
