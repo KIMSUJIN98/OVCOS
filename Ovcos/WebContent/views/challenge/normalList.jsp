@@ -220,7 +220,7 @@
                                                     <%= n.getNormalChallengeContent() %>
                                                 </td>
                                             </tr>
-                                            <tr id="count-area">
+                                            <tr class="count-area">
                                                 <td>
                                                 	<!--  -->
                                                 </td>
@@ -496,7 +496,7 @@
                     $("#uploadNick").html(value3);
 
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
-                    $("#count-area>td").html(value);
+                    $(".count-area>td").html(value);
                     
                     $("#hiddenTarget" + num).remove();
                     
