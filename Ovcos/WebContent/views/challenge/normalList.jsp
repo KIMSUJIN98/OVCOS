@@ -186,7 +186,7 @@
                         
                         <!-- The Modal -->
                         <div class="modal fade" id="detailNormalChallenge<%= count %>">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
                                     <div class="modal-header">
@@ -195,7 +195,7 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body" align="center">
-                                        <table class="detail" style="width: 400px;">
+                                        <table class="detail" style="width: 700px;">
                                             <tr>
                                                 <td>
                                                     <span>
@@ -209,9 +209,9 @@
                                             <tr>
                                                 <td>
                                                 	<% if(n.getChangeName() != null) { %>
-                                                        <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/<%= n.getChangeName() %>" alt="..."/>
+                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/<%= n.getChangeName() %>" alt="..."/>
                                                     <% }else { %>
-                                                        <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
                                                 	<% } %>
                                                 </td>
                                             </tr>

@@ -176,7 +176,7 @@
                         
                         <!-- The Modal -->
                         <div class="modal fade" id="detailContestChallenge<%= cc.getContestChallengeNo() %>">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
                                     <div class="modal-header">
@@ -185,7 +185,7 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body" align="center">
-                                        <table class="detail" style="width: 400px;">
+                                        <table class="detail" style="width: 700px;">
                                             <tr>
                                                 <td>
                                                     <h6>[<%= cc.getContestChallengeNo() %>]</h6>
@@ -200,9 +200,9 @@
                                             <tr>
                                                 <td>
                                                 	<% if(cc.getChangeName() != null) { %>
-                                                        <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
+                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
                                                     <% }else { %>
-                                                        <img class="card-img-top" width="400px" height="300px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
                                                 	<% } %>
                                                 </td>
                                             </tr>

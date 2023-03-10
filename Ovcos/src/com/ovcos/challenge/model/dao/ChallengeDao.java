@@ -215,13 +215,16 @@ public class ChallengeDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list2.add(new NormalChallenge(rset.getString("NOR_CHLG_TITLE"),
-											  rset.getDate("ENROLL_DATE"),
-											  rset.getString("NOR_CHLG_DATE"),
-											  rset.getInt("NOR_CHLG_MAX"),
-											  rset.getString("NOR_CHLG_ID"),
-											  rset.getString("LOCAL_NAME")
-											  ));
+				list2.add(new NormalChallenge(rset.getInt("NOR_CHLG_NO"),
+											   rset.getString("NOR_CHLG_TITLE"),
+											   rset.getString("NOR_CHLG_CONTENT"),
+											   rset.getDate("ENROLL_DATE"),
+											   rset.getString("NOR_CHLG_DATE"),
+											   rset.getInt("NOR_CHLG_MAX"),
+											   rset.getString("NOR_CHLG_ID"),
+											   rset.getString("CHANGE_NAME"),
+											   rset.getString("LOCAL_NAME")
+											   ));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
