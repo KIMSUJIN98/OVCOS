@@ -200,9 +200,9 @@
                                             <tr>
                                                 <td>
                                                 	<% if(cc.getChangeName() != null) { %>
-                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
+                                                        <img class="card-img-top" width="100%" height="500px" src="<%= contextPath %>/resources/upload/<%= cc.getChangeName() %>" alt="..."/>
                                                     <% }else { %>
-                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                                                        <img class="card-img-top" width="100%" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
                                                 	<% } %>
                                                 </td>
                                             </tr>

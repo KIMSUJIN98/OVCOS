@@ -209,9 +209,9 @@
                                             <tr>
                                                 <td>
                                                 	<% if(n.getChangeName() != null) { %>
-                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/<%= n.getChangeName() %>" alt="..."/>
+                                                        <img class="card-img-top" width="100%" height="500px" src="<%= contextPath %>/resources/upload/<%= n.getChangeName() %>" alt="..."/>
                                                     <% }else { %>
-                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                                                        <img class="card-img-top" width="100%" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
                                                 	<% } %>
                                                 </td>
                                             </tr>
