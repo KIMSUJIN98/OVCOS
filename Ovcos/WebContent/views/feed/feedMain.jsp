@@ -692,7 +692,7 @@ if (nlist != null && !nlist.isEmpty()) {
                 <div id="dust">
                  <div style="border-right: 2px solid rgb(255, 255, 255); width: 30%;">
                     <div style="font-weight: 600; color: white; padding-right: 15px;" align="center">현재 위치</div>
-                    <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre"></div>
+                    <div style="font-weight: 600; color: white; padding-right: 15px;" align="center" id="addre">(서울)</div>
                     <div style="color: white;"> 
                         <div id="year" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>
                         <div id="hour" style="color: white; font-size: 0.9rem; padding-right: 5px;" align="center"></div>

@@ -216,9 +216,9 @@
                                             <tr>
                                                 <td>
                                                 	<% if(n.getChangeName() != null) { %>
-                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/<%= n.getChangeName() %>" alt="..."/>
+                                                        <img class="card-img-top" width="100%" height="500px" src="<%= contextPath %>/resources/upload/<%= n.getChangeName() %>" alt="..."/>
                                                     <% }else { %>
-                                                        <img class="card-img-top" width="700px" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
+                                                        <img class="card-img-top" width="100%" height="500px" src="<%= contextPath %>/resources/upload/defaultImg.png" alt="defaultImg.png"/>
                                                 	<% } %>
                                                 </td>
                                             </tr>
@@ -227,7 +227,7 @@
                                                     <%= n.getNormalChallengeContent() %>
                                                 </td>
                                             </tr>
-                                            <tr id="count-area">
+                                            <tr class="count-area">
                                                 <td>
                                                 	<!--  -->
                                                 </td>
@@ -503,7 +503,7 @@
                     $("#uploadNick").html(value3);
 
                     value += "<span>참가인원 : " + result.length + " / " + max + "</span>";
-                    $("#count-area>td").html(value);
+                    $(".count-area>td").html(value);
                     
                     $("#hiddenTarget" + num).remove();
                     
