@@ -230,9 +230,9 @@
                                     <div class="input-group">
                                         <label for="searchBox"></label>
                                         <input type="search" id="searchBox" style="width: 500px;" placeholder="키워드를 입력하세요">
-                                        <a href="#" class="btn btn-secondary filter-btn" id="myFeed">피드조회</a>
+                                        <!-- <a href="#" class="btn btn-secondary filter-btn" id="myFeed">피드조회</a>
                                         <a href="#" class="btn btn-secondary filter-btn" id="myComment">댓글조회</a>
-                                        <a href="#" class="btn btn-secondary filter-btn" id="myPick">찜목록조회</a>
+                                        <a href="#" class="btn btn-secondary filter-btn" id="myPick">찜목록조회</a> -->
                                     </div>
                                 </div>
                             </div>
