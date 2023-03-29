@@ -18,6 +18,8 @@ import com.ovcos.explore.model.vo.Explore;
 import com.ovcos.feed.model.service.FeedService;
 import com.ovcos.feed.model.vo.Feed;
 import com.ovcos.loginRegister.model.vo.Member;
+import com.ovcos.myPage.model.service.MyPageService;
+import com.ovcos.myPage.model.vo.MyPage;
 import com.ovcos.notice.model.service.NoticeService;
 import com.ovcos.notice.model.vo.Notice;
 
@@ -40,7 +42,38 @@ public class FeedListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("utf-8");
+		//String userId = request.getParameter("userId");
 		
+		
+		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
+		
+		MyPage mp = new MyPageService().totalDistance(userId);
+		double monthDistance = mp.getDistance();
+		
+		String today = new MyPageService().selectToday();
+		
+		ArrayList<MyPage> list = new MyPageService().dayDistanceList(userId);
+		
+		HttpSession session = request.getSession();
+		if(monthDistance != 0 && !list.isEmpty()) {
+			session.setAttribute("monthDistance", monthDistance);
+			session.setAttribute("dayList", list);
+		} /*
+			 * else if(monthDistance != 0 && list.isEmpty()){
+			 * session.setAttribute("alertMsg", "저장된 러닝 기록이 없을리가 없는데..."); }else
+			 * if(monthDistance == 0 && !list.isEmpty()){ session.setAttribute("alertMsg",
+			 * "이번달은 러닝 기록이 없습니다."); }else { session.setAttribute("alertMsg",
+			 * "저장된 러닝 기록이 없습니다."); }
+			 */
+		
+		if(today != null) {
+			session.setAttribute("today", today);
+		}
+		
+		//request.getRequestDispatcher("views/myPage/myPageMain.jsp").forward(request, response);
+		
+		//------------------------------
 		//로그인하고나서 바로연결되는서블릿 (전체피드 조회리스트만을 반환하고있음) 
 //
 //		HttpSession session = request.getSession();
@@ -59,8 +92,8 @@ public class FeedListController extends HttpServlet {
 		
 //		-----------수정 코드------------ sorting 값을 가져오고 메인(전체피드)띄우는데 select box 정렬 가능하게하기
 		
-		HttpSession session = request.getSession();
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
+		//HttpSession session = request.getSession();
+		//String userId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
 		String select = request.getParameter("sorting");
 		
 		

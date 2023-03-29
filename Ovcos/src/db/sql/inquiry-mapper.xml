@@ -77,4 +77,12 @@ ORDER BY INQ_NO DESC
     WHERE INQ_NO = ?     
 
 </entry>
+
+<entry key="selectInquiryList1">
+SELECT INQ_NO, INQ_MENU, INQ_TITLE, INQ_DATE, MEM_ID
+FROM INQUIRY
+WHERE INQ_DEL_NY = 'N' 
+ORDER BY INQ_NO DESC
+</entry>
+
 </properties>
