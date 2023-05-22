@@ -33,7 +33,7 @@ https://www.erdcloud.com/d/mYMviF7bz7XQMoTfz
 - DBMS : Oracle 11g EX
 - Language : Java, HTML, CSS, JQuery, JSP, SQL, JavaScript
 
-## 6. 각섹션별 이미지
+## 6. 각 섹션별 이미지
 
 ### 1) 메인 화면
 ![image](https://github.com/pyjhoop/OVCOS/assets/59335316/986eea9d-5c0b-4429-9be1-0ca55345947c)

@@ -274,6 +274,17 @@
 	    BY FEED_INDEX DESC
 </entry>
 
+<entry key="selectMyComments">
+	SELECT FEED_INDEX
+	     , FEED_CMN_NO
+	     , FEED_CMN_ID
+	     , FEED_CMN_CNT
+	     , FEED_CMN_DATE
+	  FROM FEED
+	  JOIN FEED_COMMENTS USING(FEED_INDEX)
+	 WHERE FEED_CMN_ID = ?
+</entry>
+
 
 <!-- 작성자로 피드 검색-->
 <entry key="selectIdSearchList">
@@ -406,6 +417,9 @@ ORDER BY
     BOOKMARK_COUNT DESC, 
     FEED_INDEX DESC
 </entry>
+
+
+
 
 <!-- 친구피드에서 찜 많은 순서대로 피드정렬 -->
 <entry key="selectFriendBookmarkSorting">

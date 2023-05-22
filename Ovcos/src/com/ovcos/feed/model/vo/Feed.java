@@ -26,11 +26,20 @@ public class Feed {
 	private int count; //찜개수 
 	private String imgPath;
 
+	private int feedCommentNo; // 댓글 번호
+	private String feedCommentContent; // 댓글 내용
 
 	
 	public Feed() {}
 	
-	
+	public Feed(int feedIndex, int feedCommentNo, String memId, String feedCommentContent, String feedDate) {
+		super();
+		this.feedIndex = feedIndex;
+		this.feedCommentNo = feedCommentNo;
+		this.MemId = memId;
+		this.feedCommentContent = feedCommentContent;
+		this.feedDate = feedDate;
+	}
 	
 	
 
@@ -309,10 +318,32 @@ public class Feed {
 	
 	
 	
+	
+	
 
 
+	public int getFeedCommentNo() {
+		return feedCommentNo;
+	}
 
+	public void setFeedCommentNo(int feedCommentNo) {
+		this.feedCommentNo = feedCommentNo;
+	}
 
+	public String getFeedCommentContent() {
+		return feedCommentContent;
+	}
+
+	public void setFeedCommentContent(String feedCommentContent) {
+		this.feedCommentContent = feedCommentContent;
+	}
+
+	
+	
+	
+	
+	
+	
 	public String getImgPath() {
 		return imgPath;
 	}

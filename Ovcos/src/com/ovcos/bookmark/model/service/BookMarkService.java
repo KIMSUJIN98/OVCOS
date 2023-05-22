@@ -44,6 +44,19 @@ public class BookMarkService {
 		
 	}
 	
+	public ArrayList<BookMark> selectMyBookmark (String userId) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<BookMark> list = new BookMarkDao().selectMyBookmark(conn, userId);
+		
+		close(conn);
+		
+		return list;
+		
+		
+	}
+	
 	
 	public int deleteBookMark(int feedIndex,String userId) {
 		

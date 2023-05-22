@@ -89,6 +89,35 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public ArrayList<BookMark> selectMyBookmark(Connection conn, String userId) {
+		
+		ArrayList<BookMark> list = new ArrayList<BookMark>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMyBookmark");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				list.add(new BookMark(rset.getInt("BK_NO"), rset.getString("FEED_TITLE"), rset.getString("BK_ID"), rset.getString("BK_DATE"), rset.getString("BK_STATUS")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
+	
 	
 	public int deleteBookMark(Connection conn,int feedIndex,String userId) {
 		
