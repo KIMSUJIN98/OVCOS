@@ -23,9 +23,65 @@ KH교육원 세미프로젝트
 <b>뛰어조</b> 김수진, 박연준, 박진우, 박소영, 이형근, 이지원
 
 ## 4. 설계
-오븐 링크
-ERD
+ERD : 
+https://www.erdcloud.com/d/mYMviF7bz7XQMoTfz
 
 ## 5. 개발환경
+- OS : Windows10
+- IDE : Eclipse(2020-06) SQL Developer
+- Was : Tomcat v9.0
+- DBMS : Oracle 11g EX
+- Language : Java, HTML, CSS, JQuery, JSP, SQL, JavaScript
 
 ## 6. 각섹션별 이미지
+
+### 1) 메인 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/986eea9d-5c0b-4429-9be1-0ca55345947c)
+
+### 2) 로그인 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/a709ceb8-26d3-44dc-b345-3ac28867dd74)
+
+### 3) 회원가입 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/ebdce4e1-b618-4ab4-8a01-78c65b28c22f)
+
+### 4) 피드 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/ca595898-9162-4ba6-9cc6-9eba3e1ef772)
+
+### 5) 피드 상세 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/86f08e44-859c-45d3-9697-b62268818048)
+
+### 6) 피드 등록 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/cbc96a8c-36dc-4766-b3e5-804df3ad57ef)
+
+### 7) 탐색 화면
+![ezgif com-gif-maker (2)](https://github.com/pyjhoop/OVCOS/assets/59335316/76b2c651-0378-45c0-81a0-71b5091b47ce)
+
+### 8) 챌린지 메인 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/649dd29d-4653-4dcf-aa03-a9f6872114e1)
+
+### 9) 챌린지 일반 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/dff498ac-c000-409a-9a78-4daf0c3460ce)
+
+### 10) 챌린지 일반 등록 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/7f6cd05c-1829-475f-9481-80445cbf3a4f)
+
+### 11) 챌린지 일반 상세보기 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/c5db8bf6-8bc8-4093-a8fe-8b703976b3da)
+
+### 12) 챌린지 대회 메인 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/52d0ddad-db44-4985-b06d-bc5c504ee8b6)
+
+### 13) 챌린지 대회 참가하기시 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/7630f89b-ead2-4ade-b309-30007e4dc4ea)
+
+### 14) 챌린지 대회 생성 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/40777f66-6c96-428d-bbc5-d36f3b4c0a3a)
+
+### 15) 챌린지 대회 상세보기 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/e03af5ff-e8aa-43dc-aaf5-59cb36ef1bcb)
+
+### 16) 마이페이지 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/24572a45-1f8c-4605-8f5f-0ea76d57dee3)
+
+### 17) 친구목록 화면
+![image](https://github.com/pyjhoop/OVCOS/assets/59335316/794938fa-e7f7-45da-b09e-cb97a4942e10)
